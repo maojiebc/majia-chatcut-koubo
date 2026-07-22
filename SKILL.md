@@ -2,7 +2,7 @@
 name: majia-chatcut-koubo
 description: ChatCut 口播/录屏视频代理剪辑的通用技巧包——官方 ChatCut skill 之上的增量层。覆盖：双画面版式（横竖版 8 套坐标）、8 套主题配色与对比度档位、过渡动效工程（四档可靠性链/端点契约/fps 归一化）、人脸居中与内部取景（三层合成/reframe→mask 顺序/坐标系陷阱/overscan 公式）、中文气口字幕与可自维护词表模板、机器化字幕门禁脚本。触发：ChatCut 剪口播、直播切片、画中画/圆窗、主讲人过渡动画、竖版重构、字幕气口、术语纠错、主题配色。
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # majia-chatcut-koubo · 马甲实战版
@@ -46,7 +46,8 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 | 任务信号 | 完整读取 |
 | --- | --- |
 | 双画面构图、版式选型、圆窗/分栏/上下屏、小窗腾挪 | [双画面版式系统](references/dual-frame-layouts.md) |
-| 主题配色、字幕底板、对比度、按角色用色 | [主题配色系统](references/theme-palettes.md) |
+| 主题配色、字幕底板、对比度、按角色用色 | [主题配色系统](references/theme-palettes.md) + 选定主题的 `assets/theme-kit/playbooks/<id>.md` |
+| MG/设计图形加不加、加哪种、怎么选 | [信息块类型与选用](references/graphics-blocks.md) |
 | 过渡动画、状态切换、闪烁/黑块排查、fps 归一化 | [过渡动效工程](references/motion-transitions.md) |
 | 人脸居中、内部取景漂移、蒙版参数、黑边排查 | [人脸取景与三层合成](references/face-reframe.md) |
 | 字幕气口、术语纠错、词表维护、字幕门禁 | [字幕与词表](references/captions-terminology.md) |

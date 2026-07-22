@@ -2,6 +2,8 @@
 
 包装（字幕底板/标题/标签/观点条/MG）的配色规则与 8 套已实测主题。色值唯一真相源 = `assets/theme-kit/tokens/themes.json`；SVG 底图、1080×1920 布局与可运行 HTML 组件都在 `assets/theme-kit/`（打开 `index.html` 看总览）。
 
+**每套主题自带一份代理 playbook**（`assets/theme-kit/playbooks/<id>.md`）：token 语义与实测档位、版式搭配、信息块偏好、字幕底板硬规则、以及一段可直接嵌进 MG 生成指令的「调用 crib」。标准用法：**选定主题 → 完整读它的 playbook → 生成图形时把 crib 嵌进指令**，不再逐元素查表挑色。
+
 ## 用法总则
 
 1. **开工冻结一套主题**，记录 `paletteId + paletteVersion + 明暗模式 + 输出色域`；同一条片不逐元素临时挑色，不跨主题混搭角色。

@@ -1,5 +1,12 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## V1.1.0（2026-07-22）— 主题 playbook 化
+
+- 8 套主题各配一份代理 playbook（`assets/theme-kit/playbooks/<id>.md`）：frontmatter 注入 themes.json 语义 token + token 档位实测结论 + 绑定版式 + 信息块偏好 + 字幕底板硬规则 + 一段可直接嵌进 MG 生成指令的「调用 crib」。主题包从「色板+底图」升级为「代理可执行的设计系统」。
+- 新增 `references/graphics-blocks.md`：十类信息块 × 何时用（证据信号驱动、与钩子三公式对应）；行动引导块默认不加为红线。
+- `theme-palettes.md` 增加标准用法流：选主题 → 读 playbook → 生成时嵌 crib。
+- 方法来源新增 `pireel/pireel`（AGPL-3.0）：仅吸收「主题=数据+代理 playbook」与逐主题 crib 的组织方法，未复制其主题内容、文本或代码。
+
 ## V1.0.0（2026-07-22）— 首发
 
 从作者私有实战体系（11 天 99 场 ChatCut 代理剪辑会话、11 支直播切片多轮返工）蒸馏出的通用技巧层：
