@@ -1,0 +1,63 @@
+{
+  "$schema": "个人实测参数档:在你的素材上做一个样片,把验证过的数字填进来。数字变了就升 profileVersion 存新文件,不覆盖旧版。validate-caption-pages.mjs 用 --profile 读取本文件。",
+  "schemaVersion": "1.1.0",
+  "profileId": "your-name-landscape-default",
+  "profileVersion": "1.0.0",
+  "status": "untested-template",
+  "provenance": {
+    "projectId": "REPLACE-with-your-project-id(仅追溯用,勿跨项目硬编码)",
+    "validatedTimelineIds": [],
+    "note": "记录这组数字在哪条时间线上验证过;换素材/画幅须重新标定"
+  },
+  "hardInvariants": {
+    "maxLines": 1,
+    "automaticWrapAllowed": false,
+    "pagesUnder14Frames": 0,
+    "multilinePages": 0,
+    "singleCharacterPages": 0
+  },
+  "captions": {
+    "sourceVariant": "original",
+    "font": "Smiley Sans, PingFang SC, sans-serif",
+    "sizePx": 42,
+    "weight": 700,
+    "color": "#0B5F58",
+    "backgroundColor": "#F7FFFD",
+    "backgroundOpacity": 1,
+    "backgroundRadius": 18,
+    "displayMode": "single",
+    "maxLines": 1,
+    "maxCharactersPerLine": 22,
+    "layout": { "left": 180, "top": 924, "width": 1560, "height": 48 },
+    "shortCardPolicy": {
+      "minFrames": 24,
+      "hardMinFrames": 14,
+      "approved14To23FramePatterns": ["AI", "BI", "CLI", "ETL", "LLM"],
+      "requireCompleteSemanticUnit": true
+    },
+    "releaseGates": {
+      "validator": "scripts/validate-caption-pages.mjs",
+      "validatorExitCode": 0,
+      "multilinePages": 0,
+      "pagesOverMaxCharacters": 0,
+      "singleCharacterPages": 0,
+      "pagesUnder14Frames": 0,
+      "unapprovedPagesUnder24Frames": 0,
+      "traditionalChineseHits": 0,
+      "knownTerminologyErrors": 0
+    }
+  },
+  "presenterWindow": {
+    "$note": "人脸取景基线:圆窗直径/位置从 compositions.json 版式取;magnification 是你素材上的实测值",
+    "circleDiameterPx": 330,
+    "magnificationBaseline": 0.30,
+    "compositionNotes": "完整头发+额头呼吸位+颈肩+部分上半身;居中≠贴脸"
+  },
+  "audio": {
+    "anchorGainDb": 2,
+    "duplicateTrackGainDb": -60,
+    "tailFadeOutSeconds": 0.06,
+    "firstAudibleCheck": "第 0 帧起可听,导出 mp3 实听开头 2 秒"
+  },
+  "terminologyFile": "templates/terminology.template.json 的你的副本路径"
+}

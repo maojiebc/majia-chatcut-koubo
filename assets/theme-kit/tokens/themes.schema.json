@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/portrait-talk-theme-kit/themes.schema.json",
+  "title": "Portrait Talk Theme Kit",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "canvas",
+    "typography",
+    "themes"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "canvas": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "ratio",
+        "safeArea"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "const": 1080
+        },
+        "height": {
+          "type": "integer",
+          "const": 1920
+        },
+        "ratio": {
+          "type": "string",
+          "const": "9:16"
+        },
+        "safeArea": {
+          "type": "object",
+          "required": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ]
+        }
+      }
+    },
+    "themes": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "index",
+          "name",
+          "sourcePalette",
+          "semantic",
+          "layout",
+          "backgroundAsset"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "index": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "light",
+              "dark"
+            ]
+          },
+          "layout": {
+            "type": "string"
+          },
+          "sourcePalette": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "object",
+              "required": [
+                "role",
+                "value"
+              ]
+            }
+          },
+          "semantic": {
+            "type": "object",
+            "required": [
+              "canvas",
+              "textPrimary",
+              "textSecondary",
+              "emphasis",
+              "ctaBackground",
+              "ctaText"
+            ]
+          },
+          "backgroundAsset": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
