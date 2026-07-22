@@ -4,7 +4,7 @@ name: 活力青柠
 mode: light
 layout: playful-corner
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#ECFDF5", surface: "#F7FFE9", surfaceMuted: "rgba(247,255,233,0.78)", textPrimary: "#163300", textSecondary: "#3F5B31", emphasis: "#387A05", accent: "#84CC16", accentStrong: "#16A34A", border: "rgba(132,204,22,0.72)", ctaBackground: "#84CC16", ctaText: "#163300" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#ECFDF5", surface: "#F7FFE9", surfaceMuted: "rgba(247,255,23
 ## 字幕底板
 
 字幕墨绿字配浅色底板;青柠不做字幕文字色。
+
+## 动效档
+
+准许:淡入/上移入(可稍快至 8–12 帧)/缩放到位(强调条一次);**弹入唯一豁免主题**——仍需用户点头才用,默认不用;禁:闪烁/漂浮。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

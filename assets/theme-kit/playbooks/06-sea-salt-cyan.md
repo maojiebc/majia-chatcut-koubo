@@ -4,7 +4,7 @@ name: 海盐青
 mode: light
 layout: fresh-frame
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#E6F4F1", surface: "#F7FFFD", surfaceMuted: "rgba(247,255,253,0.74)", textPrimary: "#0B5F58", textSecondary: "#3E6F6A", emphasis: "#0F766E", accent: "#14B8A6", accentStrong: "#0F766E", border: "rgba(20,184,166,0.66)", ctaBackground: "#14B8A6", ctaText: "#062E2B" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#E6F4F1", surface: "#F7FFFD", surfaceMuted: "rgba(247,255,25
 ## 字幕底板
 
 字幕深青字必须配 surface 白青底板(实测 7.41:1),这是本主题的硬规则。
+
+## 动效档
+
+准许:淡入/上移入;缩放入仅限关键词强调条一次;禁:弹入/闪烁/漂浮。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

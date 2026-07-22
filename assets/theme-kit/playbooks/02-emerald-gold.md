@@ -4,7 +4,7 @@ name: 墨绿金
 mode: dark
 layout: executive-split
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#0F2E2E", surface: "#173A33", surfaceMuted: "rgba(23,58,51,0.76)", textPrimary: "#F8F4E8", textSecondary: "#D6E2DB", emphasis: "#D4AF37", accent: "#D4AF37", accentStrong: "#1E584E", border: "rgba(212,175,55,0.72)", ctaBackground: "#D4AF37", ctaText: "#14241F" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#0F2E2E", surface: "#173A33", surfaceMuted: "rgba(23,58,51,0
 ## 字幕底板
 
 字幕米白字,底板 surfaceMuted;金色不进字幕。
+
+## 动效档
+
+准许:淡入/上移入;金色扫过为一次性强调、全片 ≤2 次;缩放入慎用(商务克制);禁:弹入/闪烁/漂浮。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

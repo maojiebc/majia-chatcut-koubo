@@ -4,7 +4,7 @@ name: 深空蓝
 mode: dark
 layout: diagonal-tech
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#0B132B", surface: "#111D36", surfaceMuted: "rgba(17,29,54,0.72)", textPrimary: "#FFFFFF", textSecondary: "#CBD5E1", emphasis: "#60A5FA", accent: "#60A5FA", accentStrong: "#1E3A8A", border: "rgba(96,165,250,0.80)", ctaBackground: "#1E3A8A", ctaText: "#FFFFFF" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#0B132B", surface: "#111D36", surfaceMuted: "rgba(17,29,54,0
 ## 字幕底板
 
 字幕直接用白字,底板可用 surfaceMuted 半透明面板;发光 glow 只做点缀不做可读性支撑。
+
+## 动效档
+
+准许:淡入/上移入/缩放入(数字块一次性);循环:pulse ≤1 次;禁:弹入/闪烁/漂浮。数字类块可用滚动到位。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

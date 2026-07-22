@@ -4,7 +4,7 @@ name: 大地棕
 mode: light
 layout: earth-bands
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#F6F1E9", surface: "#EFE2D2", surfaceMuted: "rgba(246,241,233,0.78)", textPrimary: "#3E2C23", textSecondary: "#6F5B4A", emphasis: "#8B5E34", accent: "#8B5E34", accentStrong: "#3E2C23", border: "rgba(139,94,52,0.66)", ctaBackground: "#8B5E34", ctaText: "#FFFFFF" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#F6F1E9", surface: "#EFE2D2", surfaceMuted: "rgba(246,241,23
 ## 字幕底板
 
 字幕深棕字配米白底板;棕色系不进字幕正文。
+
+## 动效档
+
+准许:淡入/上移入/纸片式轻位移;禁:旋转/弹入/闪烁/漂浮。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

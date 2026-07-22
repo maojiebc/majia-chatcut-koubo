@@ -4,7 +4,7 @@ name: 极简黑白
 mode: light
 layout: minimal-column
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#F5F5F5", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,255,0.82)", textPrimary: "#111111", textSecondary: "#555555", emphasis: "#111111", accent: "#111111", accentStrong: "#333333", border: "rgba(17,17,17,0.76)", ctaBackground: "#111111", ctaText: "#FFFFFF" }
 ---
 
@@ -31,6 +31,10 @@ palette: { canvas: "#F5F5F5", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,25
 ## 字幕底板
 
 字幕深黑字配纯白底板,或黑底白字反转;二选一后全片一致。
+
+## 动效档
+
+仅准许:淡入/上移入——本主题动效收到最窄;禁:其余全部(含缩放/滑入/一切循环强调)。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

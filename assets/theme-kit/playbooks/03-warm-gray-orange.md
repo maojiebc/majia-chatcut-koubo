@@ -4,7 +4,7 @@ name: 暖灰橙
 mode: light
 layout: centered-editorial
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#F7F4F1", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,255,0.76)", textPrimary: "#333333", textSecondary: "#6B625C", emphasis: "#C93411", accent: "#FF6A3D", accentStrong: "#C93411", border: "rgba(242,178,108,0.84)", ctaBackground: "#FF6A3D", ctaText: "#221A17" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#F7F4F1", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,25
 ## 字幕底板
 
 字幕深灰字配纯白/米白底板;橙色系一律不进字幕。
+
+## 动效档
+
+准许:淡入/上移入;贴纸专属的极轻手写式旋转入(仅贴纸,≤±3°);禁:弹入/闪烁/漂浮。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 

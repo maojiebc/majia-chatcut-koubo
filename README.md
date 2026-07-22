@@ -1,11 +1,11 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.1.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.2.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut 口播剪辑通用技巧包 · 马甲实战版** —— 官方 ChatCut skill 之上的增量层:双画面版式、主题配色、过渡动效、人脸取景四大件,外加可自维护的词表模板与机器化字幕门禁。全部规则来自真实批量剪片(11 支直播切片 × 多轮返工)踩出来的实测结论,不是理论汇编。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.1.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -61,6 +61,8 @@ scripts/
 
 ## 📋 版本记录
 
+**V1.2.0(2026-07-22)** — 块级动效词汇表:信息块动效收敛为三轴受限枚举(进场/出场/循环强调,弹入默认禁、闪烁禁、打字机仅文字块),8 份主题 playbook 各配「动效档」准许/禁用集,块×动效推荐表落地「一致性>花样」。
+
 **V1.1.0(2026-07-22)** — 主题 playbook 化:8 套主题各配一份代理 playbook(token 语义档位/版式搭配/信息块偏好/字幕底板硬规则/调用 crib),主题包从「色板+底图」升级为「代理可执行的设计系统」;新增 `graphics-blocks.md` 十类信息块选用表(证据信号驱动,CTA 默认不加为红线)。
 
 **V1.0.0(2026-07-22)** — 首发。从作者私有实战体系(11 天 99 场 ChatCut 代理剪辑会话)蒸馏出的通用层:四大件 references + 词表/参数/判例三模板 + 8 主题资产包 + 坐标快照 + 字幕校验脚本。
@@ -69,7 +71,7 @@ scripts/
 
 ## 方法来源
 
-规则主体来自作者的 ChatCut 实战复盘。部分方法论参考了以下开源项目(未复制代码实现):`Agentchengfeng/chengfeng-videocut-skills`(删前保后/风险分层)、`lcbuaaliu/ai-jian-koubo`(确定性预选+语义判断)、`WyattBlue/auto-editor`(反向审查将删内容)、`radix-ui/colors`、`material-foundation/material-color-utilities`、`adobe/leonardo`(语义色阶与对比度优先)、`d3/d3-scale-chromatic`(数据色板)、`pireel/pireel`(AGPL-3.0;仅吸收「主题=数据+代理 playbook」与逐主题调用 crib 的组织方法,未复制其任何主题内容、文本或代码)。
+规则主体来自作者的 ChatCut 实战复盘。部分方法论参考了以下开源项目(未复制代码实现):`Agentchengfeng/chengfeng-videocut-skills`(删前保后/风险分层)、`lcbuaaliu/ai-jian-koubo`(确定性预选+语义判断)、`WyattBlue/auto-editor`(反向审查将删内容)、`radix-ui/colors`、`material-foundation/material-color-utilities`、`adobe/leonardo`(语义色阶与对比度优先)、`d3/d3-scale-chromatic`(数据色板)、`pireel/pireel`(AGPL-3.0;仅吸收「主题=数据+代理 playbook」与逐主题调用 crib 的组织方法,未复制其任何主题内容、文本或代码)、`yoqu/lingji-cut`(Apache-2.0;仅吸收「进场/出场/循环强调」三轴动效枚举的组织方法,枚举取舍与全部文本为本包自定)。
 
 ## 👤 作者 / 联系
 

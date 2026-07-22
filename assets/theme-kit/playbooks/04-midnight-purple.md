@@ -4,7 +4,7 @@ name: 午夜紫
 mode: dark
 layout: orbit-focus
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.0.0
+playbookVersion: 1.1.0
 palette: { canvas: "#1A1026", surface: "#241536", surfaceMuted: "rgba(36,21,54,0.76)", textPrimary: "#FFFFFF", textSecondary: "#DDD1F3", emphasis: "#A78BFA", accent: "#A78BFA", accentStrong: "#6D28D9", border: "rgba(167,139,250,0.72)", ctaBackground: "#6D28D9", ctaText: "#FFFFFF" }
 ---
 
@@ -32,6 +32,10 @@ palette: { canvas: "#1A1026", surface: "#241536", surfaceMuted: "rgba(36,21,54,0
 ## 字幕底板
 
 字幕纯白字,底板 surfaceMuted 深紫半透明。
+
+## 动效档
+
+准许:淡入/上移入;揭示类块允许一次由暗到亮的显影;禁:弹入/闪烁/漂浮。(词汇定义、时长基线与块×动效推荐见 `references/graphics-blocks.md`「块级动效词汇表」。)
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 
