@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maojiebc/majia-chatcut-koubo/assets/theme-kit/tokens/layouts.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "version", "canvas", "layouts"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "name": {"const": "portrait-talk-layouts"},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "canvas": {"type": "object"},
+    "layouts": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "name", "description", "zones"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "name": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1},
+          "zones": {
+            "type": "object", "additionalProperties": false,
+            "required": ["eyebrow", "title", "lead", "emphasis", "cta", "speaker", "subtitle", "footer"],
+            "properties": {
+              "eyebrow": {"$ref": "#/$defs/rectangle"}, "title": {"$ref": "#/$defs/rectangle"},
+              "lead": {"$ref": "#/$defs/rectangle"}, "emphasis": {"$ref": "#/$defs/rectangle"},
+              "cta": {"$ref": "#/$defs/rectangle"}, "speaker": {"$ref": "#/$defs/rectangle"},
+              "subtitle": {"$ref": "#/$defs/rectangle"}, "footer": {"$ref": "#/$defs/rectangle"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "rectangle": {
+      "type": "object", "additionalProperties": false, "required": ["x", "y", "w", "h"],
+      "properties": {"x": {"type": "number", "minimum": 0}, "y": {"type": "number", "minimum": 0}, "w": {"type": "number", "exclusiveMinimum": 0}, "h": {"type": "number", "exclusiveMinimum": 0}}
+    }
+  }
+}

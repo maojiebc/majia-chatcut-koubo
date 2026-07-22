@@ -4,8 +4,8 @@ name: 墨绿金
 mode: dark
 layout: executive-split
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#0F2E2E", surface: "#173A33", surfaceMuted: "rgba(23,58,51,0.76)", textPrimary: "#F8F4E8", textSecondary: "#D6E2DB", emphasis: "#D4AF37", accent: "#D4AF37", accentStrong: "#1E584E", border: "rgba(212,175,55,0.72)", ctaBackground: "#D4AF37", ctaText: "#14241F" }
+playbookVersion: 1.3.0
+palette: {"canvas":"#0F2E2E","surface":"#173A33","surfaceMuted":"rgba(23,58,51,0.76)","textPrimary":"#F8F4E8","textSecondary":"#D6E2DB","emphasis":"#D4AF37","accent":"#D4AF37","accentStrong":"#1E584E","border":"rgba(212,175,55,0.72)","ctaBackground":"#D4AF37","ctaText":"#14241F"}
 ---
 
 # 墨绿金 · 主题 playbook

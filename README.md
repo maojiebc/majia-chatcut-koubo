@@ -1,11 +1,11 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.2.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.3.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut 口播剪辑通用技巧包 · 马甲实战版** —— 官方 ChatCut skill 之上的增量层:双画面版式、主题配色、过渡动效、人脸取景四大件,外加可自维护的词表模板与机器化字幕门禁。全部规则来自真实批量剪片(11 支直播切片 × 多轮返工)踩出来的实测结论,不是理论汇编。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -13,7 +13,7 @@
 
 本包把这些坑的**根因和数学**写成代理可执行的规范:
 
-- **双画面版式系统** — 横竖版 8 套具名版式带精确坐标(`assets/compositions.json`),五状态语义决策器:什么时候人物全屏、什么时候圆窗、什么时候分栏,由证据决定不由时间轮播
+- **双画面版式系统** — 横竖版 8 套具名版式带精确坐标(`assets/compositions.json`),七状态语义决策器:什么时候人物全屏、什么时候圆窗、什么时候分栏,由证据决定不由时间轮播
 - **主题配色系统** — 8 套实测主题(token + SVG 底图 + 可运行 HTML 组件),**每套自带代理 playbook**:token 语义档位、信息块偏好、字幕底板硬规则、可直接嵌进生成指令的调用 crib
 - **过渡动效工程** — 端点契约、`N-1` 归一化公式、分层缓动、四档可靠性链、fps 归一化(30fps 时间线 60fps 导出的经典坑)
 - **人脸取景与三层合成** — reframe→mask 硬顺序、GL UV 坐标陷阱(Y 轴底部原点/radius 实为直径)、overscan 黑边数学、「居中≠贴脸」构图标准
@@ -41,7 +41,7 @@ npx clawhub install majia-chatcut-koubo
 ```
 SKILL.md                        主入口:五条第一性原则+通用工序+红线+路由表
 references/
-  dual-frame-layouts.md         双画面版式与五状态决策器
+  dual-frame-layouts.md         双画面版式与七状态决策器
   theme-palettes.md             8 主题+对比度档位+按角色用色
   graphics-blocks.md            十类信息块×何时用(证据信号驱动)
   motion-transitions.md         过渡工程:端点契约/四档链/fps 归一化
@@ -50,6 +50,7 @@ references/
 templates/
   terminology.template.json     词表模板(装你的品牌与误听)
   operating-profile.template.json  实测参数模板(装你的数字)
+  compatibility.template.json   ChatCut/tool 版本能力与探针记录
   examples.md                   气口/钩子/删减判例库
 assets/
   compositions.json             8 版式坐标快照
@@ -57,9 +58,15 @@ assets/
   theme-kit/playbooks/          每主题一份代理 playbook(档位+版式+crib)
 scripts/
   validate-caption-pages.mjs    字幕页机械校验(退出码非 0=未完成)
+rules/
+  policy.json                   不可由 profile 覆盖的发布红线
+schemas/                        profile/字幕/词表/规则 JSON Schema
+tests/                          假通过与组件默认行为回归测试
 ```
 
 ## 📋 版本记录
+
+**V1.3.0(2026-07-22)** — 发布门禁硬化：字幕改用结构化 JSON + 毫秒阈值，真实加载外部词表，单行/原文源/词级审计/简体规则移入不可编辑 policy；补 10 组假通过回归测试。主题 playbook 路径改为稳定 ID，颜色/TS/运行时/manifest/playbook 改为由 `themes.json` 生成；8 主题真实角色对比度与 8 布局安全区/碰撞检查全通过；CTA/meta 改为默认隐藏，JS/React 默认行为对齐。
 
 **V1.2.0(2026-07-22)** — 块级动效词汇表:信息块动效收敛为三轴受限枚举(进场/出场/循环强调,弹入默认禁、闪烁禁、打字机仅文字块),8 份主题 playbook 各配「动效档」准许/禁用集,块×动效推荐表落地「一致性>花样」。
 

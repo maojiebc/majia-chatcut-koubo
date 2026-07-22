@@ -1,117 +1,108 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.local/portrait-talk-theme-kit/themes.schema.json",
+  "$id": "https://github.com/maojiebc/majia-chatcut-koubo/assets/theme-kit/tokens/themes.schema.json",
   "title": "Portrait Talk Theme Kit",
   "type": "object",
-  "required": [
-    "name",
-    "version",
-    "canvas",
-    "typography",
-    "themes"
-  ],
+  "additionalProperties": false,
+  "required": ["name", "version", "language", "canvas", "typography", "shape", "captionModes", "themes"],
   "properties": {
-    "name": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string"
-    },
-    "language": {
-      "type": "string"
-    },
+    "$schema": {"type": "string"},
+    "name": {"const": "portrait-talk-theme-kit"},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "language": {"const": "zh-CN"},
     "canvas": {
       "type": "object",
-      "required": [
-        "width",
-        "height",
-        "ratio",
-        "safeArea"
-      ],
+      "additionalProperties": false,
+      "required": ["width", "height", "ratio", "safeArea", "subtitleZone"],
       "properties": {
-        "width": {
-          "type": "integer",
-          "const": 1080
+        "width": {"const": 1080},
+        "height": {"const": 1920},
+        "ratio": {"const": "9:16"},
+        "safeArea": {"$ref": "#/$defs/insets"},
+        "subtitleZone": {"$ref": "#/$defs/rectangle"}
+      }
+    },
+    "typography": {"type": "object"},
+    "shape": {"type": "object"},
+    "captionModes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["posterCaption", "timelineCaption"],
+      "properties": {
+        "posterCaption": {
+          "type": "object", "additionalProperties": false, "required": ["usage", "fontSizePx", "maxLines"],
+          "properties": {"usage": {"const": "static-preview-only"}, "fontSizePx": {"const": 36}, "maxLines": {"const": 2}}
         },
-        "height": {
-          "type": "integer",
-          "const": 1920
-        },
-        "ratio": {
-          "type": "string",
-          "const": "9:16"
-        },
-        "safeArea": {
-          "type": "object",
-          "required": [
-            "left",
-            "right",
-            "top",
-            "bottom"
-          ]
+        "timelineCaption": {
+          "type": "object", "additionalProperties": false, "required": ["usage", "source", "fontSizePx", "maxLines"],
+          "properties": {"usage": {"const": "viewer-facing-release"}, "source": {"const": "../compositions.json"}, "fontSizePx": {"const": 84}, "maxLines": {"const": 1}}
         }
       }
     },
     "themes": {
       "type": "array",
       "minItems": 8,
+      "maxItems": 8,
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "index",
-          "name",
-          "sourcePalette",
-          "semantic",
-          "layout",
-          "backgroundAsset"
-        ],
+        "additionalProperties": false,
+        "required": ["id", "index", "name", "description", "recommendedFor", "layout", "mode", "sourcePalette", "semantic", "gradient", "backgroundAsset", "playbookAsset", "backgroundPng"],
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "index": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "mode": {
-            "enum": [
-              "light",
-              "dark"
-            ]
-          },
-          "layout": {
-            "type": "string"
-          },
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "index": {"type": "string", "pattern": "^\\d{2}$"},
+          "name": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1},
+          "recommendedFor": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "layout": {"type": "string", "minLength": 1},
+          "mode": {"enum": ["light", "dark"]},
           "sourcePalette": {
             "type": "array",
             "minItems": 4,
+            "maxItems": 4,
             "items": {
               "type": "object",
-              "required": [
-                "role",
-                "value"
-              ]
+              "additionalProperties": false,
+              "required": ["role", "name", "value"],
+              "properties": {
+                "role": {"type": "string"},
+                "name": {"type": "string"},
+                "value": {"$ref": "#/$defs/hex"}
+              }
             }
           },
           "semantic": {
             "type": "object",
-            "required": [
-              "canvas",
-              "textPrimary",
-              "textSecondary",
-              "emphasis",
-              "ctaBackground",
-              "ctaText"
-            ]
+            "additionalProperties": false,
+            "required": ["canvas", "surface", "surfaceMuted", "textPrimary", "textSecondary", "emphasis", "accent", "accentStrong", "border", "ctaBackground", "ctaText", "speakerSurface", "speakerFigure", "shadow", "glow"],
+            "properties": {
+              "canvas": {"$ref": "#/$defs/hex"}, "surface": {"$ref": "#/$defs/hex"},
+              "surfaceMuted": {"$ref": "#/$defs/color"}, "textPrimary": {"$ref": "#/$defs/hex"},
+              "textSecondary": {"$ref": "#/$defs/hex"}, "emphasis": {"$ref": "#/$defs/hex"},
+              "accent": {"$ref": "#/$defs/hex"}, "accentStrong": {"$ref": "#/$defs/hex"},
+              "border": {"$ref": "#/$defs/color"}, "ctaBackground": {"$ref": "#/$defs/hex"},
+              "ctaText": {"$ref": "#/$defs/hex"}, "speakerSurface": {"$ref": "#/$defs/color"},
+              "speakerFigure": {"$ref": "#/$defs/color"}, "shadow": {"$ref": "#/$defs/color"},
+              "glow": {"$ref": "#/$defs/color"}
+            }
           },
-          "backgroundAsset": {
-            "type": "string"
-          }
+          "gradient": {"type": "string", "minLength": 1},
+          "backgroundAsset": {"type": "string", "pattern": "^assets/backgrounds/.+\\.svg$"},
+          "playbookAsset": {"type": "string", "pattern": "^playbooks/.+\\.md$"},
+          "backgroundPng": {"type": "string", "pattern": "^assets/backgrounds-png/.+\\.png$"}
         }
       }
+    }
+  },
+  "$defs": {
+    "hex": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"},
+    "color": {"type": "string", "pattern": "^(#[0-9A-Fa-f]{6}|rgba?\\(.+\\))$"},
+    "insets": {
+      "type": "object", "additionalProperties": false, "required": ["left", "right", "top", "bottom"],
+      "properties": {"left": {"type": "number", "minimum": 0}, "right": {"type": "number", "minimum": 0}, "top": {"type": "number", "minimum": 0}, "bottom": {"type": "number", "minimum": 0}}
+    },
+    "rectangle": {
+      "type": "object", "additionalProperties": false, "required": ["x", "y", "w", "h"],
+      "properties": {"x": {"type": "number", "minimum": 0}, "y": {"type": "number", "minimum": 0}, "w": {"type": "number", "exclusiveMinimum": 0}, "h": {"type": "number", "exclusiveMinimum": 0}}
     }
   }
 }

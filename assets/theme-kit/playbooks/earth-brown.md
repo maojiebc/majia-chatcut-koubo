@@ -4,8 +4,8 @@ name: 大地棕
 mode: light
 layout: earth-bands
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#F6F1E9", surface: "#EFE2D2", surfaceMuted: "rgba(246,241,233,0.78)", textPrimary: "#3E2C23", textSecondary: "#6F5B4A", emphasis: "#8B5E34", accent: "#8B5E34", accentStrong: "#3E2C23", border: "rgba(139,94,52,0.66)", ctaBackground: "#8B5E34", ctaText: "#FFFFFF" }
+playbookVersion: 1.3.0
+palette: {"canvas":"#F6F1E9","surface":"#EFE2D2","surfaceMuted":"rgba(246,241,233,0.78)","textPrimary":"#3E2C23","textSecondary":"#594234","emphasis":"#8B5E34","accent":"#8B5E34","accentStrong":"#3E2C23","border":"rgba(139,94,52,0.66)","ctaBackground":"#6B3F1F","ctaText":"#FFFFFF"}
 ---
 
 # 大地棕 · 主题 playbook
@@ -15,7 +15,7 @@ palette: { canvas: "#F6F1E9", surface: "#EFE2D2", surfaceMuted: "rgba(246,241,23
 ## Token 语义与档位(实测)
 
 - `textPrimary #3E2C23` 对 canvas 11.8:1,正文/字幕直接可用
-- `accent #8B5E34` 棕为大标题级(5.0:1),做填充底配白字为 5.6:1 大标题档
+- `accent #8B5E34` 棕为大标题级(5.0:1)；行动引导使用派生深棕 `ctaBackground #6B3F1F` 配白字(8.91:1)
 - `border` 棕色半透明为纯装饰线,不承担信息分隔
 - 深棕 `accentStrong #3E2C23` 与正文同色,做填充底时配白字
 

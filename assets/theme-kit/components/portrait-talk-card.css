@@ -54,7 +54,7 @@
   border: 2px solid var(--pt-border);
   border-radius: 12px;
   background: var(--pt-surface-muted);
-  color: var(--pt-accent);
+  color: var(--pt-text-primary);
   font-size: 30px;
   line-height: 1;
   font-weight: 700;
@@ -199,7 +199,7 @@
 
 .talk-card__meta {
   right: 72px;
-  bottom: 70px;
+  bottom: 190px;
   color: var(--pt-text-secondary);
   font-size: 24px;
   font-weight: 600;
@@ -220,7 +220,7 @@
 .talk-card[data-layout="diagonal-tech"] .talk-card__cta { left: 72px; top: 885px; }
 .talk-card[data-layout="diagonal-tech"] .talk-card__speaker { left: 570px; top: 980px; width: 430px; height: 650px; }
 .talk-card[data-layout="diagonal-tech"] .talk-card__subtitle { left: 72px; top: 1500px; width: 470px; }
-.talk-card[data-layout="diagonal-tech"] .talk-card__footer { left: 72px; top: 1704px; }
+.talk-card[data-layout="diagonal-tech"] .talk-card__footer { left: 72px; top: 1650px; }
 
 /* 02 商务分栏 */
 .talk-card[data-layout="executive-split"] .talk-card__eyebrow { left: 72px; top: 118px; }
@@ -230,7 +230,7 @@
 .talk-card[data-layout="executive-split"] .talk-card__cta { left: 72px; top: 962px; }
 .talk-card[data-layout="executive-split"] .talk-card__speaker { left: 630px; top: 300px; width: 370px; height: 1120px; border-radius: 44px; }
 .talk-card[data-layout="executive-split"] .talk-card__subtitle { left: 72px; top: 1320px; width: 520px; }
-.talk-card[data-layout="executive-split"] .talk-card__footer { left: 72px; top: 1704px; }
+.talk-card[data-layout="executive-split"] .talk-card__footer { left: 72px; top: 1650px; }
 
 /* 03 居中编辑 */
 .talk-card[data-layout="centered-editorial"] .talk-card__eyebrow { left: 50%; top: 126px; transform: translateX(-50%); }
@@ -238,9 +238,9 @@
 .talk-card[data-layout="centered-editorial"] .talk-card__lead { left: 180px; top: 666px; width: 720px; text-align: center; }
 .talk-card[data-layout="centered-editorial"] .talk-card__emphasis { left: 90px; top: 748px; width: 900px; text-align: center; }
 .talk-card[data-layout="centered-editorial"] .talk-card__cta { left: 50%; top: 948px; transform: translateX(-50%); }
-.talk-card[data-layout="centered-editorial"] .talk-card__speaker { left: 250px; top: 1070px; width: 580px; height: 540px; border-radius: 52px; }
+.talk-card[data-layout="centered-editorial"] .talk-card__speaker { left: 250px; top: 1070px; width: 580px; height: 430px; border-radius: 52px; }
 .talk-card[data-layout="centered-editorial"] .talk-card__subtitle { left: 140px; top: 1510px; width: 800px; text-align: center; justify-content: center; }
-.talk-card[data-layout="centered-editorial"] .talk-card__footer { left: 50%; top: 1704px; transform: translateX(-50%); }
+.talk-card[data-layout="centered-editorial"] .talk-card__footer { left: 50%; top: 1650px; transform: translateX(-50%); }
 
 /* 04 轨道聚焦 */
 .talk-card[data-layout="orbit-focus"] .talk-card__eyebrow { left: 72px; top: 118px; }
@@ -250,7 +250,7 @@
 .talk-card[data-layout="orbit-focus"] .talk-card__cta { left: 72px; top: 904px; }
 .talk-card[data-layout="orbit-focus"] .talk-card__speaker { left: 560px; top: 760px; width: 440px; height: 760px; border-radius: 90px 42px 90px 42px; }
 .talk-card[data-layout="orbit-focus"] .talk-card__subtitle { left: 72px; top: 1340px; width: 430px; }
-.talk-card[data-layout="orbit-focus"] .talk-card__footer { left: 72px; top: 1704px; }
+.talk-card[data-layout="orbit-focus"] .talk-card__footer { left: 72px; top: 1650px; }
 
 /* 05 极简长栏 */
 .talk-card[data-layout="minimal-column"] .talk-card__eyebrow { left: 96px; top: 130px; }
@@ -260,7 +260,7 @@
 .talk-card[data-layout="minimal-column"] .talk-card__cta { left: 96px; top: 1040px; border-radius: 6px; }
 .talk-card[data-layout="minimal-column"] .talk-card__speaker { left: 510px; top: 1070px; width: 430px; height: 560px; border-width: 0; border-radius: 22px; box-shadow: none; }
 .talk-card[data-layout="minimal-column"] .talk-card__subtitle { left: 96px; top: 1310px; width: 360px; border-radius: 8px; }
-.talk-card[data-layout="minimal-column"] .talk-card__footer { left: 96px; top: 1704px; }
+.talk-card[data-layout="minimal-column"] .talk-card__footer { left: 96px; top: 1650px; }
 
 /* 06 清新框景 */
 .talk-card[data-layout="fresh-frame"] .talk-card__eyebrow { left: 80px; top: 126px; }
@@ -268,9 +268,9 @@
 .talk-card[data-layout="fresh-frame"] .talk-card__lead { left: 80px; top: 640px; width: 650px; }
 .talk-card[data-layout="fresh-frame"] .talk-card__emphasis { left: 80px; top: 726px; }
 .talk-card[data-layout="fresh-frame"] .talk-card__cta { left: 80px; top: 916px; }
-.talk-card[data-layout="fresh-frame"] .talk-card__speaker { left: 230px; top: 1030px; width: 620px; height: 600px; border-radius: 42% 58% 44% 56% / 36% 36% 64% 64%; }
+.talk-card[data-layout="fresh-frame"] .talk-card__speaker { left: 230px; top: 1030px; width: 620px; height: 448px; border-radius: 42% 58% 44% 56% / 36% 36% 64% 64%; }
 .talk-card[data-layout="fresh-frame"] .talk-card__subtitle { left: 80px; top: 1488px; width: 620px; }
-.talk-card[data-layout="fresh-frame"] .talk-card__footer { left: 80px; top: 1704px; }
+.talk-card[data-layout="fresh-frame"] .talk-card__footer { left: 80px; top: 1650px; }
 
 /* 07 大地带状 */
 .talk-card[data-layout="earth-bands"] .talk-card__eyebrow { left: 90px; top: 248px; }
@@ -278,9 +278,14 @@
 .talk-card[data-layout="earth-bands"] .talk-card__lead { left: 90px; top: 730px; width: 650px; }
 .talk-card[data-layout="earth-bands"] .talk-card__emphasis { left: 90px; top: 818px; }
 .talk-card[data-layout="earth-bands"] .talk-card__cta { left: 90px; top: 1014px; }
-.talk-card[data-layout="earth-bands"] .talk-card__speaker { left: 280px; top: 1080px; width: 520px; height: 470px; border-radius: 120px 120px 44px 44px; }
+.talk-card[data-layout="earth-bands"] .talk-card__speaker { left: 280px; top: 1080px; width: 520px; height: 350px; border-radius: 120px 120px 44px 44px; }
 .talk-card[data-layout="earth-bands"] .talk-card__subtitle { left: 90px; top: 1440px; width: 700px; }
 .talk-card[data-layout="earth-bands"] .talk-card__footer { left: 90px; top: 1608px; }
+.talk-card[data-theme="earth-brown"] .talk-card__footer {
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: var(--pt-surface);
+}
 
 /* 08 轻快角落 */
 .talk-card[data-layout="playful-corner"] .talk-card__eyebrow { left: 72px; top: 118px; }
@@ -290,7 +295,7 @@
 .talk-card[data-layout="playful-corner"] .talk-card__cta { left: 72px; top: 930px; border-radius: 999px; }
 .talk-card[data-layout="playful-corner"] .talk-card__speaker { left: 570px; top: 980px; width: 400px; height: 620px; border-radius: 200px 200px 48px 48px; }
 .talk-card[data-layout="playful-corner"] .talk-card__subtitle { left: 72px; top: 1350px; width: 440px; }
-.talk-card[data-layout="playful-corner"] .talk-card__footer { left: 72px; top: 1704px; }
+.talk-card[data-layout="playful-corner"] .talk-card__footer { left: 72px; top: 1650px; }
 
 /* Optional debug overlay */
 .talk-card[data-show-safe-area="true"]::after {

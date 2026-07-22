@@ -4,8 +4,8 @@ name: 海盐青
 mode: light
 layout: fresh-frame
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#E6F4F1", surface: "#F7FFFD", surfaceMuted: "rgba(247,255,253,0.74)", textPrimary: "#0B5F58", textSecondary: "#3E6F6A", emphasis: "#0F766E", accent: "#14B8A6", accentStrong: "#0F766E", border: "rgba(20,184,166,0.66)", ctaBackground: "#14B8A6", ctaText: "#062E2B" }
+playbookVersion: 1.3.0
+palette: {"canvas":"#E6F4F1","surface":"#F7FFFD","surfaceMuted":"rgba(247,255,253,0.74)","textPrimary":"#07554F","textSecondary":"#24504C","emphasis":"#0F766E","accent":"#14B8A6","accentStrong":"#0F766E","border":"rgba(20,184,166,0.66)","ctaBackground":"#14B8A6","ctaText":"#000000"}
 ---
 
 # 海盐青 · 主题 playbook
@@ -14,9 +14,9 @@ palette: { canvas: "#E6F4F1", surface: "#F7FFFD", surfaceMuted: "rgba(247,255,25
 
 ## Token 语义与档位(实测)
 
-- **本主题最重要的一条**:`textPrimary #0B5F58` 对 canvas 仅 6.65:1——正文与字幕**必须落在 `surface #F7FFFD`(7.41:1)或字幕底板上,禁止裸压 canvas**
+- `textPrimary #07554F` 对 canvas 为 7.67:1，页脚与大标题可直接使用；正式时间线字幕仍必须落在 `surface` 或经像素验收的字幕底板上
 - `accent #14B8A6` 青绿为大标题级(4.8:1 档),大号强调可用,不进正文小字
-- 青绿做填充底配 `ctaText #062E2B` 深字(5.9:1),不配白字
+- 青绿做填充底配 `ctaText #000000` 为 8.44:1，不配白字
 - `border` 青绿半透明为纯装饰线
 
 半透明角色(`surfaceMuted`/`speakerSurface`/`glow`)一律按五类背景(亮/暗/肤色/彩色 UI/高细节)的最终合成像素验收。色值以 `tokens/themes.json` 为唯一真相源,本文不一致时以 JSON 为准。
@@ -31,7 +31,7 @@ palette: { canvas: "#E6F4F1", surface: "#F7FFFD", surfaceMuted: "rgba(247,255,25
 
 ## 字幕底板
 
-字幕深青字必须配 surface 白青底板(实测 7.41:1),这是本主题的硬规则。
+正式时间线字幕必须用深青字配 surface 白青底板，并按最终合成像素复核，这是本主题的硬规则。
 
 ## 动效档
 
@@ -39,4 +39,4 @@ palette: { canvas: "#E6F4F1", surface: "#F7FFFD", surfaceMuted: "rgba(247,255,25
 
 ## 调用 crib(生成 MG/图形时直接嵌入指令)
 
-> 海盐青清新风:canvas #E6F4F1 海盐底,一切文字落在 surface #F7FFFD 卡片上(本主题正文禁止裸压底色);深青 #0B5F58 做正文,青绿 #14B8A6 只做大号强调与描边框,青绿底配深字;圆角框式构图、边界清晰;动效入场淡入+轻上移 10–16 帧,克制不闹。
+> 海盐青清新风:canvas #E6F4F1 海盐底,正式字幕落在 surface #F7FFFD 卡片上;深青 #07554F 做正文,青绿 #14B8A6 只做大号强调与描边框,青绿底配黑字;圆角框式构图、边界清晰;动效入场淡入+轻上移 10–16 帧,克制不闹。

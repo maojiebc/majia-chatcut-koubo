@@ -16,9 +16,9 @@
 
 ## 改动联动
 
-- 新增或改主题时，同步更新：`tokens/themes.json`、`tokens/themes.css`、`tokens/themes.ts`、`manifest.json` 和对应 SVG/PNG 底图。
+- 新增或改主题时，只手工修改 `tokens/themes.json` 和必要的 SVG 源文件；运行 `node scripts/generate-theme-assets.mjs` 生成 `themes.css`、`themes.ts`、运行时主题、manifest 和 playbook frontmatter，禁止手改生成结果。
 - 新增或改布局时，同步更新：`tokens/layouts.json`、`components/portrait-talk-card.css` 和预览页。
-- 修改后运行 `node scripts/check-contrast.mjs`，并打开 `index.html` 检查 8 套主题无溢出、无遮挡。
+- 修改后运行 `npm run check`，并打开 `index.html` 检查 8 套主题无溢出、无遮挡。
 
 ## 交付标准
 

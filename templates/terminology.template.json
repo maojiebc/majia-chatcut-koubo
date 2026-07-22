@@ -1,24 +1,20 @@
 {
-  "$schema": "自维护词表:正确写法 → ASR 常见误听列表。复制本文件为 terminology.json,替换成你的品牌/产品/行业词;每次剪辑发现新误听就回写这里——词表是唯一维护点。",
-  "version": "1.0.0",
+  "$schema": "../schemas/terminology.schema.json",
+  "$comment": "自维护词表。高风险数字、金额、比例、日期、否定词与专名只能触发复核，不能仅凭上下文自动改写。",
+  "version": "2.0.0",
   "maintainer": "你的名字",
-  "terminology": {
-    "你的品牌名": ["误听写法1", "误听写法2"],
-    "你的产品名 CLI": ["产品名CLI", "产品 名 CLI"],
-    "LLM": ["蓝M", "L L M"],
-    "ETL": ["etl", "E T L"],
-    "SQL": ["sequel", "S Q L"],
-    "500 家门店": ["50 家门店"],
-    "数据分析师": ["数据分析"],
-    "蒸馏": ["争流"]
-  },
+  "entries": [
+    {"correct": "你的品牌名", "wrong": ["误听写法1", "误听写法2"], "matchMode": "substring", "requiresAudioEvidence": true},
+    {"correct": "你的产品名 CLI", "wrong": ["产品名CLI", "产品 名 CLI"], "matchMode": "substring", "requiresAudioEvidence": true},
+    {"correct": "LLM", "wrong": ["蓝M", "L L M"], "matchMode": "substring", "caseSensitive": false},
+    {"correct": "ETL", "wrong": ["etl", "E T L"], "matchMode": "substring", "caseSensitive": true},
+    {"correct": "SQL", "wrong": ["sequel", "S Q L"], "matchMode": "substring", "caseSensitive": false},
+    {"correct": "500 家门店", "wrong": ["50 家门店"], "matchMode": "substring", "requiresAudioEvidence": true, "risk": "number"},
+    {"correct": "数据分析师", "wrong": ["数据分析"], "matchMode": "substring", "requiresAudioEvidence": true},
+    {"correct": "蒸馏", "wrong": ["争流"], "matchMode": "substring", "requiresAudioEvidence": true}
+  ],
   "shortCardWhitelist": {
-    "$note": "允许 14-23 帧短卡的英文品牌/缩写(必须是完整可读语义单元);中文与单字卡不允许例外",
+    "$comment": "短卡按标准化后的完整文本精确匹配，不作为正则表达式。",
     "approved": ["AI", "BI", "CLI", "ETL", "LLM", "SQL"]
-  },
-  "notes": [
-    "上下文优先于发音:口音导致的误听按上下文改,不盲从 ASR",
-    "疑似方向性错字(盈利/亏损)必须试听确认后改",
-    "数字类误听最危险(500→50),重点核对"
-  ]
+  }
 }

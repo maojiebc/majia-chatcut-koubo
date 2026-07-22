@@ -7,14 +7,16 @@
       "label": "录屏画面 1",
       "role": "primary-evidence",
       "defaultFit": "contain",
-      "protect": ["current-ui", "cursor", "numbers", "buttons", "qr-and-private-data"]
+      "mustRemainVisible": ["current-ui", "cursor", "numbers", "buttons"],
+      "mustBeRedacted": ["qr-code", "account-id", "phone-number", "secret", "personal-data"]
     },
     {
       "id": "speaker",
       "label": "主讲人画面 2",
       "role": "speaker-presence",
       "defaultFit": "cover",
-      "protect": ["face", "forehead", "chin", "gesture"]
+      "mustRemainVisible": ["face", "forehead", "chin", "gesture"],
+      "mustBeRedacted": []
     }
   ],
   "formats": [

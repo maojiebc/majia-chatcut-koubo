@@ -22,11 +22,11 @@
 
 ## 蒙版参数与坐标系（GL UV，Y 轴原点在底部）
 
-内建蒙版的已验证字段（新会话仍先回读工具描述）：
+下面字段是历史观测，不是跨版本 API 契约。新会话必须复制 `templates/compatibility.template.json`、记录当前 tool schema hash 并跑完探针；探针未通过时不得把这些公式当成已验证能力：
 
-- 圆形 `fx-circle-mask`：`center_x`、`center_y`、`radius`、`feather`、`invert`。对画布 `W×H`、直径 `d`、左上角 `(x,y)`：`center_x=(x+d/2)/W`、`center_y=(y+d/2)/H`、**`radius = d/min(W,H)`（radius 值对应的是直径！）**，像素半径 = `radius × min(W,H) × 0.5`。
+- 圆形 `fx-circle-mask`：`center_x`、`center_y`、`radius`、`feather`、`invert`。对画布 `W×H`、直径 `d`、左上角 `(x,y)`：`center_x=(x+d/2)/W`，先算 `centerYTop=(y+d/2)/H`；若探针确认 Y 原点在顶部，则 `center_y=centerYTop`，若在底部，则 `center_y=1-centerYTop`。**只有探针确认 `radius` 语义为直径比例时**才用 `radius=d/min(W,H)`，像素半径为 `radius×min(W,H)×0.5`。
 - 圆角矩形 `fx-rect-mask`：`width=w/W`、`height=h/H`，`corner_radius` 用像素值。
-- 坐标按 GL UV 惯例，**Y 原点可能在底部**——按左上原点直觉算 Y 会整体翻转错位。先做单参数探针钉死原点方向再批量。
+- 坐标原点不能凭 GL UV 名称推断；先做单参数探针钉死顶部/底部原点，再选择上面的分支公式。
 - 蒙版外必须输出真实 Alpha（透明），「用黑色填外部」不是透明；`feather` 从 1px 起步。
 
 `propertyOverrides` 是**整包替换不是 PATCH**：只传一个字段会丢掉其余全部参数（巨脸/黑块的常见假象根因）。任何更新都完整重传参数组并立即结构回读。后端不校验未知字段——提交成功 ≠ 生效，必须单帧视觉验证。

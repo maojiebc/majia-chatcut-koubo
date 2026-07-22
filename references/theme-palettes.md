@@ -20,13 +20,13 @@
 | `warm-gray-orange` 暖灰橙 | light | `#F7F4F1` | 11.5:1 | 干货分享、培训、用户故事 |
 | `midnight-purple` 午夜紫 | dark | `#1A1026` | 18.3:1 | 趋势洞察、创新话题、产品发布 |
 | `minimal-black-white` 极简黑白 | light | `#F5F5F5` | 17.3:1 | 知识卡片、观点输出、问答栏目 |
-| `sea-salt-cyan` 海盐青 | light | `#E6F4F1` | 6.7:1（见档位限制） | 用户运营、会员增长、轻量科普 |
+| `sea-salt-cyan` 海盐青 | light | `#E6F4F1` | 7.7:1 | 用户运营、会员增长、轻量科普 |
 | `earth-brown` 大地棕 | light | `#F6F1E9` | 11.8:1 | 商业思考、案例复盘、品牌故事 |
 | `vitality-lime` 活力青柠 | light | `#ECFDF5` | 13.2:1 | 活动宣导、会员日、上新传播 |
 
 ### 已实测档位限制（按最终合成像素复核过）
 
-- `sea-salt-cyan` 的 `ink/canvas` 仅 6.65:1，**正文与字幕必须落在 `surface`（`#F7FFFD`，7.41:1）或加字幕底板**，不得裸压 canvas。
+- `sea-salt-cyan` 的 `textPrimary` 已加深为 `#07554F`，对 canvas 为 7.67:1；正式字幕仍必须落在 `surface` 或经合成验收的字幕底板上。
 - 深色三套（deep-space-blue / emerald-gold / midnight-purple）的 `accentStrong` 对 canvas 仅 1.8–2.6:1，**只能做填充底**配 `onPrimary` 反色字，禁止直接当文字色。
 - 浅色四套的 `border` 对 canvas 仅 1.6–2.7:1，纯装饰线，不承担有信息意义的分隔。
 - 各主题 `accent` 多为大标题级（4.8–6.9:1）：只用于大号强调词与数字高亮，不用于正文和小字号。
@@ -53,4 +53,4 @@
 - [ ] 半透明叠层按五类背景合成像素验收
 - [ ] 灰度预览仍有阅读层级
 
-工具：`assets/theme-kit/scripts/check-contrast.mjs` 可机械校验色对；位图底图不入库，用 `assets/theme-kit/scripts/render-backgrounds.py` 从 SVG 再生。
+工具：`assets/theme-kit/scripts/check-contrast.mjs` 校验真实组件角色色对，`check-geometry.mjs` 校验安全区和碰撞；位图底图不入库，用 `render-backgrounds.py` 从 SVG 再生。修改 `themes.json` 后先运行 `generate-theme-assets.mjs`，不要手改生成文件。

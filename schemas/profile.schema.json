@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/profile.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "policyVersion", "profileId", "profileVersion", "status", "provenance", "timeline", "captions", "presenterWindow", "audio", "terminologyFile"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "$comment": {"type": "string"},
+    "schemaVersion": {"const": "2.0.0"},
+    "policyVersion": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "profileId": {"type": "string", "minLength": 1},
+    "profileVersion": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "status": {"enum": ["untested-template", "validated", "deprecated"]},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectId", "validatedTimelineIds"],
+      "properties": {
+        "projectId": {"type": "string", "minLength": 1},
+        "validatedTimelineIds": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "note": {"type": "string"}
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height", "fps"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "fps": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "captions": {
+      "type": "object",
+      "required": ["sourceVariant", "maxCharactersPerLine", "displayOverridePolicy"],
+      "properties": {
+        "sourceVariant": {"const": "original"},
+        "maxCharactersPerLine": {"type": "integer", "minimum": 1},
+        "displayOverridePolicy": {
+          "type": "object",
+          "required": ["maxReplacementCharacters"],
+          "properties": {"maxReplacementCharacters": {"type": "integer", "minimum": 1}}
+        }
+      }
+    },
+    "presenterWindow": {"type": "object"},
+    "audio": {"type": "object"},
+    "terminologyFile": {"type": "string", "minLength": 1}
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "portrait-talk-theme-kit",
   "displayName": "9:16 口播视频配色与底图系统",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "entrypoints": {
     "preview": "index.html",
     "interactiveDemo": "examples/single.html",
@@ -25,49 +25,57 @@
       "id": "deep-space-blue",
       "name": "深空蓝",
       "layout": "diagonal-tech",
-      "backgroundAsset": "assets/backgrounds/01-deep-space-blue.svg"
+      "backgroundAsset": "assets/backgrounds/01-deep-space-blue.svg",
+      "playbookAsset": "playbooks/deep-space-blue.md"
     },
     {
       "id": "emerald-gold",
       "name": "墨绿金",
       "layout": "executive-split",
-      "backgroundAsset": "assets/backgrounds/02-emerald-gold.svg"
+      "backgroundAsset": "assets/backgrounds/02-emerald-gold.svg",
+      "playbookAsset": "playbooks/emerald-gold.md"
     },
     {
       "id": "warm-gray-orange",
       "name": "暖灰橙",
       "layout": "centered-editorial",
-      "backgroundAsset": "assets/backgrounds/03-warm-gray-orange.svg"
+      "backgroundAsset": "assets/backgrounds/03-warm-gray-orange.svg",
+      "playbookAsset": "playbooks/warm-gray-orange.md"
     },
     {
       "id": "midnight-purple",
       "name": "午夜紫",
       "layout": "orbit-focus",
-      "backgroundAsset": "assets/backgrounds/04-midnight-purple.svg"
+      "backgroundAsset": "assets/backgrounds/04-midnight-purple.svg",
+      "playbookAsset": "playbooks/midnight-purple.md"
     },
     {
       "id": "minimal-black-white",
       "name": "极简黑白",
       "layout": "minimal-column",
-      "backgroundAsset": "assets/backgrounds/05-minimal-black-white.svg"
+      "backgroundAsset": "assets/backgrounds/05-minimal-black-white.svg",
+      "playbookAsset": "playbooks/minimal-black-white.md"
     },
     {
       "id": "sea-salt-cyan",
       "name": "海盐青",
       "layout": "fresh-frame",
-      "backgroundAsset": "assets/backgrounds/06-sea-salt-cyan.svg"
+      "backgroundAsset": "assets/backgrounds/06-sea-salt-cyan.svg",
+      "playbookAsset": "playbooks/sea-salt-cyan.md"
     },
     {
       "id": "earth-brown",
       "name": "大地棕",
       "layout": "earth-bands",
-      "backgroundAsset": "assets/backgrounds/07-earth-brown.svg"
+      "backgroundAsset": "assets/backgrounds/07-earth-brown.svg",
+      "playbookAsset": "playbooks/earth-brown.md"
     },
     {
       "id": "vitality-lime",
       "name": "活力青柠",
       "layout": "playful-corner",
-      "backgroundAsset": "assets/backgrounds/08-vitality-lime.svg"
+      "backgroundAsset": "assets/backgrounds/08-vitality-lime.svg",
+      "playbookAsset": "playbooks/vitality-lime.md"
     }
   ]
 }

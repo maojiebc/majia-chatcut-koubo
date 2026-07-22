@@ -1,4 +1,4 @@
-// Generated design tokens for TypeScript projects.
+// Generated from tokens/themes.json. Source SHA256: 71fd176281ee24b72e8aeef942837c93f88a0ce17520e290613e05b3a40c4221. Do not edit.
 export type PortraitThemeId = "deep-space-blue" | "emerald-gold" | "warm-gray-orange" | "midnight-purple" | "minimal-black-white" | "sea-salt-cyan" | "earth-brown" | "vitality-lime";
 export type PortraitLayoutId = "diagonal-tech" | "executive-split" | "centered-editorial" | "orbit-focus" | "minimal-column" | "fresh-frame" | "earth-bands" | "playful-corner";
 
@@ -14,13 +14,14 @@ export interface PortraitTheme {
   semantic: Readonly<Record<string, string>>;
   gradient: string;
   backgroundAsset: string;
+  playbookAsset: string;
   backgroundPng: string;
 }
 
 export const portraitThemeKit = {
   "$schema": "./themes.schema.json",
   "name": "portrait-talk-theme-kit",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "language": "zh-CN",
   "canvas": {
     "width": 1080,
@@ -69,6 +70,19 @@ export const portraitThemeKit = {
     "radiusMedium": 28,
     "radiusLarge": 48,
     "radiusSpeaker": 58
+  },
+  "captionModes": {
+    "posterCaption": {
+      "usage": "static-preview-only",
+      "fontSizePx": 36,
+      "maxLines": 2
+    },
+    "timelineCaption": {
+      "usage": "viewer-facing-release",
+      "source": "../compositions.json",
+      "fontSizePx": 84,
+      "maxLines": 1
+    }
   },
   "themes": [
     {
@@ -125,6 +139,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #0B132B 0%, #081A32 58%, #0B132B 100%)",
       "backgroundAsset": "assets/backgrounds/01-deep-space-blue.svg",
+      "playbookAsset": "playbooks/deep-space-blue.md",
       "backgroundPng": "assets/backgrounds-png/01-deep-space-blue.png"
     },
     {
@@ -181,6 +196,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #0F2E2E 0%, #143B33 56%, #0B2524 100%)",
       "backgroundAsset": "assets/backgrounds/02-emerald-gold.svg",
+      "playbookAsset": "playbooks/emerald-gold.md",
       "backgroundPng": "assets/backgrounds-png/02-emerald-gold.png"
     },
     {
@@ -223,13 +239,13 @@ export const portraitThemeKit = {
         "surface": "#FFFFFF",
         "surfaceMuted": "rgba(255,255,255,0.76)",
         "textPrimary": "#333333",
-        "textSecondary": "#6B625C",
+        "textSecondary": "#4E4540",
         "emphasis": "#C93411",
         "accent": "#FF6A3D",
         "accentStrong": "#C93411",
         "border": "rgba(242,178,108,0.84)",
         "ctaBackground": "#FF6A3D",
-        "ctaText": "#221A17",
+        "ctaText": "#000000",
         "speakerSurface": "rgba(51,51,51,0.055)",
         "speakerFigure": "rgba(51,51,51,0.18)",
         "shadow": "rgba(91,67,51,0.16)",
@@ -237,6 +253,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #FFFFFF 0%, #F7F4F1 60%, #FFF8EF 100%)",
       "backgroundAsset": "assets/backgrounds/03-warm-gray-orange.svg",
+      "playbookAsset": "playbooks/warm-gray-orange.md",
       "backgroundPng": "assets/backgrounds-png/03-warm-gray-orange.png"
     },
     {
@@ -293,6 +310,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #1A1026 0%, #12091E 54%, #25113E 100%)",
       "backgroundAsset": "assets/backgrounds/04-midnight-purple.svg",
+      "playbookAsset": "playbooks/midnight-purple.md",
       "backgroundPng": "assets/backgrounds-png/04-midnight-purple.png"
     },
     {
@@ -335,7 +353,7 @@ export const portraitThemeKit = {
         "surface": "#FFFFFF",
         "surfaceMuted": "rgba(255,255,255,0.82)",
         "textPrimary": "#111111",
-        "textSecondary": "#555555",
+        "textSecondary": "#4A4A4A",
         "emphasis": "#111111",
         "accent": "#111111",
         "accentStrong": "#333333",
@@ -349,6 +367,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #FFFFFF 0%, #F5F5F5 68%, #EEEEEE 100%)",
       "backgroundAsset": "assets/backgrounds/05-minimal-black-white.svg",
+      "playbookAsset": "playbooks/minimal-black-white.md",
       "backgroundPng": "assets/backgrounds-png/05-minimal-black-white.png"
     },
     {
@@ -390,14 +409,14 @@ export const portraitThemeKit = {
         "canvas": "#E6F4F1",
         "surface": "#F7FFFD",
         "surfaceMuted": "rgba(247,255,253,0.74)",
-        "textPrimary": "#0B5F58",
-        "textSecondary": "#3E6F6A",
+        "textPrimary": "#07554F",
+        "textSecondary": "#24504C",
         "emphasis": "#0F766E",
         "accent": "#14B8A6",
         "accentStrong": "#0F766E",
         "border": "rgba(20,184,166,0.66)",
         "ctaBackground": "#14B8A6",
-        "ctaText": "#062E2B",
+        "ctaText": "#000000",
         "speakerSurface": "rgba(20,184,166,0.11)",
         "speakerFigure": "rgba(15,118,110,0.20)",
         "shadow": "rgba(15,118,110,0.14)",
@@ -405,6 +424,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #F7FFFD 0%, #E6F4F1 60%, #D8F5EF 100%)",
       "backgroundAsset": "assets/backgrounds/06-sea-salt-cyan.svg",
+      "playbookAsset": "playbooks/sea-salt-cyan.md",
       "backgroundPng": "assets/backgrounds-png/06-sea-salt-cyan.png"
     },
     {
@@ -447,12 +467,12 @@ export const portraitThemeKit = {
         "surface": "#EFE2D2",
         "surfaceMuted": "rgba(246,241,233,0.78)",
         "textPrimary": "#3E2C23",
-        "textSecondary": "#6F5B4A",
+        "textSecondary": "#594234",
         "emphasis": "#8B5E34",
         "accent": "#8B5E34",
         "accentStrong": "#3E2C23",
         "border": "rgba(139,94,52,0.66)",
-        "ctaBackground": "#8B5E34",
+        "ctaBackground": "#6B3F1F",
         "ctaText": "#FFFFFF",
         "speakerSurface": "rgba(139,94,52,0.10)",
         "speakerFigure": "rgba(62,44,35,0.17)",
@@ -461,6 +481,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #F6F1E9 0%, #EEDCC4 62%, #F6F1E9 100%)",
       "backgroundAsset": "assets/backgrounds/07-earth-brown.svg",
+      "playbookAsset": "playbooks/earth-brown.md",
       "backgroundPng": "assets/backgrounds-png/07-earth-brown.png"
     },
     {
@@ -517,6 +538,7 @@ export const portraitThemeKit = {
       },
       "gradient": "linear-gradient(145deg, #F8FFE9 0%, #ECFDF5 58%, #F1FFD8 100%)",
       "backgroundAsset": "assets/backgrounds/08-vitality-lime.svg",
+      "playbookAsset": "playbooks/vitality-lime.md",
       "backgroundPng": "assets/backgrounds-png/08-vitality-lime.png"
     }
   ]

@@ -4,8 +4,8 @@ name: 深空蓝
 mode: dark
 layout: diagonal-tech
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#0B132B", surface: "#111D36", surfaceMuted: "rgba(17,29,54,0.72)", textPrimary: "#FFFFFF", textSecondary: "#CBD5E1", emphasis: "#60A5FA", accent: "#60A5FA", accentStrong: "#1E3A8A", border: "rgba(96,165,250,0.80)", ctaBackground: "#1E3A8A", ctaText: "#FFFFFF" }
+playbookVersion: 1.3.0
+palette: {"canvas":"#0B132B","surface":"#111D36","surfaceMuted":"rgba(17,29,54,0.72)","textPrimary":"#FFFFFF","textSecondary":"#CBD5E1","emphasis":"#60A5FA","accent":"#60A5FA","accentStrong":"#1E3A8A","border":"rgba(96,165,250,0.80)","ctaBackground":"#1E3A8A","ctaText":"#FFFFFF"}
 ---
 
 # 深空蓝 · 主题 playbook

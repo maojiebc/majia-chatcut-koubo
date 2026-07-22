@@ -1,5 +1,19 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## V1.3.0（2026-07-22）— 发布门禁硬化
+
+- 新增不可编辑 `rules/policy.json`，把单行、禁止自动换行、原文源、词级审计、简体中文和时间阈值从用户 profile 中分离；未验证 profile 或无验证时间线会阻断发布。
+- 字幕门禁优先读取 `schemas/captions.schema.json` 的结构化 JSON，仍兼容旧文本并明确告警；短卡按毫秒判定，30fps/60fps 结果等价。
+- 真正解析 `terminologyFile`；短卡白名单改为标准化精确匹配；正确词包含误听子串时不再误报；高风险数字/金额/方向性词增加证据要求字段。
+- 新增 10 组回归测试，覆盖外部词表、双行绕过、`TRAINING` 误匹配、繁体、缺失 word、fps 等价、未验证 profile 与引号解析。
+- playbook 文件统一为 `<id>.md` 并在 token/manifest 中声明 `playbookAsset`；增加引用完整性校验。
+- `themes.json` 成为主题唯一可编辑源；CSS、TS、运行时主题、manifest 与 playbook frontmatter 由生成器同步并以 hash 防漂移。
+- 对比度门禁改为真实组件角色：正文/小标签/CTA/海报字幕/页脚 7:1，大标题和大号强调 4.5:1；8 套主题全部通过。
+- 增加布局安全区和人物/字幕碰撞检查；修复 footer 侵入底部保护区以及三套布局的人物/字幕重叠。
+- 默认 CTA/meta 为空并隐藏；修复字符串 `"false"` 被当成 true；React 补齐 `data-mode`、主题默认布局与人物模式。
+- 明确 `posterCaption`（静态预览）与 `timelineCaption`（正式发布）的边界；拆分录屏 `mustRemainVisible` 与隐私 `mustBeRedacted`。
+- 新增 ChatCut compatibility 模板与 schema；Y 坐标改为顶部/底部原点显式分支公式，宿主实现细节只有在探针通过后才可使用。
+
 ## V1.2.0（2026-07-22）— 块级动效词汇表
 
 - `references/graphics-blocks.md` 新增「块级动效词汇表」：进场/出场/循环强调三轴受限枚举（弹入默认禁——「不弹跳」是全包基线；闪烁禁；漂浮几乎不用；打字机仅文字块且需逐字有语义）、时长基线（进场 10–16 帧 @30fps、出场 8–12 帧，一律按秒或归一化帧率写）、块×动效推荐表、「一致性>花样」与同屏错帧规则。

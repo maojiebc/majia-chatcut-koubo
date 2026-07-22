@@ -20,7 +20,7 @@
   PortraitTalkThemeKit.mount("#card", {
     theme: "sea-salt-cyan",
     layout: "fresh-frame",
-    showSubtitle: true,
+    showSubtitle: false,
     copy: {
       title: "会员不是折扣人群，\n而是经营资产",
       emphasis: "经营资产",
@@ -31,6 +31,8 @@
 ```
 
 组件画布固定为 1080 × 1920。预览时可以使用 CSS `transform: scale(...)` 缩放，导出时按原尺寸截图或录制。
+
+`showSubtitle` 只显示海报组件里的 `posterCaption`（36px、可两行），用于静态构图预览。正式成片必须使用 `assets/compositions.json` 的 `timelineCaption`（竖版 84px、单行）并通过根目录字幕门禁。行动引导 `cta` 与内部 `meta` 默认均为空；只有用户明确要求或原素材已有 CTA 时才传入。
 
 ## 替换口播人物
 
@@ -57,6 +59,8 @@
 - `components/portrait-talk-card.*`：无依赖 HTML 组件。
 - `examples/PortraitTalkCard.tsx`：React 示例。
 - `scripts/check-contrast.mjs`：检查关键文字与按钮对比度。
+- `scripts/check-geometry.mjs`：检查安全区与人物/字幕碰撞。
+- `scripts/generate-theme-assets.mjs`：从 `themes.json` 生成 CSS、TS、运行时主题、manifest 与 playbook frontmatter。
 
 ## 主题选择
 
@@ -74,7 +78,8 @@
 ## 校验
 
 ```bash
-node scripts/check-contrast.mjs
+npm run generate
+npm run check
 python3 -m http.server 8000
 ```
 

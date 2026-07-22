@@ -4,8 +4,8 @@ name: 午夜紫
 mode: dark
 layout: orbit-focus
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#1A1026", surface: "#241536", surfaceMuted: "rgba(36,21,54,0.76)", textPrimary: "#FFFFFF", textSecondary: "#DDD1F3", emphasis: "#A78BFA", accent: "#A78BFA", accentStrong: "#6D28D9", border: "rgba(167,139,250,0.72)", ctaBackground: "#6D28D9", ctaText: "#FFFFFF" }
+playbookVersion: 1.3.0
+palette: {"canvas":"#1A1026","surface":"#241536","surfaceMuted":"rgba(36,21,54,0.76)","textPrimary":"#FFFFFF","textSecondary":"#DDD1F3","emphasis":"#A78BFA","accent":"#A78BFA","accentStrong":"#6D28D9","border":"rgba(167,139,250,0.72)","ctaBackground":"#6D28D9","ctaText":"#FFFFFF"}
 ---
 
 # 午夜紫 · 主题 playbook

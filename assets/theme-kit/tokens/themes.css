@@ -1,8 +1,8 @@
-/* Generated from tokens/themes.json. Do not hard-code colors in components. */
+/* Generated from tokens/themes.json. Source SHA256: 71fd176281ee24b72e8aeef942837c93f88a0ce17520e290613e05b3a40c4221. Do not edit. */
 :root {
   --pt-width: 1080px;
   --pt-height: 1920px;
-  --pt-font: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --pt-font: PingFang SC, Microsoft YaHei, Noto Sans SC, system-ui, sans-serif;
   --pt-radius-sm: 16px;
   --pt-radius-md: 28px;
   --pt-radius-lg: 48px;
@@ -53,13 +53,13 @@
   --pt-surface: #FFFFFF;
   --pt-surface-muted: rgba(255,255,255,0.76);
   --pt-text-primary: #333333;
-  --pt-text-secondary: #6B625C;
+  --pt-text-secondary: #4E4540;
   --pt-emphasis: #C93411;
   --pt-accent: #FF6A3D;
   --pt-accent-strong: #C93411;
   --pt-border: rgba(242,178,108,0.84);
   --pt-cta-bg: #FF6A3D;
-  --pt-cta-text: #221A17;
+  --pt-cta-text: #000000;
   --pt-speaker-surface: rgba(51,51,51,0.055);
   --pt-speaker-figure: rgba(51,51,51,0.18);
   --pt-shadow: rgba(91,67,51,0.16);
@@ -93,7 +93,7 @@
   --pt-surface: #FFFFFF;
   --pt-surface-muted: rgba(255,255,255,0.82);
   --pt-text-primary: #111111;
-  --pt-text-secondary: #555555;
+  --pt-text-secondary: #4A4A4A;
   --pt-emphasis: #111111;
   --pt-accent: #111111;
   --pt-accent-strong: #333333;
@@ -112,14 +112,14 @@
   --pt-canvas: #E6F4F1;
   --pt-surface: #F7FFFD;
   --pt-surface-muted: rgba(247,255,253,0.74);
-  --pt-text-primary: #0B5F58;
-  --pt-text-secondary: #3E6F6A;
+  --pt-text-primary: #07554F;
+  --pt-text-secondary: #24504C;
   --pt-emphasis: #0F766E;
   --pt-accent: #14B8A6;
   --pt-accent-strong: #0F766E;
   --pt-border: rgba(20,184,166,0.66);
   --pt-cta-bg: #14B8A6;
-  --pt-cta-text: #062E2B;
+  --pt-cta-text: #000000;
   --pt-speaker-surface: rgba(20,184,166,0.11);
   --pt-speaker-figure: rgba(15,118,110,0.20);
   --pt-shadow: rgba(15,118,110,0.14);
@@ -133,12 +133,12 @@
   --pt-surface: #EFE2D2;
   --pt-surface-muted: rgba(246,241,233,0.78);
   --pt-text-primary: #3E2C23;
-  --pt-text-secondary: #6F5B4A;
+  --pt-text-secondary: #594234;
   --pt-emphasis: #8B5E34;
   --pt-accent: #8B5E34;
   --pt-accent-strong: #3E2C23;
   --pt-border: rgba(139,94,52,0.66);
-  --pt-cta-bg: #8B5E34;
+  --pt-cta-bg: #6B3F1F;
   --pt-cta-text: #FFFFFF;
   --pt-speaker-surface: rgba(139,94,52,0.10);
   --pt-speaker-figure: rgba(62,44,35,0.17);

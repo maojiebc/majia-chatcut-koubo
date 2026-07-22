@@ -4,8 +4,8 @@ name: 活力青柠
 mode: light
 layout: playful-corner
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#ECFDF5", surface: "#F7FFE9", surfaceMuted: "rgba(247,255,233,0.78)", textPrimary: "#163300", textSecondary: "#3F5B31", emphasis: "#387A05", accent: "#84CC16", accentStrong: "#16A34A", border: "rgba(132,204,22,0.72)", ctaBackground: "#84CC16", ctaText: "#163300" }
+playbookVersion: 1.3.0
+palette: {"canvas":"#ECFDF5","surface":"#F7FFE9","surfaceMuted":"rgba(247,255,233,0.78)","textPrimary":"#163300","textSecondary":"#3F5B31","emphasis":"#387A05","accent":"#84CC16","accentStrong":"#16A34A","border":"rgba(132,204,22,0.72)","ctaBackground":"#84CC16","ctaText":"#163300"}
 ---
 
 # 活力青柠 · 主题 playbook
