@@ -93,6 +93,6 @@ docs/
 | 🪝 ClawHub | [clawhub.ai/p/maojiebc](https://clawhub.ai/p/maojiebc) |
 | 🐦 X | [@maojiebc](https://x.com/maojiebc) |
 | 📕 小红书 | [超级马甲](https://xhslink.com/m/4fQMJeHHWKC) |
-| 📰 微信公众号 | **超级马甲** |
+| 📰 微信公众号 | [超级马甲](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzODk2NA==#wechat_redirect) |
 
 > 这份 skill 是 14 年用户运营 + 内容矩阵实战沉淀出来的,问题/合作随时聊。
