@@ -1,15 +1,15 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.2.2-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.2.3-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 > 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令与下方一致；「ChatCut口播 · 马甲实战版」是它的中文展示名。
 
 **ChatCut 口播剪辑通用技巧包 · 马甲实战版** —— 官方 ChatCut skill 之上的增量层:双画面版式、主题配色、过渡动效、人脸取景四大件,外加可自维护的词表模板与机器化字幕门禁。全部规则来自真实批量剪片(11 支直播切片 × 多轮返工)踩出来的实测结论,不是理论汇编。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.2.2 增量层框架图:官方 ChatCut 底座 → 双画面版式 / 主题配色 / 过渡动效工程 / 人脸取景 四大件 → 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.2.3 增量层框架图:官方 ChatCut 底座 → 双画面版式 / 主题配色 / 过渡动效工程 / 人脸取景 四大件 → 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.2 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.3 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -68,11 +68,11 @@ docs/
 
 ## 📋 版本记录
 
+**V1.2.3(2026-07-23)** — 依赖 CVE 修复:`assets/theme-kit/requirements.txt` 的 `CairoSVG>=2.7` 固定为 `==2.9.0`,消除 CVE-2026-31899(递归 `<use>` 指数级 DoS)暴露;SKILL description 补前置/非目标,收窄触发口径。
+
 **V1.2.2(2026-07-23)** — 中文品牌名:展示名定为「ChatCut口播 · 马甲实战版」,同步 SKILL/README/架构图/GitHub About/ClawHub;安装标识 `majia-chatcut-koubo`、frontmatter 与安装命令一律不变。
 
 **V1.2.1(2026-07-23)** — 框架图 + 装修:新增 `docs/architecture.svg` 增量层全景框架图(官方底座 → 双画面/主题/动效/取景 四大件 → 词表模板 + 字幕门禁 → 可见画面/可听声音/可读字幕 验收三象),README 首图改为框架图、主题总览下移,版本记录收敛。纯文档增强,规则本体不变。
-
-**V1.2.0(2026-07-22)** — 块级动效词汇表:信息块动效收敛为三轴受限枚举(进场/出场/循环强调,弹入默认禁、闪烁禁、打字机仅文字块),8 份主题 playbook 各配「动效档」准许/禁用集,块×动效推荐表落地「一致性>花样」。
 
 完整变更历史见 [CHANGELOG.md](CHANGELOG.md)。
 

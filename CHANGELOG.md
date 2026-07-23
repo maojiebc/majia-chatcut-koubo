@@ -1,5 +1,12 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## V1.2.3（2026-07-23）— 依赖 CVE 修复 + trigger 收窄
+
+- **供应链修复**：`assets/theme-kit/requirements.txt` 将 `CairoSVG>=2.7` 固定为 `CairoSVG==2.9.0`，消除 **CVE-2026-31899**（CairoSVG 2.7 递归 `<use>` 元素放大导致的指数级 DoS）暴露。该依赖仅被可选脚本 `assets/theme-kit/scripts/render-backgrounds.py`（SVG→PNG）使用，pin 到 PyPI 最新稳定版不影响功能。
+- **trigger 收窄**：SKILL.md `description` 追加「前置（需官方 ChatCut skill/MCP）」与「非目标（不做非视频剪辑任务、不替代官方工具用法）」，回应 ClawHub skillspector 的 SQP-1（activation 过宽）。
+- 触发本次修复的背景：v1.2.2 发布后 ClawHub skillspector 因上述未固定 CVE 依赖判 `suspicious/CAUTION`（clawscan AI 审查判 `benign`），版本被扣在审核未转公开；本版清除该 HIGH 项以求干净过审。
+- 规则本体（references/templates/scripts 逻辑）零改动。
+
 ## V1.2.2（2026-07-23）— 中文品牌名
 
 - 展示名定为「**ChatCut口播 · 马甲实战版**」，同步五处品牌面：SKILL.md H1、README.md H1、README.en.md 副标题注记、GitHub About 简介、ClawHub `--name`；架构图标题与 footer 一并更新。
