@@ -6,9 +6,9 @@
 
 **A field-tested technique pack for agent-driven talking-head editing in ChatCut · Majia Field Edition** — an increment layer on top of the official ChatCut skills. The official skills teach agents *how to use the tools*; this pack teaches them *what a good cut looks like*, with the math behind every hard-won lesson.
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.2.3 increment-layer architecture: official ChatCut base → four pieces (dual-frame layout / theme palette / transition engineering / face reframe) → terminology template + caption gate → visible frame / audible sound / readable captions acceptance triad" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.3.0 increment-layer architecture: official ChatCut base → four pieces (dual-frame layout / theme palette / transition engineering / face reframe) → terminology template + caption gate → visible frame / audible sound / readable captions acceptance triad" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.3 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.3.0 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
 
 ## What's inside
 
