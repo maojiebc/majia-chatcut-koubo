@@ -13,7 +13,7 @@
   <rect x="0" y="0" width="1280" height="900" fill="#fbfbf9"/>
 
   <!-- Header -->
-  <text x="60" y="58" class="t h" font-size="34">majia-chatcut-koubo · 增量层框架</text>
+  <text x="60" y="58" class="t h" font-size="34">ChatCut口播 · 增量层框架</text>
   <text x="60" y="92" class="sub" font-size="18">官方 ChatCut skill 教「工具怎么用」；本包只补官方不说的那句 ——「剪成什么样才算好」</text>
 
   <!-- Legend -->
@@ -116,5 +116,5 @@
 
   <!-- footer -->
   <text x="60" y="852" class="mut" font-size="14">宿主：Codex / WorkBuddy / TRAE 等 ChatCut 代理 · 方法来源已在 CHANGELOG 逐条署名（只吸收组织方法，文本与取舍为本包自定）</text>
-  <text x="60" y="876" class="mut" font-size="13">majia-chatcut-koubo · 马甲实战版 · v1.2.1</text>
+  <text x="60" y="876" class="mut" font-size="13">ChatCut口播 · 马甲实战版 · v1.2.2 · slug: majia-chatcut-koubo</text>
 </svg>

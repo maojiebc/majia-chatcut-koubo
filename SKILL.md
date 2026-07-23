@@ -2,10 +2,10 @@
 name: majia-chatcut-koubo
 description: ChatCut 口播/录屏视频代理剪辑的通用技巧包——官方 ChatCut skill 之上的增量层。覆盖：双画面版式（横竖版 8 套坐标）、8 套主题配色与对比度档位、过渡动效工程（四档可靠性链/端点契约/fps 归一化）、人脸居中与内部取景（三层合成/reframe→mask 顺序/坐标系陷阱/overscan 公式）、中文气口字幕与可自维护词表模板、机器化字幕门禁脚本。触发：ChatCut 剪口播、直播切片、画中画/圆窗、主讲人过渡动画、竖版重构、字幕气口、术语纠错、主题配色。
 metadata:
-  version: 1.2.1
+  version: 1.2.2
 ---
 
-# majia-chatcut-koubo · 马甲实战版
+# ChatCut口播 · 马甲实战版
 
 ChatCut 口播剪辑的通用技巧包。把 ChatCut 当作最终可继续手工调整的非线性编辑器：所有剪辑交付留在项目和时间线上，以可见画面、可听声音和可读字幕为验收对象。
 

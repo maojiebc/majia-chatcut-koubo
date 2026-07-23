@@ -1,5 +1,11 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## V1.2.2（2026-07-23）— 中文品牌名
+
+- 展示名定为「**ChatCut口播 · 马甲实战版**」，同步五处品牌面：SKILL.md H1、README.md H1、README.en.md 副标题注记、GitHub About 简介、ClawHub `--name`；架构图标题与 footer 一并更新。
+- **安装标识（slug）`majia-chatcut-koubo`、SKILL frontmatter `name:`、`gh skill install` / `npx skills add` / `clawhub install` 命令一律不变** —— 仅人读展示名变更，机器标识与安装路径零改动。
+- 规则本体（SKILL/references/templates/scripts）零改动。
+
 ## V1.2.1（2026-07-23）— 框架图 + README 装修
 
 - 新增 `docs/architecture.svg`：增量层全景框架图 —— 官方 ChatCut 底座 → 双画面版式 / 主题配色 / 过渡动效工程 / 人脸取景 四大件（各标所治痛点）→ 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象；配套 `docs/architecture.png`（raw.githubusercontent 渲染用，`.svg` 在包页不内联）。
