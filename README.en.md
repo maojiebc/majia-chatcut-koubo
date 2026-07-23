@@ -1,10 +1,12 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.2.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.2.1-blue)
 
 **A field-tested technique pack for agent-driven talking-head editing in ChatCut · Majia Field Edition** — an increment layer on top of the official ChatCut skills. The official skills teach agents *how to use the tools*; this pack teaches them *what a good cut looks like*, with the math behind every hard-won lesson.
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.0 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.2.1 increment-layer architecture: official ChatCut base → four pieces (dual-frame layout / theme palette / transition engineering / face reframe) → terminology template + caption gate → visible frame / audible sound / readable captions acceptance triad" width="100%">
+
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.2.1 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
 
 ## What's inside
 
@@ -30,11 +32,11 @@ The numbers in this pack (22 chars/line, 330px circle window, `magnification≈0
 
 ## 📋 Version History
 
+**V1.2.1 (2026-07-23)** — Architecture diagram + polish: new `docs/architecture.svg` giving a full-picture view of the increment layer (official base → four pieces → terminology template + caption gate → visible/audible/readable acceptance triad); README lead image is now the framework diagram, theme overview moved below; version history trimmed. Docs-only enhancement — no rule changes.
+
 **V1.2.0 (2026-07-22)** — Block-level motion vocabulary: graphics-block animations converge into a constrained three-axis enum (enter/exit/loop emphasis — bounce off by default, flicker banned, typewriter for text blocks only), each theme playbook gains a "motion tier" allow/deny set, plus a block×motion recommendation table ("consistency beats variety").
 
 **V1.1.0 (2026-07-22)** — Theme playbooks: each of the 8 themes now ships an agent-facing playbook (measured token tiers, layout pairing, graphics-block preferences, caption-plate hard rules, and an embeddable style crib for MG generation), upgrading the theme pack from "palette + backgrounds" to an executable design system. New `graphics-blocks.md`: a ten-block taxonomy driven by evidence signals (CTA off by default — that's a red line, not a preference).
-
-**V1.0.0 (2026-07-22)** — Initial release, distilled from 99 real agent-editing sessions across 11 days of ChatCut production work.
 
 Full history: [CHANGELOG.md](CHANGELOG.md).
 

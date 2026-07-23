@@ -1,5 +1,12 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## V1.2.1（2026-07-23）— 框架图 + README 装修
+
+- 新增 `docs/architecture.svg`：增量层全景框架图 —— 官方 ChatCut 底座 → 双画面版式 / 主题配色 / 过渡动效工程 / 人脸取景 四大件（各标所治痛点）→ 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象；配套 `docs/architecture.png`（raw.githubusercontent 渲染用，`.svg` 在包页不内联）。
+- README.md / README.en.md 首图改为该框架图（绝对 raw URL），原 8 主题配色总览下移为第二张图；「结构」段补 `docs/`。
+- 版本记录段收敛为最近 3 条（V1.2.1 / V1.2.0 / V1.1.0），更早版本移交 CHANGELOG。
+- 纯文档增强，SKILL/references/templates/scripts 规则本体零改动。
+
 ## V1.2.0（2026-07-22）— 块级动效词汇表
 
 - `references/graphics-blocks.md` 新增「块级动效词汇表」：进场/出场/循环强调三轴受限枚举（弹入默认禁——「不弹跳」是全包基线；闪烁禁；漂浮几乎不用；打字机仅文字块且需逐字有语义）、时长基线（进场 10–16 帧 @30fps、出场 8–12 帧，一律按秒或归一化帧率写）、块×动效推荐表、「一致性>花样」与同屏错帧规则。
