@@ -4,8 +4,8 @@ name: 暖灰橙
 mode: light
 layout: centered-editorial
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#F7F4F1", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,255,0.76)", textPrimary: "#333333", textSecondary: "#6B625C", emphasis: "#C93411", accent: "#FF6A3D", accentStrong: "#C93411", border: "rgba(242,178,108,0.84)", ctaBackground: "#FF6A3D", ctaText: "#221A17" }
+playbookVersion: 1.2.0
+palette: { canvas: "#F7F4F1", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,255,0.76)", textPrimary: "#333333", textSecondary: "#4E4540", emphasis: "#C93411", accent: "#FF6A3D", accentStrong: "#C93411", border: "rgba(242,178,108,0.84)", ctaBackground: "#FF6A3D", ctaText: "#000000" }
 ---
 
 # 暖灰橙 · 主题 playbook
@@ -15,7 +15,7 @@ palette: { canvas: "#F7F4F1", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,25
 ## Token 语义与档位(实测)
 
 - `textPrimary #333333` 对 canvas 11.5:1,正文/字幕直接可用
-- `accent #FF6A3D` 亮橙为大标题级(配深字 #221A17 6.0:1):大号短文案/贴纸/图形,**禁配白字**(仅 2.8:1)
+- `accent #FF6A3D` 亮橙为大标题级(配纯黑字 #000000 约 6.3:1):大号短文案/贴纸/图形,**禁配白字**(仅 2.8:1)
 - `emphasis #C93411` 深橙红 4.8:1 大标题级,可做标题文字色
 - `border` 橙调半透明为纯装饰线,不承担信息分隔
 

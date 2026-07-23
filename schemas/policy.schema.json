@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/policy.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "caption"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "caption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxLines", "automaticWrapAllowed", "allowedSourceVariants", "requireWordLevelAudit", "hardMinDurationMs", "normalMinDurationMs", "maxTraditionalChineseHits", "traditionalCharacters"],
+      "properties": {
+        "maxLines": {"const": 1},
+        "automaticWrapAllowed": {"const": false},
+        "allowedSourceVariants": {"type": "array", "contains": {"const": "original"}},
+        "requireWordLevelAudit": {"const": true},
+        "hardMinDurationMs": {"type": "number", "minimum": 1},
+        "normalMinDurationMs": {"type": "number", "minimum": 1},
+        "maxTraditionalChineseHits": {"const": 0},
+        "traditionalCharacters": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

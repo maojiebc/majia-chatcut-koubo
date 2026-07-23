@@ -1,6 +1,6 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.2.3-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.3.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 > 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令与下方一致；「ChatCut口播 · 马甲实战版」是它的中文展示名。
@@ -17,11 +17,15 @@
 
 本包把这些坑的**根因和数学**写成代理可执行的规范:
 
-- **双画面版式系统** — 横竖版 8 套具名版式带精确坐标(`assets/compositions.json`),五状态语义决策器:什么时候人物全屏、什么时候圆窗、什么时候分栏,由证据决定不由时间轮播
+- **双画面版式系统** — 横竖版 8 套具名版式带精确坐标(`assets/compositions.json`),七执行状态语义决策器 + 状态落地原子契约:什么时候人物全屏、什么时候圆窗、什么时候纯录屏,由证据决定不由时间轮播
 - **主题配色系统** — 8 套实测主题(token + SVG 底图 + 可运行 HTML 组件),**每套自带代理 playbook**:token 语义档位、信息块偏好、字幕底板硬规则、可直接嵌进生成指令的调用 crib
-- **过渡动效工程** — 端点契约、`N-1` 归一化公式、分层缓动、四档可靠性链、fps 归一化(30fps 时间线 60fps 导出的经典坑)
+- **过渡动效工程** — 端点契约、`N-1` 归一化公式、分层缓动、四档可靠性链(含 ChatCut 宿主快速路由)、fps 归一化(30fps 时间线 60fps 导出的经典坑)
 - **人脸取景与三层合成** — reframe→mask 硬顺序、GL UV 坐标陷阱(Y 轴底部原点/radius 实为直径)、overscan 黑边数学、「居中≠贴脸」构图标准
-- **字幕与词表** — 气口分卡判例、单行机器门禁(`scripts/validate-caption-pages.mjs`)、译文轨 P0 陷阱、可自维护词表模板
+- **字幕与词表** — 气口分卡判例、单行机器门禁(validator + 不可放宽的 `rules/policy.json`)、译文轨 P0 陷阱、精校逐字稿真相源、可自维护词表模板
+- **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
+- **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
+- **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
+- **本地个人层** — `~/.config/majia-chatcut-koubo/` 叠加个人 profile/词表/审美基线;品牌词与实测数字留在本地,公开包保持通用
 
 ## 安装
 
@@ -36,31 +40,42 @@ npx skills add maojiebc/majia-chatcut-koubo
 npx clawhub install majia-chatcut-koubo
 ```
 
-## 让它变成你的
+## 让它变成你的(本地个人层)
 
-包里的数字(22 字/行、330px 圆窗、`magnification≈0.30`)是作者素材上的实测起点。复制 `templates/` 下的词表模板和参数模板,在你的素材上做一个样片,把验证过的数字填进去——之后每次剪辑让代理先读你的 profile。数字变了就升版本存新文件,不覆盖旧版。
+包里的数字(22 字/行、330px 圆窗、`magnification≈0.30`)是作者素材上的实测起点。正式机制:把 `templates/local-config-example/` 复制为 `~/.config/majia-chatcut-koubo/`,装进你的个人 profile(实测版式数字)、词表(validator `--terms` 直读)、审美基线与补充护栏——skill 开工探测该目录,存在即叠加。品牌实词与真实业务数字只进本地层,永不进 git;本地 profile 只能校准参数,不能放宽 `rules/policy.json` 的发布硬规则。数字变了就升版本存新文件,不覆盖旧版。
 
 ## 结构
 
 ```
-SKILL.md                        主入口:五条第一性原则+通用工序+红线+路由表
+SKILL.md                        主入口:五条第一性原则+通用工序+红线+确认闸门+路由表
 references/
-  dual-frame-layouts.md         双画面版式与五状态决策器
-  theme-palettes.md             8 主题+对比度档位+按角色用色
-  graphics-blocks.md            十类信息块×何时用(证据信号驱动)
-  motion-transitions.md         过渡工程:端点契约/四档链/fps 归一化
-  face-reframe.md               三层合成/坐标系陷阱/overscan 数学
-  captions-terminology.md       气口分卡/单行门禁/词表机制
+  operating-manual.md           逐片闭环/八道硬闸/批量流水线/验证方法学/生成资产纪律
+  dual-frame-layouts.md         双画面版式/七执行状态决策器/状态原子契约
+  theme-palettes.md             8 主题+对比度档位+按角色用色+图表色板
+  graphics-blocks.md            十类信息块×何时用+画面任务路由(证据信号驱动)
+  motion-transitions.md         过渡工程:端点契约/四档链+ChatCut 快速路由/fps 归一化
+  face-reframe.md               三层合成/坐标系陷阱/overscan 数学/兼容探针
+  captions-terminology.md       气口分卡/单行门禁/精校稿真相源/词表机制
+  retention-structure.md        开头钩子决策流/钩子-兑现/注意力时钟/四平台路由
+  chatcut-field-notes.md        ChatCut 宿主实测行为档案(crop/渲染差异/shader/分页引擎/隐私 SOP/双端预览)
+  recovery.md                   502/403/工具面固化/续接手册协议/转写绕行
 templates/
   terminology.template.json     词表模板(装你的品牌与误听)
   operating-profile.template.json  实测参数模板(装你的数字)
+  compatibility.template.json   宿主能力探针契约(公式仅在探针通过后使用)
+  local-config-example/         本地个人层四件套模板(复制到 ~/.config/majia-chatcut-koubo/)
   examples.md                   气口/钩子/删减判例库
 assets/
-  compositions.json             8 版式坐标快照
+  compositions.json             8 版式坐标快照(mustRemainVisible/mustBeRedacted 分离)
   theme-kit/                    8 主题 token+SVG 底图+可运行组件
   theme-kit/playbooks/          每主题一份代理 playbook(档位+版式+crib)
+rules/
+  policy.json                   不可由 profile 放宽的字幕发布策略(单行/毫秒短卡/繁体零容忍)
+schemas/                        profile/字幕/词表/兼容契约的 JSON Schema
 scripts/
-  validate-caption-pages.mjs    字幕页机械校验(退出码非 0=未完成)
+  validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--terms 个人词表;退出码非 0=未完成)
+tests/
+  caption-validator.test.mjs    validator 回归测试(npm test)
 docs/
   architecture.svg              增量层全景框架图(本页首图)
   theme-preview.png             8 主题配色总览
@@ -68,11 +83,11 @@ docs/
 
 ## 📋 版本记录
 
+**V1.3.0(2026-07-24)** — 制度增量+ChatCut 实测档案+本地个人层:references 6→10 册(新增逐片执行手册/宿主实测行为档案/留存结构/故障恢复);SKILL 新增确认闸门(状态表先行硬闸/60 秒预览闸/精校稿真相源);机器门禁升级(不可放宽 `rules/policy.json`+schemas+validator 支持 profile 继承/毫秒短卡/`--terms` 个人词表+14 项回归测试);主题 token v1.1 对比度修正(海盐青正文 7.67:1 达标);本地个人层正式契约 `~/.config/majia-chatcut-koubo/` + `templates/local-config-example/` 四件套模板。
+
 **V1.2.3(2026-07-23)** — 依赖 CVE 修复:`assets/theme-kit/requirements.txt` 的 `CairoSVG>=2.7` 固定为 `==2.9.0`,消除 CVE-2026-31899(递归 `<use>` 指数级 DoS)暴露;SKILL description 补前置/非目标,收窄触发口径。
 
 **V1.2.2(2026-07-23)** — 中文品牌名:展示名定为「ChatCut口播 · 马甲实战版」,同步 SKILL/README/架构图/GitHub About/ClawHub;安装标识 `majia-chatcut-koubo`、frontmatter 与安装命令一律不变。
-
-**V1.2.1(2026-07-23)** — 框架图 + 装修:新增 `docs/architecture.svg` 增量层全景框架图(官方底座 → 双画面/主题/动效/取景 四大件 → 词表模板 + 字幕门禁 → 可见画面/可听声音/可读字幕 验收三象),README 首图改为框架图、主题总览下移,版本记录收敛。纯文档增强,规则本体不变。
 
 完整变更历史见 [CHANGELOG.md](CHANGELOG.md)。
 

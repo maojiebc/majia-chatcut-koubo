@@ -12,11 +12,13 @@
 | 完整人物层 | 原始人物视频与内部取景 | **保留完整源画幅**（item 本身 `crop*=0`、`borderRadius=0`），只用等比 reframe 改窗内取景 |
 | Alpha 窗口层 | 圆形/圆角矩形的可见边界 | 独立蒙版冻结中心、尺寸、形状；描边沿蒙版外缘 |
 
-把人物 item 直接裁成 PiP 的破坏性做法，会让后续一切「圆窗↔矩形↔全屏」连续过渡无法实现。
+把人物 item 直接裁成 PiP 的破坏性做法，会让后续一切「圆窗↔矩形↔全屏」连续过渡无法实现。ChatCut 宿主上，「满屏 item + 窗口 reframe shader」路线（见 `chatcut-field-notes.md`）与本契约同构——item 仍保留完整源画幅，窗口由 shader 切出。
 
-## 效果顺序：reframe → mask（会画黑块的坑）
+## 效果顺序：reframe → mask →（描边/阴影）
 
-视觉意图顺序永远是 **先 reframe（在完整画幅内平移/等比缩放）→ 后 mask（切出可见窗口）**。反过来（先 mask 后 reframe）会让 reframe 从蒙版外的透明区采到黑色 RGB，产出大黑圆、黑条或「窗形还在、内部发黑」。
+视觉意图顺序永远是 **先 reframe（在完整画幅内平移/等比缩放）→ 后 mask（切出可见窗口）→ 描边/阴影只沿最终蒙版边界绘制**。反过来（先 mask 后 reframe）会让 reframe 从蒙版外的透明区采到黑色 RGB，产出大黑圆、黑条或「窗形还在、内部发黑」。
+
+自定义 reframe shader 的同类错位：RGB 取自映射后的 `uvMapped`、Alpha 却沿用映射前的 `v_texCoord` 时，一旦上游已被 mask，效果会保留窗口 Alpha、同时从透明区采到黑色 RGB——「外形还在、里面大片发黑」的特征故障。修正效果顺序；新写 reframe shader 时让 RGB/Alpha 的采样坐标与透明语义一致，并把越界当作失败，不把 `clamp(uvMapped, 0, 1)` 的边缘拉丝当有效 overscan。
 
 **实测创建顺序陷阱**（须每个新会话探针复验）：ChatCut 的 FX lane 编号与创建顺序可能相反——同一 clip 上想要 `reframe → mask` 的执行序，实际要**先 add mask、后 add reframe**，回读得到 reframe=lane 1、mask=lane 2 才是正确执行序。不要凭添加数组顺序判断，结构回读 lane + 用明显 offset 的单帧探针确认「人物移动、窗口不动、窗口外仍透明」。
 
@@ -30,6 +32,8 @@
 - 蒙版外必须输出真实 Alpha（透明），「用黑色填外部」不是透明；`feather` 从 1px 起步。
 
 `propertyOverrides` 是**整包替换不是 PATCH**：只传一个字段会丢掉其余全部参数（巨脸/黑块的常见假象根因）。任何更新都完整重传参数组并立即结构回读。后端不校验未知字段——提交成功 ≠ 生效，必须单帧视觉验证。
+
+以上宿主公式（原点方向、radius 语义、override 模式、lane 顺序）都属会话内需复验的实现细节：复制 `templates/compatibility.template.json`，对应探针 `passed` 后才套公式，否则重新探测或走稳定降级。能力探针用短暂 buffer item 或代表性稳定片段，先记录原 geometry/opacity/FX；验证结束立即删除 probe FX 并回读整条轨道确认无残留——**探针残留本身就是 P0**，不能留给最终导出。
 
 ## 居中 ≠ 贴脸（构图标准）
 

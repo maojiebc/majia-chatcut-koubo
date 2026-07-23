@@ -1,6 +1,6 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.2.3-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.3.0-blue)
 
 > Chinese display name: **ChatCut口播 · 马甲实战版**. Install slug stays `majia-chatcut-koubo`.
 
@@ -34,11 +34,11 @@ The numbers in this pack (22 chars/line, 330px circle window, `magnification≈0
 
 ## 📋 Version History
 
+**V1.3.0 (2026-07-24)** — Process increments + ChatCut field notes + local personal layer: references 6→10 (new per-slice operating manual / host field-notes archive / retention structure / recovery); SKILL gains confirmation gates (state-table-first hard gate / 60-second preview gate / verbatim-transcript-as-truth); machine gate upgrade (non-weakenable `rules/policy.json` + schemas + validator with profile inheritance, millisecond short-card rules and a `--terms` personal-terminology flag + 14 regression tests); theme token v1.1 contrast fixes (sea-salt body text now 7.67:1); formal local personal layer contract at `~/.config/majia-chatcut-koubo/` with `templates/local-config-example/`.
+
 **V1.2.3 (2026-07-23)** — Dependency CVE fix: `assets/theme-kit/requirements.txt` pins `CairoSVG>=2.7` to `==2.9.0`, removing exposure to CVE-2026-31899 (exponential DoS via recursive SVG `<use>`); SKILL description gains preconditions / non-goals to tighten activation scope.
 
 **V1.2.2 (2026-07-23)** — Chinese brand name: display name set to **ChatCut口播 · 马甲实战版** across SKILL / README / architecture diagram / GitHub About / ClawHub. The install slug `majia-chatcut-koubo`, frontmatter, and install commands are unchanged.
-
-**V1.2.1 (2026-07-23)** — Architecture diagram + polish: new `docs/architecture.svg` giving a full-picture view of the increment layer (official base → four pieces → terminology template + caption gate → visible/audible/readable acceptance triad); README lead image is now the framework diagram, theme overview moved below; version history trimmed. Docs-only enhancement — no rule changes.
 
 Full history: [CHANGELOG.md](CHANGELOG.md).
 

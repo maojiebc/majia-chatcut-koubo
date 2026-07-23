@@ -4,8 +4,8 @@ name: 极简黑白
 mode: light
 layout: minimal-column
 tokensSource: ../tokens/themes.json
-playbookVersion: 1.1.0
-palette: { canvas: "#F5F5F5", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,255,0.82)", textPrimary: "#111111", textSecondary: "#555555", emphasis: "#111111", accent: "#111111", accentStrong: "#333333", border: "rgba(17,17,17,0.76)", ctaBackground: "#111111", ctaText: "#FFFFFF" }
+playbookVersion: 1.2.0
+palette: { canvas: "#F5F5F5", surface: "#FFFFFF", surfaceMuted: "rgba(255,255,255,0.82)", textPrimary: "#111111", textSecondary: "#4A4A4A", emphasis: "#111111", accent: "#111111", accentStrong: "#333333", border: "rgba(17,17,17,0.76)", ctaBackground: "#111111", ctaText: "#FFFFFF" }
 ---
 
 # 极简黑白 · 主题 playbook
