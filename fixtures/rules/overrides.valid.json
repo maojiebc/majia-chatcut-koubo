@@ -5,11 +5,11 @@
   "overrides": [
     {
       "ruleId": "CAPTION-AUTOMATIC-WRAP",
-      "value": false
+      "value": true
     },
     {
       "ruleId": "CAPTION-MAX-LINES",
-      "value": 1
+      "value": 2
     },
     {
       "ruleId": "CAPTION-MIN-DURATION",

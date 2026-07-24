@@ -668,11 +668,15 @@ for (const page of pages) {
   }
   if (!Number.isSafeInteger(lines)) {
     errors.push(`${label}: lines must be an integer`);
-  } else if (lines !== captionPolicy.maxLines) {
-    errors.push(`${label}: multiline (${lines})`);
+  } else if (lines < 1 || lines > captionPolicy.maxLines) {
+    errors.push(`${label}: ${lines} lines exceeds policy range 1-${captionPolicy.maxLines}`);
   }
   const chars = charCount(text);
-  if (chars > captions.maxCharactersPerLine) errors.push(`${label}: ${chars} chars > ${captions.maxCharactersPerLine}`);
+  const effectiveLines = Number.isSafeInteger(lines) && lines > 0 ? lines : 1;
+  const characterBudget = captions.maxCharactersPerLine * Math.min(effectiveLines, captionPolicy.maxLines);
+  if (chars > characterBudget) {
+    errors.push(`${label}: ${chars} chars > ${characterBudget} (${effectiveLines} line(s) × ${captions.maxCharactersPerLine})`);
+  }
   if (chars === 1) errors.push(`${label}: single-character page`);
 
   if (Number.isFinite(timelineFps) && end > start) {

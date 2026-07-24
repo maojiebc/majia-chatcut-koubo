@@ -12,7 +12,7 @@
       "schema": "schemas/captions.schema.json",
       "expect": "invalid",
       "expectedErrorSignatures": [
-        "const@/pages/0/lines"
+        "maximum@/pages/0/lines"
       ]
     },
     {

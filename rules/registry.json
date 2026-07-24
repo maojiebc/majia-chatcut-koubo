@@ -1,13 +1,13 @@
 {
   "$schema": "../schemas/rule-registry.schema.json",
   "registryVersion": "1.1.0",
-  "policyVersion": "1.1.0",
+  "policyVersion": "1.2.0",
   "defaultDecision": "fail-closed",
   "rules": [
     {
       "ruleId": "CAPTION-AUTOMATIC-WRAP",
       "domain": "captions",
-      "title": "Viewer captions cannot use automatic wrapping",
+      "title": "Viewer captions may wrap inside a semantic event",
       "kind": "hard-policy",
       "severity": "error",
       "status": "active",
@@ -15,7 +15,7 @@
       "waiverPolicy": "deny",
       "canonical": {
         "comparison": "equal",
-        "value": false
+        "value": true
       },
       "source": {
         "type": "repository-policy",
@@ -43,7 +43,7 @@
     {
       "ruleId": "CAPTION-MAX-LINES",
       "domain": "captions",
-      "title": "Viewer captions remain single-line",
+      "title": "Viewer captions remain within two lines",
       "kind": "hard-policy",
       "severity": "error",
       "status": "active",
@@ -51,7 +51,7 @@
       "waiverPolicy": "deny",
       "canonical": {
         "comparison": "maximum",
-        "value": 1
+        "value": 2
       },
       "source": {
         "type": "repository-policy",

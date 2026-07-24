@@ -12,7 +12,7 @@ const validator = path.join(root, "scripts/validate-caption-pages.mjs");
 function baseProfile(overrides = {}) {
   return {
     schemaVersion: "2.0.0",
-    policyVersion: "1.1.0",
+    policyVersion: "1.2.0",
     profileId: "caption-test-profile",
     profileVersion: "1.0.0",
     status: "validated",
@@ -118,8 +118,8 @@ function captionDocument(pages, metadata = {}) {
     metadata: {
       sourceVariant: "original",
       timelineFps: 30,
-      automaticWrapAllowed: false,
-      pagination: {maxLines: 1, maxCharactersPerLine: 22},
+      automaticWrapAllowed: true,
+      pagination: {maxLines: 2, maxCharactersPerLine: 22},
       projectId: "project-1",
       timelineId: "timeline-1",
       timelineRevision: "timeline-revision-1",
@@ -336,7 +336,7 @@ test("old policyVersion warns in migration mode and blocks strict release", () =
   const normal = run({profile, input: captionDocument([page()])});
   const strict = run({profile, input: captionDocument([page()]), strict: true});
   assert.equal(normal.status, 0, normal.output);
-  assert.match(normal.output, /profile policyVersion=1\.0\.0; expected 1\.1\.0/);
+  assert.match(normal.output, /profile policyVersion=1\.0\.0; expected 1\.2\.0/);
   assert.equal(strict.status, 1, strict.output);
   assert.match(strict.output, /strict warning mode/);
 });
@@ -418,11 +418,33 @@ test("detects a wrong term that contains or overlaps the correct term", async (t
   }
 });
 
-test("single-line policy cannot be weakened by profile data", () => {
-  const profile = baseProfile({hardInvariants: {maxLines: 2}});
-  const result = run({profile, input: captionDocument([page({lines: 2})], {pagination: {maxLines: 2, maxCharactersPerLine: 22}})});
+test("two-line ceiling cannot be weakened by profile data", () => {
+  const profile = baseProfile({hardInvariants: {maxLines: 3}});
+  const result = run({profile, input: captionDocument([page({lines: 3})], {pagination: {maxLines: 3, maxCharactersPerLine: 22}})});
   assert.equal(result.status, 1);
   assert.match(result.output, /caption schema const@\/metadata\/pagination\/maxLines/);
+});
+
+test("semantic events may use two lines without weakening the per-line budget", async (t) => {
+  await t.test("accepts a complete two-line event within 2x budget", () => {
+    const text = "这是一个保持完整语义并在画面中自然排成两行的字幕事件";
+    const result = run({input: captionDocument([page({text, lines: 2, endFrame: 90})])});
+    assert.equal(result.status, 0, result.output);
+  });
+
+  await t.test("one-line pages still use the one-line budget", () => {
+    const text = "这是一条超过单行字符预算但错误声明为单行的字幕事件";
+    const result = run({input: captionDocument([page({text, lines: 1, endFrame: 90})])});
+    assert.equal(result.status, 1, result.output);
+    assert.match(result.output, /chars > 22 \(1 line\(s\) × 22\)/);
+  });
+
+  await t.test("two-line pages cannot exceed the two-line budget", () => {
+    const text = "字".repeat(45);
+    const result = run({input: captionDocument([page({text, lines: 2, endFrame: 120})])});
+    assert.equal(result.status, 1, result.output);
+    assert.match(result.output, /45 chars > 44 \(2 line\(s\) × 22\)/);
+  });
 });
 
 test("structured captions reject real line breaks but allow semantic slashes", async (t) => {
@@ -459,7 +481,7 @@ test("structured captions reject real line breaks but allow semantic slashes", a
 test("runtime rejects primitive coercion that the caption schema forbids", async (t) => {
   const cases = [
     ["string page index", page({index: "1"}), /caption schema type@\/pages\/0\/index/],
-    ["string line count", page({lines: "1"}), /caption schema const@\/pages\/0\/lines/],
+    ["string line count", page({lines: "1"}), /caption schema type@\/pages\/0\/lines/],
     [
       "numeric page text",
       page({
@@ -1233,8 +1255,8 @@ test("legacy parser handles escaped ASCII quotes without truncation", () => {
   const input = [
     "source variant: original",
     "timeline fps: 30",
-    "automatic wrap allowed: false",
-    "pagination density: maxLines=1 maxCharactersPerLine=22",
+    "automatic wrap allowed: true",
+    "pagination density: maxLines=2 maxCharactersPerLine=22",
     String.raw`[P1] frame=0-30 text="他说这是 \"AI Native\"" lines=1 words=1`,
     String.raw`  - key=w1 text="他说这是 \"AI Native\"" frame=0-30`,
   ].join("\n");

@@ -3,7 +3,7 @@
   "$comment": "Anonymous local-layer fixture modeled on a multi-generation personal profile.",
   "extends": "../base/profile.source.json",
   "schemaVersion": "2.0.0",
-  "policyVersion": "1.1.0",
+  "policyVersion": "1.2.0",
   "profileId": "fixture-local-anonymous",
   "profileVersion": "2.1.0",
   "status": "validated",

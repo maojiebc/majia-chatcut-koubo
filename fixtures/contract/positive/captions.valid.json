@@ -4,14 +4,14 @@
   "metadata": {
     "sourceVariant": "original",
     "timelineFps": 30,
-    "automaticWrapAllowed": false,
+    "automaticWrapAllowed": true,
     "projectId": "fixture-project",
     "timelineId": "fixture-timeline",
     "timelineRevision": "fixture-timeline-revision",
     "sourceAssetId": "fixture-source-asset",
     "sourceRevision": "fixture-source-revision",
     "pagination": {
-      "maxLines": 1,
+      "maxLines": 2,
       "maxCharactersPerLine": 22
     }
   },

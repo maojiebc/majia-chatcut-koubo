@@ -133,7 +133,7 @@ test("negative fixture must fail for its declared signature", () => {
   assert.equal(fixture.status, "expected-invalid");
   assert.deepEqual(
     fixture.errors.map((error) => error.signature),
-    ["const@/pages/0/lines"],
+    ["maximum@/pages/0/lines"],
   );
 });
 
@@ -179,7 +179,7 @@ test("unexpected invalid data uses stable validation exit code", () => {
       "fixtures/contract/negative/captions.multiline.invalid.json",
   );
   assert.equal(fixture.code, "CONTRACT.INVALID");
-  assert.equal(fixture.errors[0].signature, "const@/pages/0/lines");
+  assert.equal(fixture.errors[0].signature, "maximum@/pages/0/lines");
 });
 
 test("release mode upgrades explicit baseline debt to a failure", async () => {

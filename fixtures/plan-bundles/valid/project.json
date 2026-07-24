@@ -37,7 +37,7 @@
     }
   ],
   "contracts": {
-    "policyVersion": "1.1.0",
+    "policyVersion": "1.2.0",
     "registryVersion": "1.1.0"
   }
 }

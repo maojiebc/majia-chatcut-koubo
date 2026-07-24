@@ -25,7 +25,7 @@
 
 ### 4. 精修字幕
 
-按 `captions-terminology.md` 执行；先应用 profile 再立刻回读配置，`maxLines≠1` 即停。全量页审计，validator 必跑。
+按 `captions-terminology.md` 执行；先应用 profile 再立刻回读配置，`maxLines>2` 即停。默认单行，完整语义在安全宽度内确有需要时允许两行；全量页审计，validator 必跑。
 
 ### 5. 音频与气口
 
@@ -39,7 +39,7 @@
 
 **结构门**：空窗=0、跨态未拆分 item=0、可闻重复轨=0、孤儿 MG/FX=0、未知 override=0、探针残留=0、未分配 redaction owner 的隐私候选=0、`[outroStart,timelineEnd)` 正文 owner=0。
 
-**字幕门**：validator exit=0、多行=0、超限=0、单字卡=0、`<450ms`=0、未批准 `<800ms`=0、繁体=0、已知术语错=0；硬规则读 `rules/policy.json`，数字/专名纠错必须有证据。
+**字幕门**：validator exit=0、三行及以上=0、逐行超限=0、单字卡=0、`<450ms`=0、未批准 `<800ms`=0、繁体=0、已知术语错=0；硬规则读 `rules/policy.json`，数字/专名纠错必须有证据。
 
 **音频门**：首 0.1s 有声、接缝试听通过、片尾无硬截断、无双声。
 
