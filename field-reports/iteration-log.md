@@ -102,3 +102,108 @@
   - `field-reports/cases/2026-07-24-ai-hero-master-refinement.md`
 - verification:
   - 进行中：全片字幕回读、`break=length` 扫描、3:47 canary、章节卡边界抽帧和音频接缝复核。
+
+## 2026-07-25 · AI Hero 单帧闪烁根因审计
+
+- skill_version_before: `1.4.1`
+- actor: `Codex + 用户验收反馈`
+- task_tags:
+  - `window-reframe-shader`
+  - `clip-boundary`
+  - `single-frame-flash`
+  - `export-60fps`
+- cases_read:
+  - `FR-2026-07-24-AI-HERO-001`
+- adopted:
+  - 用最终导出文件逐帧作为闪烁真相源，不用结构 coverage 代替像素。
+  - 先扫描全片同签名场景突变，再把章节卡正常切换与人物全屏闪回分开。
+  - 对照人物/录屏 item 边界和 FX coverage，确认问题集中在“新 clip local frame 0 与 clip-anchored shader frame 0 同帧开始”。
+  - 返修候选只增加一帧不可见 guard/pre-roll，不重新生成现有 Hyperframes 资源，不改主音频、字幕或 source order。
+- rejected_or_deferred:
+  - 未把闪帧归因于 Hyperframes；四个异常均发生在普通人物/录屏窗口 shader 边界，章节卡高分场景切换是持续画面而非单帧露底。
+  - 本轮按用户措辞只完成根因审计，尚未写入时间线修复；guard 方案需要代表边界小批次验证后才能扩展。
+- new_canaries:
+  - `clip-anchored-shader-local-frame-0-bypass`：人物新 clip 首帧短暂显示原始全屏像素。
+  - `structure-coverage-includes-frame0-but-export-does-not`：E1 coverage 与 E3 成片首帧不一致。
+- promoted:
+  - `none`；当前为同一项目多个实例，先保留案例与产品问题，等待不同项目/资产复验后再晋升 hard policy。
+- files_changed:
+  - `field-reports/iteration-log.md`
+  - `field-reports/cases/2026-07-24-ai-hero-master-refinement.md`
+- verification:
+  - 最终 1080p60 文件全片 `scene_score` 扫描；
+  - 代表窗口按 60fps 逐帧 contact sheet；
+  - 四处人物/录屏 item 与 FX 时间边界结构回读；
+  - 章节卡高分切换逐帧排除。
+
+## 2026-07-25 · AI Hero 超长字幕显示审计
+
+- skill_version_before: `1.4.1`
+- actor: `Codex + 用户验收反馈`
+- task_tags:
+  - `captions`
+  - `semantic-pagination`
+  - `renderer-parity`
+  - `long-page`
+- cases_read:
+  - `FR-2026-07-24-AI-HERO-001`
+- adopted:
+  - 两行是完整短语义事件的排版上限，不是把 `2 × maxCharactersPerLine` 当作目标容量。
+  - 长页审计同时看合法句法边界、未完成尾词、最终像素占宽和真实行数；不能只查 `break=length`。
+  - `read_captions` 的 viewer-facing 行数和 anchor span 必须与最终文件抽帧对账。
+- rejected_or_deferred:
+  - 不用全局降低 `maxCharactersPerLine` 重新制造固定字数硬切。
+  - 不把三处问题解释成单纯字号过大；至少一处语义事件本身在未完成补语处结束。
+  - 本轮按用户措辞先完成根因审计，尚未批量写入新的 `forcePageBreak`。
+- new_canaries:
+  - `long-two-line-page-at-opening-middle-late`：片头、片中、后半段均存在大面积两行卡。
+  - `caption-page-ends-on-incomplete-complement`：长页在未完成补语处结束。
+  - `read-lines-1-export-lines-2`：结构行数与最终像素不一致。
+  - `page-anchor-vs-render-lead-in-drift`：成片提前带出结构后续页文字。
+- promoted:
+  - `none`；先登记同一项目多实例和产品差异，等待不同项目复验。
+- files_changed:
+  - `field-reports/iteration-log.md`
+  - `field-reports/cases/2026-07-24-ai-hero-master-refinement.md`
+- verification:
+  - 三个用户时间点词级字幕/分页回读；
+  - 当前字幕样式、容量和 source binding 回读；
+  - 最终 1080p60 文件三个时间点原始分辨率抽帧；
+  - 结构页与最终像素逐项对账。
+
+## 2026-07-25 · AI Hero 闪帧与全片长字幕实际返修
+
+- skill_version_before: `1.4.1`
+- actor: `Codex`
+- task_tags:
+  - `visual-guard`
+  - `semantic-pagination`
+  - `full-timeline-audit`
+  - `cloud-frame-verification`
+- cases_read:
+  - `FR-2026-07-24-AI-HERO-001`
+- adopted:
+  - 四个同签名人物新 clip 使用一帧 `fadeIn` guard，保留既有窗口 shader、Hyperframes、录屏和音频。
+  - 保持 `maxLines=2`、`maxCharactersPerLine=26` 和自然 pacing，不再改全局容量；只在高置信语义边界写入 `forcePageBreak`。
+  - 45 个边界按 15/15/15 三批写入；旧 `keepWithPrevious` 与新断点冲突时显式清除 merge 标记。
+  - 将真实 7 帧“观远 CLI”短页的显示文字并入后一句，避免字幕自身闪烁且不改 transcript truth。
+- rejected_or_deferred:
+  - 未重新生成任何章节卡或 Hyperframes 资产。
+  - 未用全局固定字数重新分页。
+  - 未生成新的全片 1080p60 导出；旧导出不代表本次返修。
+- new_canaries:
+  - `chunked-read-false-short-page`：时间分块读取会把跨窗口字幕裁成首词伪短页，候选必须扩大窗口复核。
+  - `keep-wins-over-force-break`：同一词同时存在 merge 与 break 时，旧 merge 会抵消新断点。
+  - `real-seven-frame-caption-slot`：短 ASR 词槽可能形成肉眼可见的字幕闪现，需要 display-only 搬移且保留语义。
+- promoted:
+  - `none`；先继续在 field report 累积，达到跨项目复验阈值后再更新正式 Skill。
+- files_changed:
+  - `field-reports/iteration-log.md`
+  - `field-reports/cases/2026-07-24-ai-hero-master-refinement.md`
+- verification:
+  - 四个窗口边界帧云端像素检查；
+  - 用户点名 22 秒、4:54、8:30 三处语义回读与云端像素检查；
+  - 全片基准扫描：384 页、32 个双行页、13 个 24 字以上单行页；
+  - 返修复扫：双行页 `0`、24 字以上单行页 `0`；
+  - 六个短页候选扩大窗口复核，五个为分块裁剪假阳性，唯一真实 7 帧页已修复；
+  - 9 个片头/片中/片尾代表帧云端像素检查。
