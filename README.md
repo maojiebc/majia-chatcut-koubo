@@ -1,15 +1,15 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.3.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.3.1-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 > 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令与下方一致；「ChatCut口播 · 马甲实战版」是它的中文展示名。
 
 **ChatCut 口播剪辑通用技巧包 · 马甲实战版** —— 官方 ChatCut skill 之上的增量层:双画面版式、主题配色、过渡动效、人脸取景四大件,外加可自维护的词表模板与机器化字幕门禁。全部规则来自真实批量剪片(11 支直播切片 × 多轮返工)踩出来的实测结论,不是理论汇编。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.3.0 增量层框架图:官方 ChatCut 底座 → 双画面版式(七执行状态) / 主题配色 / 过渡动效工程(窗口 reframe shader) / 人脸取景 四大件 + ChatCut 宿主实测档案 + 八道硬闸 + 本地个人层 → 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.3.1 增量层框架图:官方 ChatCut 底座 → 双画面版式(七执行状态) / 主题配色 / 过渡动效工程(窗口 reframe shader) / 人脸取景 四大件 + ChatCut 宿主实测档案 + 八道硬闸 + 本地个人层 → 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.3.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.3.1 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -39,6 +39,30 @@ npx skills add maojiebc/majia-chatcut-koubo
 # 或 ClawHub
 npx clawhub install majia-chatcut-koubo
 ```
+
+## 开发与发布验证
+
+```bash
+npm ci
+npm run verify
+
+# 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
+node src/cli/resolve-profile.mjs \
+  --profile <profile.source.json> \
+  --root <profile-config-root> \
+  --strict \
+  --out <profile-config-root>/generated/profile.resolved.json \
+  --trace <profile-config-root>/generated/profile.merge-trace.json
+
+# 发布态字幕校验；warning 也会阻断
+node scripts/validate-caption-pages.mjs \
+  --strict \
+  --profile <profile.source.json> \
+  --root <profile-config-root> \
+  --input <captions.json>
+```
+
+`npm run verify` 会执行离线全仓 Schema、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 产物可能含项目级标识，只能写在 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)。
 
 ## 让它变成你的(本地个人层)
 
@@ -71,17 +95,25 @@ assets/
   theme-kit/playbooks/          每主题一份代理 playbook(档位+版式+crib)
 rules/
   policy.json                   不可由 profile 放宽的字幕发布策略(单行/毫秒短卡/繁体零容忍)
-schemas/                        profile/字幕/词表/兼容契约的 JSON Schema
+schemas/                        source/resolved profile、字幕、词表、兼容与资产契约
+src/config/                     profile resolver、合并来源与安全序列化
+src/cli/resolve-profile.mjs     source → resolved CLI
 scripts/
-  validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--terms 个人词表;退出码非 0=未完成)
+  validate-all-json.mjs         全仓离线 Schema release gate
+  validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--root/--strict/--terms)
+  check-assets.mjs              composition/theme 引用与几何 gate
+  check-version-drift.mjs       package/SKILL/README/CHANGELOG 漂移 gate
 tests/
-  caption-validator.test.mjs    validator 回归测试(npm test)
+  *.test.mjs                    字幕/profile/schema/资产/文档回归测试
 docs/
   architecture.svg              增量层全景框架图(本页首图)
   theme-preview.png             8 主题配色总览
+  contract-baseline.md          本轮契约止血基线与 fail-closed 原则
 ```
 
 ## 📋 版本记录
+
+**V1.3.1(2026-07-24)** — 契约止血与发布地基：Node/lockfile/CI 可复现安装；Ajv 离线验证全仓 JSON；source/resolved profile 契约、继承路径修复、合并来源追踪与安全 CLI；字幕数值语义、词 key/区间、短卡类型、override 上限、严格 warning 与项目/时间线 provenance 绑定；主题对比度、composition 几何、资产引用和文档/版本漂移全部进入 release gate。旧字幕 JSON 仍可非严格迁移，发布态须补齐 provenance。
 
 **V1.3.0(2026-07-24)** — 制度增量+ChatCut 实测档案+本地个人层:references 6→10 册(新增逐片执行手册/宿主实测行为档案/留存结构/故障恢复);SKILL 新增确认闸门(状态表先行硬闸/60 秒预览闸/精校稿真相源);机器门禁升级(不可放宽 `rules/policy.json`+schemas+validator 支持 profile 继承/毫秒短卡/`--terms` 个人词表+14 项回归测试);主题 token v1.1 对比度修正(海盐青正文 7.67:1 达标);本地个人层正式契约 `~/.config/majia-chatcut-koubo/` + `templates/local-config-example/` 四件套模板。
 

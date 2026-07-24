@@ -1,8 +1,8 @@
 {
-  "$schema": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/profile.schema.json",
+  "$schema": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/profile.source.schema.json",
   "$comment": "个人版式实测档示例。从 templates/operating-profile.template.json 复制起模,在你的素材上验证后把数字填进来;status 改 validated、provenance 填真实项目/时间线 ID 后 validator 才放行。presenterWindow/screenStates 等键与 assets/compositions.json 同名键冲突时,以本文件为准(本地层覆盖包内快照)。",
   "schemaVersion": "2.0.0",
-  "policyVersion": "1.0.0",
+  "policyVersion": "1.1.0",
   "profileId": "your-name-landscape-yourtheme",
   "profileVersion": "1.0.0",
   "status": "untested-template",

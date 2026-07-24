@@ -6,18 +6,28 @@
   "required": ["version", "caption"],
   "properties": {
     "$schema": {"type": "string"},
-    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "version": {"const": "1.1.0"},
     "caption": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["maxLines", "automaticWrapAllowed", "allowedSourceVariants", "requireWordLevelAudit", "hardMinDurationMs", "normalMinDurationMs", "maxTraditionalChineseHits", "traditionalCharacters"],
+      "required": ["maxLines", "automaticWrapAllowed", "allowedSourceVariants", "requireWordLevelAudit", "hardMinDurationMs", "normalMinDurationMs", "shortCardAllowedPattern", "shortCardMinCharacters", "shortCardMaxCharacters", "maxReplacementCharacters", "maxTraditionalChineseHits", "traditionalCharacters"],
       "properties": {
         "maxLines": {"const": 1},
         "automaticWrapAllowed": {"const": false},
-        "allowedSourceVariants": {"type": "array", "contains": {"const": "original"}},
+        "allowedSourceVariants": {"const": ["original"]},
         "requireWordLevelAudit": {"const": true},
-        "hardMinDurationMs": {"type": "number", "minimum": 1},
-        "normalMinDurationMs": {"type": "number", "minimum": 1},
+        "hardMinDurationMs": {"const": 450},
+        "normalMinDurationMs": {"const": 800},
+        "shortCardAllowedPattern": {
+          "const": "^[A-Za-z0-9][A-Za-z0-9+&._/ -]*$",
+          "description": "Hard type gate applied after exact whitelist matching; profiles and terminology files cannot weaken it."
+        },
+        "shortCardMinCharacters": {"const": 2},
+        "shortCardMaxCharacters": {"const": 16},
+        "maxReplacementCharacters": {
+          "const": 4,
+          "description": "Hard display-override ceiling; a profile may only select a lower effective value."
+        },
         "maxTraditionalChineseHits": {"const": 0},
         "traditionalCharacters": {"type": "string", "minLength": 1}
       }

@@ -1,6 +1,6 @@
 # 9:16 口播视频配色与底图系统
 
-这是一套面向 1080 × 1920 竖屏口播内容的设计资产包。8 套配色均已拆成原始色板、语义色、SVG/PNG 底图、布局坐标和可运行的 HTML/CSS/JS 组件。
+这是一套面向 1080 × 1920 竖屏口播内容的设计资产包。8 套配色均已拆成原始色板、语义色、SVG 底图、布局坐标和可运行的 HTML/CSS/JS 组件；PNG 与海报属于本地生成物，不随 source 包预生成。
 
 ## 先看什么
 
@@ -51,8 +51,8 @@
 - `tokens/layouts.json`：8 个布局的 1080 × 1920 坐标。
 - `tokens/themes.css` / `tokens/themes.ts`：前端可直接使用的变量与类型。
 - `assets/backgrounds/*.svg`：可编辑矢量底图。
-- `assets/backgrounds-png/*.png`：视频剪辑软件可直接使用的 1080 × 1920 纯底图。
-- `assets/demo-posters/*.png`：带示例信息层级和人物占位的成品预览。
+- `assets/backgrounds-png/*.png`：运行 `scripts/render-backgrounds.py` 后生成的 1080 × 1920 纯底图（可选，不随 source 包提交）。
+- `assets/demo-posters/*.png`：可选的本地成品预览输出，不是 release 必需资产。
 - `assets/overlays/safe-area.svg`：字幕和底部 UI 保护区参考。
 - `components/portrait-talk-card.*`：无依赖 HTML 组件。
 - `examples/PortraitTalkCard.tsx`：React 示例。

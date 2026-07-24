@@ -1,5 +1,38 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## V1.3.1（2026-07-24）— 契约止血 + 可复现发布地基
+
+按本轮审查路线图的前五个 PR 切片完成第一轮工程化止血；保留旧字幕 CLI 与 `profile.schema.json` 兼容入口，不引入 ChatCut 写入执行器。
+
+**工程基线与 CI**
+
+- Node 固定为 24.18.0，补 `engines`、`package-lock.json` 与 GitHub Actions；CI 使用 `npm ci` 后执行 release gate 和依赖审计。
+- 引入 Ajv 2020 + formats 的离线 Schema registry。`validate-all-json.mjs` 强制分类仓库内全部 JSON，校验 Schema 本体、本地/远程 `$id` 映射与负例错误签名；release 模式不接受 baseline 债务。
+- `npm run verify` 统一执行全仓 Schema、回归测试、主题对比度、资产引用/几何与版本漂移检查。
+
+**Profile source/resolved 契约**
+
+- 拆出 `profile.source.schema.json` 与 `profile.resolved.schema.json`；旧 `profile.schema.json` 保留为 source 兼容 shim。
+- 新增 profile resolver 与 `resolve-profile` CLI：数组替换、对象递归合并；每层相对路径按声明文件归一；拒绝 prototype-pollution 键、继承循环和非法叶状态。
+- `status` / `provenance` 不继承，必须由叶 profile 自有；输出 merge trace 和字段来源。默认报告对仓库外绝对路径做稳定匿名化，落盘 resolved profile 使用可移植相对路径。
+
+**字幕 P0**
+
+- 保留小数点、负号、百分号、日期分隔符和单位分隔符的数值语义，兼容 NFKC 与跨 word 边界比较。
+- word key 升为全文唯一；页/词帧要求非负安全整数，词区间单调且不重叠。
+- 中文短卡不能再由 profile/词表白名单绕过；仅符合 policy 形态的英文/数字完整卡可进入窄例外。
+- `maxReplacementCharacters` 由 hard policy 接管，profile 只能收紧或设 0 禁用；新增 `--strict` / `--strict-warnings`。
+- hard policy 因新增短卡形态/长度与 replacement 上限由 1.0.0 升为 1.1.0；旧 profile 仅可走非严格迁移 warning，发布态必须显式升级。
+- 结构化字幕 provenance 采用 all-or-none 的 `projectId`、`timelineId`、`timelineRevision`、`sourceAssetId`、`sourceRevision`；发布严格模式下缺失即阻断，项目/时间线/源资产及 revision 须精确绑定 resolved profile。
+- 词表加载错误只输出安全错误码与相对/匿名路径，不泄露用户绝对路径。
+
+**主题、资产与文档一致性**
+
+- 对比度门槛与文档统一：正文/次级/CTA 7:1，标题强调 4.5:1；8 套主题全绿。
+- 新增 composition、theme/layout/manifest/demo schemas，以及引用、必需文件、画布/圆形几何检查。
+- 新增版本漂移 gate，修正英文 README 的 seven-state 描述；package、lockfile、SKILL、README 与 CHANGELOG 同步为 1.3.1。
+- 新增契约基线与 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)。本地个人 profile/词表继续留在 `~/.config/majia-chatcut-koubo/`，没有进入公开 fixture。
+
 ## V1.3.0（2026-07-24）— 制度增量 + ChatCut 实测档案 + 本地个人层
 
 私有实战版（v2.x，含一场约 15 分钟母片全片状态机重构会话的教训）向公开包的通用增量融合。全部案例匿名化，品牌词表实词与个人实测坐标不入公开包（走本地个人层机制）。

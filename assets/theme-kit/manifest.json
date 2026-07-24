@@ -14,9 +14,11 @@
   },
   "assets": {
     "backgroundSvgDirectory": "assets/backgrounds",
-    "backgroundPngDirectory": "assets/backgrounds-png",
     "safeAreaOverlay": "assets/overlays/safe-area.svg",
-    "speakerMask": "assets/overlays/speaker-placeholder.svg",
+    "speakerMask": "assets/overlays/speaker-placeholder.svg"
+  },
+  "generatedAssets": {
+    "backgroundPngDirectory": "assets/backgrounds-png",
     "demoPosterDirectory": "assets/demo-posters",
     "contactSheet": "preview/contact-sheet.png"
   },

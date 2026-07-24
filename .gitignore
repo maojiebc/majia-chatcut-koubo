@@ -1,2 +1,11 @@
 # PII deny list — must not enter public commits
 .ota-deny-list.txt
+
+# Local dependency, coverage, and diagnostic output
+node_modules/
+coverage/
+*.log
+
+# Profile resolver outputs may contain project-scoped identifiers.
+*.resolved.json
+*.merge-trace.json

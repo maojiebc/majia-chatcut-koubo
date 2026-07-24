@@ -2,7 +2,7 @@
 name: majia-chatcut-koubo
 description: ChatCut 口播/录屏视频代理剪辑的通用技巧包——官方 ChatCut skill 之上的增量层。覆盖：双画面版式（横竖版 8 套坐标/七执行状态）、8 套主题配色与对比度档位、过渡动效工程（四档可靠性链/端点契约/fps 归一化）、人脸居中与内部取景（三层合成/reframe→mask 顺序/坐标系陷阱/overscan 公式）、中文气口字幕与可自维护词表模板、机器化字幕门禁（validator+不可放宽 policy）、逐片执行手册与八道硬闸、ChatCut 宿主实测行为档案、留存结构与四平台路由、故障恢复、本地个人层（~/.config 叠加个人 profile/词表）。触发：ChatCut 剪口播、直播切片、画中画/圆窗、主讲人过渡动画、竖版重构、字幕气口、术语纠错、主题配色。前置：需已装官方 ChatCut skill / MCP 工具。非目标：不处理非视频剪辑任务，不替代官方工具本身的用法（工具怎么用一律以官方为准），本包只补剪辑审美与实测护栏。
 metadata:
-  version: 1.3.0
+  version: 1.3.1
 ---
 
 # ChatCut口播 · 马甲实战版
@@ -35,7 +35,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 ## 成片红线
 
-- 字幕：简体、始终单行、来自真实语音转写、按完整气口分卡；用户提供精校逐字稿时，精校稿是文本唯一真相源，禁止在 ASR 错词上自行猜测修正；行尾逗号不显示，句末标点保留；发布硬规则以 `rules/policy.json` 为准（profile 只能校准不能放宽），跑 `scripts/validate-caption-pages.mjs`，退出码非 0 = 未完成。
+- 字幕：简体、始终单行、来自真实语音转写、按完整气口分卡；用户提供精校逐字稿时，精校稿是文本唯一真相源，禁止在 ASR 错词上自行猜测修正；行尾逗号不显示，句末标点保留；发布硬规则以 `rules/policy.json` 为准（profile 只能校准不能放宽），发布态跑 `scripts/validate-caption-pages.mjs --strict`，退出码非 0 = 未完成。
 - 内容：重说默认删前保后；重排只搬完整语义单位，不拼出说话人没说过的话；默认自然结束，不加模板片尾。
 - 画面：PiP 不拉伸；正圆以裁后可见区判定（`visibleWidth = width × (1−cropLeft−cropRight)`），改外框时保留旧 crop = 二次裁切事故；人物层保留完整源画幅，效果顺序 reframe → mask；任一精确帧露黑边即撤销整段动态取景；框线不穿人物；二维码等隐私信息全时间范围不可见，部分遮挡=失败。
 - 工程：30fps 时间线可能 60fps 导出，MG 一律按秒或归一化帧率计时；写入宣称成功≠落盘（回读 FX 实例）；素材池有资产≠时间线有实例。
@@ -63,7 +63,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 | ChatCut 宿主实测坑：crop 语义、两步提交、编辑器/云端渲染差异、MG 媒体槽失效、窗口 reframe shader、字幕分页引擎、音频层基线、隐私扫描 SOP、双端预览路由 | [ChatCut 宿主实测行为档案](references/chatcut-field-notes.md) |
 | 连接报错、OAuth 失效、打开既有项目、转写挂死、上下文压缩恢复 | [故障恢复手册](references/recovery.md) |
 
-可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（profile/字幕/词表/兼容契约结构）、`scripts/validate-caption-pages.mjs`（字幕机械校验，`npm test` 跑回归）。
+可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、词表、兼容与资产契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）。发布前统一跑 `npm run verify`。
 
 ## 让它变成你自己的（本地个人层契约）
 

@@ -16,9 +16,27 @@
 
 | 本地文件 | 覆盖/叠加的公开资产 | 用法 |
 | --- | --- | --- |
-| `profile/*.json` | `templates/operating-profile.template.json` 起模；同名键覆盖 `assets/compositions.json` 坐标 | 剪辑开工先读；`validate-caption-pages.mjs --profile` 指向它 |
+| `profile/*.json` | `templates/operating-profile.template.json` 起模；同名键覆盖 `assets/compositions.json` 坐标 | 使用 source schema；剪辑开工先读；`validate-caption-pages.mjs --profile` 指向它 |
 | `terminology.json` | `templates/terminology.template.json` 起模 | `validate-caption-pages.mjs --terms` 指向它 |
 | `aesthetics.md` | `SKILL.md` 红线之上的个人裁决面 | 审美分歧时代理先读它再问你 |
 | `local-notes.md` | 无（纯个人层） | 写不适合进公开包的一切个人惯例 |
 
 例子文件都带注释，替换成你的内容即可。
+
+Profile 可以用相对 `extends` 继承一个父文件；每个路径都按**声明它的那一层文件**解析。数组整体替换，普通对象递归合并。叶 profile 必须自己声明 `status` 和完整 `provenance`，不能继承父层的项目/时间线可信身份。
+
+发布前先解析并检查来源：
+
+```bash
+node src/cli/resolve-profile.mjs \
+  --profile ~/.config/majia-chatcut-koubo/profile/<你的-profile>.json \
+  --root ~/.config/majia-chatcut-koubo \
+  --strict \
+  --out ~/.config/majia-chatcut-koubo/generated/profile.resolved.json \
+  --trace ~/.config/majia-chatcut-koubo/generated/profile.merge-trace.json
+```
+
+生成的 resolved 文件不含 `extends`，trace 可以追到每个字段来自哪一层。
+输出只能留在 `--root` 内，且可能包含项目级标识；两类默认文件名已在
+`.gitignore` 中排除。旧 profile 可先不加 `--strict` 做只读迁移检查，但
+`contractStatus=migration-incomplete` 时不会写出 resolved 文件。

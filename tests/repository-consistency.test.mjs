@@ -1,0 +1,150 @@
+import assert from "node:assert/strict";
+import {spawnSync} from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import test from "node:test";
+import {fileURLToPath} from "node:url";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const VERSION_SURFACE_FILES = [
+  "package.json",
+  "package-lock.json",
+  ".node-version",
+  ".github/workflows/ci.yml",
+  "SKILL.md",
+  "README.md",
+  "README.en.md",
+  "CHANGELOG.md",
+  "docs/architecture.svg",
+  "docs/migration-v1.3.1.md",
+  "references/captions-terminology.md",
+  "rules/policy.json",
+  "fixtures/profiles/local/profile.source.json",
+  "templates/operating-profile.template.json",
+  "templates/local-config-example/profile/landscape.example.json",
+  "assets/theme-kit/package.json",
+  "assets/theme-kit/manifest.json",
+  "assets/theme-kit/tokens/themes.json",
+];
+
+function copyVersionSurface(t) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "version-drift-"));
+  t.after(() => fs.rmSync(directory, {recursive: true, force: true}));
+  for (const file of VERSION_SURFACE_FILES) {
+    const destination = path.join(directory, file);
+    fs.mkdirSync(path.dirname(destination), {recursive: true});
+    fs.copyFileSync(path.join(root, file), destination);
+  }
+  return directory;
+}
+
+test("version and state-count documentation cannot drift silently", () => {
+  const result = spawnSync(process.execPath, ["scripts/check-version-drift.mjs"], {
+    cwd: process.cwd(),
+    encoding: "utf8",
+  });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /version drift audit passed/);
+});
+
+test("profile resolver outputs are excluded from public commits", () => {
+  const ignoreRules = fs.readFileSync(path.join(root, ".gitignore"), "utf8");
+  assert.match(ignoreRules, /^\*\.resolved\.json$/mu);
+  assert.match(ignoreRules, /^\*\.merge-trace\.json$/mu);
+});
+
+test("runtime validators keep Ajv packages in production dependencies", () => {
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(root, "package.json"), "utf8"),
+  );
+  const lock = JSON.parse(
+    fs.readFileSync(path.join(root, "package-lock.json"), "utf8"),
+  );
+  for (const dependency of ["ajv", "ajv-formats"]) {
+    assert.equal(typeof manifest.dependencies?.[dependency], "string");
+    assert.equal(manifest.devDependencies?.[dependency], undefined);
+    assert.equal(
+      lock.packages?.[""]?.dependencies?.[dependency],
+      manifest.dependencies[dependency],
+    );
+  }
+});
+
+test("version drift gate fails closed when the lockfile root version drifts", (t) => {
+  const directory = copyVersionSurface(t);
+  const lockFile = path.join(directory, "package-lock.json");
+  const lock = JSON.parse(fs.readFileSync(lockFile, "utf8"));
+  lock.packages[""].version = "0.0.0";
+  fs.writeFileSync(lockFile, `${JSON.stringify(lock, null, 2)}\n`);
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /package-lock root version 0\.0\.0/);
+});
+
+test("version drift gate binds Node pin, engines and CI setup", (t) => {
+  const directory = copyVersionSurface(t);
+  fs.writeFileSync(path.join(directory, ".node-version"), "24.17.0\n");
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /package engines\.node .* != >=24\.17\.0 <25/);
+});
+
+test("version drift gate rejects an incomplete Node version pin", (t) => {
+  const directory = copyVersionSurface(t);
+  fs.writeFileSync(path.join(directory, ".node-version"), "24\n");
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /\.node-version: invalid semantic version 24/);
+});
+
+test("version drift gate keeps caption root and provenance guidance in sync", (t) => {
+  const directory = copyVersionSurface(t);
+  const migrationPath = path.join(directory, "docs/migration-v1.3.1.md");
+  const migration = fs.readFileSync(migrationPath, "utf8")
+    .replaceAll("--root <profile-config-root>", "--config-boundary omitted");
+  fs.writeFileSync(migrationPath, migration);
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 1);
+  assert.match(
+    result.stderr,
+    /docs\/migration-v1\.3\.1\.md: caption validation example must declare its profile root/,
+  );
+});
+
+test("version drift input failures use a stable code without absolute paths", (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "version-private-"));
+  t.after(() => fs.rmSync(directory, {recursive: true, force: true}));
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /version drift audit unavailable: ENOENT/);
+  assert.doesNotMatch(
+    result.stderr,
+    new RegExp(directory.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
+  );
+});

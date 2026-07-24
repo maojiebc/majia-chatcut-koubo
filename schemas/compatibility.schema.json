@@ -24,7 +24,37 @@
       }
     },
     "requiredProbes": {
-      "type": "array", "minItems": 5,
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {"type": "object", "required": ["id"], "properties": {"id": {"const": "mask-origin"}}},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["id"], "properties": {"id": {"const": "circle-radius"}}},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["id"], "properties": {"id": {"const": "effect-order"}}},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["id"], "properties": {"id": {"const": "property-override-mode"}}},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"type": "object", "required": ["id"], "properties": {"id": {"const": "export-fps"}}},
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ],
       "items": {
         "type": "object", "additionalProperties": false, "required": ["id", "status", "evidence"],
         "properties": {
@@ -34,5 +64,44 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {"status": {"const": "validated"}}
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "observedAt": {"type": "string", "format": "date-time"},
+          "toolSchemaHash": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "maskCoordinateOriginY": {"not": {"const": "unknown"}},
+              "circleRadiusSemantic": {"not": {"const": "unknown"}},
+              "propertyOverridesMode": {"not": {"const": "unknown"}},
+              "fxLaneExecutionOrder": {"not": {"const": "unknown"}},
+              "exportFpsBehavior": {"not": {"const": "unknown"}}
+            }
+          },
+          "requiredProbes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {"const": "passed"},
+                "evidence": {"type": "string", "pattern": "\\S"}
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }
