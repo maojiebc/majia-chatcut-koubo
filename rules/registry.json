@@ -277,11 +277,11 @@
         "introducedIn": "1.0.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "plan.content-truth-evidence",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-plan-bundle.mjs",
+          "tests/plan-bundle.test.mjs"
         ]
       },
       "fixtureRefs": {
@@ -421,11 +421,11 @@
         "introducedIn": "1.0.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "plan.privacy-owner-coverage",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-plan-bundle.mjs",
+          "tests/plan-bundle.test.mjs"
         ]
       },
       "fixtureRefs": {
@@ -457,11 +457,11 @@
         "introducedIn": "1.0.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "plan.half-open-interval",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-plan-bundle.mjs",
+          "tests/plan-bundle.test.mjs"
         ]
       },
       "fixtureRefs": {
@@ -493,11 +493,11 @@
         "introducedIn": "1.0.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "plan.single-visual-owner",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-plan-bundle.mjs",
+          "tests/plan-bundle.test.mjs"
         ]
       },
       "fixtureRefs": {

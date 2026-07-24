@@ -12,11 +12,12 @@
     "validate:schema": "node scripts/validate-all-json.mjs --mode baseline",
     "validate:schema:release": "node scripts/validate-all-json.mjs --mode release",
     "validate:rules": "node scripts/validate-rule-registry.mjs",
+    "validate:plans": "node scripts/validate-plan-bundle.mjs --bundle fixtures/plan-bundles/valid/bundle.json",
     "validate:contrast": "node assets/theme-kit/scripts/check-contrast.mjs",
     "validate:assets": "node scripts/check-assets.mjs",
     "validate:public": "node scripts/check-public-safety.mjs",
     "validate:version": "node scripts/check-version-drift.mjs",
-    "verify": "npm run validate:schema:release && npm run validate:rules && npm test && npm run validate:contrast && npm run validate:assets && npm run validate:public && npm run validate:version"
+    "verify": "npm run validate:schema:release && npm run validate:rules && npm run validate:plans && npm test && npm run validate:contrast && npm run validate:assets && npm run validate:public && npm run validate:version"
   },
   "dependencies": {
     "ajv": "8.20.0",

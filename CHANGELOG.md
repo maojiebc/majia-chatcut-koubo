@@ -7,6 +7,7 @@
 - 新增 [公开工程路线图](docs/roadmap.md)：以 V1.3.1 为已交付基线，明确 Rule Registry、Creator OS IR/SRT、预览审批、可恢复执行、证据链、媒体 QA、平台交付与反馈治理的顺序和 Definition of Done。
 - README、迁移指南与版本漂移门禁同步接入路线图；路线图不承诺日期或未经 live canary 验证的 ChatCut runtime 能力。
 - 交付 Rule Registry foundation：新增六域 14 条 stable rule、registry/override Schema、来源与 policy pointer 对账、`deny`/`tighten-only` 覆盖审计、每条规则的 pass/fail fixture 证明和 `npm run validate:rules` release gate。现有字幕规则标为 runtime-enforced，尚未接入 Creator OS IR 的跨域规则明确标为 registry-contract，不虚报宿主执行能力。
+- 交付 Rational Time + Creator OS IR v0：新增显式时间域/有理速率/半开区间运算，以及 project、transcript、edit、state、owner、caption、evidence 七类计划文档和 bundle Schema；跨文档 validator 会核对 revision、source、evidence、时间线完整覆盖、唯一视觉 owner、正交隐私 owner 与批准状态，并以匿名完整 fixture 接入 `npm run verify`。
 
 ## V1.3.1（2026-07-24）— 契约止血 + 可复现发布地基
 

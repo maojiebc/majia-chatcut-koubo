@@ -39,8 +39,8 @@ test("canonical Rule Registry passes all six governed domains", () => {
   assert.deepEqual(report.summary, {
     rules: 14,
     domains: 6,
-    runtimeRules: 7,
-    contractRules: 7,
+    runtimeRules: 11,
+    contractRules: 3,
     errors: 0,
   });
 
