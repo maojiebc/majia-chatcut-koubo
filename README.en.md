@@ -17,10 +17,11 @@
 - **Transition engineering** — endpoint contracts, the `N-1` normalization formula, layered easing, a four-tier reliability chain, and fps normalization (the classic 30fps-timeline-exports-at-60fps trap).
 - **Face reframe & three-layer compositing** — the hard `reframe → mask` order, GL UV coordinate traps (bottom-origin Y axis; `radius` is actually a diameter), overscan math for black-edge prevention, and a "centered ≠ face-crammed" framing standard.
 - **Captions & terminology** — breath-unit paging with worked examples, a machine-enforced single-line gate (`scripts/validate-caption-pages.mjs`), the translation-track P0 trap, and a self-maintainable terminology template.
-- **Rule Registry** — 14 initial rules across content truth, captions, privacy, timeline integrity, execution safety, and export authorization, with stable IDs, source references, override semantics, enforcement levels, and machine-checked pass/fail fixtures.
+- **Rule Registry** — 18 rules across content truth, captions, privacy, timeline integrity, execution safety, and export authorization, with stable IDs, source references, override semantics, enforcement levels, and machine-checked pass/fail fixtures.
 - **Creator OS IR v0** — rational time with explicit domains and half-open intervals; bundled project, transcript, edit, state, owner, caption, and evidence documents with offline revision, evidence, coverage, ownership, privacy, and approval checks.
 - **SRT text bridge** — standard SRT for human review plus a sidecar that preserves cue/page/word identity, exact ranges, revisions, and quantization residuals; renumbering is lossless and edits only produce auditable candidates.
 - **Explainable content planning** — computes reproducible opening-density, evidence-coverage, confidence/risk, and destructive-edit signals; Hook-to-SoftCTA candidates only reference existing segments and words, remain pending human review, and never generate copy or a black-box virality probability.
+- **Visual Decision Contract** — assigns one primary visual task per segment; B-roll candidates are scored across semantics, authenticity, timing, clarity, rights, and repetition, while sub-7 candidates route to human review and generated visuals cannot impersonate evidence.
 - **Preview approval gate** — deterministically covers the opening 60 seconds, complex state, every privacy-risk range, and the ending; approval binds actor, full window scope, and plan/style/timeline fingerprints, and closes on any drift.
 - **Recoverable execution and evidence foundation** — an offline fake adapter proves unique logical-ID binding, idempotent writes, revision locks, read-after-write reconciliation, scene compensation, checkpoint/resume, and evidence invalidation; no live ChatCut adapter claim is made.
 - **Capability profile and live-route gate** — audits ChatCut build, tool-schema hash, TTL, mandatory probes, a redacted canary, and per-capability fallback; the repository fixture is explicitly `unverified`, so absent current evidence routes remain fake/manual/blocked.
@@ -52,6 +53,7 @@ node scripts/validate-rule-registry.mjs \
 
 npm run validate:plans
 npm run validate:planner
+npm run validate:visual
 npm run validate:srt
 npm run validate:preview
 npm run validate:recovery

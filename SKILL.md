@@ -17,7 +17,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 ## 当前生产闭环
 
-1. **规则与计划**：Rule Registry 保护 hard policy；Creator OS IR、Rational Time、SRT sidecar 和 Explainable Planner 统一内容、时间、owner、revision 与证据引用。
+1. **规则与计划**：Rule Registry 保护 hard policy；Creator OS IR、Rational Time、SRT sidecar、Explainable Planner 和 Visual Decision Contract 统一内容、时间、owner、revision、候选评分与证据引用。低于自动门槛的视觉候选只转人工复核，不伪装成可执行结论。
 2. **审批与执行**：代表窗口 preview approval 精确绑定 scope/fingerprint；recoverable executor 用 fake adapter 验证幂等、写后回读、补偿、checkpoint/resume 和 evidence 失效传播。
 3. **QA 与交付**：Media QA 报告审计最终 artifact、音画/隐私和导出授权；distribution pack 绑定母片/content truth，`publishAction=none`。
 4. **反馈与真实环境**：反馈只进入受治理建议队列，不在线改 hard policy；capability profile 缺少当前 build/schema/probe/canary 时保持 `liveAllowed=false`。
@@ -72,7 +72,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 | ChatCut 宿主实测坑：crop 语义、两步提交、编辑器/云端渲染差异、MG 媒体槽失效、窗口 reframe shader、字幕分页引擎、音频层基线、隐私扫描 SOP、双端预览路由 | [ChatCut 宿主实测行为档案](references/chatcut-field-notes.md) |
 | 连接报错、OAuth 失效、打开既有项目、转写挂死、上下文压缩恢复 | [故障恢复手册](references/recovery.md) |
 
-可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、词表、兼容与资产契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）。发布前统一跑 `npm run verify`。
+可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、视觉决策、词表、兼容与资产契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）、`scripts/validate-visual-decision-plan.mjs`（视觉候选评分/证据/审批 gate）。发布前统一跑 `npm run verify`。
 
 ## 让它变成你自己的（本地个人层契约）
 

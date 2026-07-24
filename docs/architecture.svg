@@ -29,7 +29,7 @@
   <g>
     <rect x="60" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
     <text x="82" y="320" class="cardTitle">Rule Registry</text>
-    <text x="82" y="350" class="cardBody">14 条 runtime rule · 六个治理域</text>
+    <text x="82" y="350" class="cardBody">18 条 runtime rule · 六个治理域</text>
     <text x="82" y="375" class="cardBody">hard policy 不可被 profile 放宽</text>
     <text x="82" y="400" class="cardBody">稳定 ID / 来源 / waiver / fallback</text>
 

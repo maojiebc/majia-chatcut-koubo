@@ -15,7 +15,7 @@
       "type": "string"
     },
     "registryVersion": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "policyVersion": {
       "type": "string",

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+**视觉决策与规则吸收**
+
+- 新增 Visual Decision Contract v0：每个语义段声明单一主视觉任务，B-roll 候选按语义、真实性、时机、清晰度、版权与重复度六维计分；总分与分项必须一致，低于 7 分只能转人工复核。
+- 自动视觉选择新增来源、版权与预览批准门；生成视觉不得替代 evidence/data，固定间隔切镜、无关 B-roll、句句特效等反模式会阻断自动执行。
+- Rule Registry 从 14 条扩展为 18 条 runtime rule，registry contract 升为 1.1.0 以阻断旧 override 冒充当前规则集，并为新增规则补齐 tighten/weakening fixtures；新 schema、匿名 plan fixture、CLI 和 8 项回归测试进入 `npm run verify`。
+- 新增 AI 口播经验规则吸收记录：复用已有字幕/IR/审批/恢复/QA 能力，明确数值经验只作为 Style Profile 候选基线，不创建不可解释的单一“爆款分数”，也不写入私有知识库路径或原文全文。
+
 ## V1.4.0（2026-07-24）— 可验证生产系统
 
 **规划与治理**

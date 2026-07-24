@@ -37,9 +37,9 @@ test("canonical Rule Registry passes all six governed domains", () => {
   const report = auditRuleRegistry({root: ROOT});
   assert.equal(report.status, "passed", JSON.stringify(report.findings));
   assert.deepEqual(report.summary, {
-    rules: 14,
+    rules: 18,
     domains: 6,
-    runtimeRules: 14,
+    runtimeRules: 18,
     contractRules: 0,
     errors: 0,
   });
@@ -102,13 +102,13 @@ test("weakened overrides fail every registered rule without echoing values", () 
   );
   assert.equal(result.status, 1, result.stderr || result.stdout);
   const report = JSON.parse(result.stdout);
-  assert.equal(report.findings.length, 14);
+  assert.equal(report.findings.length, 18);
   assert.ok(report.findings.every(
     (item) => item.code === "RULE_OVERRIDE_WEAKENED",
   ));
   assert.equal(
     new Set(report.findings.map((item) => item.ruleId)).size,
-    14,
+    18,
   );
   assert.doesNotMatch(result.stdout, /translation|blind-retry/u);
 });

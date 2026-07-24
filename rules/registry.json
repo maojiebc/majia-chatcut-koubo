@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/rule-registry.schema.json",
-  "registryVersion": "1.0.0",
+  "registryVersion": "1.1.0",
   "policyVersion": "1.1.0",
   "defaultDecision": "fail-closed",
   "rules": [
@@ -259,6 +259,78 @@
       "fallback": "block"
     },
     {
+      "ruleId": "CONTENT-BROLL-EVIDENCE-FIRST",
+      "domain": "content-truth",
+      "title": "Evidence and data visuals cannot be replaced by generated assets",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "introducedIn": "1.5.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "visual.evidence-first",
+        "implementedBy": [
+          "scripts/validate-visual-decision-plan.mjs",
+          "tests/visual-decision-plan.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CONTENT-BROLL-MIN-AUTO-SCORE",
+      "domain": "content-truth",
+      "title": "Automatic visual selection requires a transparent minimum score",
+      "kind": "heuristic",
+      "severity": "warning",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "review-required",
+      "canonical": {
+        "comparison": "minimum",
+        "value": 7
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "introducedIn": "1.5.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "visual.minimum-auto-score",
+        "implementedBy": [
+          "scripts/validate-visual-decision-plan.mjs",
+          "tests/visual-decision-plan.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "manual-review"
+    },
+    {
       "ruleId": "CONTENT-TRUTH-EVIDENCE",
       "domain": "content-truth",
       "title": "Facts and corrections require approved source evidence",
@@ -293,6 +365,42 @@
         ]
       },
       "fallback": "block"
+    },
+    {
+      "ruleId": "CONTENT-VISUAL-ANTI-PATTERNS",
+      "domain": "content-truth",
+      "title": "Detected visual anti-patterns block automatic execution",
+      "kind": "heuristic",
+      "severity": "warning",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "review-required",
+      "canonical": {
+        "comparison": "maximum",
+        "value": 0
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "introducedIn": "1.5.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "visual.anti-patterns",
+        "implementedBy": [
+          "scripts/validate-visual-decision-plan.mjs",
+          "tests/visual-decision-plan.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "manual-review"
     },
     {
       "ruleId": "EXECUTION-AMBIGUOUS-WRITE",
@@ -462,6 +570,42 @@
         "implementedBy": [
           "scripts/validate-plan-bundle.mjs",
           "tests/plan-bundle.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "TIMELINE-PRIMARY-VISUAL-TASK",
+      "domain": "timeline-integrity",
+      "title": "Each segment declares exactly one primary visual task",
+      "kind": "structural-invariant",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "introducedIn": "1.5.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "visual.one-primary-task",
+        "implementedBy": [
+          "scripts/validate-visual-decision-plan.mjs",
+          "tests/visual-decision-plan.test.mjs"
         ]
       },
       "fixtureRefs": {

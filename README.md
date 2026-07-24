@@ -22,10 +22,11 @@
 - **过渡动效工程** — 端点契约、`N-1` 归一化公式、分层缓动、四档可靠性链(含 ChatCut 宿主快速路由)、fps 归一化(30fps 时间线 60fps 导出的经典坑)
 - **人脸取景与三层合成** — reframe→mask 硬顺序、GL UV 坐标陷阱(Y 轴底部原点/radius 实为直径)、overscan 黑边数学、「居中≠贴脸」构图标准
 - **字幕与词表** — 气口分卡判例、单行机器门禁(validator + 不可放宽的 `rules/policy.json`)、译文轨 P0 陷阱、精校逐字稿真相源、可自维护词表模板
-- **Rule Registry** — 14 条首批规则覆盖内容真相、字幕、隐私、时间线、执行安全与导出授权六域；stable ID、来源、覆盖权限、runtime/contract 执行级别和 pass/fail fixture 全部机器校验
+- **Rule Registry** — 18 条规则覆盖内容真相、字幕、隐私、时间线、执行安全与导出授权六域；stable ID、来源、覆盖权限、runtime/contract 执行级别和 pass/fail fixture 全部机器校验
 - **Creator OS IR v0** — 显式时间域的有理时间与半开区间；project、transcript、edit、state、owner、caption、evidence 七类计划文档由 bundle 串联，revision、证据、时间线 coverage、唯一视觉 owner、隐私 owner 和批准状态统一离线校验
 - **SRT 文本桥** — 标准 SRT 供人工审阅，sidecar 保留 cue/page/word identity、exact range、revision 与量化残差；重编号无损，纠字/改时/隐藏/删除/合并/拆分/重排只生成可审计候选
 - **可解释内容规划** — 只计算 opening density、evidence coverage、低置信/风险词和破坏性编辑等可复算信号；Hook→SoftCTA 候选只引用已有 segment/word，保持人工待审，不生成文案或“爆款概率”
+- **视觉决策合同** — 每段只声明一个主视觉任务；B-roll 候选按语义、真实性、时机、清晰度、版权与重复度六维计分，低于 7 分转人工，生成图不得冒充证据，反模式与审批缺失会关闭执行门
 - **预览审批门** — 自动覆盖首 60 秒、复杂状态、全部隐私风险段与片尾；批准绑定 actor、完整窗口 scope、plan/style/timeline 指纹，缺失、撤销或任一漂移即关闭执行
 - **可恢复执行与证据底座** — 离线 fake adapter 证明 logical ID 唯一绑定、幂等写、revision lock、写后回读、scene 补偿、checkpoint/resume 与证据失效传播；尚不宣称真实 ChatCut adapter 已验证
 - **Capability profile 与 live route 闸门** — ChatCut build、tool schema hash、TTL、mandatory probes、脱敏 canary 与 fallback 统一审计；仓库默认 fixture 明确为 `unverified`，没有 current canary 时只走 fake/manual/blocked 路线
@@ -68,6 +69,9 @@ npm run validate:plans
 
 # 重建并审计可解释 scorecard、叙事候选与 decision queue
 npm run validate:planner
+
+# 审计视觉候选评分、来源/版权、反模式与批准状态
+npm run validate:visual
 
 # 校验标准 SRT 与 sidecar 的稳定往返
 npm run validate:srt
@@ -149,6 +153,7 @@ fixtures/media-qa/              匿名 final artifact release report
 fixtures/distribution/          匿名平台 profile + deliverables pack
 fixtures/feedback/              匿名 privacy-safe event + suggested update queue
 fixtures/planning/              匿名 explainable content scorecard
+fixtures/visual-decisions/      匿名视觉候选、评分、证据与审批计划
 fixtures/capabilities/          明确 live=false/unverified 的 capability profile
 src/config/                     profile resolver、合并来源与安全序列化
 src/cli/resolve-profile.mjs     source → resolved CLI
@@ -156,6 +161,7 @@ src/rules/                      Rule Registry 审计与 tighten-only override ev
 src/time/                       有理时间、显式时间域与半开区间运算
 src/planning/                   Creator OS bundle 跨文档 validator
                                  SRT export/parser/matcher/diff classifier
+                                 Visual Decision Contract 审计
 src/execution/                  fake adapter、journal、reconcile、resume、evidence
 src/governance/                 feedback event 与建议发布治理
 src/qa/                         媒体 probe/audio/privacy/inspection/release audit
@@ -164,6 +170,7 @@ scripts/
   validate-all-json.mjs         全仓离线 Schema release gate
   validate-rule-registry.mjs    Registry/来源/覆盖权限/pass-fail fixture 审计
   validate-plan-bundle.mjs      plan schemas/revision/coverage/owner/evidence 审计
+  validate-visual-decision-plan.mjs 视觉候选评分/证据/审批/反模式 gate
   srt-bridge.mjs                SRT/sidecar export 与候选 diff CLI
   validate-preview-approval.mjs 预览批准 scope/指纹/失效 gate
   validate-recovery-fixtures.mjs 可恢复执行故障注入 gate
@@ -181,6 +188,7 @@ docs/
   theme-preview.png             8 主题配色总览
   contract-baseline.md          本轮契约止血基线与 fail-closed 原则
   migration-v1.3.1.md           source/resolved profile 与字幕契约迁移说明
+  rule-intake-ai-editing-v0.1.md AI 口播经验规则吸收与取舍记录
   roadmap.md                    已交付/下一步/规划/研究的公开工程路线图
 ```
 

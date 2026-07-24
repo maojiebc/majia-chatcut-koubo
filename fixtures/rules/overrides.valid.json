@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/rule-overrides.schema.json",
   "version": 1,
-  "registryVersion": "1.0.0",
+  "registryVersion": "1.1.0",
   "overrides": [
     {
       "ruleId": "CAPTION-AUTOMATIC-WRAP",
@@ -34,8 +34,20 @@
       "value": true
     },
     {
+      "ruleId": "CONTENT-BROLL-EVIDENCE-FIRST",
+      "value": true
+    },
+    {
+      "ruleId": "CONTENT-BROLL-MIN-AUTO-SCORE",
+      "value": 8
+    },
+    {
       "ruleId": "CONTENT-TRUTH-EVIDENCE",
       "value": true
+    },
+    {
+      "ruleId": "CONTENT-VISUAL-ANTI-PATTERNS",
+      "value": 0
     },
     {
       "ruleId": "EXECUTION-AMBIGUOUS-WRITE",
@@ -56,6 +68,10 @@
     {
       "ruleId": "TIMELINE-HALF-OPEN-INTERVAL",
       "value": "[start,end)"
+    },
+    {
+      "ruleId": "TIMELINE-PRIMARY-VISUAL-TASK",
+      "value": true
     },
     {
       "ruleId": "TIMELINE-SINGLE-VISUAL-OWNER",
