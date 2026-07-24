@@ -118,6 +118,12 @@ if (packageManifest.scripts?.["validate:media"] !== "node scripts/validate-media
 if (!packageManifest.scripts?.verify?.includes("npm run validate:media")) {
   errors.push("package.json: verify must include the media release gate");
 }
+if (packageManifest.scripts?.["validate:distribution"] !== "node scripts/validate-distribution-pack.mjs --pack fixtures/distribution/valid/distribution-pack.json --as-of 2026-07-24") {
+  errors.push("package.json: validate:distribution must invoke the dated canonical pack");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:distribution")) {
+  errors.push("package.json: verify must include the distribution pack gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }
@@ -163,6 +169,7 @@ for (const marker of [
   "Preview approval gate — SHIPPED",
   "Recoverable executor + evidence foundation — SHIPPED",
   "Local Media QA + export authorization gate — SHIPPED",
+  "Distribution pack foundation — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);

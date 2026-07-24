@@ -23,6 +23,7 @@
 - **Preview approval gate** — deterministically covers the opening 60 seconds, complex state, every privacy-risk range, and the ending; approval binds actor, full window scope, and plan/style/timeline fingerprints, and closes on any drift.
 - **Recoverable execution and evidence foundation** — an offline fake adapter proves unique logical-ID binding, idempotent writes, revision locks, read-after-write reconciliation, scene compensation, checkpoint/resume, and evidence invalidation; no live ChatCut adapter claim is made.
 - **Local Media QA and export authorization** — audits final-file hashes, codecs/timebase/dimensions/color/audio/duration, loudness/true peak/silence, black/freeze findings, privacy coverage, and deterministic inspection samples from supplied reports; it never exports or publishes media.
+- **Distribution pack foundation** — platform rules carry source, observation, expiry, and confidence metadata; stale hard rules degrade to advisory, deliverables bind to master/revision/content-truth hashes, and publishing is forbidden.
 
 ## Install
 
@@ -49,6 +50,7 @@ npm run validate:srt
 npm run validate:preview
 npm run validate:recovery
 npm run validate:media
+npm run validate:distribution
 
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \
