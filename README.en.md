@@ -1,14 +1,14 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.3.1-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.4.0-blue)
 
-> Chinese display name: **ChatCut口播 · 马甲实战版**. Install slug stays `majia-chatcut-koubo`.
+> **ChatCut口播 · 马甲实战版** — the install slug stays `majia-chatcut-koubo`.
 
-**A field-tested technique pack for agent-driven talking-head editing in ChatCut · Majia Field Edition** — an increment layer on top of the official ChatCut skills. The official skills teach agents *how to use the tools*; this pack teaches them *what a good cut looks like*, with the math behind every hard-won lesson.
+**A verifiable production system for agent-driven talking-head editing** — an increment layer above the official ChatCut skills, joining visual craft with governed rules, IR/SRT planning, approval, recoverable execution, evidence, media QA, delivery, and feedback.
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.3.1 increment-layer architecture: official ChatCut base → four pieces (dual-frame layout / theme palette / transition engineering / face reframe) → terminology template + caption gate → visible frame / audible sound / readable captions acceptance triad" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.0 verifiable production system: Rule Registry → Creator OS IR/SRT → Explainable Planner → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Feedback Governance, with Capability Profile blocking unproven live routes" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.3.1 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.0 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
 
 ## What's inside
 
@@ -27,6 +27,8 @@
 - **Local Media QA and export authorization** — audits final-file hashes, codecs/timebase/dimensions/color/audio/duration, loudness/true peak/silence, black/freeze findings, privacy coverage, and deterministic inspection samples from supplied reports; it never exports or publishes media.
 - **Distribution pack foundation** — platform rules carry source, observation, expiry, and confidence metadata; stale hard rules degrade to advisory, deliverables bind to master/revision/content-truth hashes, and publishing is forbidden.
 - **Feedback governance foundation** — events retain only anonymous hashes, stable failure signatures, and allowlisted metrics; update suggestions require repeated samples, evidence, counterexamples, an owner, human review, and rollback, with no online auto-apply route.
+
+> **Live-environment boundary:** the repository validates offline schemas, anonymous fixtures, a fake adapter, report audits, and fail-closed routing. A real ChatCut adapter, real media probing/rendering, and platform publishing remain unverified and are never run automatically.
 
 ## Install
 
@@ -80,19 +82,19 @@ The numbers in this pack (22 chars/line, 330px circle window, `magnification≈0
 
 ## 📋 Version History
 
+**V1.4.0 (2026-07-24)** — Upgraded from a technique pack to a verifiable production system: Rule Registry, Creator OS IR/Rational Time, SRT and explainable planning, preview approval, recoverable execution/evidence, Media QA/export authorization, governed distribution packs, feedback governance, and a capability live-route gate are now part of the offline release gates. Real ChatCut adaptation, media probing/rendering, and platform publishing remain explicitly unverified and non-automatic.
+
 **V1.3.1 (2026-07-24)** — Contract hotfix and reproducible release foundation: pinned Node and lockfile CI; offline repository-wide JSON validation; separate source/resolved profile contracts with safe inheritance, merge provenance and CLI output; caption numeric semantics, word identity/intervals, narrow short-card exception, hard override cap, strict warnings and project/timeline provenance binding; release gates for contrast, asset references/geometry and documentation/version drift. Legacy caption JSON remains available for non-strict migration, while release mode requires provenance.
 
 **V1.3.0 (2026-07-24)** — Process increments + ChatCut field notes + local personal layer: references 6→10 (new per-slice operating manual / host field-notes archive / retention structure / recovery); SKILL gains confirmation gates (state-table-first hard gate / 60-second preview gate / verbatim-transcript-as-truth); machine gate upgrade (non-weakenable `rules/policy.json` + schemas + validator with profile inheritance, millisecond short-card rules and a `--terms` personal-terminology flag + 14 regression tests); theme token v1.1 contrast fixes (sea-salt body text now 7.67:1); formal local personal layer contract at `~/.config/majia-chatcut-koubo/` with `templates/local-config-example/`.
 
-**V1.2.3 (2026-07-23)** — Dependency CVE fix: `assets/theme-kit/requirements.txt` pins `CairoSVG>=2.7` to `==2.9.0`, removing exposure to CVE-2026-31899 (exponential DoS via recursive SVG `<use>`); SKILL description gains preconditions / non-goals to tighten activation scope.
-
-**V1.2.2 (2026-07-23)** — Chinese brand name: display name set to **ChatCut口播 · 马甲实战版** across SKILL / README / architecture diagram / GitHub About / ClawHub. The install slug `majia-chatcut-koubo`, frontmatter, and install commands are unchanged.
-
-Full history: [CHANGELOG.md](CHANGELOG.md).
+Full history: [CHANGELOG.md](./CHANGELOG.md) or [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases).
 
 ## 👤 Author / Contact
 
-**Majia (@maojiebc)** · 超级马甲
+**Majia (@maojiebc)** · 超级马甲 (Super Majia)
+
+If this skill helps you, find me on any of these channels — happy to chat about field experience, take feature requests, hear bug reports, or trade notes on user operations / data platforms / BI engineering work:
 
 | Channel | Link |
 |---|---|
@@ -100,7 +102,7 @@ Full history: [CHANGELOG.md](CHANGELOG.md).
 | 🐙 GitHub | [github.com/maojiebc](https://github.com/maojiebc) |
 | 🪝 ClawHub | [clawhub.ai/p/maojiebc](https://clawhub.ai/p/maojiebc) |
 | 🐦 X | [@maojiebc](https://x.com/maojiebc) |
-| 📕 Xiaohongshu | [超级马甲](https://xhslink.com/m/4fQMJeHHWKC) |
-| 📰 WeChat | **超级马甲** |
+| 📕 Xiaohongshu | [Super Majia](https://xhslink.com/m/4fQMJeHHWKC) |
+| 📰 WeChat Official Account | [超级马甲](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzODk2NA==#wechat_redirect) |
 
-> Distilled from 14 years of user-operations practice. Issues and collaboration welcome.
+> Built from 14 years of user-operations work and multi-channel content matrix experience.

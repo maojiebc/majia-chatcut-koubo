@@ -1,21 +1,21 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.3.1-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.4.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
-> 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令与下方一致；「ChatCut口播 · 马甲实战版」是它的中文展示名。
+> **ChatCut口播 · 马甲实战版** — 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令保持不变。
 
-**ChatCut 口播剪辑通用技巧包 · 马甲实战版** —— 官方 ChatCut skill 之上的增量层:双画面版式、主题配色、过渡动效、人脸取景四大件,外加可自维护的词表模板与机器化字幕门禁。全部规则来自真实批量剪片(11 支直播切片 × 多轮返工)踩出来的实测结论,不是理论汇编。
+**从剪辑经验包升级为可验证生产系统** —— 在官方 ChatCut skill 之上，把版式/配色/动效/人脸取景与规则、IR/SRT、审批、可恢复执行、证据、媒体 QA、交付和反馈治理串成一条 fail-closed 生产链。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.3.1 增量层框架图:官方 ChatCut 底座 → 双画面版式(七执行状态) / 主题配色 / 过渡动效工程(窗口 reframe shader) / 人脸取景 四大件 + ChatCut 宿主实测档案 + 八道硬闸 + 本地个人层 → 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.0 可验证生产系统：Rule Registry → Creator OS IR/SRT → Explainable Planner → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Feedback Governance，并由 Capability Profile 阻断无证据 live route" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.3.1 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
 用 AI 代理(Codex / WorkBuddy / TRAE 等 ChatCut 宿主)剪口播视频时,官方 skill 教了「工具怎么用」,但没人告诉代理「剪成什么样算好」。结果是:画中画被裁成叶片形、过渡生硬得像 PPT、字幕两行挤压、导出后动画凭空消失 0.2 秒、黑边反复修不掉。
 
-本包把这些坑的**根因和数学**写成代理可执行的规范:
+本包把这些坑的**根因和数学**写成代理可执行的规范，并把“做完”升级为可追溯的生产状态：
 
 - **双画面版式系统** — 横竖版 8 套具名版式带精确坐标(`assets/compositions.json`),七执行状态语义决策器 + 状态落地原子契约:什么时候人物全屏、什么时候圆窗、什么时候纯录屏,由证据决定不由时间轮播
 - **主题配色系统** — 8 套实测主题(token + SVG 底图 + 可运行 HTML 组件),**每套自带代理 playbook**:token 语义档位、信息块偏好、字幕底板硬规则、可直接嵌进生成指令的调用 crib
@@ -36,6 +36,8 @@
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
 - **本地个人层** — `~/.config/majia-chatcut-koubo/` 叠加个人 profile/词表/审美基线;品牌词与实测数字留在本地,公开包保持通用
+
+> **真实环境边界**：当前仓库验证的是离线 Schema、匿名 fixtures、fake adapter、报告审计与 fail-closed 路由。真实 ChatCut adapter、真实媒体探针/渲染与平台发布尚未验证，也不会被自动执行。
 
 ## 安装
 
@@ -145,6 +147,9 @@ fixtures/preview/               匿名 preview bundle + approval log
 fixtures/execution/             匿名 execution plan
 fixtures/media-qa/              匿名 final artifact release report
 fixtures/distribution/          匿名平台 profile + deliverables pack
+fixtures/feedback/              匿名 privacy-safe event + suggested update queue
+fixtures/planning/              匿名 explainable content scorecard
+fixtures/capabilities/          明确 live=false/unverified 的 capability profile
 src/config/                     profile resolver、合并来源与安全序列化
 src/cli/resolve-profile.mjs     source → resolved CLI
 src/rules/                      Rule Registry 审计与 tighten-only override evaluator
@@ -152,6 +157,7 @@ src/time/                       有理时间、显式时间域与半开区间运
 src/planning/                   Creator OS bundle 跨文档 validator
                                  SRT export/parser/matcher/diff classifier
 src/execution/                  fake adapter、journal、reconcile、resume、evidence
+src/governance/                 feedback event 与建议发布治理
 src/qa/                         媒体 probe/audio/privacy/inspection/release audit
 src/distribution/               平台 profile freshness 与 master binding audit
 scripts/
@@ -161,8 +167,10 @@ scripts/
   srt-bridge.mjs                SRT/sidecar export 与候选 diff CLI
   validate-preview-approval.mjs 预览批准 scope/指纹/失效 gate
   validate-recovery-fixtures.mjs 可恢复执行故障注入 gate
+  validate-capability-profile.mjs build/schema/TTL/probe/canary live-route gate
   validate-media-release.mjs    最终媒体报告与导出授权 gate
   validate-distribution-pack.mjs 平台交付 manifest gate
+  validate-feedback-governance.mjs 匿名事件与人工 release queue gate
   validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--root/--strict/--terms)
   check-assets.mjs              composition/theme 引用与几何 gate
   check-version-drift.mjs       package/SKILL/README/CHANGELOG 漂移 gate
@@ -178,15 +186,13 @@ docs/
 
 ## 📋 版本记录
 
+**V1.4.0（2026-07-24）** — 从技巧包升级为可验证生产系统：Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据链、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate 全部进入离线 release gates；真实 ChatCut adapter、真实媒体探针/渲染与平台发布继续保持 `unverified` 且不自动执行。
+
 **V1.3.1(2026-07-24)** — 契约止血与发布地基：Node/lockfile/CI 可复现安装；Ajv 离线验证全仓 JSON；source/resolved profile 契约、继承路径修复、合并来源追踪与安全 CLI；字幕数值语义、词 key/区间、短卡类型、override 上限、严格 warning 与项目/时间线 provenance 绑定；主题对比度、composition 几何、资产引用和文档/版本漂移全部进入 release gate。旧字幕 JSON 仍可非严格迁移，发布态须补齐 provenance。
 
 **V1.3.0(2026-07-24)** — 制度增量+ChatCut 实测档案+本地个人层:references 6→10 册(新增逐片执行手册/宿主实测行为档案/留存结构/故障恢复);SKILL 新增确认闸门(状态表先行硬闸/60 秒预览闸/精校稿真相源);机器门禁升级(不可放宽 `rules/policy.json`+schemas+validator 支持 profile 继承/毫秒短卡/`--terms` 个人词表+14 项回归测试);主题 token v1.1 对比度修正(海盐青正文 7.67:1 达标);本地个人层正式契约 `~/.config/majia-chatcut-koubo/` + `templates/local-config-example/` 四件套模板。
 
-**V1.2.3(2026-07-23)** — 依赖 CVE 修复:`assets/theme-kit/requirements.txt` 的 `CairoSVG>=2.7` 固定为 `==2.9.0`,消除 CVE-2026-31899(递归 `<use>` 指数级 DoS)暴露;SKILL description 补前置/非目标,收窄触发口径。
-
-**V1.2.2(2026-07-23)** — 中文品牌名:展示名定为「ChatCut口播 · 马甲实战版」,同步 SKILL/README/架构图/GitHub About/ClawHub;安装标识 `majia-chatcut-koubo`、frontmatter 与安装命令一律不变。
-
-完整变更历史见 [CHANGELOG.md](CHANGELOG.md)。
+完整变更历史见 [CHANGELOG.md](./CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
 
 ## 方法来源
 
@@ -194,9 +200,9 @@ docs/
 
 ## 👤 作者 / 联系
 
-**马甲(@maojiebc)** · 超级马甲
+**马甲（@maojiebc）** · 超级马甲
 
-如果这份 skill 帮到你,欢迎在以下任意渠道找我交流踩坑实录、提需求、报 bug,也欢迎勾兑用户运营 / 数据中台 / BI 工程的实战经验:
+如果这份 skill 帮到你，欢迎在以下任意渠道找我交流踩坑实录、提需求、报 bug，也欢迎勾兑用户运营 / 数据中台 / BI 工程的实战经验：
 
 | 渠道 | 链接 |
 |---|---|
@@ -207,4 +213,4 @@ docs/
 | 📕 小红书 | [超级马甲](https://xhslink.com/m/4fQMJeHHWKC) |
 | 📰 微信公众号 | [超级马甲](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzODk2NA==#wechat_redirect) |
 
-> 这份 skill 是 14 年用户运营 + 内容矩阵实战沉淀出来的,问题/合作随时聊。
+> 这份 skill 是 14 年用户运营 + 内容矩阵实战沉淀出来的，问题/合作随时聊。

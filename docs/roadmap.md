@@ -1,6 +1,6 @@
 # majia-chatcut-koubo 公开工程路线图
 
-> 状态基线：V1.3.1
+> 状态基线：V1.4.0
 >
 > 更新日期：2026-07-24
 >
@@ -10,7 +10,7 @@
 
 ## 1. 当前判断
 
-V1.3.1 已经完成第一轮“契约止血”：仓库从主要依靠自然语言纪律，前进到拥有可复现安装、离线 Schema、严格字幕门禁、profile source/resolved 契约、资产检查、公开安全扫描、版本漂移检查和 GitHub Actions 的可信基线。
+V1.4.0 已完成从“契约止血”到可验证生产系统的第一轮闭环：仓库拥有可复现安装、Rule Registry、Creator OS IR/SRT、可解释规划、预览审批、可恢复 fake adapter/证据链、Media QA、受治理交付包、反馈治理、capability live gate、公开安全扫描和 GitHub Actions。
 
 下一阶段的目标不是继续堆 Markdown，而是把最有价值的生产纪律变成五类机器资产：
 

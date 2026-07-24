@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## V1.4.0（2026-07-24）— 可验证生产系统
+
 **规划与治理**
 
 - 新增 [公开工程路线图](docs/roadmap.md)：以 V1.3.1 为已交付基线，明确 Rule Registry、Creator OS IR/SRT、预览审批、可恢复执行、证据链、媒体 QA、平台交付与反馈治理的顺序和 Definition of Done。

@@ -1,19 +1,28 @@
 ---
 name: majia-chatcut-koubo
-description: ChatCut 口播/录屏视频代理剪辑的通用技巧包——官方 ChatCut skill 之上的增量层。覆盖：双画面版式（横竖版 8 套坐标/七执行状态）、8 套主题配色与对比度档位、过渡动效工程（四档可靠性链/端点契约/fps 归一化）、人脸居中与内部取景（三层合成/reframe→mask 顺序/坐标系陷阱/overscan 公式）、中文气口字幕与可自维护词表模板、机器化字幕门禁（validator+不可放宽 policy）、逐片执行手册与八道硬闸、ChatCut 宿主实测行为档案、留存结构与四平台路由、故障恢复、本地个人层（~/.config 叠加个人 profile/词表）。触发：ChatCut 剪口播、直播切片、画中画/圆窗、主讲人过渡动画、竖版重构、字幕气口、术语纠错、主题配色。前置：需已装官方 ChatCut skill / MCP 工具。非目标：不处理非视频剪辑任务，不替代官方工具本身的用法（工具怎么用一律以官方为准），本包只补剪辑审美与实测护栏。
+description: ChatCut 口播/录屏视频代理剪辑的可验证生产系统——官方 ChatCut skill 之上的增量层。覆盖双画面版式、主题配色、过渡、人脸取景与字幕门禁，以及 Rule Registry、Creator OS IR/Rational Time、SRT 与可解释规划、预览审批、可恢复 fake adapter/证据链、本地 Media QA/导出授权、多平台交付包、反馈治理和 capability live gate。触发：ChatCut 剪口播、直播切片、竖版重构、字幕纠错、批量规划、预览审批、恢复执行、媒体 QA、交付审计。前置：需官方 ChatCut skill / MCP。边界：真实 ChatCut adapter、真实媒体探针/渲染与平台发布须另有当前环境证据，本 skill 不自动执行。
 metadata:
-  version: 1.3.1
+  version: 1.4.0
 ---
 
 # ChatCut口播 · 马甲实战版
 
-ChatCut 口播剪辑的通用技巧包。把 ChatCut 当作最终可继续手工调整的非线性编辑器：所有剪辑交付留在项目和时间线上，以可见画面、可听声音和可读字幕为验收对象。
+ChatCut 口播剪辑的可验证生产系统。它把 ChatCut 当作最终可继续手工调整的非线性编辑器，把规则、内容计划、审批、执行、证据、媒体 QA、交付和反馈放进同一条 fail-closed 流程。
 
 ## 与官方 skill 的分工
 
 ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcription / verification / known-errors / create-motion-graphics 等），**工具怎么用一律以官方为准**，参数以当前 MCP 工具实时描述为真相源。
 
-本包只写官方没有的：**剪成什么样算好**（版式、配色、动效节奏、构图标准）、**实测踩坑护栏**（坐标系陷阱、fps 错位、验证方法）、**可复用资产**（8 版式坐标、8 主题色板、字幕校验脚本、词表模板）。与官方重复处以官方为准。
+本包只写官方没有的：**剪成什么样算好**（版式、配色、动效节奏、构图标准）、**如何安全完成**（规则/IR、审批、幂等恢复、证据和发布授权）、**实测踩坑护栏**（坐标系陷阱、fps 错位、验证方法）与**可复用资产**。与官方重复处以官方为准。
+
+## 当前生产闭环
+
+1. **规则与计划**：Rule Registry 保护 hard policy；Creator OS IR、Rational Time、SRT sidecar 和 Explainable Planner 统一内容、时间、owner、revision 与证据引用。
+2. **审批与执行**：代表窗口 preview approval 精确绑定 scope/fingerprint；recoverable executor 用 fake adapter 验证幂等、写后回读、补偿、checkpoint/resume 和 evidence 失效传播。
+3. **QA 与交付**：Media QA 报告审计最终 artifact、音画/隐私和导出授权；distribution pack 绑定母片/content truth，`publishAction=none`。
+4. **反馈与真实环境**：反馈只进入受治理建议队列，不在线改 hard policy；capability profile 缺少当前 build/schema/probe/canary 时保持 `liveAllowed=false`。
+
+**当前边界**：离线 Schema、匿名 fixture、fake adapter 和报告审计已验证；真实 ChatCut adapter、真实媒体探针/渲染和平台发布仍需外部环境证据，本 skill 不会自动执行这些动作。
 
 ## 五条第一性原则
 
@@ -73,7 +82,13 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 2. **起模**：把 `templates/local-config-example/` 整体复制为 `~/.config/majia-chatcut-koubo/`，在你的素材上做样片，把验证过的数字、品牌词表和审美偏好填进去。
 3. **边界**：品牌实词、真实业务数字、个人路径只进本地层，永不进 git、永不进公开仓；本地 profile 只能校准参数，不能放宽 `rules/policy.json` 的发布硬规则。数字变了就升版本存新文件，不覆盖旧版。
 
-版本记录见 [CHANGELOG.md](CHANGELOG.md)。
+## 📋 版本记录
+
+- **v1.4.0（2026-07-24）**：升级为可验证生产系统；交付 Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate；真实适配器/媒体探针/平台发布仍明确未验证且不自动执行。
+- **v1.3.1（2026-07-24）**：契约止血与可复现发布地基；Node/lockfile/CI、离线 JSON Schema、source/resolved profile、字幕 P0、资产/对比度/版本漂移门禁。
+- **v1.3.0（2026-07-24）**：逐片执行手册、ChatCut 宿主实测档案、八道硬闸、60 秒预览闸、留存结构与本地个人层。
+
+完整变更历史见 [CHANGELOG.md](./CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
 
 ## 👤 作者 / 联系
 

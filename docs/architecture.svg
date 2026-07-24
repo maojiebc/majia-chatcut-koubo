@@ -1,120 +1,101 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1080" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
   <defs>
-    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#8a949e"/>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#718096"/>
     </marker>
     <style>
-      .t{fill:#1f2933}.sub{fill:#5b6670}.mut{fill:#8a949e}
-      .h{font-weight:700}.card-t{font-weight:700}
-      .lead{font-style:italic}
+      .title{fill:#102A43;font-weight:700}.body{fill:#334E68}.muted{fill:#627D98}
+      .cardTitle{fill:#102A43;font-size:18px;font-weight:700}
+      .cardBody{fill:#486581;font-size:14px}
+      .chip{fill:#FFFFFF;font-size:13px;font-weight:700}
+      .section{fill:#243B53;font-size:15px;font-weight:700}
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1280" height="900" fill="#fbfbf9"/>
+  <rect width="1280" height="1080" fill="#F7FAFC"/>
 
-  <!-- Header -->
-  <text x="60" y="58" class="t h" font-size="34">ChatCut口播 · 增量层框架</text>
-  <text x="60" y="92" class="sub" font-size="18">官方 ChatCut skill 教「工具怎么用」；本包只补官方不说的那句 ——「剪成什么样才算好」</text>
+  <text x="60" y="62" class="title" font-size="34">ChatCut口播 · 可验证生产系统</text>
+  <text x="60" y="98" class="body" font-size="18">从剪辑经验包升级为：规则 → IR/SRT → 审批 → 可恢复执行 → 媒体 QA → 交付 → 反馈治理</text>
+  <rect x="1080" y="42" width="140" height="34" rx="17" fill="#0F766E"/>
+  <text x="1150" y="64" class="chip" text-anchor="middle">v1.4.0</text>
 
-  <!-- Legend -->
-  <g font-size="15" class="sub">
-    <rect x="838" y="44" width="16" height="16" rx="4" fill="#d8ded0" stroke="#8ea06f"/>
-    <text x="860" y="57">官方底座</text>
-    <rect x="948" y="44" width="16" height="16" rx="4" fill="#d9efec" stroke="#2fa39a"/>
-    <text x="970" y="57">增量四大件</text>
-    <rect x="1088" y="44" width="16" height="16" rx="4" fill="#f6e6d6" stroke="#c8702f"/>
-    <text x="1110" y="57">门禁 · 自维护</text>
+  <rect x="60" y="130" width="1160" height="78" rx="14" fill="#E8F1E4" stroke="#7A9B61" stroke-width="1.5"/>
+  <text x="86" y="162" class="title" font-size="20">官方 ChatCut skill / MCP 工具面</text>
+  <text x="86" y="190" class="body" font-size="15">工具与参数以当前宿主描述为真相源；本 skill 提供生产纪律、离线契约与安全路由，不冒充官方工具实现</text>
+
+  <path d="M640,208 L640,244" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <text x="60" y="268" class="section">① 规则与内容计划 · 机器可读的生产真相</text>
+  <g>
+    <rect x="60" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
+    <text x="82" y="320" class="cardTitle">Rule Registry</text>
+    <text x="82" y="350" class="cardBody">14 条 runtime rule · 六个治理域</text>
+    <text x="82" y="375" class="cardBody">hard policy 不可被 profile 放宽</text>
+    <text x="82" y="400" class="cardBody">稳定 ID / 来源 / waiver / fallback</text>
+
+    <rect x="460" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
+    <text x="482" y="320" class="cardTitle">Creator OS IR + Rational Time</text>
+    <text x="482" y="350" class="cardBody">project / transcript / edit / state / owner</text>
+    <text x="482" y="375" class="cardBody">caption / evidence · [start,end)</text>
+    <text x="482" y="400" class="cardBody">revision / coverage / owner 跨文档校验</text>
+
+    <rect x="860" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
+    <text x="882" y="320" class="cardTitle">SRT + Explainable Planner</text>
+    <text x="882" y="350" class="cardBody">SRT 人工视图 + sidecar 机器真相</text>
+    <text x="882" y="375" class="cardBody">可复算信号 + source refs</text>
+    <text x="882" y="400" class="cardBody">不生成台词 · 不输出“爆款概率”</text>
   </g>
 
-  <!-- Base band: official ChatCut -->
-  <rect x="60" y="122" width="1160" height="82" rx="14" fill="#eef1e7" stroke="#8ea06f" stroke-width="1.5"/>
-  <text x="88" y="156" class="t card-t" font-size="21">官方 ChatCut Skill 底座（15 件官方）</text>
-  <text x="88" y="184" class="sub" font-size="15.5">工具怎么用 · 命令与参数 · 时间线操作 —— 本包一律路由官方，不重复造轮子</text>
-  <text x="1192" y="170" class="mut" font-size="30" text-anchor="end">⚙</text>
+  <path d="M640,432 L640,474" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
 
-  <!-- connector base -> increment -->
-  <path d="M640,204 L640,238" stroke="#8a949e" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="656" y="228" class="mut lead" font-size="14">本包在其上做增量</text>
+  <text x="60" y="498" class="section">② 审批与执行 · 先批准、可恢复、证据先于完成</text>
+  <g>
+    <rect x="60" y="516" width="360" height="146" rx="14" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
+    <text x="82" y="550" class="cardTitle">Preview Approval</text>
+    <text x="82" y="580" class="cardBody">首 60 秒 / 复杂段 / 隐私段 / 片尾</text>
+    <text x="82" y="605" class="cardBody">actor + scope + plan/style/timeline 指纹</text>
+    <text x="82" y="630" class="cardBody">任何漂移自动关闭执行门</text>
 
-  <!-- Section label -->
-  <text x="60" y="266" class="sub h" font-size="16">四大件 · 代理「剪成什么样算好」的决策规则（皆来自 11 支直播切片 × 多轮返工实测）</text>
+    <rect x="460" y="516" width="360" height="146" rx="14" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
+    <text x="482" y="550" class="cardTitle">Recoverable Executor + Evidence</text>
+    <text x="482" y="580" class="cardBody">幂等 / revision lock / 写后回读</text>
+    <text x="482" y="605" class="cardBody">scene compensation / checkpoint / resume</text>
+    <text x="482" y="630" class="cardBody">依赖变化递归失效下游 evidence</text>
 
-  <!-- Four cards -->
-  <!-- card geometry: x=60,357,654,951 ; w=269 ; y=284 h=210 -->
-  <g font-size="14.5">
-    <!-- 1 dual-frame -->
-    <rect x="60" y="284" width="269" height="212" rx="14" fill="#e6f4f2" stroke="#2fa39a" stroke-width="1.6"/>
-    <text x="80" y="318" class="t card-t" font-size="19">① 双画面版式</text>
-    <line x1="80" y1="330" x2="309" y2="330" stroke="#bfe0dc"/>
-    <text x="80" y="356" class="sub">录屏 1 ＋ 主讲人 2</text>
-    <text x="80" y="380" class="sub">横竖版 8 套坐标</text>
-    <text x="80" y="404" class="sub">圆窗 / 画中画</text>
-    <text x="80" y="470" class="mut lead" font-size="13.5">治：被裁成叶片形</text>
-
-    <!-- 2 theme -->
-    <rect x="357" y="284" width="269" height="212" rx="14" fill="#e6f4f2" stroke="#2fa39a" stroke-width="1.6"/>
-    <text x="377" y="318" class="t card-t" font-size="19">② 主题配色</text>
-    <line x1="377" y1="330" x2="606" y2="330" stroke="#bfe0dc"/>
-    <text x="377" y="356" class="sub">8 套主题 · 对比档位</text>
-    <text x="377" y="380" class="sub">每套带代理 playbook</text>
-    <text x="377" y="404" class="sub">色板＝可执行设计系统</text>
-    <text x="377" y="470" class="mut lead" font-size="13.5">治：配色全靠猜</text>
-
-    <!-- 3 motion -->
-    <rect x="654" y="284" width="269" height="212" rx="14" fill="#e6f4f2" stroke="#2fa39a" stroke-width="1.6"/>
-    <text x="674" y="318" class="t card-t" font-size="19">③ 过渡动效工程</text>
-    <line x1="674" y1="330" x2="903" y2="330" stroke="#bfe0dc"/>
-    <text x="674" y="356" class="sub">四档可靠性链 · 端点契约</text>
-    <text x="674" y="380" class="sub">fps 归一化</text>
-    <text x="674" y="404" class="sub">块级动效词汇表（三轴）</text>
-    <text x="674" y="470" class="mut lead" font-size="13.5">治：动画凭空消失 0.2s</text>
-
-    <!-- 4 face -->
-    <rect x="951" y="284" width="269" height="212" rx="14" fill="#e6f4f2" stroke="#2fa39a" stroke-width="1.6"/>
-    <text x="971" y="318" class="t card-t" font-size="19">④ 人脸取景</text>
-    <line x1="971" y1="330" x2="1200" y2="330" stroke="#bfe0dc"/>
-    <text x="971" y="356" class="sub">三层合成</text>
-    <text x="971" y="380" class="sub">reframe → mask 顺序</text>
-    <text x="971" y="404" class="sub">坐标系陷阱 · overscan 公式</text>
-    <text x="971" y="470" class="mut lead" font-size="13.5">治：黑边反复修不掉</text>
+    <rect x="860" y="516" width="360" height="146" rx="14" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
+    <text x="882" y="550" class="cardTitle">Capability Profile + Live Gate</text>
+    <text x="882" y="580" class="cardBody">build / schema hash / TTL / probes</text>
+    <text x="882" y="605" class="cardBody">content-free canary + per-capability fallback</text>
+    <text x="882" y="630" class="cardBody">无当前证据：live=false / unverified</text>
   </g>
 
-  <!-- connectors four -> gate row -->
-  <path d="M194,496 L194,548" stroke="#8a949e" stroke-width="1.4" marker-end="url(#ar)"/>
-  <path d="M491,496 L640,548" stroke="#8a949e" stroke-width="1.4" fill="none" marker-end="url(#ar)"/>
-  <path d="M788,496 L640,548" stroke="#8a949e" stroke-width="1.4" fill="none" marker-end="url(#ar)"/>
-  <path d="M1086,496 L1086,548" stroke="#8a949e" stroke-width="1.4" marker-end="url(#ar)"/>
+  <path d="M640,662 L640,704" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
 
-  <!-- Gate + self-maintain row -->
-  <g font-size="14.5">
-    <!-- 词表模板 (self maintain, left) -->
-    <rect x="60" y="550" width="537" height="96" rx="14" fill="#f6e6d6" stroke="#c8702f" stroke-width="1.5"/>
-    <text x="82" y="584" class="t card-t" font-size="18">词表模板 · 可自维护</text>
-    <text x="82" y="612" class="sub">terminology.template.json —— 字幕术语纠错的唯一维护点，喂给字幕层</text>
-    <text x="82" y="634" class="mut lead" font-size="13.5">治：专有名词一错到底</text>
+  <text x="60" y="728" class="section">③ 发布与复盘 · 最终文件、无自动发布、反馈不直改规则</text>
+  <g>
+    <rect x="60" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
+    <text x="82" y="780" class="cardTitle">Local Media QA + Export Auth</text>
+    <text x="82" y="810" class="cardBody">hash / codec / timebase / 音频 / 黑冻帧</text>
+    <text x="82" y="835" class="cardBody">隐私 coverage + 确定性抽帧</text>
+    <text x="82" y="860" class="cardBody">授权精确绑定 artifact + plan hash</text>
 
-    <!-- 字幕门禁 (machine gate, right) -->
-    <rect x="683" y="550" width="537" height="96" rx="14" fill="#f6e6d6" stroke="#c8702f" stroke-width="1.5"/>
-    <text x="705" y="584" class="t card-t" font-size="18">字幕门禁 · 机器验收</text>
-    <text x="705" y="612" class="sub">validate-caption-pages.mjs —— 两行挤压 / 越界 / 气口断错自动拦</text>
-    <text x="705" y="634" class="mut lead" font-size="13.5">治：字幕两行挤压</text>
+    <rect x="460" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
+    <text x="482" y="780" class="cardTitle">Governed Distribution Pack</text>
+    <text x="482" y="810" class="cardBody">平台规则来源 / 日期 / 可信度 / 过期</text>
+    <text x="482" y="835" class="cardBody">母片 hash / revision / content truth 绑定</text>
+    <text x="482" y="860" class="cardBody">publishAction = none</text>
+
+    <rect x="860" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
+    <text x="882" y="780" class="cardTitle">Feedback Governance</text>
+    <text x="882" y="810" class="cardBody">匿名事件 → repeated samples → review</text>
+    <text x="882" y="835" class="cardBody">证据 / 反例 / owner / rollback</text>
+    <text x="882" y="860" class="cardBody">autoApply=false · 人工 release</text>
   </g>
 
-  <!-- connector gate -> acceptance -->
-  <path d="M640,646 L640,690" stroke="#8a949e" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="60" y="930" width="1160" height="92" rx="14" fill="#FFF5F5" stroke="#C53030" stroke-width="1.5"/>
+  <text x="86" y="964" class="title" font-size="18">真实环境安全边界</text>
+  <text x="86" y="992" class="body" font-size="15">已验证：Schema、匿名 fixtures、fake adapter、报告审计与 fail-closed 路由</text>
+  <text x="86" y="1015" class="body" font-size="15">未宣称：真实 ChatCut adapter、真实媒体探针/渲染、平台发布；这些动作不会自动执行</text>
 
-  <!-- Acceptance triad -->
-  <text x="60" y="712" class="sub h" font-size="16">验收三象 · 以最终画面为准（ChatCut 当作可继续手工调整的非线性编辑器）</text>
-  <g font-size="17" class="card-t">
-    <rect x="60" y="726" width="366" height="70" rx="35" fill="#e4f3e8" stroke="#3f9d5c" stroke-width="1.6"/>
-    <text x="243" y="769" class="t" text-anchor="middle">👁 可见画面</text>
-    <rect x="457" y="726" width="366" height="70" rx="35" fill="#e4f3e8" stroke="#3f9d5c" stroke-width="1.6"/>
-    <text x="640" y="769" class="t" text-anchor="middle">🔊 可听声音</text>
-    <rect x="854" y="726" width="366" height="70" rx="35" fill="#e4f3e8" stroke="#3f9d5c" stroke-width="1.6"/>
-    <text x="1037" y="769" class="t" text-anchor="middle">📝 可读字幕</text>
-  </g>
-
-  <!-- footer -->
-  <text x="60" y="852" class="mut" font-size="14">宿主：Codex / WorkBuddy / TRAE 等 ChatCut 代理 · 方法来源已在 CHANGELOG 逐条署名（只吸收组织方法，文本与取舍为本包自定）</text>
-  <text x="60" y="876" class="mut" font-size="13">ChatCut口播 · 马甲实战版 · v1.3.1 · slug: majia-chatcut-koubo</text>
+  <text x="60" y="1058" class="muted" font-size="13">ChatCut口播 · 马甲实战版 · v1.4.0 · slug / frontmatter / install commands unchanged</text>
 </svg>
