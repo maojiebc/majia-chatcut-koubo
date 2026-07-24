@@ -35,6 +35,7 @@
 - **反馈治理底座** — 事件仅保存匿名 hash、稳定错误签名与计数指标，不接收字幕正文/帧图/音频/用户路径/私有词表；规则建议需重复样本、证据、反例、owner、人工审核和回滚记录，永不在线自动应用
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
+- **实战经验库** — `field-reports/` 追加保存真实任务的完整失败链、ChatCut 产品问题、证据等级与绕行方案；迭代前必读、读后留痕，积累成批后再晋升正式规则和版本
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
 - **本地个人层** — `~/.config/majia-chatcut-koubo/` 叠加个人 profile/词表/审美基线;品牌词与实测数字留在本地,公开包保持通用
 
@@ -131,6 +132,10 @@ references/
   retention-structure.md        开头钩子决策流/钩子-兑现/注意力时钟/四平台路由
   chatcut-field-notes.md        ChatCut 宿主实测行为档案(crop/渲染差异/shader/分页引擎/隐私 SOP/双端预览)
   recovery.md                   502/403/工具面固化/续接手册协议/转写绕行
+field-reports/
+  README.md                     案例库协议、证据等级、晋升规则、产品反馈格式
+  iteration-log.md              迭代前读取回执与读后决策，追加式留痕
+  cases/                        脱敏的真实项目案例；不覆盖旧记录
 templates/
   terminology.template.json     词表模板(装你的品牌与误听)
   operating-profile.template.json  实测参数模板(装你的数字)

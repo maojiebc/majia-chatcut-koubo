@@ -24,6 +24,23 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 **当前边界**：离线 Schema、匿名 fixture、fake adapter 和报告审计已验证；真实 ChatCut adapter、真实媒体探针/渲染和平台发布仍需外部环境证据，本 skill 不会自动执行这些动作。
 
+## 实战经验库读写协议（迭代硬闸）
+
+`field-reports/` 是案例级、追加式的实战经验库，保存尚未全部晋升为正式规则的现场事实、失败链、产品问题、绕行方案和证据等级。它与 `references/` 的分工是：
+
+- `field-reports/` 保留「一次任务实际发生了什么」，允许包含未决问题、相互矛盾的宿主表现和产品反馈。
+- `references/` 只收录已跨案例复验、可以指导下一次生产的稳定结论。
+- `rules/` 只收录可机器执行、带反例和回滚条件的 hard policy。
+
+每次更新本 skill 或处理命中案例标签的真实 ChatCut 任务时，必须：
+
+1. 先完整读取 [`field-reports/README.md`](field-reports/README.md) 和命中标签的案例；不得只凭摘要引用结论。
+2. 在 [`field-reports/iteration-log.md`](field-reports/iteration-log.md) 追加读取回执：读了哪些案例、吸收了什么、拒绝了什么、哪些证据仍不足。
+3. 任务结束后把新事实追加到既有案例或新建案例；原记录不静默改写，纠错用 `supersedes` 或修订段落说明。
+4. 只有重复样本、证据和反例齐备时，才把结论晋升到 `references/` / `rules/`；一次事故不得直接变成全局 hard policy。
+5. 经验可以持续累积而不立即发布正式版本；积累到一批再统一升级版本，但读取回执和案例记录不能等到发版才补。
+6. 公开仓只写脱敏事实：不提交真实项目 ID、签名下载链接、用户本机路径、字幕正文、私有词表、真实业务敏感数字或人物素材。
+
 ## 五条第一性原则
 
 1. **内容真相**：成片的实际音频和当前时间线是唯一真相；装修不改写源区间、顺序、速度、主音频或字幕时序。
@@ -70,6 +87,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 | 字幕气口、术语纠错、词表维护、字幕门禁 | [字幕与词表](references/captions-terminology.md) |
 | 信息流切片开头钩子、完播、中段节奏、结尾、四平台路由 | [留存结构剪辑](references/retention-structure.md) |
 | ChatCut 宿主实测坑：crop 语义、两步提交、编辑器/云端渲染差异、MG 媒体槽失效、窗口 reframe shader、字幕分页引擎、音频层基线、隐私扫描 SOP、双端预览路由 | [ChatCut 宿主实测行为档案](references/chatcut-field-notes.md) |
+| 真实项目复盘、ChatCut 产品问题、编辑器与代码/云端画面不一致、外部 MG/Hyperframes、共享模板缓存、导出长任务 | [实战经验库](field-reports/README.md) + 命中标签的案例 |
 | 连接报错、OAuth 失效、打开既有项目、转写挂死、上下文压缩恢复 | [故障恢复手册](references/recovery.md) |
 
 可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、视觉决策、词表、兼容与资产契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）、`scripts/validate-visual-decision-plan.mjs`（视觉候选评分/证据/审批 gate）。发布前统一跑 `npm run verify`。
