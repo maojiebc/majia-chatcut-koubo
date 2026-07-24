@@ -124,6 +124,12 @@ if (packageManifest.scripts?.["validate:distribution"] !== "node scripts/validat
 if (!packageManifest.scripts?.verify?.includes("npm run validate:distribution")) {
   errors.push("package.json: verify must include the distribution pack gate");
 }
+if (packageManifest.scripts?.["validate:feedback"] !== "node scripts/validate-feedback-governance.mjs --event fixtures/feedback/valid/event.json --queue fixtures/feedback/valid/suggestion-queue.json") {
+  errors.push("package.json: validate:feedback must invoke the privacy-safe governance fixtures");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:feedback")) {
+  errors.push("package.json: verify must include the feedback governance gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }
@@ -170,6 +176,7 @@ for (const marker of [
   "Recoverable executor + evidence foundation — SHIPPED",
   "Local Media QA + export authorization gate — SHIPPED",
   "Distribution pack foundation — SHIPPED",
+  "Feedback governance foundation — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);

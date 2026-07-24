@@ -24,6 +24,7 @@
 - **Recoverable execution and evidence foundation** — an offline fake adapter proves unique logical-ID binding, idempotent writes, revision locks, read-after-write reconciliation, scene compensation, checkpoint/resume, and evidence invalidation; no live ChatCut adapter claim is made.
 - **Local Media QA and export authorization** — audits final-file hashes, codecs/timebase/dimensions/color/audio/duration, loudness/true peak/silence, black/freeze findings, privacy coverage, and deterministic inspection samples from supplied reports; it never exports or publishes media.
 - **Distribution pack foundation** — platform rules carry source, observation, expiry, and confidence metadata; stale hard rules degrade to advisory, deliverables bind to master/revision/content-truth hashes, and publishing is forbidden.
+- **Feedback governance foundation** — events retain only anonymous hashes, stable failure signatures, and allowlisted metrics; update suggestions require repeated samples, evidence, counterexamples, an owner, human review, and rollback, with no online auto-apply route.
 
 ## Install
 
@@ -51,6 +52,7 @@ npm run validate:preview
 npm run validate:recovery
 npm run validate:media
 npm run validate:distribution
+npm run validate:feedback
 
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \

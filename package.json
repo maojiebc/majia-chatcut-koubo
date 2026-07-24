@@ -18,11 +18,12 @@
     "validate:recovery": "node scripts/validate-recovery-fixtures.mjs",
     "validate:media": "node scripts/validate-media-release.mjs --report fixtures/media-qa/valid/release-report.json",
     "validate:distribution": "node scripts/validate-distribution-pack.mjs --pack fixtures/distribution/valid/distribution-pack.json --as-of 2026-07-24",
+    "validate:feedback": "node scripts/validate-feedback-governance.mjs --event fixtures/feedback/valid/event.json --queue fixtures/feedback/valid/suggestion-queue.json",
     "validate:contrast": "node assets/theme-kit/scripts/check-contrast.mjs",
     "validate:assets": "node scripts/check-assets.mjs",
     "validate:public": "node scripts/check-public-safety.mjs",
     "validate:version": "node scripts/check-version-drift.mjs",
-    "verify": "npm run validate:schema:release && npm run validate:rules && npm run validate:plans && npm run validate:srt && npm run validate:preview && npm run validate:recovery && npm run validate:media && npm run validate:distribution && npm test && npm run validate:contrast && npm run validate:assets && npm run validate:public && npm run validate:version"
+    "verify": "npm run validate:schema:release && npm run validate:rules && npm run validate:plans && npm run validate:srt && npm run validate:preview && npm run validate:recovery && npm run validate:media && npm run validate:distribution && npm run validate:feedback && npm test && npm run validate:contrast && npm run validate:assets && npm run validate:public && npm run validate:version"
   },
   "dependencies": {
     "ajv": "8.20.0",

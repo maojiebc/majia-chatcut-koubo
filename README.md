@@ -29,6 +29,7 @@
 - **可恢复执行与证据底座** — 离线 fake adapter 证明 logical ID 唯一绑定、幂等写、revision lock、写后回读、scene 补偿、checkpoint/resume 与证据失效传播；尚不宣称真实 ChatCut adapter 已验证
 - **本地 Media QA 与导出授权** — 对最终文件 hash、codec/timebase/尺寸/颜色/音轨/时长、loudness/true-peak/silence、black/freeze、隐私覆盖和确定性抽帧表做报告审计；只验证输入报告，不自动导出或发布
 - **多平台交付包底座** — 平台规则带来源/观测日/过期日/可信度，过期 hard rule 自动降级 advisory；交付物绑定母片 hash、timeline revision 与 content truth hash，manifest 禁止自动发布
+- **反馈治理底座** — 事件仅保存匿名 hash、稳定错误签名与计数指标，不接收字幕正文/帧图/音频/用户路径/私有词表；规则建议需重复样本、证据、反例、owner、人工审核和回滚记录，永不在线自动应用
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
@@ -75,6 +76,9 @@ npm run validate:media
 
 # 审计平台 profile 新鲜度、母片绑定与 no-publish 交付 manifest
 npm run validate:distribution
+
+# 审计匿名反馈事件与人工发布建议队列
+npm run validate:feedback
 
 # 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
 node src/cli/resolve-profile.mjs \

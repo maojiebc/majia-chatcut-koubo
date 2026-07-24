@@ -13,6 +13,7 @@
 - 交付 Recoverable executor + evidence foundation：新增 execution plan / operation journal Schema、动态 logical→host ID 唯一绑定、idempotency、revision lock、read-after-write、scene transaction 补偿、checkpoint/resume 与证据依赖失效传播；fake adapter 覆盖写前/写后超时、partial write、host ID 变化和 revision drift，不连接真实 ChatCut。
 - 交付 Local Media QA + export authorization gate：release report 对最终文件 hash、codec/timebase/尺寸/音轨/颜色/时长、loudness/true-peak/silence、black/freeze、critical privacy coverage 和确定性风险抽帧做离线审计；导出批准必须精确绑定 artifact hash 与 plan hash，仓库不实际导出或发布媒体。
 - 交付 Distribution pack foundation：平台 profile 强制记录来源、观测日、可信度与过期日；过期 hard rule 自动降级为 advisory，每个视频/封面/字幕/包装交付物绑定母片 hash、timeline revision 与 content truth hash，`publishAction` 固定为 `none`。
+- 交付 Feedback governance foundation：匿名事件 Schema 默认不允许字幕正文、帧图、音频、用户路径或私有词表；suggested update queue 以重复样本、证据、反例、owner、人工 reviewer、版本升级与回滚记录阻断在线自动改规则，诊断数据默认 `not-authorized` 外发。
 
 ## V1.3.1（2026-07-24）— 契约止血 + 可复现发布地基
 
