@@ -24,6 +24,7 @@
 - **字幕与词表** — 气口分卡判例、单行机器门禁(validator + 不可放宽的 `rules/policy.json`)、译文轨 P0 陷阱、精校逐字稿真相源、可自维护词表模板
 - **Rule Registry** — 14 条首批规则覆盖内容真相、字幕、隐私、时间线、执行安全与导出授权六域；stable ID、来源、覆盖权限、runtime/contract 执行级别和 pass/fail fixture 全部机器校验
 - **Creator OS IR v0** — 显式时间域的有理时间与半开区间；project、transcript、edit、state、owner、caption、evidence 七类计划文档由 bundle 串联，revision、证据、时间线 coverage、唯一视觉 owner、隐私 owner 和批准状态统一离线校验
+- **SRT 文本桥** — 标准 SRT 供人工审阅，sidecar 保留 cue/page/word identity、exact range、revision 与量化残差；重编号无损，纠字/改时/隐藏/删除/合并/拆分/重排只生成可审计候选
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
@@ -55,6 +56,9 @@ node scripts/validate-rule-registry.mjs \
 
 # 校验匿名 Creator OS 完整计划包
 npm run validate:plans
+
+# 校验标准 SRT 与 sidecar 的稳定往返
+npm run validate:srt
 
 # 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
 node src/cli/resolve-profile.mjs \
@@ -108,15 +112,18 @@ rules/
   registry.json                 六域 Rule Registry(stable ID/来源/覆盖语义/执行级别/fixtures)
 schemas/                        profile、字幕、Rule Registry/overrides、Creator OS IR、兼容与资产契约
 fixtures/plan-bundles/          匿名完整 Creator OS plan bundle
+fixtures/srt/                   匿名 SRT + sidecar 往返 fixture
 src/config/                     profile resolver、合并来源与安全序列化
 src/cli/resolve-profile.mjs     source → resolved CLI
 src/rules/                      Rule Registry 审计与 tighten-only override evaluator
 src/time/                       有理时间、显式时间域与半开区间运算
 src/planning/                   Creator OS bundle 跨文档 validator
+                                 SRT export/parser/matcher/diff classifier
 scripts/
   validate-all-json.mjs         全仓离线 Schema release gate
   validate-rule-registry.mjs    Registry/来源/覆盖权限/pass-fail fixture 审计
   validate-plan-bundle.mjs      plan schemas/revision/coverage/owner/evidence 审计
+  srt-bridge.mjs                SRT/sidecar export 与候选 diff CLI
   validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--root/--strict/--terms)
   check-assets.mjs              composition/theme 引用与几何 gate
   check-version-drift.mjs       package/SKILL/README/CHANGELOG 漂移 gate

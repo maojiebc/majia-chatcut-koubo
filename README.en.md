@@ -19,6 +19,7 @@
 - **Captions & terminology** — breath-unit paging with worked examples, a machine-enforced single-line gate (`scripts/validate-caption-pages.mjs`), the translation-track P0 trap, and a self-maintainable terminology template.
 - **Rule Registry** — 14 initial rules across content truth, captions, privacy, timeline integrity, execution safety, and export authorization, with stable IDs, source references, override semantics, enforcement levels, and machine-checked pass/fail fixtures.
 - **Creator OS IR v0** — rational time with explicit domains and half-open intervals; bundled project, transcript, edit, state, owner, caption, and evidence documents with offline revision, evidence, coverage, ownership, privacy, and approval checks.
+- **SRT text bridge** — standard SRT for human review plus a sidecar that preserves cue/page/word identity, exact ranges, revisions, and quantization residuals; renumbering is lossless and edits only produce auditable candidates.
 
 ## Install
 
@@ -41,6 +42,7 @@ node scripts/validate-rule-registry.mjs \
   --overrides fixtures/rules/overrides.valid.json
 
 npm run validate:plans
+npm run validate:srt
 
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \

@@ -94,6 +94,12 @@ if (packageManifest.scripts?.["validate:plans"] !== "node scripts/validate-plan-
 if (!packageManifest.scripts?.verify?.includes("npm run validate:plans")) {
   errors.push("package.json: verify must include the plan bundle gate");
 }
+if (packageManifest.scripts?.["validate:srt"] !== "node scripts/srt-bridge.mjs diff --srt fixtures/srt/valid/captions.srt --sidecar fixtures/srt/valid/captions.sidecar.json") {
+  errors.push("package.json: validate:srt must diff the canonical SRT fixture");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:srt")) {
+  errors.push("package.json: verify must include the SRT bridge gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }
@@ -135,6 +141,7 @@ for (const marker of [
   "不是发布时间或版本承诺",
   "Rule Registry foundation — SHIPPED",
   "Rational Time + Creator OS IR v0 — SHIPPED",
+  "SRT bridge — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);
