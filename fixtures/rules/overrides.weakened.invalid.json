@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/rule-overrides.schema.json",
+  "version": 1,
+  "registryVersion": "1.0.0",
+  "overrides": [
+    {
+      "ruleId": "CAPTION-AUTOMATIC-WRAP",
+      "value": true
+    },
+    {
+      "ruleId": "CAPTION-MAX-LINES",
+      "value": 2
+    },
+    {
+      "ruleId": "CAPTION-MIN-DURATION",
+      "value": 400
+    },
+    {
+      "ruleId": "CAPTION-ORIGINAL-SOURCE",
+      "value": [
+        "original",
+        "translation"
+      ]
+    },
+    {
+      "ruleId": "CAPTION-REPLACEMENT-MAX",
+      "value": 5
+    },
+    {
+      "ruleId": "CAPTION-TRADITIONAL-ZERO",
+      "value": 1
+    },
+    {
+      "ruleId": "CAPTION-WORD-AUDIT",
+      "value": false
+    },
+    {
+      "ruleId": "CONTENT-TRUTH-EVIDENCE",
+      "value": false
+    },
+    {
+      "ruleId": "EXECUTION-AMBIGUOUS-WRITE",
+      "value": "blind-retry"
+    },
+    {
+      "ruleId": "EXECUTION-PREVIEW-APPROVAL",
+      "value": false
+    },
+    {
+      "ruleId": "EXPORT-AUTHORIZATION-REQUIRED",
+      "value": false
+    },
+    {
+      "ruleId": "PRIVACY-CRITICAL-FAIL-CLOSED",
+      "value": false
+    },
+    {
+      "ruleId": "TIMELINE-HALF-OPEN-INTERVAL",
+      "value": "(start,end)"
+    },
+    {
+      "ruleId": "TIMELINE-SINGLE-VISUAL-OWNER",
+      "value": false
+    }
+  ]
+}

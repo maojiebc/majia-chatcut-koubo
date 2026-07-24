@@ -22,6 +22,7 @@
 - **过渡动效工程** — 端点契约、`N-1` 归一化公式、分层缓动、四档可靠性链(含 ChatCut 宿主快速路由)、fps 归一化(30fps 时间线 60fps 导出的经典坑)
 - **人脸取景与三层合成** — reframe→mask 硬顺序、GL UV 坐标陷阱(Y 轴底部原点/radius 实为直径)、overscan 黑边数学、「居中≠贴脸」构图标准
 - **字幕与词表** — 气口分卡判例、单行机器门禁(validator + 不可放宽的 `rules/policy.json`)、译文轨 P0 陷阱、精校逐字稿真相源、可自维护词表模板
+- **Rule Registry** — 14 条首批规则覆盖内容真相、字幕、隐私、时间线、执行安全与导出授权六域；stable ID、来源、覆盖权限、runtime/contract 执行级别和 pass/fail fixture 全部机器校验
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
@@ -46,6 +47,11 @@ npx clawhub install majia-chatcut-koubo
 npm ci
 npm run verify
 
+# 单独审计 Rule Registry；本地 override 只能保持或收紧 hard policy
+npm run validate:rules
+node scripts/validate-rule-registry.mjs \
+  --overrides fixtures/rules/overrides.valid.json
+
 # 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \
@@ -62,7 +68,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-`npm run verify` 会执行离线全仓 Schema、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 产物可能含项目级标识，只能写在 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)，后续工程顺序与验收边界见 [公开工程路线图](docs/roadmap.md)。
+`npm run verify` 会执行离线全仓 Schema、Rule Registry 与 override 覆盖审计、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 产物可能含项目级标识，只能写在 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)，后续工程顺序与验收边界见 [公开工程路线图](docs/roadmap.md)。
 
 ## 让它变成你的(本地个人层)
 
@@ -95,11 +101,14 @@ assets/
   theme-kit/playbooks/          每主题一份代理 playbook(档位+版式+crib)
 rules/
   policy.json                   不可由 profile 放宽的字幕发布策略(单行/毫秒短卡/繁体零容忍)
-schemas/                        source/resolved profile、字幕、词表、兼容与资产契约
+  registry.json                 六域 Rule Registry(stable ID/来源/覆盖语义/执行级别/fixtures)
+schemas/                        profile、字幕、Rule Registry/overrides、兼容与资产契约
 src/config/                     profile resolver、合并来源与安全序列化
 src/cli/resolve-profile.mjs     source → resolved CLI
+src/rules/                      Rule Registry 审计与 tighten-only override evaluator
 scripts/
   validate-all-json.mjs         全仓离线 Schema release gate
+  validate-rule-registry.mjs    Registry/来源/覆盖权限/pass-fail fixture 审计
   validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--root/--strict/--terms)
   check-assets.mjs              composition/theme 引用与几何 gate
   check-version-drift.mjs       package/SKILL/README/CHANGELOG 漂移 gate

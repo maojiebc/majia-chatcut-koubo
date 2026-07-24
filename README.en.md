@@ -17,6 +17,7 @@
 - **Transition engineering** — endpoint contracts, the `N-1` normalization formula, layered easing, a four-tier reliability chain, and fps normalization (the classic 30fps-timeline-exports-at-60fps trap).
 - **Face reframe & three-layer compositing** — the hard `reframe → mask` order, GL UV coordinate traps (bottom-origin Y axis; `radius` is actually a diameter), overscan math for black-edge prevention, and a "centered ≠ face-crammed" framing standard.
 - **Captions & terminology** — breath-unit paging with worked examples, a machine-enforced single-line gate (`scripts/validate-caption-pages.mjs`), the translation-track P0 trap, and a self-maintainable terminology template.
+- **Rule Registry** — 14 initial rules across content truth, captions, privacy, timeline integrity, execution safety, and export authorization, with stable IDs, source references, override semantics, enforcement levels, and machine-checked pass/fail fixtures.
 
 ## Install
 
@@ -34,6 +35,10 @@ npx clawhub install majia-chatcut-koubo
 npm ci
 npm run verify
 
+npm run validate:rules
+node scripts/validate-rule-registry.mjs \
+  --overrides fixtures/rules/overrides.valid.json
+
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \
   --root <profile-config-root> \
@@ -48,7 +53,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-The release gate validates every governed JSON document offline, runs the regression suite, checks theme contrast, asset geometry/references, public-content safety, and version drift. New authored profiles should use `schemas/profile.source.schema.json`; `profile.schema.json` remains only as a compatibility shim. Resolver artifacts can contain project-scoped identifiers, must stay inside `--root`, and are ignored by git by default. See the [V1.3.1 migration guide](docs/migration-v1.3.1.md) and the [public engineering roadmap](docs/roadmap.md).
+The release gate validates every governed JSON document offline, audits the Rule Registry and protected overrides, runs the regression suite, checks theme contrast, asset geometry/references, public-content safety, and version drift. New authored profiles should use `schemas/profile.source.schema.json`; `profile.schema.json` remains only as a compatibility shim. Resolver artifacts can contain project-scoped identifiers, must stay inside `--root`, and are ignored by git by default. See the [V1.3.1 migration guide](docs/migration-v1.3.1.md) and the [public engineering roadmap](docs/roadmap.md).
 
 ## Make it yours
 

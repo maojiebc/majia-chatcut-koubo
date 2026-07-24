@@ -1,0 +1,514 @@
+{
+  "$schema": "../schemas/rule-registry.schema.json",
+  "registryVersion": "1.0.0",
+  "policyVersion": "1.1.0",
+  "defaultDecision": "fail-closed",
+  "rules": [
+    {
+      "ruleId": "CAPTION-AUTOMATIC-WRAP",
+      "domain": "captions",
+      "title": "Viewer captions cannot use automatic wrapping",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": false
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/automaticWrapAllowed",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.automatic-wrap",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CAPTION-MAX-LINES",
+      "domain": "captions",
+      "title": "Viewer captions remain single-line",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "maximum",
+        "value": 1
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/maxLines",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.max-lines",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CAPTION-MIN-DURATION",
+      "domain": "captions",
+      "title": "Caption cards respect the hard minimum duration",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "minimum",
+        "value": 450
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/hardMinDurationMs",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.min-duration",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CAPTION-ORIGINAL-SOURCE",
+      "domain": "captions",
+      "title": "Viewer captions use only approved original-language sources",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "subset",
+        "value": [
+          "original"
+        ]
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/allowedSourceVariants",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.original-source",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CAPTION-REPLACEMENT-MAX",
+      "domain": "captions",
+      "title": "Display replacements cannot exceed the hard ceiling",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "maximum",
+        "value": 4
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/maxReplacementCharacters",
+        "introducedIn": "1.3.1"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.replacement-max",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CAPTION-TRADITIONAL-ZERO",
+      "domain": "captions",
+      "title": "Traditional Chinese hits remain release-blocking",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "tighten-only",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "maximum",
+        "value": 0
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/maxTraditionalChineseHits",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.traditional-zero",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CAPTION-WORD-AUDIT",
+      "domain": "captions",
+      "title": "Every caption page requires word-level audit evidence",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-policy",
+        "reference": "rules/policy.json#/caption/requireWordLevelAudit",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "runtime",
+        "checkId": "caption.word-audit",
+        "implementedBy": [
+          "scripts/validate-caption-pages.mjs",
+          "tests/caption-validator.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "CONTENT-TRUTH-EVIDENCE",
+      "domain": "content-truth",
+      "title": "Facts and corrections require approved source evidence",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "SKILL.md#五条第一性原则",
+        "introducedIn": "1.0.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "EXECUTION-AMBIGUOUS-WRITE",
+      "domain": "execution-safety",
+      "title": "Ambiguous writes reconcile by reading before retry",
+      "kind": "structural-invariant",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": "read-after-write"
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "references/recovery.md",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "EXECUTION-PREVIEW-APPROVAL",
+      "domain": "execution-safety",
+      "title": "Batch execution requires approved preview scope",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "SKILL.md#确认闸门",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "EXPORT-AUTHORIZATION-REQUIRED",
+      "domain": "export-authorization",
+      "title": "Export requires explicit user authorization for its scope",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "SKILL.md#确认闸门",
+        "introducedIn": "1.3.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "PRIVACY-CRITICAL-FAIL-CLOSED",
+      "domain": "privacy",
+      "title": "Critical privacy coverage failures block release",
+      "kind": "hard-policy",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "SKILL.md#成片红线",
+        "introducedIn": "1.0.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "TIMELINE-HALF-OPEN-INTERVAL",
+      "domain": "timeline-integrity",
+      "title": "Timeline ranges use half-open interval semantics",
+      "kind": "structural-invariant",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": "[start,end)"
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "SKILL.md#五条第一性原则",
+        "introducedIn": "1.0.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    },
+    {
+      "ruleId": "TIMELINE-SINGLE-VISUAL-OWNER",
+      "domain": "timeline-integrity",
+      "title": "Every visible frame has one visual composition owner",
+      "kind": "structural-invariant",
+      "severity": "error",
+      "status": "active",
+      "overridePolicy": "deny",
+      "waiverPolicy": "deny",
+      "canonical": {
+        "comparison": "equal",
+        "value": true
+      },
+      "source": {
+        "type": "repository-contract",
+        "reference": "SKILL.md#五条第一性原则",
+        "introducedIn": "1.0.0"
+      },
+      "enforcement": {
+        "level": "registry-contract",
+        "checkId": null,
+        "implementedBy": [
+          "scripts/validate-rule-registry.mjs",
+          "tests/rule-registry.test.mjs"
+        ]
+      },
+      "fixtureRefs": {
+        "pass": [
+          "fixtures/rules/overrides.valid.json"
+        ],
+        "fail": [
+          "fixtures/rules/overrides.weakened.invalid.json"
+        ]
+      },
+      "fallback": "block"
+    }
+  ]
+}

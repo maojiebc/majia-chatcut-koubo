@@ -28,6 +28,7 @@ const expectedNodeEngine = nodeMajor !== null
   : null;
 const ciWorkflow = read(".github/workflows/ci.yml");
 const policyVersion = JSON.parse(read("rules/policy.json")).version;
+const ruleRegistry = JSON.parse(read("rules/registry.json"));
 const themeKitVersions = [
   "assets/theme-kit/package.json",
   "assets/theme-kit/manifest.json",
@@ -81,6 +82,15 @@ if (!expectedNodeEngine) {
 if (!ciWorkflow.includes("node-version-file: .node-version")) {
   errors.push(".github/workflows/ci.yml: Node setup must use .node-version");
 }
+if (packageManifest.scripts?.["validate:rules"] !== "node scripts/validate-rule-registry.mjs") {
+  errors.push("package.json: validate:rules must invoke the Rule Registry gate");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:rules")) {
+  errors.push("package.json: verify must include the Rule Registry gate");
+}
+if (ruleRegistry.policyVersion !== policyVersion) {
+  errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
+}
 if (!architectureSvg.includes(`· v${packageVersion} ·`)) {
   errors.push(`docs/architecture.svg: footer version does not match ${packageVersion}`);
 }
@@ -117,6 +127,7 @@ for (const marker of [
   "Creator OS IR",
   "live capability canary",
   "不是发布时间或版本承诺",
+  "Rule Registry foundation — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);

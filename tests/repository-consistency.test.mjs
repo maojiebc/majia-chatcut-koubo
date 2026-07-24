@@ -21,6 +21,7 @@ const VERSION_SURFACE_FILES = [
   "docs/roadmap.md",
   "references/captions-terminology.md",
   "rules/policy.json",
+  "rules/registry.json",
   "fixtures/profiles/local/profile.source.json",
   "templates/operating-profile.template.json",
   "templates/local-config-example/profile/landscape.example.json",
@@ -149,6 +150,25 @@ test("version drift gate keeps the public roadmap linked and governed", (t) => {
   assert.match(
     result.stderr,
     /docs\/roadmap\.md: missing governance marker/,
+  );
+});
+
+test("version drift gate binds Rule Registry to hard policy and release verify", (t) => {
+  const directory = copyVersionSurface(t);
+  const registryPath = path.join(directory, "rules/registry.json");
+  const registry = JSON.parse(fs.readFileSync(registryPath, "utf8"));
+  registry.policyVersion = "0.0.0";
+  fs.writeFileSync(registryPath, `${JSON.stringify(registry, null, 2)}\n`);
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 1);
+  assert.match(
+    result.stderr,
+    /rules\/registry\.json: policyVersion 0\.0\.0/,
   );
 });
 
