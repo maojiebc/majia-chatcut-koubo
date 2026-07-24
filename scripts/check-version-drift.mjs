@@ -118,6 +118,12 @@ if (packageManifest.scripts?.["validate:recovery"] !== "node scripts/validate-re
 if (!packageManifest.scripts?.verify?.includes("npm run validate:recovery")) {
   errors.push("package.json: verify must include the recovery fixture gate");
 }
+if (packageManifest.scripts?.["validate:capabilities"] !== "node scripts/validate-capability-profile.mjs --profile fixtures/capabilities/valid/unverified-profile.json --as-of 2026-07-24T12:00:00Z") {
+  errors.push("package.json: validate:capabilities must audit the dated unverified profile");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:capabilities")) {
+  errors.push("package.json: verify must include the capability profile gate");
+}
 if (packageManifest.scripts?.["validate:media"] !== "node scripts/validate-media-release.mjs --report fixtures/media-qa/valid/release-report.json") {
   errors.push("package.json: validate:media must invoke the canonical release report");
 }
@@ -181,6 +187,7 @@ for (const marker of [
   "Explainable planner foundation — SHIPPED",
   "Preview approval gate — SHIPPED",
   "Recoverable executor + evidence foundation — SHIPPED",
+  "Capability profile + live route gate — SHIPPED",
   "Local Media QA + export authorization gate — SHIPPED",
   "Distribution pack foundation — SHIPPED",
   "Feedback governance foundation — SHIPPED",

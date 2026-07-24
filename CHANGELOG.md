@@ -15,6 +15,7 @@
 - 交付 Distribution pack foundation：平台 profile 强制记录来源、观测日、可信度与过期日；过期 hard rule 自动降级为 advisory，每个视频/封面/字幕/包装交付物绑定母片 hash、timeline revision 与 content truth hash，`publishAction` 固定为 `none`。
 - 交付 Feedback governance foundation：匿名事件 Schema 默认不允许字幕正文、帧图、音频、用户路径或私有词表；suggested update queue 以重复样本、证据、反例、owner、人工 reviewer、版本升级与回滚记录阻断在线自动改规则，诊断数据默认 `not-authorized` 外发。
 - 交付 Explainable planner foundation：从 transcript/edit IR 确定性重建 opening density、evidence coverage、低置信/风险词与破坏性编辑等结构信号；Hook→SoftCTA 只建立引用既有 segment/word 的待审候选，不生成文案、不输出黑箱爆款分数，revision 或 scorecard 漂移即阻断。
+- 交付 Capability profile + live route gate：profile 绑定 ChatCut build、tool schema hash、TTL、五类 mandatory capability、probe evidence、非阻断脱敏 canary 与逐能力 fallback；缺少 current canary 时审计保持成功但 live route 明确关闭，过期/失败/证据不全时请求 live 会 fail closed。
 
 ## V1.3.1（2026-07-24）— 契约止血 + 可复现发布地基
 

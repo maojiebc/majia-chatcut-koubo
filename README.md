@@ -28,6 +28,7 @@
 - **可解释内容规划** — 只计算 opening density、evidence coverage、低置信/风险词和破坏性编辑等可复算信号；Hook→SoftCTA 候选只引用已有 segment/word，保持人工待审，不生成文案或“爆款概率”
 - **预览审批门** — 自动覆盖首 60 秒、复杂状态、全部隐私风险段与片尾；批准绑定 actor、完整窗口 scope、plan/style/timeline 指纹，缺失、撤销或任一漂移即关闭执行
 - **可恢复执行与证据底座** — 离线 fake adapter 证明 logical ID 唯一绑定、幂等写、revision lock、写后回读、scene 补偿、checkpoint/resume 与证据失效传播；尚不宣称真实 ChatCut adapter 已验证
+- **Capability profile 与 live route 闸门** — ChatCut build、tool schema hash、TTL、mandatory probes、脱敏 canary 与 fallback 统一审计；仓库默认 fixture 明确为 `unverified`，没有 current canary 时只走 fake/manual/blocked 路线
 - **本地 Media QA 与导出授权** — 对最终文件 hash、codec/timebase/尺寸/颜色/音轨/时长、loudness/true-peak/silence、black/freeze、隐私覆盖和确定性抽帧表做报告审计；只验证输入报告，不自动导出或发布
 - **多平台交付包底座** — 平台规则带来源/观测日/过期日/可信度，过期 hard rule 自动降级 advisory；交付物绑定母片 hash、timeline revision 与 content truth hash，manifest 禁止自动发布
 - **反馈治理底座** — 事件仅保存匿名 hash、稳定错误签名与计数指标，不接收字幕正文/帧图/音频/用户路径/私有词表；规则建议需重复样本、证据、反例、owner、人工审核和回滚记录，永不在线自动应用
@@ -74,6 +75,9 @@ npm run validate:preview
 
 # 跑写前/写后超时、partial write、ID 变化与 revision drift 场景
 npm run validate:recovery
+
+# 审计 ChatCut 能力证据；默认 fixture 应保持 live=false/unverified
+npm run validate:capabilities
 
 # 审计匿名最终媒体 probe、隐私覆盖、抽帧计划与导出授权
 npm run validate:media
