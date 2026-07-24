@@ -349,11 +349,11 @@
         "introducedIn": "1.3.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "preview.approval-scope",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-preview-approval.mjs",
+          "tests/preview-approval.test.mjs"
         ]
       },
       "fixtureRefs": {

@@ -100,6 +100,12 @@ if (packageManifest.scripts?.["validate:srt"] !== "node scripts/srt-bridge.mjs d
 if (!packageManifest.scripts?.verify?.includes("npm run validate:srt")) {
   errors.push("package.json: verify must include the SRT bridge gate");
 }
+if (!packageManifest.scripts?.["validate:preview"]?.startsWith("node scripts/validate-preview-approval.mjs --preview fixtures/preview/valid/preview-bundle.json")) {
+  errors.push("package.json: validate:preview must invoke the canonical preview fixture");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:preview")) {
+  errors.push("package.json: verify must include the preview approval gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }
@@ -142,6 +148,7 @@ for (const marker of [
   "Rule Registry foundation — SHIPPED",
   "Rational Time + Creator OS IR v0 — SHIPPED",
   "SRT bridge — SHIPPED",
+  "Preview approval gate — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);

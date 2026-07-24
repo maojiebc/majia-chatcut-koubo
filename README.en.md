@@ -20,6 +20,7 @@
 - **Rule Registry** — 14 initial rules across content truth, captions, privacy, timeline integrity, execution safety, and export authorization, with stable IDs, source references, override semantics, enforcement levels, and machine-checked pass/fail fixtures.
 - **Creator OS IR v0** — rational time with explicit domains and half-open intervals; bundled project, transcript, edit, state, owner, caption, and evidence documents with offline revision, evidence, coverage, ownership, privacy, and approval checks.
 - **SRT text bridge** — standard SRT for human review plus a sidecar that preserves cue/page/word identity, exact ranges, revisions, and quantization residuals; renumbering is lossless and edits only produce auditable candidates.
+- **Preview approval gate** — deterministically covers the opening 60 seconds, complex state, every privacy-risk range, and the ending; approval binds actor, full window scope, and plan/style/timeline fingerprints, and closes on any drift.
 
 ## Install
 
@@ -43,6 +44,7 @@ node scripts/validate-rule-registry.mjs \
 
 npm run validate:plans
 npm run validate:srt
+npm run validate:preview
 
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \
