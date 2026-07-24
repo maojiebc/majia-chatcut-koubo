@@ -25,6 +25,7 @@
 - **Rule Registry** — 14 条首批规则覆盖内容真相、字幕、隐私、时间线、执行安全与导出授权六域；stable ID、来源、覆盖权限、runtime/contract 执行级别和 pass/fail fixture 全部机器校验
 - **Creator OS IR v0** — 显式时间域的有理时间与半开区间；project、transcript、edit、state、owner、caption、evidence 七类计划文档由 bundle 串联，revision、证据、时间线 coverage、唯一视觉 owner、隐私 owner 和批准状态统一离线校验
 - **SRT 文本桥** — 标准 SRT 供人工审阅，sidecar 保留 cue/page/word identity、exact range、revision 与量化残差；重编号无损，纠字/改时/隐藏/删除/合并/拆分/重排只生成可审计候选
+- **可解释内容规划** — 只计算 opening density、evidence coverage、低置信/风险词和破坏性编辑等可复算信号；Hook→SoftCTA 候选只引用已有 segment/word，保持人工待审，不生成文案或“爆款概率”
 - **预览审批门** — 自动覆盖首 60 秒、复杂状态、全部隐私风险段与片尾；批准绑定 actor、完整窗口 scope、plan/style/timeline 指纹，缺失、撤销或任一漂移即关闭执行
 - **可恢复执行与证据底座** — 离线 fake adapter 证明 logical ID 唯一绑定、幂等写、revision lock、写后回读、scene 补偿、checkpoint/resume 与证据失效传播；尚不宣称真实 ChatCut adapter 已验证
 - **本地 Media QA 与导出授权** — 对最终文件 hash、codec/timebase/尺寸/颜色/音轨/时长、loudness/true-peak/silence、black/freeze、隐私覆盖和确定性抽帧表做报告审计；只验证输入报告，不自动导出或发布
@@ -61,6 +62,9 @@ node scripts/validate-rule-registry.mjs \
 
 # 校验匿名 Creator OS 完整计划包
 npm run validate:plans
+
+# 重建并审计可解释 scorecard、叙事候选与 decision queue
+npm run validate:planner
 
 # 校验标准 SRT 与 sidecar 的稳定往返
 npm run validate:srt

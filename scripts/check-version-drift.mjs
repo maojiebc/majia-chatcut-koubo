@@ -94,6 +94,12 @@ if (packageManifest.scripts?.["validate:plans"] !== "node scripts/validate-plan-
 if (!packageManifest.scripts?.verify?.includes("npm run validate:plans")) {
   errors.push("package.json: verify must include the plan bundle gate");
 }
+if (packageManifest.scripts?.["validate:planner"] !== "node scripts/validate-explainable-planner.mjs --transcript fixtures/plan-bundles/valid/transcript.json --edit-plan fixtures/plan-bundles/valid/edit-plan.json --expected fixtures/planning/valid/content-scorecard.json") {
+  errors.push("package.json: validate:planner must reproduce the canonical scorecard");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:planner")) {
+  errors.push("package.json: verify must include the explainable planner gate");
+}
 if (packageManifest.scripts?.["validate:srt"] !== "node scripts/srt-bridge.mjs diff --srt fixtures/srt/valid/captions.srt --sidecar fixtures/srt/valid/captions.sidecar.json") {
   errors.push("package.json: validate:srt must diff the canonical SRT fixture");
 }
@@ -172,6 +178,7 @@ for (const marker of [
   "Rule Registry foundation — SHIPPED",
   "Rational Time + Creator OS IR v0 — SHIPPED",
   "SRT bridge — SHIPPED",
+  "Explainable planner foundation — SHIPPED",
   "Preview approval gate — SHIPPED",
   "Recoverable executor + evidence foundation — SHIPPED",
   "Local Media QA + export authorization gate — SHIPPED",

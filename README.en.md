@@ -20,6 +20,7 @@
 - **Rule Registry** — 14 initial rules across content truth, captions, privacy, timeline integrity, execution safety, and export authorization, with stable IDs, source references, override semantics, enforcement levels, and machine-checked pass/fail fixtures.
 - **Creator OS IR v0** — rational time with explicit domains and half-open intervals; bundled project, transcript, edit, state, owner, caption, and evidence documents with offline revision, evidence, coverage, ownership, privacy, and approval checks.
 - **SRT text bridge** — standard SRT for human review plus a sidecar that preserves cue/page/word identity, exact ranges, revisions, and quantization residuals; renumbering is lossless and edits only produce auditable candidates.
+- **Explainable content planning** — computes reproducible opening-density, evidence-coverage, confidence/risk, and destructive-edit signals; Hook-to-SoftCTA candidates only reference existing segments and words, remain pending human review, and never generate copy or a black-box virality probability.
 - **Preview approval gate** — deterministically covers the opening 60 seconds, complex state, every privacy-risk range, and the ending; approval binds actor, full window scope, and plan/style/timeline fingerprints, and closes on any drift.
 - **Recoverable execution and evidence foundation** — an offline fake adapter proves unique logical-ID binding, idempotent writes, revision locks, read-after-write reconciliation, scene compensation, checkpoint/resume, and evidence invalidation; no live ChatCut adapter claim is made.
 - **Local Media QA and export authorization** — audits final-file hashes, codecs/timebase/dimensions/color/audio/duration, loudness/true peak/silence, black/freeze findings, privacy coverage, and deterministic inspection samples from supplied reports; it never exports or publishes media.
@@ -47,6 +48,7 @@ node scripts/validate-rule-registry.mjs \
   --overrides fixtures/rules/overrides.valid.json
 
 npm run validate:plans
+npm run validate:planner
 npm run validate:srt
 npm run validate:preview
 npm run validate:recovery
