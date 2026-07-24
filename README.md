@@ -1,15 +1,15 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.4.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.4.1-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 > **ChatCut口播 · 马甲实战版** — 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令保持不变。
 
 **从剪辑经验包升级为可验证生产系统** —— 在官方 ChatCut skill 之上，把版式/配色/动效/人脸取景与规则、IR/SRT、审批、可恢复执行、证据、媒体 QA、交付和反馈治理串成一条 fail-closed 生产链。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.0 可验证生产系统：Rule Registry → Creator OS IR/SRT → Explainable Planner → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Feedback Governance，并由 Capability Profile 阻断无证据 live route" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.1 可验证生产系统：Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance，并由 Capability Profile 阻断无证据 live route" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.1 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -199,11 +199,11 @@ docs/
 
 ## 📋 版本记录
 
+**V1.4.1（2026-07-24）** — 新增 Visual Decision Contract 与 4 条视觉决策规则：每段单一主视觉任务、六维透明评分、低分转人工、生成图不得冒充证据；同时新增追加式 `field-reports/` 实战经验库、迭代前必读与读后留痕协议，首个公开脱敏案例记录 AI Hero 母片精修失败链、三证据面和 7 条 ChatCut 产品问题。
+
 **V1.4.0（2026-07-24）** — 从技巧包升级为可验证生产系统：Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据链、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate 全部进入离线 release gates；真实 ChatCut adapter、真实媒体探针/渲染与平台发布继续保持 `unverified` 且不自动执行。
 
 **V1.3.1(2026-07-24)** — 契约止血与发布地基：Node/lockfile/CI 可复现安装；Ajv 离线验证全仓 JSON；source/resolved profile 契约、继承路径修复、合并来源追踪与安全 CLI；字幕数值语义、词 key/区间、短卡类型、override 上限、严格 warning 与项目/时间线 provenance 绑定；主题对比度、composition 几何、资产引用和文档/版本漂移全部进入 release gate。旧字幕 JSON 仍可非严格迁移，发布态须补齐 provenance。
-
-**V1.3.0(2026-07-24)** — 制度增量+ChatCut 实测档案+本地个人层:references 6→10 册(新增逐片执行手册/宿主实测行为档案/留存结构/故障恢复);SKILL 新增确认闸门(状态表先行硬闸/60 秒预览闸/精校稿真相源);机器门禁升级(不可放宽 `rules/policy.json`+schemas+validator 支持 profile 继承/毫秒短卡/`--terms` 个人词表+14 项回归测试);主题 token v1.1 对比度修正(海盐青正文 7.67:1 达标);本地个人层正式契约 `~/.config/majia-chatcut-koubo/` + `templates/local-config-example/` 四件套模板。
 
 完整变更历史见 [CHANGELOG.md](./CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
 

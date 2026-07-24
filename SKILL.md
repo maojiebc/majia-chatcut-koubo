@@ -2,7 +2,7 @@
 name: majia-chatcut-koubo
 description: ChatCut 口播/录屏视频代理剪辑的可验证生产系统——官方 ChatCut skill 之上的增量层。覆盖双画面版式、主题配色、过渡、人脸取景与字幕门禁，以及 Rule Registry、Creator OS IR/Rational Time、SRT 与可解释规划、预览审批、可恢复 fake adapter/证据链、本地 Media QA/导出授权、多平台交付包、反馈治理和 capability live gate。触发：ChatCut 剪口播、直播切片、竖版重构、字幕纠错、批量规划、预览审批、恢复执行、媒体 QA、交付审计。前置：需官方 ChatCut skill / MCP。边界：真实 ChatCut adapter、真实媒体探针/渲染与平台发布须另有当前环境证据，本 skill 不自动执行。
 metadata:
-  version: 1.4.0
+  version: 1.4.1
 ---
 
 # ChatCut口播 · 马甲实战版
@@ -102,9 +102,9 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 ## 📋 版本记录
 
+- **v1.4.1（2026-07-24）**：新增 Visual Decision Contract 与 4 条视觉决策规则，低分候选转人工且生成图不得冒充证据；同时新增追加式 `field-reports/` 实战经验库、迭代前必读和读后留痕协议，首个案例记录 AI Hero 母片精修失败链、三证据面与 7 条 ChatCut 产品问题。
 - **v1.4.0（2026-07-24）**：升级为可验证生产系统；交付 Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate；真实适配器/媒体探针/平台发布仍明确未验证且不自动执行。
 - **v1.3.1（2026-07-24）**：契约止血与可复现发布地基；Node/lockfile/CI、离线 JSON Schema、source/resolved profile、字幕 P0、资产/对比度/版本漂移门禁。
-- **v1.3.0（2026-07-24）**：逐片执行手册、ChatCut 宿主实测档案、八道硬闸、60 秒预览闸、留存结构与本地个人层。
 
 完整变更历史见 [CHANGELOG.md](./CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
 

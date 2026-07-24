@@ -1,14 +1,14 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.4.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.4.1-blue)
 
 > **ChatCut口播 · 马甲实战版** — the install slug stays `majia-chatcut-koubo`.
 
 **A verifiable production system for agent-driven talking-head editing** — an increment layer above the official ChatCut skills, joining visual craft with governed rules, IR/SRT planning, approval, recoverable execution, evidence, media QA, delivery, and feedback.
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.0 verifiable production system: Rule Registry → Creator OS IR/SRT → Explainable Planner → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Feedback Governance, with Capability Profile blocking unproven live routes" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.1 verifiable production system: Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance, with Capability Profile blocking unproven live routes" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.0 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.1 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
 
 ## What's inside
 
@@ -28,6 +28,7 @@
 - **Local Media QA and export authorization** — audits final-file hashes, codecs/timebase/dimensions/color/audio/duration, loudness/true peak/silence, black/freeze findings, privacy coverage, and deterministic inspection samples from supplied reports; it never exports or publishes media.
 - **Distribution pack foundation** — platform rules carry source, observation, expiry, and confidence metadata; stale hard rules degrade to advisory, deliverables bind to master/revision/content-truth hashes, and publishing is forbidden.
 - **Feedback governance foundation** — events retain only anonymous hashes, stable failure signatures, and allowlisted metrics; update suggestions require repeated samples, evidence, counterexamples, an owner, human review, and rollback, with no online auto-apply route.
+- **Field report library** — `field-reports/` append-only cases preserve real production failures, ChatCut product issues, evidence levels, and workarounds; matching cases must be read before an iteration and the adopted/rejected decisions must be logged before experience is promoted into formal rules.
 
 > **Live-environment boundary:** the repository validates offline schemas, anonymous fixtures, a fake adapter, report audits, and fail-closed routing. A real ChatCut adapter, real media probing/rendering, and platform publishing remain unverified and are never run automatically.
 
@@ -84,11 +85,11 @@ The numbers in this pack (22 chars/line, 330px circle window, `magnification≈0
 
 ## 📋 Version History
 
+**V1.4.1 (2026-07-24)** — Added the Visual Decision Contract and four governed visual-selection rules: one primary task per segment, transparent six-axis scoring, human review below threshold, and no generated visual impersonating evidence. Also added an append-only `field-reports/` library with mandatory pre-iteration reading and receipts; the first public-sanitized AI Hero case records the failure chain, three evidence surfaces, and seven ChatCut product issues.
+
 **V1.4.0 (2026-07-24)** — Upgraded from a technique pack to a verifiable production system: Rule Registry, Creator OS IR/Rational Time, SRT and explainable planning, preview approval, recoverable execution/evidence, Media QA/export authorization, governed distribution packs, feedback governance, and a capability live-route gate are now part of the offline release gates. Real ChatCut adaptation, media probing/rendering, and platform publishing remain explicitly unverified and non-automatic.
 
 **V1.3.1 (2026-07-24)** — Contract hotfix and reproducible release foundation: pinned Node and lockfile CI; offline repository-wide JSON validation; separate source/resolved profile contracts with safe inheritance, merge provenance and CLI output; caption numeric semantics, word identity/intervals, narrow short-card exception, hard override cap, strict warnings and project/timeline provenance binding; release gates for contrast, asset references/geometry and documentation/version drift. Legacy caption JSON remains available for non-strict migration, while release mode requires provenance.
-
-**V1.3.0 (2026-07-24)** — Process increments + ChatCut field notes + local personal layer: references 6→10 (new per-slice operating manual / host field-notes archive / retention structure / recovery); SKILL gains confirmation gates (state-table-first hard gate / 60-second preview gate / verbatim-transcript-as-truth); machine gate upgrade (non-weakenable `rules/policy.json` + schemas + validator with profile inheritance, millisecond short-card rules and a `--terms` personal-terminology flag + 14 regression tests); theme token v1.1 contrast fixes (sea-salt body text now 7.67:1); formal local personal layer contract at `~/.config/majia-chatcut-koubo/` with `templates/local-config-example/`.
 
 Full history: [CHANGELOG.md](./CHANGELOG.md) or [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases).
 

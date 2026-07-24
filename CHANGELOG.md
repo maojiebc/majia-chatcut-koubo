@@ -2,12 +2,22 @@
 
 ## Unreleased
 
+## V1.4.1（2026-07-24）— 视觉决策与实战经验库
+
 **视觉决策与规则吸收**
 
 - 新增 Visual Decision Contract v0：每个语义段声明单一主视觉任务，B-roll 候选按语义、真实性、时机、清晰度、版权与重复度六维计分；总分与分项必须一致，低于 7 分只能转人工复核。
 - 自动视觉选择新增来源、版权与预览批准门；生成视觉不得替代 evidence/data，固定间隔切镜、无关 B-roll、句句特效等反模式会阻断自动执行。
 - Rule Registry 从 14 条扩展为 18 条 runtime rule，registry contract 升为 1.1.0 以阻断旧 override 冒充当前规则集，并为新增规则补齐 tighten/weakening fixtures；新 schema、匿名 plan fixture、CLI 和 8 项回归测试进入 `npm run verify`。
 - 新增 AI 口播经验规则吸收记录：复用已有字幕/IR/审批/恢复/QA 能力，明确数值经验只作为 Style Profile 候选基线，不创建不可解释的单一“爆款分数”，也不写入私有知识库路径或原文全文。
+
+**实战经验与产品反馈**
+
+- 新增 `field-reports/` 追加式实战经验库：案例保留真实任务时间线、失败路径、修复、验证、未决问题和 E0–E3 证据等级，不把单次事故直接写成全局规则。
+- 新增迭代前读取与读后留痕硬闸：按标签和失败签名读取完整案例，在 `field-reports/iteration-log.md` 记录采用、拒绝、canary、晋升与验证；经验可先累积，成批复验后再进入 `references/`、`rules/` 和正式版本。
+- 首个公开脱敏案例记录 AI Hero 母片精修：字幕/画面审计、错误地把 ChatCut MG 改色当成 Hyperframes 成片、编辑器仍见黑底、真实 Hyperframes 母视频加 source offset 原位替换，以及 1080P60 最终文件验证。
+- 面向 ChatCut 产品与研发整理 7 个可转 issue 的问题：编辑器预览与云端合成帧不一致、同步中断恢复、刷新后项目库/时间码干扰、共享 MG 版本传播、代码写入缺少画面一致性回执、导出进度非线性、缺少三证据面对账入口。
+- README、英文 README、Skill 路由、版本近况、路线图和架构图同步反映本版经验闭环；公开安全扫描继续禁止项目 ID、资产 ID、签名 URL、临时 token、本机路径和私有素材。
 
 ## V1.4.0（2026-07-24）— 可验证生产系统
 

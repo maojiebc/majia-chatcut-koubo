@@ -15,9 +15,9 @@
   <rect width="1280" height="1080" fill="#F7FAFC"/>
 
   <text x="60" y="62" class="title" font-size="34">ChatCut口播 · 可验证生产系统</text>
-  <text x="60" y="98" class="body" font-size="18">从剪辑经验包升级为：规则 → IR/SRT → 审批 → 可恢复执行 → 媒体 QA → 交付 → 反馈治理</text>
+  <text x="60" y="98" class="body" font-size="18">从剪辑经验包升级为：规则 → IR/SRT/视觉决策 → 审批 → 可恢复执行 → 媒体 QA → 交付 → 经验治理</text>
   <rect x="1080" y="42" width="140" height="34" rx="17" fill="#0F766E"/>
-  <text x="1150" y="64" class="chip" text-anchor="middle">v1.4.0</text>
+  <text x="1150" y="64" class="chip" text-anchor="middle">v1.4.1</text>
 
   <rect x="60" y="130" width="1160" height="78" rx="14" fill="#E8F1E4" stroke="#7A9B61" stroke-width="1.5"/>
   <text x="86" y="162" class="title" font-size="20">官方 ChatCut skill / MCP 工具面</text>
@@ -40,10 +40,10 @@
     <text x="482" y="400" class="cardBody">revision / coverage / owner 跨文档校验</text>
 
     <rect x="860" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
-    <text x="882" y="320" class="cardTitle">SRT + Explainable Planner</text>
+    <text x="882" y="320" class="cardTitle">SRT + Decision Planning</text>
     <text x="882" y="350" class="cardBody">SRT 人工视图 + sidecar 机器真相</text>
-    <text x="882" y="375" class="cardBody">可复算信号 + source refs</text>
-    <text x="882" y="400" class="cardBody">不生成台词 · 不输出“爆款概率”</text>
+    <text x="882" y="375" class="cardBody">可复算信号 + Visual Decision Contract</text>
+    <text x="882" y="400" class="cardBody">不生成台词 · 低分候选转人工</text>
   </g>
 
   <path d="M640,432 L640,474" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
@@ -86,10 +86,10 @@
     <text x="482" y="860" class="cardBody">publishAction = none</text>
 
     <rect x="860" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
-    <text x="882" y="780" class="cardTitle">Feedback Governance</text>
-    <text x="882" y="810" class="cardBody">匿名事件 → repeated samples → review</text>
+    <text x="882" y="780" class="cardTitle">Field Reports + Feedback</text>
+    <text x="882" y="810" class="cardBody">真实案例 → 读取回执 → repeated samples</text>
     <text x="882" y="835" class="cardBody">证据 / 反例 / owner / rollback</text>
-    <text x="882" y="860" class="cardBody">autoApply=false · 人工 release</text>
+    <text x="882" y="860" class="cardBody">候选先积累 · 人工晋升规则</text>
   </g>
 
   <rect x="60" y="930" width="1160" height="92" rx="14" fill="#FFF5F5" stroke="#C53030" stroke-width="1.5"/>
@@ -97,5 +97,5 @@
   <text x="86" y="992" class="body" font-size="15">已验证：Schema、匿名 fixtures、fake adapter、报告审计与 fail-closed 路由</text>
   <text x="86" y="1015" class="body" font-size="15">未宣称：真实 ChatCut adapter、真实媒体探针/渲染、平台发布；这些动作不会自动执行</text>
 
-  <text x="60" y="1058" class="muted" font-size="13">ChatCut口播 · 马甲实战版 · v1.4.0 · slug / frontmatter / install commands unchanged</text>
+  <text x="60" y="1058" class="muted" font-size="13">ChatCut口播 · 马甲实战版 · v1.4.1 · slug / frontmatter / install commands unchanged</text>
 </svg>
