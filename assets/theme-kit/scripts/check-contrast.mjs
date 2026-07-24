@@ -29,7 +29,7 @@ function contrast(a, b) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-// Keep these thresholds aligned with references/theme-palettes.md.
+// Keep these thresholds aligned with 02-剪辑方法手册/03-主题配色.md.
 // Body/secondary/CTA copy may render at phone-scale, so they use the
 // repository's stricter 7:1 internal target. Emphasis is headline-only.
 const INTERNAL_THRESHOLDS = Object.freeze({

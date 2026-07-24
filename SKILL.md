@@ -26,18 +26,18 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 ## 实战经验库读写协议（迭代硬闸）
 
-`field-reports/` 是案例级、追加式的实战经验库，保存尚未全部晋升为正式规则的现场事实、失败链、产品问题、绕行方案和证据等级。它与 `references/` 的分工是：
+`03-实操迭代与踩坑/` 是案例级、追加式的实战经验库，保存尚未全部晋升为正式规则的现场事实、失败链、产品问题、绕行方案和证据等级。它与 `02-剪辑方法手册/` 的分工是：
 
-- `field-reports/` 保留「一次任务实际发生了什么」，允许包含未决问题、相互矛盾的宿主表现和产品反馈。
-- `references/` 只收录已跨案例复验、可以指导下一次生产的稳定结论。
+- `03-实操迭代与踩坑/` 保留「一次任务实际发生了什么」，允许包含未决问题、相互矛盾的宿主表现和产品反馈。
+- `02-剪辑方法手册/` 只收录已跨案例复验、可以指导下一次生产的稳定结论。
 - `rules/` 只收录可机器执行、带反例和回滚条件的 hard policy。
 
 每次更新本 skill 或处理命中案例标签的真实 ChatCut 任务时，必须：
 
-1. 先完整读取 [`field-reports/README.md`](field-reports/README.md) 和命中标签的案例；不得只凭摘要引用结论。
-2. 在 [`field-reports/iteration-log.md`](field-reports/iteration-log.md) 追加读取回执：读了哪些案例、吸收了什么、拒绝了什么、哪些证据仍不足。
+1. 先完整读取 [`03-实操迭代与踩坑/README.md`](03-实操迭代与踩坑/README.md) 和命中标签的案例；不得只凭摘要引用结论。
+2. 在 [`03-实操迭代与踩坑/迭代记录.md`](03-实操迭代与踩坑/迭代记录.md) 追加读取回执：读了哪些案例、吸收了什么、拒绝了什么、哪些证据仍不足。
 3. 任务结束后把新事实追加到既有案例或新建案例；原记录不静默改写，纠错用 `supersedes` 或修订段落说明。
-4. 只有重复样本、证据和反例齐备时，才把结论晋升到 `references/` / `rules/`；一次事故不得直接变成全局 hard policy。
+4. 只有重复样本、证据和反例齐备时，才把结论晋升到 `02-剪辑方法手册/` / `rules/`；一次事故不得直接变成全局 hard policy。
 5. 经验可以持续累积而不立即发布正式版本；积累到一批再统一升级版本，但读取回执和案例记录不能等到发版才补。
 6. 公开仓只写脱敏事实：不提交真实项目 ID、签名下载链接、用户本机路径、字幕正文、私有词表、真实业务敏感数字或人物素材。
 
@@ -52,12 +52,12 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 ## 通用工序
 
 1. **同步与规格**：多机位 `multicam_sync`；只留一个主音轨（讲解人 anchor，重复轨优先 mute/disable，宿主不支持才 -60dB 降级）；冻结画幅、fps、采样率。
-2. **A-roll 内容**：按官方 talking-head-guide，删减增量见 `references/operating-manual.md`；一句话原则——**删声音比删意思安全，错删信息的代价高于漏留口癖**。
-3. **剪后转写与字幕**：删除/重排/变速后必须刷新剪后转写；字幕见 `references/captions-terminology.md`——第一步永远是查字幕源绑定（挂在翻译变体轨上=P0，先切回原文源）。开工先扫素材目录找用户精校逐字稿：有则它是字幕文本唯一真相源，禁止在 ASR 错词上自行猜测修正（数字吞位/繁体/专名是 ASR 三大高发）。
+2. **A-roll 内容**：按官方 talking-head-guide，删减增量见 `02-剪辑方法手册/01-逐片执行手册.md`；一句话原则——**删声音比删意思安全，错删信息的代价高于漏留口癖**。
+3. **剪后转写与字幕**：删除/重排/变速后必须刷新剪后转写；字幕见 `02-剪辑方法手册/07-字幕与术语.md`——第一步永远是查字幕源绑定（挂在翻译变体轨上=P0，先切回原文源）。开工先扫素材目录找用户精校逐字稿：有则它是字幕文本唯一真相源，禁止在 ASR 错词上自行猜测修正（数字吞位/繁体/专名是 ASR 三大高发）。
 4. **样片闸门（渐进交付）**：横版先做开头约 18–23 秒、竖版 20–30 秒样片，确认后才批量；**长片（>5 分钟）升级为 60 秒预览闸——先把开头 60 秒做成全层完成态（剪辑+状态机+过渡+字幕+包装+隐私），请用户播放验收，通过后才向后推进**；批量中每完成一幕渲染抽查帧，不整片铺完才验。**验收单元 = 完整成片体验（画面+动画+字幕+隐私），字幕修正随幕完成，不设整片末尾统一校对环节。**任何一项失败先修样片，不批量复制错误。
-5. **画面结构**：双画面版式与七执行状态见 `references/dual-frame-layouts.md`；人脸取景见 `references/face-reframe.md`；批量切片与逐片精修先读 `references/operating-manual.md`。
-6. **动效与包装**：字幕锁定后才做过渡、B-roll、MG；过渡工程见 `references/motion-transitions.md`；配色见 `references/theme-palettes.md`。静态章节卡单调时，可由外部 MG 工具（如 hyperframes）产 MP4 后 `import_media` 替换；音效/BGM 走 ChatCut 素材库与生成工具，音量不夺 anchor。
-7. **验收**：结构回读 + 合成像素 + 实际试听三证齐才算完成；帧率以 ffprobe 读实际导出文件为准。请用户播放验收时按 `references/chatcut-field-notes.md` 双端预览路由：本地 ChatCut Mac 客户端优先 → 未装提示一次可下载（不强推）→ 浏览器兜底（明示网页端可能卡顿）；代理自己的像素证据始终 = 云端渲染帧。
+5. **画面结构**：双画面版式与七执行状态见 `02-剪辑方法手册/02-双画面版式.md`；人脸取景见 `02-剪辑方法手册/06-人脸取景与三层合成.md`；批量切片与逐片精修先读 `02-剪辑方法手册/01-逐片执行手册.md`。
+6. **动效与包装**：字幕锁定后才做过渡、B-roll、MG；过渡工程见 `02-剪辑方法手册/05-过渡动效.md`；配色见 `02-剪辑方法手册/03-主题配色.md`。静态章节卡单调时，可由外部 MG 工具（如 hyperframes）产 MP4 后 `import_media` 替换；音效/BGM 走 ChatCut 素材库与生成工具，音量不夺 anchor。
+7. **验收**：结构回读 + 合成像素 + 实际试听三证齐才算完成；帧率以 ffprobe 读实际导出文件为准。请用户播放验收时按 `02-剪辑方法手册/09-ChatCut宿主实测.md` 双端预览路由：本地 ChatCut Mac 客户端优先 → 未装提示一次可下载（不强推）→ 浏览器兜底（明示网页端可能卡顿）；代理自己的像素证据始终 = 云端渲染帧。
 
 ## 成片红线
 
@@ -78,17 +78,17 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 | 任务信号 | 完整读取 |
 | --- | --- |
-| 批量切片、逐片精修、验收门禁、八道硬闸、A-roll 删减细则、多代理调度、生成资产纪律 | [逐片执行手册](references/operating-manual.md) |
-| 双画面构图、版式选型、七执行状态、状态原子契约、圆窗/分栏/上下屏、小窗腾挪 | [双画面版式系统](references/dual-frame-layouts.md) |
-| 主题配色、字幕底板、对比度、按角色用色、图表色板 | [主题配色系统](references/theme-palettes.md) + 选定主题的 `assets/theme-kit/playbooks/<id>.md` |
-| MG/设计图形加不加、加哪种、画面任务路由 | [信息块类型与选用](references/graphics-blocks.md) |
-| 过渡动画、状态切换、闪烁/黑块排查、fps 归一化 | [过渡动效工程](references/motion-transitions.md) |
-| 人脸居中、内部取景漂移、蒙版参数、黑边排查 | [人脸取景与三层合成](references/face-reframe.md) |
-| 字幕气口、术语纠错、词表维护、字幕门禁 | [字幕与词表](references/captions-terminology.md) |
-| 信息流切片开头钩子、完播、中段节奏、结尾、四平台路由 | [留存结构剪辑](references/retention-structure.md) |
-| ChatCut 宿主实测坑：crop 语义、两步提交、编辑器/云端渲染差异、MG 媒体槽失效、窗口 reframe shader、字幕分页引擎、音频层基线、隐私扫描 SOP、双端预览路由 | [ChatCut 宿主实测行为档案](references/chatcut-field-notes.md) |
-| 真实项目复盘、ChatCut 产品问题、编辑器与代码/云端画面不一致、外部 MG/Hyperframes、共享模板缓存、导出长任务 | [实战经验库](field-reports/README.md) + 命中标签的案例 |
-| 连接报错、OAuth 失效、打开既有项目、转写挂死、上下文压缩恢复 | [故障恢复手册](references/recovery.md) |
+| 批量切片、逐片精修、验收门禁、八道硬闸、A-roll 删减细则、多代理调度、生成资产纪律 | [逐片执行手册](02-剪辑方法手册/01-逐片执行手册.md) |
+| 双画面构图、版式选型、七执行状态、状态原子契约、圆窗/分栏/上下屏、小窗腾挪 | [双画面版式系统](02-剪辑方法手册/02-双画面版式.md) |
+| 主题配色、字幕底板、对比度、按角色用色、图表色板 | [主题配色系统](02-剪辑方法手册/03-主题配色.md) + 选定主题的 `assets/theme-kit/playbooks/<id>.md` |
+| MG/设计图形加不加、加哪种、画面任务路由 | [信息块类型与选用](02-剪辑方法手册/04-信息块与画面任务.md) |
+| 过渡动画、状态切换、闪烁/黑块排查、fps 归一化 | [过渡动效工程](02-剪辑方法手册/05-过渡动效.md) |
+| 人脸居中、内部取景漂移、蒙版参数、黑边排查 | [人脸取景与三层合成](02-剪辑方法手册/06-人脸取景与三层合成.md) |
+| 字幕气口、术语纠错、词表维护、字幕门禁 | [字幕与词表](02-剪辑方法手册/07-字幕与术语.md) |
+| 信息流切片开头钩子、完播、中段节奏、结尾、四平台路由 | [留存结构剪辑](02-剪辑方法手册/08-留存结构与平台路由.md) |
+| ChatCut 宿主实测坑：crop 语义、两步提交、编辑器/云端渲染差异、MG 媒体槽失效、窗口 reframe shader、字幕分页引擎、音频层基线、隐私扫描 SOP、双端预览路由 | [ChatCut 宿主实测行为档案](02-剪辑方法手册/09-ChatCut宿主实测.md) |
+| 真实项目复盘、ChatCut 产品问题、编辑器与代码/云端画面不一致、外部 MG/Hyperframes、共享模板缓存、导出长任务 | [实战经验库](03-实操迭代与踩坑/README.md) + 命中标签的案例 |
+| 连接报错、OAuth 失效、打开既有项目、转写挂死、上下文压缩恢复 | [故障恢复手册](02-剪辑方法手册/10-故障恢复.md) |
 
 可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、视觉决策、词表、兼容与资产契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）、`scripts/validate-visual-decision-plan.mjs`（视觉候选评分/证据/审批 gate）。发布前统一跑 `npm run verify`。
 
@@ -102,7 +102,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 ## 📋 版本记录
 
-- **v1.4.1（2026-07-24）**：新增 Visual Decision Contract 与 4 条视觉决策规则，低分候选转人工且生成图不得冒充证据；同时新增追加式 `field-reports/` 实战经验库、迭代前必读和读后留痕协议，首个案例记录 AI Hero 母片精修失败链、三证据面与 7 条 ChatCut 产品问题。
+- **v1.4.1（2026-07-24）**：新增 Visual Decision Contract 与 4 条视觉决策规则，低分候选转人工且生成图不得冒充证据；同时新增追加式 `03-实操迭代与踩坑/` 实战经验库、迭代前必读和读后留痕协议，首个案例记录 AI Hero 母片精修失败链、三证据面与 7 条 ChatCut 产品问题。
 - **v1.4.0（2026-07-24）**：升级为可验证生产系统；交付 Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate；真实适配器/媒体探针/平台发布仍明确未验证且不自动执行。
 - **v1.3.1（2026-07-24）**：契约止血与可复现发布地基；Node/lockfile/CI、离线 JSON Schema、source/resolved profile、字幕 P0、资产/对比度/版本漂移门禁。
 

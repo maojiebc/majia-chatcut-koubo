@@ -10,16 +10,16 @@
 ## 目录契约
 
 ```text
-field-reports/
+03-实操迭代与踩坑/
   README.md
-  iteration-log.md
-  cases/
-    YYYY-MM-DD-<case-slug>.md
+  迭代记录.md
+  案例/
+    YYYY-MM-DD-<案例名称>.md
 ```
 
-- `cases/`：追加式原始案例。保留时间线、尝试、失败、修复、验证和未决问题。
-- `iteration-log.md`：每次 Skill 迭代或命中案例标签的生产任务的读取回执。
-- `references/`：从多个案例中晋升出的稳定做法。
+- `案例/`：追加式原始案例。保留时间线、尝试、失败、修复、验证和未决问题。
+- `迭代记录.md`：每次 Skill 迭代或命中案例标签的生产任务的读取回执。
+- `02-剪辑方法手册/`：从多个案例中晋升出的稳定做法。
 - `rules/`：可机器执行、带反例和回滚条件的 hard policy。
 
 ## 开工读取协议
@@ -29,7 +29,7 @@ field-reports/
 1. 读取本文件。
 2. 按 frontmatter 的 `tags`、`chatcut_surfaces`、`failure_signatures` 找到相关案例。
 3. 完整读取案例，不能只读执行摘要。
-4. 把读取结果写入 `iteration-log.md`：
+4. 把读取结果写入 `迭代记录.md`：
    - 读取了哪些案例；
    - 哪些结论本次采用；
    - 哪些结论因版本、证据或任务差异被拒绝；
@@ -52,7 +52,7 @@ field-reports/
 
 ## 规则晋升
 
-一条案例结论进入 `references/` 至少满足：
+一条案例结论进入 `02-剪辑方法手册/` 至少满足：
 
 - 两个独立案例，或同一问题在不同资产/实例上重复；
 - 有 E2/E3 证据；
@@ -93,4 +93,4 @@ field-reports/
 
 ## 第一个案例
 
-- [AI Hero 母片精修：编辑器黑底、云端帧正常与真实 Hyperframes 替换](cases/2026-07-24-ai-hero-master-refinement.md)
+- [AI Hero 母片精修：编辑器黑底、云端帧正常与真实 Hyperframes 替换](案例/2026-07-24-AI-Hero母片精修.md)

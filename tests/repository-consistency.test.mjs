@@ -7,6 +7,13 @@ import test from "node:test";
 import {fileURLToPath} from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const HUMAN_MAINTENANCE_FILES = [
+  "01-从这里开始/README.md",
+  "02-剪辑方法手册/README.md",
+  "03-实操迭代与踩坑/README.md",
+  "03-实操迭代与踩坑/迭代记录.md",
+  "04-项目设计与路线图/README.md",
+];
 const VERSION_SURFACE_FILES = [
   "package.json",
   "package-lock.json",
@@ -16,10 +23,10 @@ const VERSION_SURFACE_FILES = [
   "README.md",
   "README.en.md",
   "CHANGELOG.md",
-  "docs/architecture.svg",
-  "docs/migration-v1.3.1.md",
-  "docs/roadmap.md",
-  "references/captions-terminology.md",
+  "04-项目设计与路线图/系统架构.svg",
+  "04-项目设计与路线图/V1.3.1迁移指南.md",
+  "04-项目设计与路线图/公开路线图.md",
+  "02-剪辑方法手册/07-字幕与术语.md",
   "rules/policy.json",
   "rules/registry.json",
   "fixtures/profiles/local/profile.source.json",
@@ -29,6 +36,21 @@ const VERSION_SURFACE_FILES = [
   "assets/theme-kit/manifest.json",
   "assets/theme-kit/tokens/themes.json",
 ];
+
+test("human maintenance navigation remains complete", () => {
+  const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
+  for (const file of HUMAN_MAINTENANCE_FILES) {
+    assert.equal(fs.existsSync(path.join(root, file)), true, `missing ${file}`);
+  }
+  for (const directory of [
+    "01-从这里开始",
+    "02-剪辑方法手册",
+    "03-实操迭代与踩坑",
+    "04-项目设计与路线图",
+  ]) {
+    assert.match(readme, new RegExp(`${directory}/README\\.md`, "u"));
+  }
+});
 
 function copyVersionSurface(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "version-drift-"));
@@ -117,7 +139,7 @@ test("version drift gate rejects an incomplete Node version pin", (t) => {
 
 test("version drift gate keeps caption root and provenance guidance in sync", (t) => {
   const directory = copyVersionSurface(t);
-  const migrationPath = path.join(directory, "docs/migration-v1.3.1.md");
+  const migrationPath = path.join(directory, "04-项目设计与路线图/V1.3.1迁移指南.md");
   const migration = fs.readFileSync(migrationPath, "utf8")
     .replaceAll("--root <profile-config-root>", "--config-boundary omitted");
   fs.writeFileSync(migrationPath, migration);
@@ -130,13 +152,13 @@ test("version drift gate keeps caption root and provenance guidance in sync", (t
   assert.equal(result.status, 1);
   assert.match(
     result.stderr,
-    /docs\/migration-v1\.3\.1\.md: caption validation example must declare its profile root/,
+    /V1\.3\.1迁移指南\.md: caption validation example must declare its profile root/,
   );
 });
 
 test("version drift gate keeps the public roadmap linked and governed", (t) => {
   const directory = copyVersionSurface(t);
-  const roadmapPath = path.join(directory, "docs/roadmap.md");
+  const roadmapPath = path.join(directory, "04-项目设计与路线图/公开路线图.md");
   const roadmap = fs.readFileSync(roadmapPath, "utf8")
     .replaceAll("不是发布时间或版本承诺", "时间承诺省略");
   fs.writeFileSync(roadmapPath, roadmap);
@@ -149,7 +171,7 @@ test("version drift gate keeps the public roadmap linked and governed", (t) => {
   assert.equal(result.status, 1);
   assert.match(
     result.stderr,
-    /docs\/roadmap\.md: missing governance marker/,
+    /公开路线图\.md: missing governance marker/,
   );
 });
 

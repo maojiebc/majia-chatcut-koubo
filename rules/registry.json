@@ -273,7 +273,7 @@
       },
       "source": {
         "type": "repository-contract",
-        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "reference": "04-项目设计与路线图/AI剪辑规则吸收记录.md#本轮机器合同",
         "introducedIn": "1.5.0"
       },
       "enforcement": {
@@ -309,7 +309,7 @@
       },
       "source": {
         "type": "repository-contract",
-        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "reference": "04-项目设计与路线图/AI剪辑规则吸收记录.md#本轮机器合同",
         "introducedIn": "1.5.0"
       },
       "enforcement": {
@@ -381,7 +381,7 @@
       },
       "source": {
         "type": "repository-contract",
-        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "reference": "04-项目设计与路线图/AI剪辑规则吸收记录.md#本轮机器合同",
         "introducedIn": "1.5.0"
       },
       "enforcement": {
@@ -417,7 +417,7 @@
       },
       "source": {
         "type": "repository-contract",
-        "reference": "references/recovery.md",
+        "reference": "02-剪辑方法手册/10-故障恢复.md",
         "introducedIn": "1.3.0"
       },
       "enforcement": {
@@ -597,7 +597,7 @@
       },
       "source": {
         "type": "repository-contract",
-        "reference": "docs/rule-intake-ai-editing-v0.1.md#本轮机器合同",
+        "reference": "04-项目设计与路线图/AI剪辑规则吸收记录.md#本轮机器合同",
         "introducedIn": "1.5.0"
       },
       "enforcement": {

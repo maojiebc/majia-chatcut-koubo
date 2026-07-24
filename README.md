@@ -7,9 +7,22 @@
 
 **从剪辑经验包升级为可验证生产系统** —— 在官方 ChatCut skill 之上，把版式/配色/动效/人脸取景与规则、IR/SRT、审批、可恢复执行、证据、媒体 QA、交付和反馈治理串成一条 fail-closed 生产链。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.1 可验证生产系统：Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance，并由 Capability Profile 阻断无证据 live route" width="100%">
+## 如果你是维护者，先看这里
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.1 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+不需要从代码目录开始读。仓库最上方的四个中文目录就是维护入口：
+
+| 你要做的事 | 入口 |
+| --- | --- |
+| 第一次打开，不知道维护哪里 | [01-从这里开始](01-从这里开始/README.md) |
+| 查字幕、转场、双画面、人脸取景方法 | [02-剪辑方法手册](02-剪辑方法手册/README.md) |
+| 记录真实任务的新坑和 ChatCut 产品问题 | [03-实操迭代与踩坑](03-实操迭代与踩坑/README.md) |
+| 看系统架构、路线图和迁移说明 | [04-项目设计与路线图](04-项目设计与路线图/README.md) |
+
+`src / scripts / schemas / fixtures / tests` 是技术内核，普通经验维护通常不用碰。完整的“我该改哪个文件”对照表在 [维护地图](01-从这里开始/README.md)。
+
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.4.1 可验证生产系统：Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance，并由 Capability Profile 阻断无证据 live route" width="100%">
+
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.4.1 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -35,7 +48,7 @@
 - **反馈治理底座** — 事件仅保存匿名 hash、稳定错误签名与计数指标，不接收字幕正文/帧图/音频/用户路径/私有词表；规则建议需重复样本、证据、反例、owner、人工审核和回滚记录，永不在线自动应用
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
-- **实战经验库** — `field-reports/` 追加保存真实任务的完整失败链、ChatCut 产品问题、证据等级与绕行方案；迭代前必读、读后留痕，积累成批后再晋升正式规则和版本
+- **实战经验库** — `03-实操迭代与踩坑/` 追加保存真实任务的完整失败链、ChatCut 产品问题、证据等级与绕行方案；迭代前必读、读后留痕，积累成批后再晋升正式规则和版本
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
 - **本地个人层** — `~/.config/majia-chatcut-koubo/` 叠加个人 profile/词表/审美基线;品牌词与实测数字留在本地,公开包保持通用
 
@@ -111,7 +124,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-`npm run verify` 会执行离线全仓 Schema、Rule Registry 与 override 覆盖审计、Creator OS plan bundle 跨文件审计、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 与计划产物可能含项目级标识，只能写在显式 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)，后续工程顺序与验收边界见 [公开工程路线图](docs/roadmap.md)。
+`npm run verify` 会执行离线全仓 Schema、Rule Registry 与 override 覆盖审计、Creator OS plan bundle 跨文件审计、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 与计划产物可能含项目级标识，只能写在显式 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](04-项目设计与路线图/V1.3.1迁移指南.md)，后续工程顺序与验收边界见 [公开工程路线图](04-项目设计与路线图/公开路线图.md)。
 
 ## 让它变成你的(本地个人层)
 
@@ -119,87 +132,35 @@ node scripts/validate-caption-pages.mjs \
 
 ## 结构
 
+### 人类维护区
+
+```text
+01-从这里开始/              维护地图：我应该读哪里、改哪里
+02-剪辑方法手册/            已复验的字幕、画面、转场、留存与恢复方法
+03-实操迭代与踩坑/          真实案例、失败链、产品问题与迭代记录
+04-项目设计与路线图/        架构、主题预览、迁移说明和公开路线图
+SKILL.md                     安装后 Agent 实际读取的总入口
+CHANGELOG.md                 正式版本变更记录
 ```
-SKILL.md                        主入口:五条第一性原则+通用工序+红线+确认闸门+路由表
-references/
-  operating-manual.md           逐片闭环/八道硬闸/批量流水线/验证方法学/生成资产纪律
-  dual-frame-layouts.md         双画面版式/七执行状态决策器/状态原子契约
-  theme-palettes.md             8 主题+对比度档位+按角色用色+图表色板
-  graphics-blocks.md            十类信息块×何时用+画面任务路由(证据信号驱动)
-  motion-transitions.md         过渡工程:端点契约/四档链+ChatCut 快速路由/fps 归一化
-  face-reframe.md               三层合成/坐标系陷阱/overscan 数学/兼容探针
-  captions-terminology.md       气口分卡/单行门禁/精校稿真相源/词表机制
-  retention-structure.md        开头钩子决策流/钩子-兑现/注意力时钟/四平台路由
-  chatcut-field-notes.md        ChatCut 宿主实测行为档案(crop/渲染差异/shader/分页引擎/隐私 SOP/双端预览)
-  recovery.md                   502/403/工具面固化/续接手册协议/转写绕行
-field-reports/
-  README.md                     案例库协议、证据等级、晋升规则、产品反馈格式
-  iteration-log.md              迭代前读取回执与读后决策，追加式留痕
-  cases/                        脱敏的真实项目案例；不覆盖旧记录
-templates/
-  terminology.template.json     词表模板(装你的品牌与误听)
-  operating-profile.template.json  实测参数模板(装你的数字)
-  compatibility.template.json   宿主能力探针契约(公式仅在探针通过后使用)
-  local-config-example/         本地个人层四件套模板(复制到 ~/.config/majia-chatcut-koubo/)
-  examples.md                   气口/钩子/删减判例库
-assets/
-  compositions.json             8 版式坐标快照(mustRemainVisible/mustBeRedacted 分离)
-  theme-kit/                    8 主题 token+SVG 底图+可运行组件
-  theme-kit/playbooks/          每主题一份代理 playbook(档位+版式+crib)
-rules/
-  policy.json                   不可由 profile 放宽的字幕发布策略(单行/毫秒短卡/繁体零容忍)
-  registry.json                 六域 Rule Registry(stable ID/来源/覆盖语义/执行级别/fixtures)
-schemas/                        profile、字幕、Rule Registry/overrides、Creator OS IR、兼容与资产契约
-fixtures/plan-bundles/          匿名完整 Creator OS plan bundle
-fixtures/srt/                   匿名 SRT + sidecar 往返 fixture
-fixtures/preview/               匿名 preview bundle + approval log
-fixtures/execution/             匿名 execution plan
-fixtures/media-qa/              匿名 final artifact release report
-fixtures/distribution/          匿名平台 profile + deliverables pack
-fixtures/feedback/              匿名 privacy-safe event + suggested update queue
-fixtures/planning/              匿名 explainable content scorecard
-fixtures/visual-decisions/      匿名视觉候选、评分、证据与审批计划
-fixtures/capabilities/          明确 live=false/unverified 的 capability profile
-src/config/                     profile resolver、合并来源与安全序列化
-src/cli/resolve-profile.mjs     source → resolved CLI
-src/rules/                      Rule Registry 审计与 tighten-only override evaluator
-src/time/                       有理时间、显式时间域与半开区间运算
-src/planning/                   Creator OS bundle 跨文档 validator
-                                 SRT export/parser/matcher/diff classifier
-                                 Visual Decision Contract 审计
-src/execution/                  fake adapter、journal、reconcile、resume、evidence
-src/governance/                 feedback event 与建议发布治理
-src/qa/                         媒体 probe/audio/privacy/inspection/release audit
-src/distribution/               平台 profile freshness 与 master binding audit
-scripts/
-  validate-all-json.mjs         全仓离线 Schema release gate
-  validate-rule-registry.mjs    Registry/来源/覆盖权限/pass-fail fixture 审计
-  validate-plan-bundle.mjs      plan schemas/revision/coverage/owner/evidence 审计
-  validate-visual-decision-plan.mjs 视觉候选评分/证据/审批/反模式 gate
-  srt-bridge.mjs                SRT/sidecar export 与候选 diff CLI
-  validate-preview-approval.mjs 预览批准 scope/指纹/失效 gate
-  validate-recovery-fixtures.mjs 可恢复执行故障注入 gate
-  validate-capability-profile.mjs build/schema/TTL/probe/canary live-route gate
-  validate-media-release.mjs    最终媒体报告与导出授权 gate
-  validate-distribution-pack.mjs 平台交付 manifest gate
-  validate-feedback-governance.mjs 匿名事件与人工 release queue gate
-  validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--root/--strict/--terms)
-  check-assets.mjs              composition/theme 引用与几何 gate
-  check-version-drift.mjs       package/SKILL/README/CHANGELOG 漂移 gate
-tests/
-  *.test.mjs                    字幕/profile/schema/资产/文档回归测试
-docs/
-  architecture.svg              增量层全景框架图(本页首图)
-  theme-preview.png             8 主题配色总览
-  contract-baseline.md          本轮契约止血基线与 fail-closed 原则
-  migration-v1.3.1.md           source/resolved profile 与字幕契约迁移说明
-  rule-intake-ai-editing-v0.1.md AI 口播经验规则吸收与取舍记录
-  roadmap.md                    已交付/下一步/规划/研究的公开工程路线图
+
+### 技术内核
+
+```text
+assets/                      版式、主题 token、SVG 与可运行组件
+templates/                   词表、参数、兼容性与本地个人层模板
+rules/                       不可随意放宽的机器硬规则
+schemas/                     JSON 数据合同
+fixtures/                    匿名测试样例和正反例
+src/                         核心程序实现
+scripts/                     校验与命令行工具
+tests/                       自动化回归测试
 ```
+
+日常积累剪辑经验时，通常只需要修改 `03-实操迭代与踩坑/`；不要从 `src/` 或 `schemas/` 开始找。
 
 ## 📋 版本记录
 
-**V1.4.1（2026-07-24）** — 新增 Visual Decision Contract 与 4 条视觉决策规则：每段单一主视觉任务、六维透明评分、低分转人工、生成图不得冒充证据；同时新增追加式 `field-reports/` 实战经验库、迭代前必读与读后留痕协议，首个公开脱敏案例记录 AI Hero 母片精修失败链、三证据面和 7 条 ChatCut 产品问题。
+**V1.4.1（2026-07-24）** — 新增 Visual Decision Contract 与 4 条视觉决策规则：每段单一主视觉任务、六维透明评分、低分转人工、生成图不得冒充证据；同时新增追加式 `03-实操迭代与踩坑/` 实战经验库、迭代前必读与读后留痕协议，首个公开脱敏案例记录 AI Hero 母片精修失败链、三证据面和 7 条 ChatCut 产品问题。
 
 **V1.4.0（2026-07-24）** — 从技巧包升级为可验证生产系统：Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据链、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate 全部进入离线 release gates；真实 ChatCut adapter、真实媒体探针/渲染与平台发布继续保持 `unverified` 且不自动执行。
 

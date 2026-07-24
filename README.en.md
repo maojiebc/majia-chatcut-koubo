@@ -6,9 +6,9 @@
 
 **A verifiable production system for agent-driven talking-head editing** — an increment layer above the official ChatCut skills, joining visual craft with governed rules, IR/SRT planning, approval, recoverable execution, evidence, media QA, delivery, and feedback.
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/architecture.png" alt="v1.4.1 verifiable production system: Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance, with Capability Profile blocking unproven live routes" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.4.1 verifiable production system: Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance, with Capability Profile blocking unproven live routes" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/docs/theme-preview.png" alt="v1.4.1 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.4.1 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
 
 ## What's inside
 
@@ -28,7 +28,7 @@
 - **Local Media QA and export authorization** — audits final-file hashes, codecs/timebase/dimensions/color/audio/duration, loudness/true peak/silence, black/freeze findings, privacy coverage, and deterministic inspection samples from supplied reports; it never exports or publishes media.
 - **Distribution pack foundation** — platform rules carry source, observation, expiry, and confidence metadata; stale hard rules degrade to advisory, deliverables bind to master/revision/content-truth hashes, and publishing is forbidden.
 - **Feedback governance foundation** — events retain only anonymous hashes, stable failure signatures, and allowlisted metrics; update suggestions require repeated samples, evidence, counterexamples, an owner, human review, and rollback, with no online auto-apply route.
-- **Field report library** — `field-reports/` append-only cases preserve real production failures, ChatCut product issues, evidence levels, and workarounds; matching cases must be read before an iteration and the adopted/rejected decisions must be logged before experience is promoted into formal rules.
+- **Field report library** — `03-实操迭代与踩坑/` append-only cases preserve real production failures, ChatCut product issues, evidence levels, and workarounds; matching cases must be read before an iteration and the adopted/rejected decisions must be logged before experience is promoted into formal rules.
 
 > **Live-environment boundary:** the repository validates offline schemas, anonymous fixtures, a fake adapter, report audits, and fail-closed routing. A real ChatCut adapter, real media probing/rendering, and platform publishing remain unverified and are never run automatically.
 
@@ -77,7 +77,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-The release gate validates every governed JSON document offline, audits the Rule Registry and protected overrides, validates the Creator OS plan bundle across files, runs the regression suite, and checks theme contrast, asset geometry/references, public-content safety, and version drift. New authored profiles should use `schemas/profile.source.schema.json`; `profile.schema.json` remains only as a compatibility shim. Resolver and plan artifacts can contain project-scoped identifiers, must stay inside an explicit `--root`, and are ignored by git by default. See the [V1.3.1 migration guide](docs/migration-v1.3.1.md) and the [public engineering roadmap](docs/roadmap.md).
+The release gate validates every governed JSON document offline, audits the Rule Registry and protected overrides, validates the Creator OS plan bundle across files, runs the regression suite, and checks theme contrast, asset geometry/references, public-content safety, and version drift. New authored profiles should use `schemas/profile.source.schema.json`; `profile.schema.json` remains only as a compatibility shim. Resolver and plan artifacts can contain project-scoped identifiers, must stay inside an explicit `--root`, and are ignored by git by default. See the [V1.3.1 migration guide](04-项目设计与路线图/V1.3.1迁移指南.md) and the [public engineering roadmap](04-项目设计与路线图/公开路线图.md).
 
 ## Make it yours
 
@@ -85,7 +85,7 @@ The numbers in this pack (22 chars/line, 330px circle window, `magnification≈0
 
 ## 📋 Version History
 
-**V1.4.1 (2026-07-24)** — Added the Visual Decision Contract and four governed visual-selection rules: one primary task per segment, transparent six-axis scoring, human review below threshold, and no generated visual impersonating evidence. Also added an append-only `field-reports/` library with mandatory pre-iteration reading and receipts; the first public-sanitized AI Hero case records the failure chain, three evidence surfaces, and seven ChatCut product issues.
+**V1.4.1 (2026-07-24)** — Added the Visual Decision Contract and four governed visual-selection rules: one primary task per segment, transparent six-axis scoring, human review below threshold, and no generated visual impersonating evidence. Also added an append-only `03-实操迭代与踩坑/` library with mandatory pre-iteration reading and receipts; the first public-sanitized AI Hero case records the failure chain, three evidence surfaces, and seven ChatCut product issues.
 
 **V1.4.0 (2026-07-24)** — Upgraded from a technique pack to a verifiable production system: Rule Registry, Creator OS IR/Rational Time, SRT and explainable planning, preview approval, recoverable execution/evidence, Media QA/export authorization, governed distribution packs, feedback governance, and a capability live-route gate are now part of the offline release gates. Real ChatCut adaptation, media probing/rendering, and platform publishing remain explicitly unverified and non-automatic.
 

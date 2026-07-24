@@ -13,8 +13,8 @@
 
 **实战经验与产品反馈**
 
-- 新增 `field-reports/` 追加式实战经验库：案例保留真实任务时间线、失败路径、修复、验证、未决问题和 E0–E3 证据等级，不把单次事故直接写成全局规则。
-- 新增迭代前读取与读后留痕硬闸：按标签和失败签名读取完整案例，在 `field-reports/iteration-log.md` 记录采用、拒绝、canary、晋升与验证；经验可先累积，成批复验后再进入 `references/`、`rules/` 和正式版本。
+- 新增 `03-实操迭代与踩坑/` 追加式实战经验库：案例保留真实任务时间线、失败路径、修复、验证、未决问题和 E0–E3 证据等级，不把单次事故直接写成全局规则。
+- 新增迭代前读取与读后留痕硬闸：按标签和失败签名读取完整案例，在 `03-实操迭代与踩坑/迭代记录.md` 记录采用、拒绝、canary、晋升与验证；经验可先累积，成批复验后再进入 `02-剪辑方法手册/`、`rules/` 和正式版本。
 - 首个公开脱敏案例记录 AI Hero 母片精修：字幕/画面审计、错误地把 ChatCut MG 改色当成 Hyperframes 成片、编辑器仍见黑底、真实 Hyperframes 母视频加 source offset 原位替换，以及 1080P60 最终文件验证。
 - 面向 ChatCut 产品与研发整理 7 个可转 issue 的问题：编辑器预览与云端合成帧不一致、同步中断恢复、刷新后项目库/时间码干扰、共享 MG 版本传播、代码写入缺少画面一致性回执、导出进度非线性、缺少三证据面对账入口。
 - README、英文 README、Skill 路由、版本近况、路线图和架构图同步反映本版经验闭环；公开安全扫描继续禁止项目 ID、资产 ID、签名 URL、临时 token、本机路径和私有素材。
@@ -23,7 +23,7 @@
 
 **规划与治理**
 
-- 新增 [公开工程路线图](docs/roadmap.md)：以 V1.3.1 为已交付基线，明确 Rule Registry、Creator OS IR/SRT、预览审批、可恢复执行、证据链、媒体 QA、平台交付与反馈治理的顺序和 Definition of Done。
+- 新增 [公开工程路线图](04-项目设计与路线图/公开路线图.md)：以 V1.3.1 为已交付基线，明确 Rule Registry、Creator OS IR/SRT、预览审批、可恢复执行、证据链、媒体 QA、平台交付与反馈治理的顺序和 Definition of Done。
 - README、迁移指南与版本漂移门禁同步接入路线图；路线图不承诺日期或未经 live canary 验证的 ChatCut runtime 能力。
 - 交付 Rule Registry foundation：新增六域 14 条 stable rule、registry/override Schema、来源与 policy pointer 对账、`deny`/`tighten-only` 覆盖审计、每条规则的 pass/fail fixture 证明和 `npm run validate:rules` release gate。现有字幕规则标为 runtime-enforced，尚未接入 Creator OS IR 的跨域规则明确标为 registry-contract，不虚报宿主执行能力。
 - 交付 Rational Time + Creator OS IR v0：新增显式时间域/有理速率/半开区间运算，以及 project、transcript、edit、state、owner、caption、evidence 七类计划文档和 bundle Schema；跨文档 validator 会核对 revision、source、evidence、时间线完整覆盖、唯一视觉 owner、正交隐私 owner 与批准状态，并以匿名完整 fixture 接入 `npm run verify`。
@@ -67,7 +67,7 @@
 - 对比度门槛与文档统一：正文/次级/CTA 7:1，标题强调 4.5:1；8 套主题全绿。
 - 新增 composition、theme/layout/manifest/demo schemas，以及引用、必需文件、画布/圆形几何检查。
 - 新增版本漂移 gate，修正英文 README 的 seven-state 描述；package、lockfile、SKILL、README 与 CHANGELOG 同步为 1.3.1。
-- 新增契约基线与 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)。本地个人 profile/词表继续留在 `~/.config/majia-chatcut-koubo/`，没有进入公开 fixture。
+- 新增契约基线与 [V1.3.1 迁移指南](04-项目设计与路线图/V1.3.1迁移指南.md)。本地个人 profile/词表继续留在 `~/.config/majia-chatcut-koubo/`，没有进入公开 fixture。
 
 ## V1.3.0（2026-07-24）— 制度增量 + ChatCut 实测档案 + 本地个人层
 
@@ -81,7 +81,7 @@
 - 工序 6 下游增强：静态章节卡可由外部 MG 工具（如 hyperframes）产 MP4 后 `import_media` 替换；音效/BGM 走 ChatCut 素材库与生成工具，音量不夺 anchor。
 - 工序 7 验收加双端预览路由指针（细则权威位在 chatcut-field-notes）。
 
-**新册 references/chatcut-field-notes.md（ChatCut 宿主实测行为档案）**
+**新册 02-剪辑方法手册/09-ChatCut宿主实测.md（ChatCut 宿主实测行为档案）**
 
 - 几何与渲染：crop=框内裁显示区与反推公式、keepAspectRatio 校验/渲染两层不一致与两步提交、编辑器 vs 云端渲染差异（成片以云端帧为准）、borderRadius 作用域。
 - 窗口动画：MG 媒体槽（video/image 属性）运行时失效实证 → 四档链 2/3 档跳过；正解 = 满屏 item + 窗口 reframe shader（归一化参数契约/track-bound per-item 挂载/过渡窗口摆位/圆窗换算示例）；框线与过渡单一 owner；shader beta 确认。
@@ -94,9 +94,9 @@
 
 **三本通用新册**
 
-- `references/operating-manual.md`：一片一闭环（冻结盘点→状态表→原子改画面→精修字幕→音频→门禁）、四大门禁 + **八道硬闸**、A-roll 删减增量（删前保后/风险分级）、批量流水线与回归矩阵、多代理调度编制、生成资产纪律（成本合并报价/参考图先行/两段式/三轮降级）、验证方法学、导出与帧率、止损与汇报。
-- `references/retention-structure.md`：开头重构决策流（删铺垫/钩子三公式/爆点前置扫描）、钩子-兑现成对、注意力时钟与开环句保护、自然结尾、**四平台条件路由表**（抖音/小红书/视频号/B站，含可信度标注）、数据复盘口径。
-- `references/recovery.md`：502/403/工具面固化处置、续接手册协议（事实层 vs 动态 ID 层）、打开既有项目标准流（connected≠持久化）、转写故障绕行、素材上传、上下文压缩后恢复。
+- `02-剪辑方法手册/01-逐片执行手册.md`：一片一闭环（冻结盘点→状态表→原子改画面→精修字幕→音频→门禁）、四大门禁 + **八道硬闸**、A-roll 删减增量（删前保后/风险分级）、批量流水线与回归矩阵、多代理调度编制、生成资产纪律（成本合并报价/参考图先行/两段式/三轮降级）、验证方法学、导出与帧率、止损与汇报。
+- `02-剪辑方法手册/08-留存结构与平台路由.md`：开头重构决策流（删铺垫/钩子三公式/爆点前置扫描）、钩子-兑现成对、注意力时钟与开环句保护、自然结尾、**四平台条件路由表**（抖音/小红书/视频号/B站，含可信度标注）、数据复盘口径。
+- `02-剪辑方法手册/10-故障恢复.md`：502/403/工具面固化处置、续接手册协议（事实层 vs 动态 ID 层）、打开既有项目标准流（connected≠持久化）、转写故障绕行、素材上传、上下文压缩后恢复。
 
 **既有册融合增量**
 
@@ -126,31 +126,31 @@
 - **供应链修复**：`assets/theme-kit/requirements.txt` 将 `CairoSVG>=2.7` 固定为 `CairoSVG==2.9.0`，消除 **CVE-2026-31899**（CairoSVG 2.7 递归 `<use>` 元素放大导致的指数级 DoS）暴露。该依赖仅被可选脚本 `assets/theme-kit/scripts/render-backgrounds.py`（SVG→PNG）使用，pin 到 PyPI 最新稳定版不影响功能。
 - **trigger 收窄**：SKILL.md `description` 追加「前置（需官方 ChatCut skill/MCP）」与「非目标（不做非视频剪辑任务、不替代官方工具用法）」，回应 ClawHub skillspector 的 SQP-1（activation 过宽）。
 - 触发本次修复的背景：v1.2.2 发布后 ClawHub skillspector 因上述未固定 CVE 依赖判 `suspicious/CAUTION`（clawscan AI 审查判 `benign`），版本被扣在审核未转公开；本版清除该 HIGH 项以求干净过审。
-- 规则本体（references/templates/scripts 逻辑）零改动。
+- 规则本体（02-剪辑方法手册/templates/scripts 逻辑）零改动。
 
 ## V1.2.2（2026-07-23）— 中文品牌名
 
 - 展示名定为「**ChatCut口播 · 马甲实战版**」，同步五处品牌面：SKILL.md H1、README.md H1、README.en.md 副标题注记、GitHub About 简介、ClawHub `--name`；架构图标题与 footer 一并更新。
 - **安装标识（slug）`majia-chatcut-koubo`、SKILL frontmatter `name:`、`gh skill install` / `npx skills add` / `clawhub install` 命令一律不变** —— 仅人读展示名变更，机器标识与安装路径零改动。
-- 规则本体（SKILL/references/templates/scripts）零改动。
+- 规则本体（SKILL/02-剪辑方法手册/templates/scripts）零改动。
 
 ## V1.2.1（2026-07-23）— 框架图 + README 装修
 
-- 新增 `docs/architecture.svg`：增量层全景框架图 —— 官方 ChatCut 底座 → 双画面版式 / 主题配色 / 过渡动效工程 / 人脸取景 四大件（各标所治痛点）→ 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象；配套 `docs/architecture.png`（raw.githubusercontent 渲染用，`.svg` 在包页不内联）。
+- 新增 `04-项目设计与路线图/系统架构.svg`：增量层全景框架图 —— 官方 ChatCut 底座 → 双画面版式 / 主题配色 / 过渡动效工程 / 人脸取景 四大件（各标所治痛点）→ 词表模板 + 字幕门禁 → 可见画面 / 可听声音 / 可读字幕 验收三象；配套 `04-项目设计与路线图/系统架构.png`（raw.githubusercontent 渲染用，`.svg` 在包页不内联）。
 - README.md / README.en.md 首图改为该框架图（绝对 raw URL），原 8 主题配色总览下移为第二张图；「结构」段补 `docs/`。
 - 版本记录段收敛为最近 3 条（V1.2.1 / V1.2.0 / V1.1.0），更早版本移交 CHANGELOG。
-- 纯文档增强，SKILL/references/templates/scripts 规则本体零改动。
+- 纯文档增强，SKILL/02-剪辑方法手册/templates/scripts 规则本体零改动。
 
 ## V1.2.0（2026-07-22）— 块级动效词汇表
 
-- `references/graphics-blocks.md` 新增「块级动效词汇表」：进场/出场/循环强调三轴受限枚举（弹入默认禁——「不弹跳」是全包基线；闪烁禁；漂浮几乎不用；打字机仅文字块且需逐字有语义）、时长基线（进场 10–16 帧 @30fps、出场 8–12 帧，一律按秒或归一化帧率写）、块×动效推荐表、「一致性>花样」与同屏错帧规则。
+- `02-剪辑方法手册/04-信息块与画面任务.md` 新增「块级动效词汇表」：进场/出场/循环强调三轴受限枚举（弹入默认禁——「不弹跳」是全包基线；闪烁禁；漂浮几乎不用；打字机仅文字块且需逐字有语义）、时长基线（进场 10–16 帧 @30fps、出场 8–12 帧，一律按秒或归一化帧率写）、块×动效推荐表、「一致性>花样」与同屏错帧规则。
 - 8 份主题 playbook 各增「动效档」：逐主题准许/慎用/禁用集（极简黑白收到最窄仅淡入+上移；活力青柠为弹入唯一豁免主题且仍需用户点头）；playbookVersion 1.0.0 → 1.1.0。
 - 方法来源新增 `yoqu/lingji-cut`（Apache-2.0）：仅吸收三轴动效枚举的组织方法，枚举取舍与全部文本为本包自定。
 
 ## V1.1.0（2026-07-22）— 主题 playbook 化
 
 - 8 套主题各配一份代理 playbook（`assets/theme-kit/playbooks/<id>.md`）：frontmatter 注入 themes.json 语义 token + token 档位实测结论 + 绑定版式 + 信息块偏好 + 字幕底板硬规则 + 一段可直接嵌进 MG 生成指令的「调用 crib」。主题包从「色板+底图」升级为「代理可执行的设计系统」。
-- 新增 `references/graphics-blocks.md`：十类信息块 × 何时用（证据信号驱动、与钩子三公式对应）；行动引导块默认不加为红线。
+- 新增 `02-剪辑方法手册/04-信息块与画面任务.md`：十类信息块 × 何时用（证据信号驱动、与钩子三公式对应）；行动引导块默认不加为红线。
 - `theme-palettes.md` 增加标准用法流：选主题 → 读 playbook → 生成时嵌 crib。
 - 方法来源新增 `pireel/pireel`（AGPL-3.0）：仅吸收「主题=数据+代理 playbook」与逐主题 crib 的组织方法，未复制其主题内容、文本或代码。
 
