@@ -385,11 +385,11 @@
         "introducedIn": "1.3.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "media.export-authorization",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-media-release.mjs",
+          "tests/media-release-audit.test.mjs"
         ]
       },
       "fixtureRefs": {

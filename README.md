@@ -27,6 +27,7 @@
 - **SRT 文本桥** — 标准 SRT 供人工审阅，sidecar 保留 cue/page/word identity、exact range、revision 与量化残差；重编号无损，纠字/改时/隐藏/删除/合并/拆分/重排只生成可审计候选
 - **预览审批门** — 自动覆盖首 60 秒、复杂状态、全部隐私风险段与片尾；批准绑定 actor、完整窗口 scope、plan/style/timeline 指纹，缺失、撤销或任一漂移即关闭执行
 - **可恢复执行与证据底座** — 离线 fake adapter 证明 logical ID 唯一绑定、幂等写、revision lock、写后回读、scene 补偿、checkpoint/resume 与证据失效传播；尚不宣称真实 ChatCut adapter 已验证
+- **本地 Media QA 与导出授权** — 对最终文件 hash、codec/timebase/尺寸/颜色/音轨/时长、loudness/true-peak/silence、black/freeze、隐私覆盖和确定性抽帧表做报告审计；只验证输入报告，不自动导出或发布
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
@@ -67,6 +68,9 @@ npm run validate:preview
 
 # 跑写前/写后超时、partial write、ID 变化与 revision drift 场景
 npm run validate:recovery
+
+# 审计匿名最终媒体 probe、隐私覆盖、抽帧计划与导出授权
+npm run validate:media
 
 # 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
 node src/cli/resolve-profile.mjs \
@@ -123,6 +127,7 @@ fixtures/plan-bundles/          匿名完整 Creator OS plan bundle
 fixtures/srt/                   匿名 SRT + sidecar 往返 fixture
 fixtures/preview/               匿名 preview bundle + approval log
 fixtures/execution/             匿名 execution plan
+fixtures/media-qa/              匿名 final artifact release report
 src/config/                     profile resolver、合并来源与安全序列化
 src/cli/resolve-profile.mjs     source → resolved CLI
 src/rules/                      Rule Registry 审计与 tighten-only override evaluator
@@ -130,6 +135,7 @@ src/time/                       有理时间、显式时间域与半开区间运
 src/planning/                   Creator OS bundle 跨文档 validator
                                  SRT export/parser/matcher/diff classifier
 src/execution/                  fake adapter、journal、reconcile、resume、evidence
+src/qa/                         媒体 probe/audio/privacy/inspection/release audit
 scripts/
   validate-all-json.mjs         全仓离线 Schema release gate
   validate-rule-registry.mjs    Registry/来源/覆盖权限/pass-fail fixture 审计
@@ -137,6 +143,7 @@ scripts/
   srt-bridge.mjs                SRT/sidecar export 与候选 diff CLI
   validate-preview-approval.mjs 预览批准 scope/指纹/失效 gate
   validate-recovery-fixtures.mjs 可恢复执行故障注入 gate
+  validate-media-release.mjs    最终媒体报告与导出授权 gate
   validate-caption-pages.mjs    字幕页机械校验(profile 继承/结构化 JSON/--root/--strict/--terms)
   check-assets.mjs              composition/theme 引用与几何 gate
   check-version-drift.mjs       package/SKILL/README/CHANGELOG 漂移 gate

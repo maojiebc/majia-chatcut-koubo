@@ -112,6 +112,12 @@ if (packageManifest.scripts?.["validate:recovery"] !== "node scripts/validate-re
 if (!packageManifest.scripts?.verify?.includes("npm run validate:recovery")) {
   errors.push("package.json: verify must include the recovery fixture gate");
 }
+if (packageManifest.scripts?.["validate:media"] !== "node scripts/validate-media-release.mjs --report fixtures/media-qa/valid/release-report.json") {
+  errors.push("package.json: validate:media must invoke the canonical release report");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:media")) {
+  errors.push("package.json: verify must include the media release gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }
@@ -156,6 +162,7 @@ for (const marker of [
   "SRT bridge — SHIPPED",
   "Preview approval gate — SHIPPED",
   "Recoverable executor + evidence foundation — SHIPPED",
+  "Local Media QA + export authorization gate — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);
