@@ -29,7 +29,6 @@
     },
     "artifacts": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -96,6 +95,20 @@
             "items": {
               "type": "string",
               "pattern": "^[A-Z][A-Z0-9_]+$"
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "creator-os-common.schema.json#/$defs/identifier"
+            }
+          },
+          "invalidatedBy": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "creator-os-common.schema.json#/$defs/identifier"
             }
           }
         }

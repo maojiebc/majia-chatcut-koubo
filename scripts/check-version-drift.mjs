@@ -106,6 +106,12 @@ if (!packageManifest.scripts?.["validate:preview"]?.startsWith("node scripts/val
 if (!packageManifest.scripts?.verify?.includes("npm run validate:preview")) {
   errors.push("package.json: verify must include the preview approval gate");
 }
+if (packageManifest.scripts?.["validate:recovery"] !== "node scripts/validate-recovery-fixtures.mjs") {
+  errors.push("package.json: validate:recovery must invoke recovery fixtures");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:recovery")) {
+  errors.push("package.json: verify must include the recovery fixture gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }
@@ -149,6 +155,7 @@ for (const marker of [
   "Rational Time + Creator OS IR v0 — SHIPPED",
   "SRT bridge — SHIPPED",
   "Preview approval gate — SHIPPED",
+  "Recoverable executor + evidence foundation — SHIPPED",
 ]) {
   if (!roadmap.includes(marker)) {
     errors.push(`docs/roadmap.md: missing governance marker ${marker}`);

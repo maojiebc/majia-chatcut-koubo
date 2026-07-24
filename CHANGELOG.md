@@ -10,6 +10,7 @@
 - 交付 Rational Time + Creator OS IR v0：新增显式时间域/有理速率/半开区间运算，以及 project、transcript、edit、state、owner、caption、evidence 七类计划文档和 bundle Schema；跨文档 validator 会核对 revision、source、evidence、时间线完整覆盖、唯一视觉 owner、正交隐私 owner 与批准状态，并以匿名完整 fixture 接入 `npm run verify`。
 - 交付 SRT bridge：标准 SRT 与 sidecar 双向审阅协议保留 cue/page/word identity、exact rational range、revision 和毫秒量化残差；cue 重编号不影响匹配，sidecar 漂移和歧义匹配 fail closed，纠字/改时/隐藏/删除/合并/拆分/重排仅生成候选决策而不直接改计划。
 - 交付 Preview approval gate：确定性选择首 60 秒、复杂状态、全部隐私风险段和片尾窗口；批准事件绑定 actor、完整 window scope、plan hash、style fingerprint、timeline revision 与失效字段，缺少/拒绝/撤销/部分批准或任一指纹变化都会关闭执行门。
+- 交付 Recoverable executor + evidence foundation：新增 execution plan / operation journal Schema、动态 logical→host ID 唯一绑定、idempotency、revision lock、read-after-write、scene transaction 补偿、checkpoint/resume 与证据依赖失效传播；fake adapter 覆盖写前/写后超时、partial write、host ID 变化和 revision drift，不连接真实 ChatCut。
 
 ## V1.3.1（2026-07-24）— 契约止血 + 可复现发布地基
 

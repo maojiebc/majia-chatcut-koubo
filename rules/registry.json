@@ -313,11 +313,11 @@
         "introducedIn": "1.3.0"
       },
       "enforcement": {
-        "level": "registry-contract",
-        "checkId": null,
+        "level": "runtime",
+        "checkId": "execution.read-after-write",
         "implementedBy": [
-          "scripts/validate-rule-registry.mjs",
-          "tests/rule-registry.test.mjs"
+          "scripts/validate-recovery-fixtures.mjs",
+          "tests/recoverable-executor.test.mjs"
         ]
       },
       "fixtureRefs": {
