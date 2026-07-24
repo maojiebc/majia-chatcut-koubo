@@ -1,0 +1,259 @@
+# majia-chatcut-koubo 公开工程路线图
+
+> 状态基线：V1.3.1
+>
+> 更新日期：2026-07-24
+>
+> 适用范围：公开仓库的工程能力、契约、验证与 ChatCut 适配层
+
+这份路线图把内部代码审查、自动剪辑研究和现有仓库事实压缩为可公开、可验收的开发顺序。它描述优先级与完成条件，不给出虚假的宿主能力结论，也不是发布时间或版本承诺。
+
+## 1. 当前判断
+
+V1.3.1 已经完成第一轮“契约止血”：仓库从主要依靠自然语言纪律，前进到拥有可复现安装、离线 Schema、严格字幕门禁、profile source/resolved 契约、资产检查、公开安全扫描、版本漂移检查和 GitHub Actions 的可信基线。
+
+下一阶段的目标不是继续堆 Markdown，而是把最有价值的生产纪律变成五类机器资产：
+
+1. 可追溯、不可被本地配置放宽的 Rule Registry。
+2. 统一的 Creator OS IR，让内容、时间、状态、字幕、音频、隐私和证据共享稳定身份。
+3. 以标准 SRT 为人工视图、以 sidecar/IR 为机器真相的文本化剪辑桥。
+4. 可幂等、可回读、可检查点恢复的执行协议。
+5. 从输入契约到最终导出文件的 evidence-first 验证链。
+
+真实 ChatCut 写入、云端渲染与导出能力在当前 live capability canary 通过前仍标记为 `unverified`。公开 CI 只验证可离线复现的核心和 fake adapter，不依赖账号、私有素材或宿主在线状态。
+
+## 2. 不变的工程原则
+
+| 原则 | 工程含义 |
+|---|---|
+| 内容真相优先 | 精校稿、词级证据和被批准的纠错记录高于生成文案；系统不得补造数字、专名或事实 |
+| 单一 owner | 每个时间区间、视觉合成、可听对白和隐私处置都有唯一责任域；不同责任域可以正交叠加 |
+| 原子时间 | 内部使用有理时基和 `[start,end)`；source、timeline、graphics、export 时间域不得混用 |
+| 证据先于完成 | API success 只代表请求返回；完成必须有结构回读、像素/音频证据或最终文件探针 |
+| 先计划后写入 | 全片状态表、高风险内容决策和预览批准是批量执行前置条件 |
+| 失败关闭 | 能力未知、revision 漂移、写入结果含糊、隐私覆盖不完整时停止向前，不猜测成功 |
+| 可恢复优先 | 写失败先回读；重复执行不双写；每幕有 checkpoint，三轮同类失败后进入声明的降级路线 |
+| 反馈受治理 | 数据只产生规则候选，不直接修改 hard policy；规则升级需要样本、证据、评审和版本记录 |
+
+## 3. 目标架构
+
+| 层 | 责任 | 主要公开产物 |
+|---|---|---|
+| Knowledge | 人与 Agent 可读的方法、事故和操作手册 | `SKILL.md`、`references/` |
+| Policy & Contract | 规则来源、覆盖权限、Schema 和兼容条件 | Rule Registry、domain policies、profile/capability schemas |
+| Creator OS IR | 稳定 ID、时间域、计划与跨文件引用 | project/transcript/edit/state/owner/caption/evidence plans |
+| Planning | 内容评分、叙事计划、SRT diff 和预览选择 | scorecard、decision queue、preview bundle |
+| Execution & Adapter | 把计划编译为宿主操作并安全恢复 | ChatCut fake/live adapter、journal、checkpoint、resume |
+| Verification | 对账结构、像素、音频、隐私和导出文件 | evidence manifest、machine reports、release report |
+
+默认演进顺序是 `audit → assist → auto`。在同一能力通过契约测试、故障注入和 live canary 之前，不升级自动化等级。
+
+## 4. 里程碑
+
+### R0 · 可信发布地基 — SHIPPED
+
+V1.3.1 已交付：
+
+- Node、lockfile、`npm ci` 和 GitHub Actions；
+- 仓库全部受治理 JSON 的离线 Schema release gate；
+- profile source/resolved 分层、安全继承、路径边界和 merge trace；
+- 字幕数值语义、word identity/interval、短卡类型、hard override、严格 warning 和 provenance P0 门禁；
+- 主题对比度、版式几何、资产引用、公开内容安全与版本漂移检查；
+- 兼容 shim、迁移指南和匿名 fail/pass fixtures。
+
+R0 不包含真实 ChatCut mutation executor，也不把 field notes 自动当成当前宿主真相。
+
+### R1 · Rule Registry + Creator OS IR — NEXT
+
+目标：让自然语言中的硬规则和计划资产拥有机器身份、来源与跨文件不变量。
+
+范围：
+
+- Rule Registry Schema，至少区分 `hard-policy`、`structural-invariant`、`host-observation`、`heuristic`、`profile` 和 `experiment`；
+- `deny`、`tighten-only`、`local`、`experiment` 等 override 语义；
+- content truth、captions、privacy、timeline integrity、execution safety 和 export authorization 六个首批规则域；
+- rational time 与 interval algebra；
+- project、transcript、edit、state、owner、caption、evidence 的最小 Creator OS IR；
+- plan bundle 跨文件引用、revision、coverage 和 owner validator；
+- 稳定 error code 与机器可读报告。
+
+退出条件：
+
+- hard policy 无法被任何 profile/overlay 放宽；
+- 一个匿名 fixture 可生成并验证完整 plan bundle；
+- composition 与 privacy 使用正交 lane，视觉 owner 无重叠或缺口；
+- 每个已迁移 hard rule 至少有一个 fail fixture 和一个 pass fixture；
+- 不连接 ChatCut 也能完成 `audit` 和 `plan`。
+
+### R2 · 文本化规划与预览审批 — PLANNED
+
+目标：让人能用熟悉的文本界面审阅节奏，同时保留机器可追溯性。
+
+范围：
+
+- 标准 SRT 导出/导入，以及保存 cue、word、source range、revision 和量化残差的 sidecar；
+- SRT diff 分类：纠字、删除、隐藏字幕、改时、合并、拆分与重排只生成候选决策，不直接落刀；
+- explainable content scorecard，只报告可解释信号，不输出黑箱“爆款概率”；
+- Hook → Problem → Contrast/Example → Method → Result → SoftCTA 的叙事建议器；它可以重排候选，不能发明内容；
+- 首 60 秒、最复杂操作段、隐私高风险段和片尾组成的 preview bundle；
+- 带 scope、actor、plan hash 和失效条件的批准事件。
+
+退出条件：
+
+- 未修改 cue 经过多次 SRT 往返不累计漂移；
+- cue 重编号不破坏身份，歧义匹配一律阻断；
+- 删除或重排高风险内容必须产生人工批准要求；
+- preview 未批准或 style fingerprint 变化时，批量执行门保持关闭。
+
+### R3 · 可恢复执行与证据链 — PLANNED
+
+目标：把“Agent 记得按手册做”升级为执行器强制的状态机。
+
+范围：
+
+- ChatCut adapter contract 与可故障注入的 fake adapter；
+- logical ID 到动态宿主 ID 的唯一绑定，歧义时停止；
+- operation journal、idempotency key、precondition、read-after-write、postcondition；
+- revision lock、scene transaction、compensation、checkpoint 和 resume；
+- evidence manifest 与依赖失效传播；
+- capability profile 的 build/schema hash、TTL、mandatory probes 和 fallback；
+- 脱敏、非阻断的 live capability canary。
+
+退出条件：
+
+- timeout-before-commit、timeout-after-commit、partial write、ID 变化和 revision drift fixtures 全部通过；
+- 同一 plan 重复执行不产生重复对象；
+- 中断后能区分未写、已写和部分写，并从最近通过的 scene 恢复；
+- 没有 current canary 时，live 路由 fail closed 且明确报告 `unverified`；
+- 每个“完成”状态均可定位到回读或 evidence。
+
+### R4 · Graphics、Audio、Privacy 与 Export QA — PLANNED
+
+目标：把增强能力放进同一计划—执行—验证协议，而不是追加不可追溯脚本。
+
+范围：
+
+- HyperFrames scene spec 与 `doctor → lint → check → snapshot → render → inspect → import verify` adapter；
+- 静态关键帧批准、render manifest、版本/hash 锁和三档降级；
+- dialogue anchor、BGM/SFX event binding、license/provenance 与 loudness/silence/true-peak 报告；
+- source-to-timeline 隐私区间映射和 fail-closed coverage；
+- 确定性边界/风险抽帧、black/freeze 检测和像素证据；
+- 最终文件的 codec、timebase、尺寸、音轨、颜色、时长和 hash 对账。
+
+退出条件：
+
+- 外部图形资产从 scene spec 到时间线实例全程可追溯；
+- orphan graphics/SFX 为 0，音频只有一个可听 dialogue anchor；
+- critical privacy risk 的 timeline occurrences 全区间有处置证明；
+- 导出授权事件存在，且最终文件而非代理帧通过 release report。
+
+### R5 · 多平台交付包 — PLANNED
+
+目标：从同一已验证母片生成平台适配候选，而不是复制一套静态“平台真理”。
+
+范围：
+
+- 平台配置的来源、观测日期、可信度、过期时间和 fallback；
+- 画幅、封面、标题、简介、字幕文件和章节信息组成的 distribution pack；
+- 不改变内容真相的安全裁切与包装变体；
+- release report 与发布授权边界。
+
+退出条件：
+
+- 平台规则过期后自动降级为建议，不继续作为硬闸；
+- 每个交付物绑定母片 revision 和实际文件 hash；
+- 仓库不自动发布账号内容，导出和发布始终需要明确授权。
+
+### R6 · 反馈与规则治理 — RESEARCH
+
+目标：建立可复盘闭环，同时防止一次高播放或单一样本污染生产规则。
+
+范围：
+
+- 默认不含字幕正文、帧图、音频、用户路径或私有词表的事件 Schema；
+- preview、返工、恢复、失败签名、字幕、隐私、资产复用和交付效率指标；
+- feedback → suggested update queue → repeated samples → human review → rule/profile release；
+- 规则误报、waiver、实验和 promotion 记录。
+
+退出条件：
+
+- 线上反馈不能直接改 hard policy 或自动执行路线；
+- 每次规则升级能说明样本范围、证据、反例、owner 和回滚方式；
+- 诊断包默认本地，任何外发先生成脱敏预览并由用户确认。
+
+## 5. 推荐的下一组实现切片
+
+为避免巨型重构，后续按单一责任拆成可独立验收的 PR/commit：
+
+| 顺序 | 切片 | 最小产物 |
+|---:|---|---|
+| 1 | Rule Registry foundation | registry Schema、首批 hard rules、override validator、fixtures |
+| 2 | Rational time & interval | 明确 domain 的有理时间、区间运算和属性测试 |
+| 3 | Creator OS IR v0 | 最小 plan schemas、稳定 ID、plan bundle validator |
+| 4 | SRT bridge | SRT + sidecar、matcher、diff classifier、round-trip tests |
+| 5 | Explainable planner | scorecard、叙事状态建议、risk/decision queue |
+| 6 | Preview gate | 代表窗口选择、approval log、style fingerprint |
+| 7 | Executor skeleton | adapter、journal、reconcile、fake failure injection |
+| 8 | Recovery & evidence | revision lock、checkpoint/resume、evidence manifest |
+| 9 | Media adapters | HyperFrames、audio、privacy、export QA 的独立小切片 |
+| 10 | Packaging & feedback | distribution pack、event schema、suggested update queue |
+
+每个切片必须先在匿名 fixture 和离线 CI 中闭环；需要真实宿主的能力另走 canary，不把私有项目变成公开测试依赖。
+
+## 6. Definition of Done
+
+单个工程切片只有同时满足以下条件才算完成：
+
+- 有明确输入、输出、非目标与验收条件；
+- Schema/contract、实现、文档和 migration 同步；
+- 至少一个最小 fail fixture 与对应 pass fixture；
+- 错误 code 稳定，机器报告不依赖解析自然语言；
+- `npm run verify` 在 clean checkout 可复现；
+- 不含密钥、个人路径、品牌私有词表、真实项目 ID 或未授权媒体；
+- mutation 具备幂等、回读和中断恢复策略；
+- 外部能力有版本、hash、capability check 和 fallback；
+- “完成”能定位到 evidence，不只依赖 API success；
+- 用户批准范围不会被自动外扩。
+
+运行态只使用 `planned`、`written-unverified`、`structure-passed`、`pixels-passed`、`audio-passed`、`release-passed`、`unverified` 和 `blocked` 等可证明状态。
+
+## 7. 跨阶段门禁
+
+### 安全与隐私
+
+- 本地个人层、真实项目 run bundle、诊断媒体和品牌词表不进入公开 git；
+- 默认日志只记录 code、计数、hash、匿名内容类型和工具版本；
+- 外部 HTML/SVG/渲染模板按代码执行输入处理，使用沙箱、依赖检查和网络边界；
+- 音乐、SFX、字体、图形和生成资产必须有 provenance/license。
+
+### 兼容与供应链
+
+- Node、Python、FFmpeg、HyperFrames、Actions 与容器版本可复现；
+- ChatCut field notes 绑定观测时间、build/tool schema hash 和 TTL；
+- fake adapter 是公开 CI 硬闸，live canary 是独立的宿主真实性证据；
+- breaking Schema 变化必须带 migration 和 loss report。
+
+### 文档与可观测性
+
+- README 只概述能力，Schema/registry 是机器真相，路线图只描述计划；
+- 版本、能力数量、命令和契约引用继续由 drift gate 对账；
+- 指标用于定位可靠性和返工根因，不替代人工审美或内容判断。
+
+## 8. 依赖与明确非承诺
+
+以下条件会影响阶段推进：
+
+- ChatCut 是否提供稳定、可读回的工具 Schema、revision 和最小 canary 环境；
+- 真实但可脱敏的回读/导出 fixture 是否可合法保留；
+- GitHub 分支保护、required status 与供应链策略的仓库管理权限；
+- 外部渲染器、字体、音乐和平台规则的版本与授权变化。
+
+本路线图不承诺：
+
+- 精确发布日期、固定大版本号或人日估算；
+- 自动发布到任何平台，或把样片批准外扩为整片导出授权；
+- 对播放量、完播率或“爆款概率”的保证；
+- 把私有素材、字幕、品牌词表或个人 profile 上传为公共训练/遥测数据；
+- 在 live capability canary 缺失时宣称真实 ChatCut runtime 已验证。
+
+仓库代码、Schema、测试、CHANGELOG 和 CI 结果始终高于本文描述；实现发生变化时，路线图必须与它们一起更新。

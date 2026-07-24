@@ -18,6 +18,7 @@ const VERSION_SURFACE_FILES = [
   "CHANGELOG.md",
   "docs/architecture.svg",
   "docs/migration-v1.3.1.md",
+  "docs/roadmap.md",
   "references/captions-terminology.md",
   "rules/policy.json",
   "fixtures/profiles/local/profile.source.json",
@@ -129,6 +130,25 @@ test("version drift gate keeps caption root and provenance guidance in sync", (t
   assert.match(
     result.stderr,
     /docs\/migration-v1\.3\.1\.md: caption validation example must declare its profile root/,
+  );
+});
+
+test("version drift gate keeps the public roadmap linked and governed", (t) => {
+  const directory = copyVersionSurface(t);
+  const roadmapPath = path.join(directory, "docs/roadmap.md");
+  const roadmap = fs.readFileSync(roadmapPath, "utf8")
+    .replaceAll("不是发布时间或版本承诺", "时间承诺省略");
+  fs.writeFileSync(roadmapPath, roadmap);
+
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/check-version-drift.mjs", "--root", directory],
+    {cwd: root, encoding: "utf8"},
+  );
+  assert.equal(result.status, 1);
+  assert.match(
+    result.stderr,
+    /docs\/roadmap\.md: missing governance marker/,
   );
 });
 

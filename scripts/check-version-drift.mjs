@@ -50,6 +50,7 @@ const readmeEnglish = read("README.en.md");
 const changelog = read("CHANGELOG.md");
 const architectureSvg = read("docs/architecture.svg");
 const migrationGuide = read("docs/migration-v1.3.1.md");
+const roadmap = read("docs/roadmap.md");
 const captionReference = read("references/captions-terminology.md");
 
 const skillVersion = skill.match(/^metadata:\s*\n\s+version:\s*([^\s]+)\s*$/m)?.[1];
@@ -105,6 +106,22 @@ for (const [name, document] of [["README.md", readme], ["README.en.md", readmeEn
 if (!readme.includes("七执行状态")) errors.push("README.md: missing seven-state capability wording");
 if (!readmeEnglish.includes("seven-state")) errors.push("README.en.md: missing seven-state capability wording");
 if (readmeEnglish.includes("five-state")) errors.push("README.en.md: stale five-state capability wording");
+for (const [name, document] of [["README.md", readme], ["README.en.md", readmeEnglish]]) {
+  if (!document.includes("docs/roadmap.md")) {
+    errors.push(`${name}: missing public roadmap link`);
+  }
+}
+for (const marker of [
+  "V1.3.1",
+  "Rule Registry",
+  "Creator OS IR",
+  "live capability canary",
+  "不是发布时间或版本承诺",
+]) {
+  if (!roadmap.includes(marker)) {
+    errors.push(`docs/roadmap.md: missing governance marker ${marker}`);
+  }
+}
 for (const [name, document] of [
   ["README.md", readme],
   ["README.en.md", readmeEnglish],

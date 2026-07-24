@@ -197,4 +197,4 @@ with code `2` instead of being ignored.
 - Existing `--terms` behavior remains; it still overrides `terminologyFile`.
 - Existing legacy text input remains migration-only and cannot claim structured provenance.
 - No live ChatCut mutation or export is added in this release.
-- Rule Registry, unified IR/SRT planning, recoverable executor, and live capability canaries remain later roadmap slices. Until a current live canary exists, host-runtime claims remain `unverified`.
+- Rule Registry, unified IR/SRT planning, recoverable executor, and live capability canaries remain later roadmap slices. Until a current live canary exists, host-runtime claims remain `unverified`. Their order, acceptance gates, and explicit non-commitments are tracked in the [public engineering roadmap](roadmap.md).

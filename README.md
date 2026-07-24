@@ -62,7 +62,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-`npm run verify` 会执行离线全仓 Schema、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 产物可能含项目级标识，只能写在 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)。
+`npm run verify` 会执行离线全仓 Schema、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 产物可能含项目级标识，只能写在 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](docs/migration-v1.3.1.md)，后续工程顺序与验收边界见 [公开工程路线图](docs/roadmap.md)。
 
 ## 让它变成你的(本地个人层)
 
@@ -109,6 +109,8 @@ docs/
   architecture.svg              增量层全景框架图(本页首图)
   theme-preview.png             8 主题配色总览
   contract-baseline.md          本轮契约止血基线与 fail-closed 原则
+  migration-v1.3.1.md           source/resolved profile 与字幕契约迁移说明
+  roadmap.md                    已交付/下一步/规划/研究的公开工程路线图
 ```
 
 ## 📋 版本记录

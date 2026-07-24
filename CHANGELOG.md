@@ -1,5 +1,12 @@
 # CHANGELOG · majia-chatcut-koubo
 
+## Unreleased
+
+**规划与治理**
+
+- 新增 [公开工程路线图](docs/roadmap.md)：以 V1.3.1 为已交付基线，明确 Rule Registry、Creator OS IR/SRT、预览审批、可恢复执行、证据链、媒体 QA、平台交付与反馈治理的顺序和 Definition of Done。
+- README、迁移指南与版本漂移门禁同步接入路线图；路线图不承诺日期或未经 live canary 验证的 ChatCut runtime 能力。
+
 ## V1.3.1（2026-07-24）— 契约止血 + 可复现发布地基
 
 按本轮审查路线图的前五个 PR 切片完成第一轮工程化止血；保留旧字幕 CLI 与 `profile.schema.json` 兼容入口，不引入 ChatCut 写入执行器。

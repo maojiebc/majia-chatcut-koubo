@@ -48,7 +48,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-The release gate validates every governed JSON document offline, runs the regression suite, checks theme contrast, asset geometry/references, public-content safety, and version drift. New authored profiles should use `schemas/profile.source.schema.json`; `profile.schema.json` remains only as a compatibility shim. Resolver artifacts can contain project-scoped identifiers, must stay inside `--root`, and are ignored by git by default. See the [V1.3.1 migration guide](docs/migration-v1.3.1.md).
+The release gate validates every governed JSON document offline, runs the regression suite, checks theme contrast, asset geometry/references, public-content safety, and version drift. New authored profiles should use `schemas/profile.source.schema.json`; `profile.schema.json` remains only as a compatibility shim. Resolver artifacts can contain project-scoped identifiers, must stay inside `--root`, and are ignored by git by default. See the [V1.3.1 migration guide](docs/migration-v1.3.1.md) and the [public engineering roadmap](docs/roadmap.md).
 
 ## Make it yours
 
