@@ -38,6 +38,23 @@ export const PATH_SCHEMA_MAP = Object.freeze({
   "assets/theme-kit/package.json": "schemas/theme-package.schema.json",
   "assets/theme-kit/tokens/layouts.json":
     "schemas/theme-layouts.schema.json",
+  "extensions/registry.json": "schemas/extension-registry.schema.json",
+  "extensions/cuttips-kb/manifest.json":
+    "schemas/extension-manifest.schema.json",
+  "extensions/cuttips-kb/data/categories.json":
+    "schemas/extension-array.schema.json",
+  "extensions/cuttips-kb/data/knowledge-items.json":
+    "schemas/extension-array.schema.json",
+  "extensions/cuttips-kb/data/rules.json":
+    "schemas/extension-array.schema.json",
+  "extensions/cuttips-kb/data/sources.json":
+    "schemas/extension-array.schema.json",
+  "extensions/cuttips-kb/data/stats.json":
+    "schemas/cuttips-stats.schema.json",
+  "extensions/video-shotcraft/manifest.json":
+    "schemas/extension-manifest.schema.json",
+  "extensions/video-shotcraft/allowlist.json":
+    "schemas/extension-array.schema.json",
 });
 
 const BASELINE_DOCUMENT_SCHEMA = {

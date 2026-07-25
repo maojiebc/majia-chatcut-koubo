@@ -1,14 +1,14 @@
 # majia-chatcut-koubo
 
-![Skill Version](https://img.shields.io/badge/skill-v1.4.1-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.5.0-blue)
 
 > **ChatCut口播 · 马甲实战版** — the install slug stays `majia-chatcut-koubo`.
 
 **A verifiable production system for agent-driven talking-head editing** — an increment layer above the official ChatCut skills, joining visual craft with governed rules, IR/SRT planning, approval, recoverable execution, evidence, media QA, delivery, and feedback.
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.4.1 verifiable production system: Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance, with Capability Profile blocking unproven live routes" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.5.0 verifiable production system with governed optional knowledge and shot-recipe providers" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.4.1 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.5.0 · 8 talking-head color themes overview (each with an agent playbook)" width="100%">
 
 ## What's inside
 
@@ -29,6 +29,7 @@
 - **Distribution pack foundation** — platform rules carry source, observation, expiry, and confidence metadata; stale hard rules degrade to advisory, deliverables bind to master/revision/content-truth hashes, and publishing is forbidden.
 - **Feedback governance foundation** — events retain only anonymous hashes, stable failure signatures, and allowlisted metrics; update suggestions require repeated samples, evidence, counterexamples, an owner, human review, and rollback, with no online auto-apply route.
 - **Field report library** — `03-实操迭代与踩坑/` append-only cases preserve real production failures, ChatCut product issues, evidence levels, and workarounds; matching cases must be read before an iteration and the adopted/rejected decisions must be logged before experience is promoted into formal rules.
+- **Optional extension layer** — `extensions/cuttips-kb/` bundles 198 public source records, 48 queryable knowledge cards, and 14 machine rules; `extensions/video-shotcraft/` exposes a pinned, eight-card allowlist and local-checkout inspector for external Remotion shot recipes. Extensions only propose candidates and cannot override content truth, privacy, captions, evidence, composition ownership, or release gates.
 
 > **Live-environment boundary:** the repository validates offline schemas, anonymous fixtures, a fake adapter, report audits, and fail-closed routing. A real ChatCut adapter, real media probing/rendering, and platform publishing remain unverified and are never run automatically.
 
@@ -62,6 +63,7 @@ npm run validate:capabilities
 npm run validate:media
 npm run validate:distribution
 npm run validate:feedback
+npm run validate:extensions
 
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \
@@ -84,6 +86,8 @@ The release gate validates every governed JSON document offline, audits the Rule
 The numbers in this pack (22 chars/line, 330px circle window, `magnification≈0.30`) are the author's measured starting points on his own footage — not cross-footage truths. Copy the templates in `templates/`, validate on a sample cut of your own material, and fill in your numbers. Bump the profile version when they change; never overwrite old data.
 
 ## 📋 Version History
+
+**V1.5.0 (2026-07-25)** — Added a governed optional extension layer: the 198-source talking-head encyclopedia now ships as queryable cards, rules, and public source metadata; Video Shotcraft is integrated as an external provider pinned to a full commit with an Apache-2.0 declaration, an eight-card allowlist, and a local-checkout inspector. Checksums, references, redaction, and provider contracts are part of the release gate.
 
 **V1.4.1 (2026-07-24)** — Added the Visual Decision Contract and four governed visual-selection rules: one primary task per segment, transparent six-axis scoring, human review below threshold, and no generated visual impersonating evidence. Also added an append-only `03-实操迭代与踩坑/` library with mandatory pre-iteration reading and receipts; the first public-sanitized AI Hero case records the failure chain, three evidence surfaces, and seven ChatCut product issues.
 

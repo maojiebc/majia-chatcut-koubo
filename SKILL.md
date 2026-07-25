@@ -1,8 +1,8 @@
 ---
 name: majia-chatcut-koubo
-description: ChatCut 口播/录屏视频代理剪辑的可验证生产系统——官方 ChatCut skill 之上的增量层。覆盖双画面版式、主题配色、过渡、人脸取景与字幕门禁，以及 Rule Registry、Creator OS IR/Rational Time、SRT 与可解释规划、预览审批、可恢复 fake adapter/证据链、本地 Media QA/导出授权、多平台交付包、反馈治理和 capability live gate。触发：ChatCut 剪口播、直播切片、竖版重构、字幕纠错、批量规划、预览审批、恢复执行、媒体 QA、交付审计。前置：需官方 ChatCut skill / MCP。边界：真实 ChatCut adapter、真实媒体探针/渲染与平台发布须另有当前环境证据，本 skill 不自动执行。
+description: ChatCut 口播/录屏视频代理剪辑的可验证生产系统——官方 ChatCut skill 之上的增量层。覆盖双画面版式、主题配色、过渡、人脸取景与字幕门禁，以及 Rule Registry、Creator OS IR/Rational Time、SRT 与可解释规划、预览审批、可恢复 fake adapter/证据链、本地 Media QA/导出授权、多平台交付包、反馈治理、capability live gate，并可按需查询 198 份来源剪辑百科或调用受约束的外部镜头配方。触发：ChatCut 剪口播、直播切片、竖版重构、字幕纠错、批量规划、预览审批、恢复执行、媒体 QA、交付审计、口播剪辑技巧检索、外部 Remotion MG。前置：需官方 ChatCut skill / MCP。边界：真实 ChatCut adapter、真实媒体探针/渲染与平台发布须另有当前环境证据，本 skill 不自动执行。
 metadata:
-  version: 1.4.1
+  version: 1.5.0
 ---
 
 # ChatCut口播 · 马甲实战版
@@ -13,7 +13,7 @@ ChatCut 口播剪辑的可验证生产系统。它把 ChatCut 当作最终可继
 
 ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcription / verification / known-errors / create-motion-graphics 等），**工具怎么用一律以官方为准**，参数以当前 MCP 工具实时描述为真相源。
 
-本包只写官方没有的：**剪成什么样算好**（版式、配色、动效节奏、构图标准）、**如何安全完成**（规则/IR、审批、幂等恢复、证据和发布授权）、**实测踩坑护栏**（坐标系陷阱、fps 错位、验证方法）与**可复用资产**。与官方重复处以官方为准。
+本包只写官方没有的：**剪成什么样算好**（版式、配色、动效节奏、构图标准）、**如何安全完成**（规则/IR、审批、幂等恢复、证据和发布授权）、**实测踩坑护栏**（坐标系陷阱、fps 错位、验证方法）、**可复用资产**与**可选外挂资源包**。与官方重复处以官方为准；外挂只能扩大候选，不能改变工具真相或硬规则。
 
 ## 当前生产闭环
 
@@ -56,7 +56,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 3. **剪后转写与字幕**：删除/重排/变速后必须刷新剪后转写；字幕见 `02-剪辑方法手册/07-字幕与术语.md`——第一步永远是查字幕源绑定（挂在翻译变体轨上=P0，先切回原文源）。开工先扫素材目录找用户精校逐字稿：有则它是字幕文本唯一真相源，禁止在 ASR 错词上自行猜测修正（数字吞位/繁体/专名是 ASR 三大高发）。
 4. **样片闸门（渐进交付）**：横版先做开头约 18–23 秒、竖版 20–30 秒样片，确认后才批量；**长片（>5 分钟）升级为 60 秒预览闸——先把开头 60 秒做成全层完成态（剪辑+状态机+过渡+字幕+包装+隐私），请用户播放验收，通过后才向后推进**；批量中每完成一幕渲染抽查帧，不整片铺完才验。**验收单元 = 完整成片体验（画面+动画+字幕+隐私），字幕修正随幕完成，不设整片末尾统一校对环节。**任何一项失败先修样片，不批量复制错误。
 5. **画面结构**：双画面版式与七执行状态见 `02-剪辑方法手册/02-双画面版式.md`；人脸取景见 `02-剪辑方法手册/06-人脸取景与三层合成.md`；批量切片与逐片精修先读 `02-剪辑方法手册/01-逐片执行手册.md`。
-6. **动效与包装**：字幕锁定后才做过渡、B-roll、MG；过渡工程见 `02-剪辑方法手册/05-过渡动效.md`；配色见 `02-剪辑方法手册/03-主题配色.md`。静态章节卡单调时，可由外部 MG 工具（如 hyperframes）产 MP4 后 `import_media` 替换；音效/BGM 走 ChatCut 素材库与生成工具，音量不夺 anchor。
+6. **动效与包装**：字幕锁定后才做过渡、B-roll、MG；过渡工程见 `02-剪辑方法手册/05-过渡动效.md`；配色见 `02-剪辑方法手册/03-主题配色.md`。需要补充方法候选或外部镜头配方时先读 `02-剪辑方法手册/11-外挂知识包与镜头配方.md`：百科只作 advisory，Shotcraft 只允许锁定 revision 的白名单卡片，且不得越过唯一合成 owner、证据和回退合同。静态章节卡单调时，可由外部 MG 工具（如 hyperframes）产 MP4 后 `import_media` 替换；音效/BGM 走 ChatCut 素材库与生成工具，音量不夺 anchor。
 7. **验收**：结构回读 + 合成像素 + 实际试听三证齐才算完成；帧率以 ffprobe 读实际导出文件为准。请用户播放验收时按 `02-剪辑方法手册/09-ChatCut宿主实测.md` 双端预览路由：本地 ChatCut Mac 客户端优先 → 未装提示一次可下载（不强推）→ 浏览器兜底（明示网页端可能卡顿）；代理自己的像素证据始终 = 云端渲染帧。
 
 ## 成片红线
@@ -89,8 +89,9 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 | ChatCut 宿主实测坑：crop 语义、两步提交、编辑器/云端渲染差异、MG 媒体槽失效、窗口 reframe shader、字幕分页引擎、音频层基线、隐私扫描 SOP、双端预览路由 | [ChatCut 宿主实测行为档案](02-剪辑方法手册/09-ChatCut宿主实测.md) |
 | 真实项目复盘、ChatCut 产品问题、编辑器与代码/云端画面不一致、外部 MG/Hyperframes、共享模板缓存、导出长任务 | [实战经验库](03-实操迭代与踩坑/README.md) + 命中标签的案例 |
 | 连接报错、OAuth 失效、打开既有项目、转写挂死、上下文压缩恢复 | [故障恢复手册](02-剪辑方法手册/10-故障恢复.md) |
+| 查询 198 份来源剪辑百科、检索知识卡/规则/来源、选择或验证 Video Shotcraft/Remotion 外部 MG 配方 | [外挂知识包与镜头配方](02-剪辑方法手册/11-外挂知识包与镜头配方.md) + `extensions/` |
 
-可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、视觉决策、词表、兼容与资产契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）、`scripts/validate-visual-decision-plan.mjs`（视觉候选评分/证据/审批 gate）。发布前统一跑 `npm run verify`。
+可复用资产：`assets/compositions.json`（8 版式坐标快照）、`assets/theme-kit/`（8 主题 token+SVG 底图+可运行组件）、`extensions/cuttips-kb/`（198 来源、48 知识卡、14 规则的随包查询层）、`extensions/video-shotcraft/`（锁定 revision 的外部镜头白名单与检查器）、`templates/`（词表/实测参数/宿主兼容契约模板 + 本地个人层模板，装进你自己的数字）、`rules/policy.json`（不可由 profile 放宽的字幕发布策略）、`schemas/`（source/resolved profile、字幕、视觉决策、词表、兼容、资产与外挂契约）、`src/cli/resolve-profile.mjs`（profile 继承解析与来源追踪）、`scripts/validate-caption-pages.mjs`（字幕机械校验）、`scripts/validate-visual-decision-plan.mjs`（视觉候选评分/证据/审批 gate）、`scripts/validate-extensions.mjs`（外挂来源、checksum、引用、脱敏和白名单 gate）。发布前统一跑 `npm run verify`。
 
 ## 让它变成你自己的（本地个人层契约）
 
@@ -102,6 +103,7 @@ ChatCut 插件自带官方 skill（plugin-basics / talking-head-guide / transcri
 
 ## 📋 版本记录
 
+- **v1.5.0（2026-07-25）**：新增可选外挂层：把 198 份公开来源蒸馏为随包可查询的 48 张知识卡、14 条规则和来源索引；把 Video Shotcraft 接成锁定 commit、Apache-2.0 声明、8 卡白名单、可验证本地 checkout 的外部镜头提供器。外挂只产生 advisory 候选，硬规则、内容真相、证据、唯一合成 owner、审批和回退继续优先；新增专项校验并进入 `npm run verify`。
 - **v1.4.1（2026-07-24）**：新增 Visual Decision Contract 与 4 条视觉决策规则，低分候选转人工且生成图不得冒充证据；同时新增追加式 `03-实操迭代与踩坑/` 实战经验库、迭代前必读和读后留痕协议，首个案例记录 AI Hero 母片精修失败链、三证据面与 7 条 ChatCut 产品问题。
 - **v1.4.0（2026-07-24）**：升级为可验证生产系统；交付 Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate；真实适配器/媒体探针/平台发布仍明确未验证且不自动执行。
 - **v1.3.1（2026-07-24）**：契约止血与可复现发布地基；Node/lockfile/CI、离线 JSON Schema、source/resolved profile、字幕 P0、资产/对比度/版本漂移门禁。

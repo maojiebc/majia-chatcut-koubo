@@ -142,6 +142,12 @@ if (packageManifest.scripts?.["validate:feedback"] !== "node scripts/validate-fe
 if (!packageManifest.scripts?.verify?.includes("npm run validate:feedback")) {
   errors.push("package.json: verify must include the feedback governance gate");
 }
+if (packageManifest.scripts?.["validate:extensions"] !== "node scripts/validate-extensions.mjs") {
+  errors.push("package.json: validate:extensions must invoke the extension pack gate");
+}
+if (!packageManifest.scripts?.verify?.includes("npm run validate:extensions")) {
+  errors.push("package.json: verify must include the extension pack gate");
+}
 if (ruleRegistry.policyVersion !== policyVersion) {
   errors.push(`rules/registry.json: policyVersion ${ruleRegistry.policyVersion ?? "<missing>"} != hard policy ${policyVersion}`);
 }

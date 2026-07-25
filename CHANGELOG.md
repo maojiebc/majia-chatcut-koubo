@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## V1.5.0（2026-07-25）— 可选外挂知识与镜头配方层
+
+- 新增 `extensions/registry.json`，把外挂统一声明为可选资源；核心 skill 在没有外挂时仍可完整运行。
+- 将 `majia-zimeiti` 的口播剪辑百科以公开脱敏快照接入 `extensions/cuttips-kb/`：12 类、48 张知识卡、14 条机器规则、198 条来源元数据，锁定来源 commit、生成时间、数量与逐文件 SHA-256。
+- 新增机器查询 CLI，可按文本、类别、标签、规则强度和资源类型检索，并保留适用/禁用条件、QA、回退和来源引用供 AI 决策。
+- 将 `Vincentwei1021/video-shotcraft` 接为 external candidate provider：锁定完整 commit，声明 Apache-2.0，仅启用 8 张适合知识口播的卡片；每项都有语义信号、禁用条件、频率、render mode、唯一合成 owner 和静态回退。
+- 不复制 Shotcraft 整仓、示例音频或远端依赖；新增本地 checkout 检查器，revision、library、卡片或 style 漂移即 fail closed。
+- 新增 `02-剪辑方法手册/11-外挂知识包与镜头配方.md`，明确硬规则优先级、AI 候选合同、证据与知识引用分离、fps 秒域归一化、单一合成 owner 和实际 ChatCut 合成帧验收。
+- 新增外挂专项校验和回归测试，并接入全仓 JSON Schema、公开安全、版本漂移和 `npm run verify`。
+
 ## V1.4.1（2026-07-24）— 视觉决策与实战经验库
 
 **视觉决策与规则吸收**

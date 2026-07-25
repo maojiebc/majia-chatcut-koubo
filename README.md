@@ -1,6 +1,6 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.4.1-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.5.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 > **ChatCut口播 · 马甲实战版** — 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令保持不变。
@@ -20,9 +20,9 @@
 
 `src / scripts / schemas / fixtures / tests` 是技术内核，普通经验维护通常不用碰。完整的“我该改哪个文件”对照表在 [维护地图](01-从这里开始/README.md)。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.4.1 可验证生产系统：Rule Registry → Creator OS IR/SRT → Explainable/Visual Decision Planning → Preview Approval → Recoverable Executor/Evidence → Media QA → Distribution Pack → Field Reports/Feedback Governance，并由 Capability Profile 阻断无证据 live route" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.5.0 可验证生产系统：核心门禁优先，外挂层只提供受治理候选" width="100%">
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.4.1 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.5.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
 
 ## 这个包解决什么
 
@@ -49,6 +49,7 @@
 - **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
 - **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
 - **实战经验库** — `03-实操迭代与踩坑/` 追加保存真实任务的完整失败链、ChatCut 产品问题、证据等级与绕行方案；迭代前必读、读后留痕，积累成批后再晋升正式规则和版本
+- **可选外挂资源层** — `extensions/cuttips-kb/` 随包提供 198 条公开来源索引、48 张知识卡和 14 条机器规则；`extensions/video-shotcraft/` 以锁定 commit、8 卡白名单和本地检查器接入外部 Remotion 镜头配方。两者只产生候选，不覆盖内容真相、隐私、字幕、证据、唯一合成 owner 或发布门禁
 - **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
 - **本地个人层** — `~/.config/majia-chatcut-koubo/` 叠加个人 profile/词表/审美基线;品牌词与实测数字留在本地,公开包保持通用
 
@@ -108,6 +109,9 @@ npm run validate:distribution
 # 审计匿名反馈事件与人工发布建议队列
 npm run validate:feedback
 
+# 校验外挂快照 checksum、引用、脱敏、版本锁和镜头白名单
+npm run validate:extensions
+
 # 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
 node src/cli/resolve-profile.mjs \
   --profile <profile.source.json> \
@@ -149,6 +153,7 @@ CHANGELOG.md                 正式版本变更记录
 assets/                      版式、主题 token、SVG 与可运行组件
 templates/                   词表、参数、兼容性与本地个人层模板
 rules/                       不可随意放宽的机器硬规则
+extensions/                  可选百科知识包与外部镜头配方适配层
 schemas/                     JSON 数据合同
 fixtures/                    匿名测试样例和正反例
 src/                         核心程序实现
@@ -159,6 +164,8 @@ tests/                       自动化回归测试
 日常积累剪辑经验时，通常只需要修改 `03-实操迭代与踩坑/`；不要从 `src/` 或 `schemas/` 开始找。
 
 ## 📋 版本记录
+
+**V1.5.0（2026-07-25）** — 新增可选外挂资源层：198 份公开来源蒸馏为随包可查询的 48 张知识卡、14 条规则和来源索引；Video Shotcraft 以锁定 commit、Apache-2.0 声明、8 卡白名单和本地 checkout 检查器接入。外挂只提供 advisory 候选，专项 checksum、引用、脱敏与白名单验证进入完整发布门禁。
 
 **V1.4.1（2026-07-24）** — 新增 Visual Decision Contract 与 4 条视觉决策规则：每段单一主视觉任务、六维透明评分、低分转人工、生成图不得冒充证据；同时新增追加式 `03-实操迭代与踩坑/` 实战经验库、迭代前必读与读后留痕协议，首个公开脱敏案例记录 AI Hero 母片精修失败链、三证据面和 7 条 ChatCut 产品问题。
 
