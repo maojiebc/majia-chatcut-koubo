@@ -128,6 +128,36 @@ function auditExecutionPlan(plan) {
   }
 }
 
+function auditExecutionGate(executionPlan, approvalReport, executionGate) {
+  if (approvalReport?.canExecute) return;
+  if (
+    executionGate?.kind !== "bounded-sample"
+    || executionGate.canExecute !== true
+    || executionGate.planHash !== executionPlan.planHash
+    || executionGate.timelineRevision !== executionPlan.timelineRevision
+    || !Array.isArray(executionGate.scope)
+    || executionGate.scope.length === 0
+  ) {
+    throw new ExecutionError(
+      "EXEC_PREVIEW_NOT_APPROVED",
+      "execution requires either current preview approval or a bounded sample gate",
+    );
+  }
+  const allowedScope = new Set(executionGate.scope);
+  for (const operation of executionPlan.operations) {
+    if (
+      !["low", "medium"].includes(operation.risk)
+      || !operation.scopeRef
+      || !allowedScope.has(operation.scopeRef)
+    ) {
+      throw new ExecutionError(
+        "EXEC_SAMPLE_GATE_SCOPE_INVALID",
+        "bounded sample execution cannot include high-risk or out-of-scope operations",
+      );
+    }
+  }
+}
+
 function requireUniqueBinding(objects) {
   if (objects.length > 1) {
     throw new ExecutionError(
@@ -261,16 +291,12 @@ export class RecoverableExecutor {
   execute({
     executionPlan,
     approvalReport,
+    executionGate,
     journal: suppliedJournal,
     evidenceManifest: suppliedEvidence,
   }) {
     auditExecutionPlan(executionPlan);
-    if (!approvalReport?.canExecute) {
-      throw new ExecutionError(
-        "EXEC_PREVIEW_NOT_APPROVED",
-        "execution requires an open preview approval gate",
-      );
-    }
+    auditExecutionGate(executionPlan, approvalReport, executionGate);
     const journal = suppliedJournal
       ? clone(suppliedJournal)
       : createJournal(executionPlan);

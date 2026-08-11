@@ -9,3 +9,6 @@ coverage/
 # Profile resolver outputs may contain project-scoped identifiers.
 *.resolved.json
 *.merge-trace.json
+
+# Per-project run state may contain timeline identifiers and local evidence.
+.majia-koubo/

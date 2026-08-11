@@ -12,6 +12,9 @@
 | 修改主题颜色或版式坐标 | `assets/` | 这是半人工、半程序区，修改后必须运行全量验证 |
 | 修改机器必须遵守的硬规则 | `rules/` | 同时补 schema、正反 fixture 和测试，不直接手改一句就结束 |
 | 修改安装后 Agent 的总行为 | `SKILL.md` | 先读实操案例；修改后检查所有链接和版本面 |
+| 修改一句话入口或主流程 | `agents/`、`workflows/`、`src/orchestration/` | 同步入口路由、状态、风险、样片、恢复和交付测试 |
+| 修改稳剪/快剪/长片/录屏默认值 | `profiles/` | 默认只能保持或收紧安全边界，并更新匿名正反例 |
+| 修改跨会话状态和报告 | `schemas/runtime/`、`templates/runtime/` | 同步 Schema、模板、CLI、故障场景和兼容检查 |
 | 发布一批正式更新 | `CHANGELOG.md`、`package.json` | 经验积累不等于发版；达到一批后再统一升级版本 |
 
 ## 四个中文维护区
@@ -33,6 +36,9 @@
 | `fixtures/` | 测试用匿名样例 | 否 |
 | `tests/` | 自动化回归测试 | 否 |
 | `templates/` | 给用户复制的模板 | 偶尔 |
+| `agents/` | 安装后的默认一句话入口 | 偶尔 |
+| `workflows/` | 稳剪、快剪、专业增强和恢复说明 | 偶尔 |
+| `profiles/` | 四套可复现剪辑默认方案 | 谨慎 |
 | `assets/` | 版式、主题和视觉资产 | 按需 |
 | `rules/` | 机器硬规则 | 谨慎 |
 
@@ -53,3 +59,18 @@
 ```
 
 原则只有一句：案例先积累，方法后晋升，硬规则最后机器化。
+
+## V1.6 主流程改动后的最小检查
+
+```bash
+npm run validate:runtime-contracts
+npm run test:orchestration
+npm run test:risk-policy
+npm run test:run-state
+npm run test:starter-prompts
+npm run smoke:one-click:fake
+npm run validate:docs-routing
+npm run verify
+```
+
+真实 ChatCut 验证结果单独写入 `reports/live-canary-v1.6.0.json`。匿名模拟通过不能把真实状态从 `UNVERIFIED` 改为通过。

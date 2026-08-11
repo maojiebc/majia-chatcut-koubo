@@ -1,0 +1,6 @@
+# SkillHub enforces a 200-file package cap. Keep user/runtime validators in
+# exported packages and omit CI-only validators; clones retain every file.
+scripts/validate-*.mjs export-ignore
+scripts/validate-caption-pages.mjs -export-ignore
+scripts/validate-live-canary-claim.mjs -export-ignore
+scripts/validate-runtime-fixtures.mjs -export-ignore

@@ -69,6 +69,13 @@
           "desiredHash": {
             "$ref": "creator-os-common.schema.json#/$defs/sha256"
           },
+          "risk": {
+            "enum": ["low", "medium", "high"]
+          },
+          "scopeRef": {
+            "type": "string",
+            "pattern": "^logical:[a-z0-9-]+$"
+          },
           "desiredState": {
             "type": "object",
             "minProperties": 1

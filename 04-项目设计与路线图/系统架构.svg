@@ -1,101 +1,131 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1080" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#718096"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F8FF"/>
+      <stop offset="0.52" stop-color="#FAFBFF"/>
+      <stop offset="1" stop-color="#F3FBF8"/>
+    </linearGradient>
+    <linearGradient id="prompt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#155E75"/>
+    </linearGradient>
+    <linearGradient id="sample" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF8E8"/>
+      <stop offset="1" stop-color="#FFFDF7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#102A43" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#8A9BB1"/>
     </marker>
     <style>
-      .title{fill:#102A43;font-weight:700}.body{fill:#334E68}.muted{fill:#627D98}
-      .cardTitle{fill:#102A43;font-size:18px;font-weight:700}
-      .cardBody{fill:#486581;font-size:14px}
-      .chip{fill:#FFFFFF;font-size:13px;font-weight:700}
-      .section{fill:#243B53;font-size:15px;font-weight:700}
+      .ink{fill:#102A43}.body{fill:#334E68}.muted{fill:#718096}
+      .tiny{font-size:13px}.small{font-size:15px}.label{font-size:16px;font-weight:700}
+      .cardTitle{font-size:18px;font-weight:700;fill:#102A43}.cardBody{font-size:14px;fill:#52677F}
+      .chip{font-size:13px;font-weight:700;fill:#FFFFFF}.mono{font-family:'SFMono-Regular',Consolas,monospace}
     </style>
   </defs>
 
-  <rect width="1280" height="1080" fill="#F7FAFC"/>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1450" cy="70" r="210" fill="#DDF5EF" opacity="0.48"/>
+  <circle cx="95" cy="980" r="260" fill="#E5EEFF" opacity="0.65"/>
 
-  <text x="60" y="62" class="title" font-size="34">ChatCut口播 · 可验证生产系统</text>
-  <text x="60" y="98" class="body" font-size="18">规则 → IR/SRT/视觉决策 → 可选知识/镜头候选 → 审批 → 可恢复执行 → 媒体 QA → 交付 → 经验治理</text>
-  <rect x="1080" y="42" width="140" height="34" rx="17" fill="#0F766E"/>
-  <text x="1150" y="64" class="chip" text-anchor="middle">v1.5.0</text>
+  <text x="80" y="74" class="ink" font-size="38" font-weight="800">一句话稳剪，确认后再扩展</text>
+  <text x="80" y="108" class="body" font-size="18">ChatCut 官方能力之上的安全默认、审批、恢复与证据交付层</text>
+  <rect x="1380" y="48" width="140" height="38" rx="19" fill="#102A43"/>
+  <text x="1450" y="73" class="chip" text-anchor="middle">v1.6.0</text>
 
-  <rect x="60" y="130" width="1160" height="78" rx="14" fill="#E8F1E4" stroke="#7A9B61" stroke-width="1.5"/>
-  <text x="86" y="162" class="title" font-size="20">官方 ChatCut skill / MCP 工具面</text>
-  <text x="86" y="190" class="body" font-size="15">工具与参数以当前宿主描述为真相源；本 skill 提供生产纪律、离线契约与安全路由，不冒充官方工具实现</text>
-
-  <path d="M640,208 L640,244" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
-
-  <text x="60" y="268" class="section">① 规则与内容计划 · 机器可读的生产真相</text>
-  <g>
-    <rect x="60" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
-    <text x="82" y="320" class="cardTitle">Rule Registry</text>
-    <text x="82" y="350" class="cardBody">18 条 runtime rule · 六个治理域</text>
-    <text x="82" y="375" class="cardBody">hard policy 不可被 profile 放宽</text>
-    <text x="82" y="400" class="cardBody">稳定 ID / 来源 / waiver / fallback</text>
-
-    <rect x="460" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
-    <text x="482" y="320" class="cardTitle">Creator OS IR + Rational Time</text>
-    <text x="482" y="350" class="cardBody">project / transcript / edit / state / owner</text>
-    <text x="482" y="375" class="cardBody">caption / evidence · [start,end)</text>
-    <text x="482" y="400" class="cardBody">revision / coverage / owner 跨文档校验</text>
-
-    <rect x="860" y="286" width="360" height="146" rx="14" fill="#E6FFFA" stroke="#319795" stroke-width="1.5"/>
-    <text x="882" y="320" class="cardTitle">SRT + Planning + Extensions</text>
-    <text x="882" y="350" class="cardBody">SRT 人工视图 + sidecar 机器真相</text>
-    <text x="882" y="375" class="cardBody">可复算信号 + Visual Decision Contract</text>
-    <text x="882" y="400" class="cardBody">百科 / Shotcraft 只供候选 · 低分转人工</text>
+  <rect x="80" y="140" width="1440" height="92" rx="22" fill="url(#prompt)" filter="url(#shadow)"/>
+  <text x="112" y="180" fill="#D8FFFA" font-size="15" font-weight="700">用户只需要说</text>
+  <text x="112" y="211" fill="#FFFFFF" font-size="25" font-weight="750">“用马甲稳剪当前口播”</text>
+  <g transform="translate(900 166)">
+    <rect width="130" height="38" rx="19" fill="#FFFFFF" opacity="0.15"/>
+    <text x="65" y="25" class="chip" text-anchor="middle">稳剪 stable</text>
+    <rect x="146" width="130" height="38" rx="19" fill="#FFFFFF" opacity="0.15"/>
+    <text x="211" y="25" class="chip" text-anchor="middle">快剪 fast</text>
+    <rect x="292" width="150" height="38" rx="19" fill="#FFFFFF" opacity="0.15"/>
+    <text x="367" y="25" class="chip" text-anchor="middle">专业增强 pro</text>
   </g>
 
-  <path d="M640,432 L640,474" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="80" y="278" class="ink" font-size="17" font-weight="750">主流程</text>
+  <text x="1508" y="278" class="muted tiny" text-anchor="end">默认停在可审阅时间线，不自动导出或发布</text>
 
-  <text x="60" y="498" class="section">② 审批与执行 · 先批准、可恢复、证据先于完成</text>
-  <g>
-    <rect x="60" y="516" width="360" height="146" rx="14" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
-    <text x="82" y="550" class="cardTitle">Preview Approval</text>
-    <text x="82" y="580" class="cardBody">首 60 秒 / 复杂段 / 隐私段 / 片尾</text>
-    <text x="82" y="605" class="cardBody">actor + scope + plan/style/timeline 指纹</text>
-    <text x="82" y="630" class="cardBody">任何漂移自动关闭执行门</text>
-
-    <rect x="460" y="516" width="360" height="146" rx="14" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
-    <text x="482" y="550" class="cardTitle">Recoverable Executor + Evidence</text>
-    <text x="482" y="580" class="cardBody">幂等 / revision lock / 写后回读</text>
-    <text x="482" y="605" class="cardBody">scene compensation / checkpoint / resume</text>
-    <text x="482" y="630" class="cardBody">依赖变化递归失效下游 evidence</text>
-
-    <rect x="860" y="516" width="360" height="146" rx="14" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
-    <text x="882" y="550" class="cardTitle">Capability Profile + Live Gate</text>
-    <text x="882" y="580" class="cardBody">build / schema hash / TTL / probes</text>
-    <text x="882" y="605" class="cardBody">content-free canary + per-capability fallback</text>
-    <text x="882" y="630" class="cardBody">无当前证据：live=false / unverified</text>
+  <g filter="url(#shadow)">
+    <rect x="80" y="300" width="178" height="148" rx="18" fill="#FFFFFF" stroke="#D6E1EE"/>
+    <rect x="280" y="300" width="178" height="148" rx="18" fill="#FFFFFF" stroke="#D6E1EE"/>
+    <rect x="480" y="300" width="178" height="148" rx="18" fill="url(#sample)" stroke="#F4C86A" stroke-width="2"/>
+    <rect x="680" y="300" width="178" height="148" rx="18" fill="#FFF8E8" stroke="#F59E0B" stroke-width="2"/>
+    <rect x="880" y="300" width="178" height="148" rx="18" fill="#FFFFFF" stroke="#D6E1EE"/>
+    <rect x="1080" y="300" width="178" height="148" rx="18" fill="#FFFFFF" stroke="#D6E1EE"/>
+    <rect x="1280" y="300" width="240" height="148" rx="18" fill="#EEFBF6" stroke="#65BFA7" stroke-width="2"/>
   </g>
 
-  <path d="M640,662 L640,704" stroke="#718096" stroke-width="1.6" marker-end="url(#arrow)"/>
-
-  <text x="60" y="728" class="section">③ 发布与复盘 · 最终文件、无自动发布、反馈不直改规则</text>
-  <g>
-    <rect x="60" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
-    <text x="82" y="780" class="cardTitle">Local Media QA + Export Auth</text>
-    <text x="82" y="810" class="cardBody">hash / codec / timebase / 音频 / 黑冻帧</text>
-    <text x="82" y="835" class="cardBody">隐私 coverage + 确定性抽帧</text>
-    <text x="82" y="860" class="cardBody">授权精确绑定 artifact + plan hash</text>
-
-    <rect x="460" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
-    <text x="482" y="780" class="cardTitle">Governed Distribution Pack</text>
-    <text x="482" y="810" class="cardBody">平台规则来源 / 日期 / 可信度 / 过期</text>
-    <text x="482" y="835" class="cardBody">母片 hash / revision / content truth 绑定</text>
-    <text x="482" y="860" class="cardBody">publishAction = none</text>
-
-    <rect x="860" y="746" width="360" height="146" rx="14" fill="#FFF5EB" stroke="#DD6B20" stroke-width="1.5"/>
-    <text x="882" y="780" class="cardTitle">Field Reports + Feedback</text>
-    <text x="882" y="810" class="cardBody">真实案例 → 读取回执 → repeated samples</text>
-    <text x="882" y="835" class="cardBody">证据 / 反例 / owner / rollback</text>
-    <text x="882" y="860" class="cardBody">候选先积累 · 人工晋升规则</text>
+  <g class="cardTitle" text-anchor="middle">
+    <text x="169" y="340">① 项目检查</text>
+    <text x="369" y="340">② 转写与风险</text>
+    <text x="569" y="340">③ 代表样片</text>
+    <text x="769" y="340">④ 用户确认</text>
+    <text x="969" y="340">⑤ 整片 A-roll</text>
+    <text x="1169" y="340">⑥ 声音与字幕</text>
+    <text x="1400" y="340">⑦ 验证与交付</text>
+  </g>
+  <g class="cardBody" text-anchor="middle">
+    <text x="169" y="374">会话 · 项目 · 素材</text><text x="169" y="399">安全默认 · 运行清单</text><text x="169" y="424">能力不足就阻断</text>
+    <text x="369" y="374">保护数字与专名</text><text x="369" y="399">低 / 中 / 高风险</text><text x="369" y="424">每项都有理由证据</text>
+    <text x="569" y="374">开头 + 复杂切点</text><text x="569" y="399">重说 · 停顿 · 隐私</text><text x="569" y="424">只改代表窗口</text>
+    <text x="769" y="374">继续 / 自然 / 更紧</text><text x="769" y="399">或查看高风险项</text><text x="769" y="424">指纹变化即失效</text>
+    <text x="969" y="374">仅扩展批准策略</text><text x="969" y="399">小批写入后回读</text><text x="969" y="424">手工修改优先</text>
+    <text x="1169" y="374">单一对白主轨</text><text x="1169" y="399">声音平滑后字幕</text><text x="1169" y="424">正式字幕最后生成</text>
+    <text x="1400" y="374">结构 · 画面 · 音频</text><text x="1400" y="399">试听 · 隐私 · 审批</text><text x="1400" y="424">可编辑时间线 + 报告</text>
   </g>
 
-  <rect x="60" y="930" width="1160" height="92" rx="14" fill="#FFF5F5" stroke="#C53030" stroke-width="1.5"/>
-  <text x="86" y="964" class="title" font-size="18">真实环境安全边界</text>
-  <text x="86" y="992" class="body" font-size="15">已验证：Schema、匿名 fixtures、fake adapter、报告审计与 fail-closed 路由</text>
-  <text x="86" y="1015" class="body" font-size="15">未宣称：真实 ChatCut adapter、真实媒体探针/渲染、平台发布；这些动作不会自动执行</text>
+  <g stroke="#8A9BB1" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M258 374H274"/><path d="M458 374H474"/><path d="M658 374H674"/>
+    <path d="M858 374H874"/><path d="M1058 374H1074"/><path d="M1258 374H1274"/>
+  </g>
 
-  <text x="60" y="1058" class="muted" font-size="13">ChatCut口播 · 马甲实战版 · v1.5.0 · optional extensions stay governed and fail closed</text>
+  <text x="80" y="500" class="ink" font-size="17" font-weight="750">四套可复现默认方案</text>
+  <g>
+    <rect x="80" y="522" width="340" height="102" rx="16" fill="#EEF5FF" stroke="#B7CDF2"/>
+    <rect x="446" y="522" width="340" height="102" rx="16" fill="#F3EEFF" stroke="#C7B6EF"/>
+    <rect x="812" y="522" width="340" height="102" rx="16" fill="#FFF6EA" stroke="#EFCB91"/>
+    <rect x="1178" y="522" width="342" height="102" rx="16" fill="#EAF9F4" stroke="#A9DCCB"/>
+  </g>
+  <g class="cardTitle">
+    <text x="104" y="556">balanced-stable</text><text x="470" y="556">tight-short</text>
+    <text x="836" y="556">trust-longform</text><text x="1202" y="556">screen-demo</text>
+  </g>
+  <g class="cardBody">
+    <text x="104" y="586">日常口播 · 原顺序 · 自然节奏</text><text x="104" y="609">低风险自动，中风险进样片</text>
+    <text x="470" y="586">30–90 秒 · 更紧但不冒进</text><text x="470" y="609">钩子与重排仍需明确确认</text>
+    <text x="836" y="586">5–30 分钟 · 保护论证链</text><text x="836" y="609">首 60 秒 + 复杂段 + 片尾</text>
+    <text x="1202" y="586">屏幕证据优先 · 人物按需</text><text x="1202" y="609">隐私检查和字幕避让为硬闸</text>
+  </g>
+
+  <text x="80" y="674" class="ink" font-size="17" font-weight="750">四道安全护栏</text>
+  <g filter="url(#shadow)">
+    <rect x="80" y="696" width="340" height="116" rx="18" fill="#FFFFFF"/>
+    <rect x="446" y="696" width="340" height="116" rx="18" fill="#FFFFFF"/>
+    <rect x="812" y="696" width="340" height="116" rx="18" fill="#FFFFFF"/>
+    <rect x="1178" y="696" width="342" height="116" rx="18" fill="#FFFFFF"/>
+  </g>
+  <g class="cardTitle">
+    <text x="104" y="734">风险闸</text><text x="470" y="734">审批闸</text><text x="836" y="734">恢复闸</text><text x="1202" y="734">证据闸</text>
+  </g>
+  <g class="cardBody">
+    <text x="104" y="764">整句 · 数字 · 否定 · 隐私</text><text x="104" y="788">生成 · 导出均需明确批准</text>
+    <text x="470" y="764">计划 / 风格 / 版式 / 字幕</text><text x="470" y="788">时间线版本 / 窗口范围绑定</text>
+    <text x="836" y="764">超时先回读 · 幂等不重复写</text><text x="836" y="788">部分写入补偿 · 三轮止损</text>
+    <text x="1202" y="764">结构 ≠ 画面 ≠ 音频 ≠ 试听</text><text x="1202" y="788">无证据保持 UNVERIFIED</text>
+  </g>
+
+  <rect x="80" y="846" width="1440" height="70" rx="18" fill="#102A43"/>
+  <text x="108" y="876" fill="#9FE3D3" font-size="14" font-weight="700">ChatCut 官方 15 个 Skill 是执行底座</text>
+  <text x="108" y="899" fill="#EAF2FA" class="tiny mono">project · import · talking-head · transcription · verification · multicam · music · graphics · shader · video · voice · export · errors · help · forms</text>
+
+  <rect x="80" y="936" width="1440" height="40" rx="12" fill="#FFF3D7" stroke="#E6B957"/>
+  <text x="100" y="961" fill="#7A4C00" font-size="14" font-weight="700">当前边界：离线合同与匿名恢复模拟已验证；真实 ChatCut 写入、合成画面、人耳试听与匿名生产样本仍为 UNVERIFIED。</text>
+
+  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.6.0 · editable timeline by default · no automatic export or publishing</text>
 </svg>

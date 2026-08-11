@@ -50,6 +50,43 @@ test("successful scenes create readback evidence and a checkpoint", () => {
   );
 });
 
+test("bounded sample gate 只允许低中风险且限定 scope", () => {
+  const samplePlan = plan();
+  for (const [index, operation] of samplePlan.operations.entries()) {
+    operation.risk = index === 0 ? "low" : "medium";
+    operation.scopeRef = `logical:sample-${index + 1}`;
+  }
+  const adapter = new FakeTimelineAdapter();
+  const completed = new RecoverableExecutor(adapter).execute({
+    executionPlan: samplePlan,
+    executionGate: {
+      kind: "bounded-sample",
+      canExecute: true,
+      planHash: samplePlan.planHash,
+      timelineRevision: samplePlan.timelineRevision,
+      scope: samplePlan.operations.map((item) => item.scopeRef),
+    },
+  });
+  assert.equal(completed.status, "completed");
+
+  const unsafePlan = plan();
+  unsafePlan.operations[0].risk = "high";
+  unsafePlan.operations[0].scopeRef = "logical:sample-1";
+  assert.throws(
+    () => new RecoverableExecutor(new FakeTimelineAdapter()).execute({
+      executionPlan: unsafePlan,
+      executionGate: {
+        kind: "bounded-sample",
+        canExecute: true,
+        planHash: unsafePlan.planHash,
+        timelineRevision: unsafePlan.timelineRevision,
+        scope: ["logical:sample-1"],
+      },
+    }),
+    (error) => error.code === "EXEC_SAMPLE_GATE_SCOPE_INVALID",
+  );
+});
+
 test("replaying a completed journal is idempotent", () => {
   const adapter = new FakeTimelineAdapter();
   const executor = new RecoverableExecutor(adapter);

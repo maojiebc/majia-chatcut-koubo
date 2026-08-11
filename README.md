@@ -1,59 +1,157 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.5.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.6.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
-> **ChatCut口播 · 马甲实战版** — 安装标识（slug）仍为 `majia-chatcut-koubo`，安装命令保持不变。
+**ChatCut口播 · 马甲实战版｜一句话稳剪与可恢复主流程**
 
-**从剪辑经验包升级为可验证生产系统** —— 在官方 ChatCut skill 之上，把版式/配色/动效/人脸取景与规则、IR/SRT、审批、可恢复执行、证据、媒体 QA、交付和反馈治理串成一条 fail-closed 生产链。
+> 给普通创作者的一句话入口：先安全清理口播、做代表样片，确认后再扩展整片，最后交回可继续编辑的 ChatCut 时间线。
 
-## 如果你是维护者，先看这里
+![v1.6.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
-不需要从代码目录开始读。仓库最上方的四个中文目录就是维护入口：
+## 30 秒开始
 
-| 你要做的事 | 入口 |
+安装后，在支持 Skill 的助手里说：
+
+```text
+$majia-chatcut-koubo 用马甲稳剪当前口播
+```
+
+它会先自动读取当前项目、时间线和素材；只有无法唯一确定时才问一个聚焦问题。随后完成低风险口误清理与代表样片。你确认样片后，它才会把相同策略扩展到整片，并依次处理声音衔接、基础字幕和验证。
+
+默认结果是一个可继续手调的 ChatCut 时间线，不是自动发布的视频文件。
+
+本地开发者也可以查看入口。以下命令面向 GitHub 源码 clone；SkillHub 的轻量分发包会省略测试、fixture 和纯 CI validator，完整验证仍以同一提交的源码仓与 CI 为准：
+
+```bash
+npm ci
+npm run doctor
+npm run koubo -- --help
+npm run smoke:one-click:fake
+```
+
+## 默认会做什么
+
+- 识别“稳剪、快剪、专业增强、继续上次、只审核”等自然语言意图。
+- 选择四套可复现默认方案之一，并记录本次选择。
+- 保护数字、专名、否定、论证链和用户已经确认的设计。
+- 只自动处理有证据的低风险项；中风险进入样片，高风险必须由你决定。
+- 按片长选择开头、复杂切点、重说、停顿、隐私和片尾代表窗口。
+- 样片确认后，按“小批写入 → 回读 → 检查点”的方式继续。
+- 先锁定 A-roll，再做声音平滑与整片字幕。
+- 分开报告结构、画面、音频测量、人耳试听、隐私和用户确认状态。
+
+## 默认不会做什么
+
+- 不自动重排观点或把钩子搬到前面。
+- 不自动删除整句、数字、专名、否定附近内容。
+- 不自动添加音乐、动态图形、补充画面或生成素材。
+- 不覆盖用户手工修改；时间线变化会让旧样片确认失效。
+- 不把“工具返回成功”写成“画面和声音已经通过”。
+- 不自动导出，更不会自动发布用户视频。
+
+## 三种模式，四套默认方案
+
+| 你怎么说 | 默认方案 | 适合 | 关键边界 |
+| --- | --- | --- | --- |
+| “用马甲稳剪” | `balanced-stable` | 日常单人口播 | 保持原顺序，节奏自然 |
+| “快剪这条短口播” | `tight-short` | 30–90 秒短片 | 更紧，但钩子和重排仍需确认 |
+| “做专业增强” | 按素材选择 | 长片或录屏 | 高级画面只给候选，不擅自执行 |
+| 长片信任表达 | `trust-longform` | 5–30 分钟 | 保护案例、数字和论证链 |
+| 录屏演示 | `screen-demo` | 屏幕 + 人物 | 屏幕证据优先，隐私必须验证 |
+
+四套方案的机器合同位于 [`profiles/`](profiles/)。个人方案只能保持或收紧安全边界，不能放宽高风险审批。
+
+## 你会看到的主流程
+
+```text
+一句话需求
+→ 项目与素材检查
+→ 转写与低/中/高风险决定
+→ 代表样片
+→ 你确认或要求调整
+→ 整片 A-roll
+→ 声音平滑与字幕
+→ 分项验证
+→ 可编辑时间线 + 交付报告
+```
+
+典型样片确认卡只说人话：
+
+```text
+代表样片已做好
+已处理：明显口误、失败重说、批准范围内的长停顿
+已保护：数字、专名、否定和需要你决定的内容点
+未执行：重排、音乐、动态图形、补充画面、导出
+请选择：继续整片 / 再自然一点 / 再紧一点 / 查看高风险项
+```
+
+## 中断后怎么继续
+
+每次运行都有独立清单、决定记录和检查点。恢复前会先比较项目与时间线版本：
+
+- 写入前超时：回读确认没写，再安全重试。
+- 写入后超时：回读确认已经写入，不重复创建。
+- 部分写入：补偿或停在最近检查点，等待核对。
+- 用户手工修改：停止覆盖，旧审批标记为 `STALE`。
+- 同一失败连续三次：止损并交接，不无限重试。
+
+开发者命令：
+
+```bash
+npm run run -- --intent "用马甲稳剪当前口播" --dry-run --json
+npm run status -- --run-id <run-id>
+npm run review -- --run-id <run-id>
+npm run approve-decisions -- --run-id <run-id> --decision-id <decision-id>
+npm run approve-sample -- --run-id <run-id>
+npm run request-revision -- --run-id <run-id> --direction natural
+npm run resume -- --run-id <run-id> --timeline-revision <fresh-revision> \
+  --reconcile-outcome <blocker-specific-outcome> \
+  --evidence-ref <logical:readback-evidence> [--checkpoint-id <checkpoint-id>]
+npm run report -- --run-id <run-id>
+```
+
+`resume` 不会用清单里的旧版本号自证安全：必须先从 ChatCut 重新回读时间线版本；处于阻断状态时，还必须提交与阻断原因匹配的对账结果和证据。写入类阻断需要最近的已落盘检查点。
+
+`doctor` 在源码 clone 中会运行匿名运行时 fixture 审计；在注册表轻量包中会明确返回 `verificationScope=distribution-package` 与 `runtimeContracts.status=not_packaged`，不会伪造一次本地全量测试。
+
+项目运行记录默认放在项目内 `.majia-koubo/`，已被 Git 忽略，不会进入公开包。
+
+## 完成状态不是一个总勾
+
+交付报告分别使用以下状态：
+
+- `PASS`：有对应证据并通过。
+- `FAIL`：有证据且未通过。
+- `UNVERIFIED`：当前没有足够证据。
+- `STALE`：证据对应的时间线或方案已经变化。
+- `WAIVED`：用户明确豁免。
+- `NOT_APPLICABLE`：本次不适用。
+
+结构回读只能证明结构；合成帧才能证明画面；音频测量不能替代人耳试听；样片确认也不能替代最终播放确认。
+
+## 当前验证边界
+
+| 能力 | v1.6.0 状态 |
 | --- | --- |
-| 第一次打开，不知道维护哪里 | [01-从这里开始](01-从这里开始/README.md) |
-| 查字幕、转场、双画面、人脸取景方法 | [02-剪辑方法手册](02-剪辑方法手册/README.md) |
-| 记录真实任务的新坑和 ChatCut 产品问题 | [03-实操迭代与踩坑](03-实操迭代与踩坑/README.md) |
-| 看系统架构、路线图和迁移说明 | [04-项目设计与路线图](04-项目设计与路线图/README.md) |
+| 运行合同、四套方案、风险规则、状态转换 | `PASS`（离线自动检查） |
+| 超时前/后、部分写入、手工修改保护 | `PASS`（带结构化模拟证据的匿名会话） |
+| 一句话路由与本地命令 | `PASS`（离线自动检查） |
+| 真实 ChatCut 工具面与项目写入 | `UNVERIFIED` |
+| 真实合成画面、人耳试听、匿名生产样本 | `UNVERIFIED` |
 
-`src / scripts / schemas / fixtures / tests` 是技术内核，普通经验维护通常不用碰。完整的“我该改哪个文件”对照表在 [维护地图](01-从这里开始/README.md)。
+本仓库当前没有可用的真实 ChatCut 会话和匿名媒体，因此 [`reports/live-canary-v1.6.0.json`](reports/live-canary-v1.6.0.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png" alt="v1.5.0 可验证生产系统：核心门禁优先，外挂层只提供受治理候选" width="100%">
+## 与 ChatCut 官方能力怎么分工
 
-<img src="https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/主题预览.png" alt="v1.5.0 · 8 套口播主题配色总览(每套含代理 playbook):深空蓝/墨绿金/暖灰橙/午夜紫/极简黑白/海盐青/大地棕/活力青柠" width="100%">
+ChatCut 官方 15 个 Skill 负责项目操作、素材导入、转写、口播基础方法、验证、音乐、动效、生成、导出和产品帮助。本包不复制它们的参数教程，只负责：
 
-## 这个包解决什么
+- 把一句话需求拆成可恢复的阶段；
+- 给出安全默认、风险边界和样片策略；
+- 保护用户已经确认的内容与设计；
+- 把不同证据分开记录并形成交付报告。
 
-用 AI 代理(Codex / WorkBuddy / TRAE 等 ChatCut 宿主)剪口播视频时,官方 skill 教了「工具怎么用」,但没人告诉代理「剪成什么样算好」。结果是:画中画被裁成叶片形、过渡生硬得像 PPT、字幕两行挤压、导出后动画凭空消失 0.2 秒、黑边反复修不掉。
-
-本包把这些坑的**根因和数学**写成代理可执行的规范，并把“做完”升级为可追溯的生产状态：
-
-- **双画面版式系统** — 横竖版 8 套具名版式带精确坐标(`assets/compositions.json`),七执行状态语义决策器 + 状态落地原子契约:什么时候人物全屏、什么时候圆窗、什么时候纯录屏,由证据决定不由时间轮播
-- **主题配色系统** — 8 套实测主题(token + SVG 底图 + 可运行 HTML 组件),**每套自带代理 playbook**:token 语义档位、信息块偏好、字幕底板硬规则、可直接嵌进生成指令的调用 crib
-- **过渡动效工程** — 端点契约、`N-1` 归一化公式、分层缓动、四档可靠性链(含 ChatCut 宿主快速路由)、fps 归一化(30fps 时间线 60fps 导出的经典坑)
-- **人脸取景与三层合成** — reframe→mask 硬顺序、GL UV 坐标陷阱(Y 轴底部原点/radius 实为直径)、overscan 黑边数学、「居中≠贴脸」构图标准
-- **字幕与词表** — 气口分卡判例、单行机器门禁(validator + 不可放宽的 `rules/policy.json`)、译文轨 P0 陷阱、精校逐字稿真相源、可自维护词表模板
-- **Rule Registry** — 18 条规则覆盖内容真相、字幕、隐私、时间线、执行安全与导出授权六域；stable ID、来源、覆盖权限、runtime/contract 执行级别和 pass/fail fixture 全部机器校验
-- **Creator OS IR v0** — 显式时间域的有理时间与半开区间；project、transcript、edit、state、owner、caption、evidence 七类计划文档由 bundle 串联，revision、证据、时间线 coverage、唯一视觉 owner、隐私 owner 和批准状态统一离线校验
-- **SRT 文本桥** — 标准 SRT 供人工审阅，sidecar 保留 cue/page/word identity、exact range、revision 与量化残差；重编号无损，纠字/改时/隐藏/删除/合并/拆分/重排只生成可审计候选
-- **可解释内容规划** — 只计算 opening density、evidence coverage、低置信/风险词和破坏性编辑等可复算信号；Hook→SoftCTA 候选只引用已有 segment/word，保持人工待审，不生成文案或“爆款概率”
-- **视觉决策合同** — 每段只声明一个主视觉任务；B-roll 候选按语义、真实性、时机、清晰度、版权与重复度六维计分，低于 7 分转人工，生成图不得冒充证据，反模式与审批缺失会关闭执行门
-- **预览审批门** — 自动覆盖首 60 秒、复杂状态、全部隐私风险段与片尾；批准绑定 actor、完整窗口 scope、plan/style/timeline 指纹，缺失、撤销或任一漂移即关闭执行
-- **可恢复执行与证据底座** — 离线 fake adapter 证明 logical ID 唯一绑定、幂等写、revision lock、写后回读、scene 补偿、checkpoint/resume 与证据失效传播；尚不宣称真实 ChatCut adapter 已验证
-- **Capability profile 与 live route 闸门** — ChatCut build、tool schema hash、TTL、mandatory probes、脱敏 canary 与 fallback 统一审计；仓库默认 fixture 明确为 `unverified`，没有 current canary 时只走 fake/manual/blocked 路线
-- **本地 Media QA 与导出授权** — 对最终文件 hash、codec/timebase/尺寸/颜色/音轨/时长、loudness/true-peak/silence、black/freeze、隐私覆盖和确定性抽帧表做报告审计；只验证输入报告，不自动导出或发布
-- **多平台交付包底座** — 平台规则带来源/观测日/过期日/可信度，过期 hard rule 自动降级 advisory；交付物绑定母片 hash、timeline revision 与 content truth hash，manifest 禁止自动发布
-- **反馈治理底座** — 事件仅保存匿名 hash、稳定错误签名与计数指标，不接收字幕正文/帧图/音频/用户路径/私有词表；规则建议需重复样本、证据、反例、owner、人工审核和回滚记录，永不在线自动应用
-- **逐片执行手册 + 八道硬闸** — 一片一闭环、批量流水线、验证方法学、历史事故的回归闸门;60 秒预览闸与状态表先行确认闸
-- **ChatCut 宿主实测行为档案** — crop 语义、编辑器/云端渲染差异、MG 媒体槽失效与窗口 reframe shader 正解、字幕分页引擎机器路径、隐私扫描 SOP、双端预览路由
-- **实战经验库** — `03-实操迭代与踩坑/` 追加保存真实任务的完整失败链、ChatCut 产品问题、证据等级与绕行方案；迭代前必读、读后留痕，积累成批后再晋升正式规则和版本
-- **可选外挂资源层** — `extensions/cuttips-kb/` 随包提供 198 条公开来源索引、48 张知识卡和 14 条机器规则；`extensions/video-shotcraft/` 以锁定 commit、8 卡白名单和本地检查器接入外部 Remotion 镜头配方。两者只产生候选，不覆盖内容真相、隐私、字幕、证据、唯一合成 owner 或发布门禁
-- **留存结构 + 四平台路由** — 开头钩子决策流、钩子-兑现成对、注意力时钟、抖音/小红书/视频号/B站条件路由
-- **本地个人层** — `~/.config/majia-chatcut-koubo/` 叠加个人 profile/词表/审美基线;品牌词与实测数字留在本地,公开包保持通用
-
-> **真实环境边界**：当前仓库验证的是离线 Schema、匿名 fixtures、fake adapter、报告审计与 fail-closed 路由。真实 ChatCut adapter、真实媒体探针/渲染与平台发布尚未验证，也不会被自动执行。
+完整分工见 [`workflows/official-skill-map.md`](workflows/official-skill-map.md)。官方工具名称和参数始终以当前 ChatCut 工具说明为准。
 
 ## 安装
 
@@ -61,66 +159,42 @@
 # GitHub CLI
 gh skill install maojiebc/majia-chatcut-koubo
 
-# 或 skills.sh
+# skills.sh
 npx skills add maojiebc/majia-chatcut-koubo
 
-# 或 ClawHub
+# ClawHub
 npx clawhub install majia-chatcut-koubo
 ```
 
-## 开发与发布验证
+安装标识始终是 `majia-chatcut-koubo`，展示名是“ChatCut口播 · 马甲实战版”。
+
+## 开发与发布检查
+
+要求 Node 24.18.0：
 
 ```bash
 npm ci
 npm run verify
+npm audit --audit-level=high
+```
 
-# 单独审计 Rule Registry；本地 override 只能保持或收紧 hard policy
-npm run validate:rules
-node scripts/validate-rule-registry.mjs \
-  --overrides fixtures/rules/overrides.valid.json
+分层检查：
 
-# 校验匿名 Creator OS 完整计划包
-npm run validate:plans
+```bash
+npm run validate:runtime-contracts
+npm run test:orchestration
+npm run test:risk-policy
+npm run test:run-state
+npm run test:starter-prompts
+npm run test:cli
+npm run smoke:one-click:fake
+npm run validate:docs-routing
+npm run validate:live-claim
+```
 
-# 重建并审计可解释 scorecard、叙事候选与 decision queue
-npm run validate:planner
+旧能力仍保留：Rule Registry、Creator OS IR、SRT 文本桥、七执行状态、预览审批、可恢复写入、媒体检查、外挂知识包与视觉候选治理。它们是高级底座，不再占据普通用户首屏。发布态字幕检查仍需显式配置根目录：
 
-# 审计视觉候选评分、来源/版权、反模式与批准状态
-npm run validate:visual
-
-# 校验标准 SRT 与 sidecar 的稳定往返
-npm run validate:srt
-
-# 校验代表预览的批准 scope 与当前 plan/style/timeline 指纹
-npm run validate:preview
-
-# 跑写前/写后超时、partial write、ID 变化与 revision drift 场景
-npm run validate:recovery
-
-# 审计 ChatCut 能力证据；默认 fixture 应保持 live=false/unverified
-npm run validate:capabilities
-
-# 审计匿名最终媒体 probe、隐私覆盖、抽帧计划与导出授权
-npm run validate:media
-
-# 审计平台 profile 新鲜度、母片绑定与 no-publish 交付 manifest
-npm run validate:distribution
-
-# 审计匿名反馈事件与人工发布建议队列
-npm run validate:feedback
-
-# 校验外挂快照 checksum、引用、脱敏、版本锁和镜头白名单
-npm run validate:extensions
-
-# 把可继承的 source profile 解析为无 extends、可追溯的 resolved profile
-node src/cli/resolve-profile.mjs \
-  --profile <profile.source.json> \
-  --root <profile-config-root> \
-  --strict \
-  --out <profile-config-root>/generated/profile.resolved.json \
-  --trace <profile-config-root>/generated/profile.merge-trace.json
-
-# 发布态字幕校验；warning 也会阻断
+```bash
 node scripts/validate-caption-pages.mjs \
   --strict \
   --profile <profile.source.json> \
@@ -128,70 +202,56 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-`npm run verify` 会执行离线全仓 Schema、Rule Registry 与 override 覆盖审计、Creator OS plan bundle 跨文件审计、全量回归测试、主题对比度、资产几何/引用、公开内容安全扫描和版本漂移门禁；安全扫描只报告相对路径/规则/行号，本地可用 `.ota-deny-list.txt` 与 `.ota-allow-list.txt` 管理精确禁用词和公开豁免（allow 仅抵消本地 deny，不能绕过内置路径/密钥规则）。Profile 新文件应使用 `schemas/profile.source.schema.json`；旧 `profile.schema.json` 只保留为兼容 shim。Resolver 与计划产物可能含项目级标识，只能写在显式 `--root` 内，默认已由 `.gitignore` 排除。升级说明见 [V1.3.1 迁移指南](04-项目设计与路线图/V1.3.1迁移指南.md)，后续工程顺序与验收边界见 [公开工程路线图](04-项目设计与路线图/公开路线图.md)。
+工程顺序和真实验证闸见[公开路线图](04-项目设计与路线图/公开路线图.md)，历史升级约束见 [V1.3.1 迁移指南](04-项目设计与路线图/V1.3.1迁移指南.md)。
 
-## 让它变成你的(本地个人层)
+## 维护入口
 
-包里的数字(22 字/行、330px 圆窗、`magnification≈0.30`)是作者素材上的实测起点。正式机制:把 `templates/local-config-example/` 复制为 `~/.config/majia-chatcut-koubo/`,装进你的个人 profile(实测版式数字)、词表(validator `--terms` 直读)、审美基线与补充护栏——skill 开工探测该目录,存在即叠加。品牌实词与真实业务数字只进本地层,永不进 git;本地 profile 只能校准参数,不能放宽 `rules/policy.json` 的发布硬规则。数字变了就升版本存新文件,不覆盖旧版。
+| 你要做的事 | 入口 |
+| --- | --- |
+| 第一次维护，不知道改哪里 | [01-从这里开始](01-从这里开始/README.md) |
+| 查字幕、转场、双画面和人脸取景 | [02-剪辑方法手册](02-剪辑方法手册/README.md) |
+| 记录真实任务的新坑 | [03-实操迭代与踩坑](03-实操迭代与踩坑/README.md) |
+| 看架构、路线图和迁移说明 | [04-项目设计与路线图](04-项目设计与路线图/README.md) |
 
-## 结构
-
-### 人类维护区
-
-```text
-01-从这里开始/              维护地图：我应该读哪里、改哪里
-02-剪辑方法手册/            已复验的字幕、画面、转场、留存与恢复方法
-03-实操迭代与踩坑/          真实案例、失败链、产品问题与迭代记录
-04-项目设计与路线图/        架构、主题预览、迁移说明和公开路线图
-SKILL.md                     安装后 Agent 实际读取的总入口
-CHANGELOG.md                 正式版本变更记录
-```
-
-### 技术内核
+目录职责：
 
 ```text
-assets/                      版式、主题 token、SVG 与可运行组件
-templates/                   词表、参数、兼容性与本地个人层模板
-rules/                       不可随意放宽的机器硬规则
-extensions/                  可选百科知识包与外部镜头配方适配层
-schemas/                     JSON 数据合同
-fixtures/                    匿名测试样例和正反例
-src/                         核心程序实现
-scripts/                     校验与命令行工具
-tests/                       自动化回归测试
+agents/       安装后的默认一句话入口
+workflows/    稳剪、快剪、专业增强、恢复和官方分工
+profiles/     四套可复现默认方案
+schemas/      数据合同
+templates/    匿名示例与交付模板
+src/          路由、状态、风险、检查点和命令
+scripts/      自动检查与离线冒烟
+fixtures/     匿名正反例和故障场景
+reports/      脱敏真实验证状态
 ```
 
-日常积累剪辑经验时，通常只需要修改 `03-实操迭代与踩坑/`；不要从 `src/` 或 `schemas/` 开始找。
+本地个人词表、项目路径和真实业务内容只放本机配置，不进入公开仓。完整维护地图见 [`01-从这里开始/README.md`](01-从这里开始/README.md)。
 
-## 📋 版本记录
+## 版本记录
 
-**V1.5.0（2026-07-25）** — 新增可选外挂资源层：198 份公开来源蒸馏为随包可查询的 48 张知识卡、14 条规则和来源索引；Video Shotcraft 以锁定 commit、Apache-2.0 声明、8 卡白名单和本地 checkout 检查器接入。外挂只提供 advisory 候选，专项 checksum、引用、脱敏与白名单验证进入完整发布门禁。
+**V1.6.0（2026-08-11）** — 新增一句话入口、三种模式、四套默认方案、`run/status/review/approve-decisions/approve-sample/request-revision/resume/report` 主流程、运行清单、决定记录、检查点、六维样片指纹、恢复协议和证据分离交付报告；新增 11 个匿名故障场景与真实验证声明门禁。真实 ChatCut 端到端仍为 `UNVERIFIED`。
 
-**V1.4.1（2026-07-24）** — 新增 Visual Decision Contract 与 4 条视觉决策规则：每段单一主视觉任务、六维透明评分、低分转人工、生成图不得冒充证据；同时新增追加式 `03-实操迭代与踩坑/` 实战经验库、迭代前必读与读后留痕协议，首个公开脱敏案例记录 AI Hero 母片精修失败链、三证据面和 7 条 ChatCut 产品问题。
+**V1.5.0（2026-07-25）** — 新增受治理的可选知识与镜头候选层；外部资源只能扩大候选，不能覆盖内容真相、隐私、审批或证据规则。
 
-**V1.4.0（2026-07-24）** — 从技巧包升级为可验证生产系统：Rule Registry、Creator OS IR/Rational Time、SRT/可解释规划、预览审批、可恢复执行与证据链、Media QA/导出授权、受治理交付包、反馈治理和 capability live gate 全部进入离线 release gates；真实 ChatCut adapter、真实媒体探针/渲染与平台发布继续保持 `unverified` 且不自动执行。
+**V1.4.1（2026-07-24）** — 新增视觉决定合同、追加式实战经验库和迭代前完整回读协议。
 
-**V1.3.1(2026-07-24)** — 契约止血与发布地基：Node/lockfile/CI 可复现安装；Ajv 离线验证全仓 JSON；source/resolved profile 契约、继承路径修复、合并来源追踪与安全 CLI；字幕数值语义、词 key/区间、短卡类型、override 上限、严格 warning 与项目/时间线 provenance 绑定；主题对比度、composition 几何、资产引用和文档/版本漂移全部进入 release gate。旧字幕 JSON 仍可非严格迁移，发布态须补齐 provenance。
+完整历史见 [CHANGELOG.md](CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
 
-完整变更历史见 [CHANGELOG.md](./CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
-
-## 方法来源
-
-规则主体来自作者的 ChatCut 实战复盘。部分方法论参考了以下开源项目(未复制代码实现):`Agentchengfeng/chengfeng-videocut-skills`(删前保后/风险分层)、`lcbuaaliu/ai-jian-koubo`(确定性预选+语义判断)、`WyattBlue/auto-editor`(反向审查将删内容)、`radix-ui/colors`、`material-foundation/material-color-utilities`、`adobe/leonardo`(语义色阶与对比度优先)、`d3/d3-scale-chromatic`(数据色板)、`pireel/pireel`(AGPL-3.0;仅吸收「主题=数据+代理 playbook」与逐主题调用 crib 的组织方法,未复制其任何主题内容、文本或代码)、`yoqu/lingji-cut`(Apache-2.0;仅吸收「进场/出场/循环强调」三轴动效枚举的组织方法,枚举取舍与全部文本为本包自定)。
-
-## 👤 作者 / 联系
+## 作者 / 联系
 
 **马甲（@maojiebc）** · 超级马甲
 
-如果这份 skill 帮到你，欢迎在以下任意渠道找我交流踩坑实录、提需求、报 bug，也欢迎勾兑用户运营 / 数据中台 / BI 工程的实战经验：
+如果这份 Skill 帮到你，欢迎交流踩坑、提需求或报问题：
 
 | 渠道 | 链接 |
-|---|---|
-| 📧 Email | [m9224@163.com](mailto:m9224@163.com) |
-| 🐙 GitHub | [github.com/maojiebc](https://github.com/maojiebc) |
-| 🪝 ClawHub | [clawhub.ai/p/maojiebc](https://clawhub.ai/p/maojiebc) |
-| 🐦 X | [@maojiebc](https://x.com/maojiebc) |
-| 📕 小红书 | [超级马甲](https://xhslink.com/m/4fQMJeHHWKC) |
-| 📰 微信公众号 | [超级马甲](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzODk2NA==#wechat_redirect) |
+| --- | --- |
+| Email | [m9224@163.com](mailto:m9224@163.com) |
+| GitHub | [github.com/maojiebc](https://github.com/maojiebc) |
+| ClawHub | [clawhub.ai/p/maojiebc](https://clawhub.ai/p/maojiebc) |
+| X | [@maojiebc](https://x.com/maojiebc) |
+| 小红书 | [超级马甲](https://xhslink.com/m/4fQMJeHHWKC) |
+| 微信公众号 | [超级马甲](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzODk2NA==#wechat_redirect) |
 
-> 这份 skill 是 14 年用户运营 + 内容矩阵实战沉淀出来的，问题/合作随时聊。
+> 这份 Skill 来自 14 年用户运营、数据与内容生产实践。
