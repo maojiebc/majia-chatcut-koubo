@@ -34,7 +34,7 @@
   <text x="80" y="74" class="ink" font-size="38" font-weight="800">一句话稳剪，确认后再扩展</text>
   <text x="80" y="108" class="body" font-size="18">ChatCut 官方能力之上的安全默认、审批、恢复与证据交付层</text>
   <rect x="1380" y="48" width="140" height="38" rx="19" fill="#102A43"/>
-  <text x="1450" y="73" class="chip" text-anchor="middle">v1.6.0</text>
+  <text x="1450" y="73" class="chip" text-anchor="middle">v1.7.0</text>
 
   <rect x="80" y="140" width="1440" height="92" rx="22" fill="url(#prompt)" filter="url(#shadow)"/>
   <text x="112" y="180" fill="#D8FFFA" font-size="15" font-weight="700">用户只需要说</text>
@@ -62,8 +62,8 @@
   </g>
 
   <g class="cardTitle" text-anchor="middle">
-    <text x="169" y="340">① 项目检查</text>
-    <text x="369" y="340">② 转写与风险</text>
+    <text x="169" y="340">① 环境与项目</text>
+    <text x="369" y="340">② 文字与风险</text>
     <text x="569" y="340">③ 代表样片</text>
     <text x="769" y="340">④ 用户确认</text>
     <text x="969" y="340">⑤ 整片 A-roll</text>
@@ -71,8 +71,8 @@
     <text x="1400" y="340">⑦ 验证与交付</text>
   </g>
   <g class="cardBody" text-anchor="middle">
-    <text x="169" y="374">会话 · 项目 · 素材</text><text x="169" y="399">安全默认 · 运行清单</text><text x="169" y="424">能力不足就阻断</text>
-    <text x="369" y="374">保护数字与专名</text><text x="369" y="399">低 / 中 / 高风险</text><text x="369" y="424">每项都有理由证据</text>
+    <text x="169" y="374">Hosted / Desktop</text><text x="169" y="399">安全默认 · 运行清单</text><text x="169" y="424">能力不足就阻断</text>
+    <text x="369" y="374">字幕 / 转写 / 剪切</text><text x="369" y="399">低 / 中 / 高风险</text><text x="369" y="424">原声替换另行批准</text>
     <text x="569" y="374">开头 + 复杂切点</text><text x="569" y="399">重说 · 停顿 · 隐私</text><text x="569" y="424">只改代表窗口</text>
     <text x="769" y="374">继续 / 自然 / 更紧</text><text x="769" y="399">或查看高风险项</text><text x="769" y="424">指纹变化即失效</text>
     <text x="969" y="374">仅扩展批准策略</text><text x="969" y="399">小批写入后回读</text><text x="969" y="424">手工修改优先</text>

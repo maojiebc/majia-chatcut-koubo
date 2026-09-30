@@ -7,7 +7,7 @@
 
 > 给普通创作者的一句话入口：先安全清理口播、做代表样片，确认后再扩展整片，最后交回可继续编辑的 ChatCut 时间线。
 
-![v1.7.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.svg)
+![v1.7.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## 30 秒开始
 
@@ -34,7 +34,7 @@ npm run smoke:one-click:fake
 
 当前版本先分清 Hosted/Web 与 Desktop，使用对应官方指令；会话未知、过期或缺能力时先补齐。只改字幕或只修识别错误会关闭默认口播清理；实际原声替换需要精确授权，模糊的文字请求先澄清。
 
-开发者可用 `npm run preflight -- --session <current-session.json> --json` 检查当前会话合同，用 `npm run check:official -- --checkout <official-checkout>` 对照官方版本、Skill 清单与已审查内容。两个检查都不能证明真实剪辑效果。详见 [环境与文字修改](workflows/session-and-text-safety.md) 和 [本轮官方来源与设计](04-项目设计与路线图/2026-09-30官方更新与v1.7设计.md)。
+开发者可用 `npm run preflight -- --session <current-session.json> --json` 检查当前会话合同，用 `npm run check:official -- --checkout <official-checkout>` 对照官方版本、Skill 清单与已审查内容。两个检查都不能证明真实剪辑效果。详见 [环境与文字修改](workflows/session-and-text-safety.md) 和 [本轮官方来源与设计](https://github.com/maojiebc/majia-chatcut-koubo/blob/main/04-%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B7%AF%E7%BA%BF%E5%9B%BE/2026-09-30%E5%AE%98%E6%96%B9%E6%9B%B4%E6%96%B0%E4%B8%8Ev1.7%E8%AE%BE%E8%AE%A1.md)。
 
 ## 默认会做什么
 
@@ -208,7 +208,7 @@ node scripts/validate-caption-pages.mjs \
   --input <captions.json>
 ```
 
-工程顺序和真实验证闸见[公开路线图](04-项目设计与路线图/公开路线图.md)，历史升级约束见 [V1.3.1 迁移指南](04-项目设计与路线图/V1.3.1迁移指南.md)。
+工程顺序和真实验证闸见[公开路线图](04-项目设计与路线图/公开路线图.md)，历史升级约束见 [V1.3.1 迁移指南](https://github.com/maojiebc/majia-chatcut-koubo/blob/main/04-%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B7%AF%E7%BA%BF%E5%9B%BE/V1.3.1%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97.md)。
 
 ## 维护入口
 
@@ -243,7 +243,6 @@ reports/      脱敏真实验证状态
 
 **V1.5.0（2026-07-25）** — 新增受治理的可选知识与镜头候选层；外部资源只能扩大候选，不能覆盖内容真相、隐私、审批或证据规则。
 
-**V1.4.1（2026-07-24）** — 新增视觉决定合同、追加式实战经验库和迭代前完整回读协议。
 
 完整历史见 [CHANGELOG.md](CHANGELOG.md) 或 [GitHub Releases](https://github.com/maojiebc/majia-chatcut-koubo/releases)。
 

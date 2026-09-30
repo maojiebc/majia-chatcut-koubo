@@ -7,7 +7,7 @@
 
 > A one-sentence path for ordinary creators: clean low-risk talking-head issues, approve a representative sample, extend the approved treatment, and hand back an editable ChatCut timeline.
 
-![v1.7.0 one-sentence workflow](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.svg)
+![v1.7.0 one-sentence workflow](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## Start in 30 seconds
 
@@ -34,7 +34,7 @@ npm run smoke:one-click:fake
 
 The current session selects Hosted/Web or Desktop instructions. Missing, stale, mismatched, or simulated capability observations do not clear preflight. Caption-only and ASR repair requests disable default speech cleanup; local spoken-audio replacement requires exact high-risk approval. Ambiguous text targets require clarification.
 
-Developers can check a declared current session with `npm run preflight -- --session <current-session.json> --json` and compare a supplied official checkout with `npm run check:official -- --checkout <official-checkout>`. These checks do not verify media. See [session and text safety](workflows/session-and-text-safety.md) and the [dated official-source review](04-项目设计与路线图/2026-09-30官方更新与v1.7设计.md).
+Developers can check a declared current session with `npm run preflight -- --session <current-session.json> --json` and compare a supplied official checkout with `npm run check:official -- --checkout <official-checkout>`. These checks do not verify media. See [session and text safety](workflows/session-and-text-safety.md) and the [dated official-source review](https://github.com/maojiebc/majia-chatcut-koubo/blob/main/04-%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B7%AF%E7%BA%BF%E5%9B%BE/2026-09-30%E5%AE%98%E6%96%B9%E6%9B%B4%E6%96%B0%E4%B8%8Ev1.7%E8%AE%BE%E8%AE%A1.md).
 
 ## Safe defaults
 
@@ -202,7 +202,6 @@ Private terms, project paths, and business content belong only in local configur
 
 **V1.5.0 (2026-07-25)** — Governed optional knowledge and shot-candidate extensions.
 
-**V1.4.1 (2026-07-24)** — Visual decision contract and append-only field experience library.
 
 See [CHANGELOG.md](CHANGELOG.md) for the full history.
 

@@ -4,3 +4,13 @@ scripts/validate-*.mjs export-ignore
 scripts/validate-caption-pages.mjs -export-ignore
 scripts/validate-live-canary-claim.mjs -export-ignore
 scripts/validate-runtime-fixtures.mjs -export-ignore
+# Omit maintenance-only material from archives; GitHub clones keep it all.
+AGENTS.md export-ignore
+assets/theme-kit/AGENTS.md export-ignore
+scripts/check-assets.mjs export-ignore
+scripts/check-public-safety.mjs export-ignore
+scripts/check-version-drift.mjs export-ignore
+04-项目设计与路线图/AI剪辑规则吸收记录.md export-ignore
+04-项目设计与路线图/V1.3.1迁移指南.md export-ignore
+04-项目设计与路线图/契约基线.md export-ignore
+04-项目设计与路线图/2026-09-30官方更新与v1.7设计.md export-ignore

@@ -1,6 +1,7 @@
 ---
 name: majia-chatcut-koubo
 description: ChatCut 口播与录屏视频的一句话编排和安全默认层。用户说“用马甲稳剪、快剪、专业增强、继续上次剪辑、只审核口误和字幕”时触发；负责意图路由、四套默认方案、风险分级、代表样片、审批绑定、中断恢复、证据分级与可编辑时间线交付。项目操作与工具参数始终交给 ChatCut 官方 Skill。默认不重排观点，不添加音乐、动态图形、补充画面或生成素材，不导出、不发布。真实 ChatCut 端到端只有当前匿名样本和工具证据齐全时才能宣称通过。
+license: MIT
 metadata:
   version: 1.7.0
 ---
@@ -8,6 +9,12 @@ metadata:
 # ChatCut口播 · 马甲实战版
 
 你是官方 ChatCut 能力之上的轻量流程助手。让普通创作者用一句话进入安全、可恢复、可审阅的口播流程，不要先展示全部高级知识。
+
+## 功能架构
+
+从当前会话检查、代表样片到可继续编辑的时间线，按阶段回读并保存进度：
+
+![v1.7.0 口播流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## 用户合同
 
@@ -44,7 +51,7 @@ metadata:
 
 ## v1.7 环境与文字保护
 
-先确定当前项目是 Hosted/Web 还是 Desktop。Hosted 读取对应官方 Skills；Desktop 使用签名应用同步或托管 Agent 的当前指令，不强制加载 Hosted 教程，也不静默换环境。工具缺失时按当前环境指引处理；本包不自行安装或重配另一环境。
+先确定当前项目是 Hosted/Web 还是 Desktop。Hosted 读取对应官方 Skills；Desktop 使用签名应用同步或托管助手的当前指令，不强制加载 Hosted 教程，也不静默换环境。工具缺失时按当前环境指引处理；本包不自行安装或重配另一环境。
 
 每次会话和工具定义变化后重新读取能力。可用 `npm run preflight -- --session <current-session.json> --json` 检查声明的来源、能力和时效；没有观察记录、缺能力、过期、环境不匹配或模拟记录不得作为写入准入。该命令只检查提供的合同，不证明已连接账号或已验证真实媒体。
 
@@ -167,7 +174,7 @@ preflight
 
 ## 验证与完成声明
 
-JSON 用小写，用户报告显示大写：`pass / fail / unverified / stale / waived / not_applicable / pending`。
+机器记录（JSON）用小写，用户报告显示大写：`pass / fail / unverified / stale / waived / not_applicable / pending`。
 
 | 证据 | 能证明 | 不能证明 |
 | --- | --- | --- |
@@ -225,7 +232,6 @@ v1.7.0 的数据合同、风险规则、状态转换、匿名模拟会话和本�
 - **v1.7.0（2026-09-30）**：环境准入、文字目标保护、原声替换审批、官方来源与漂移检查；真实端到端仍为 `UNVERIFIED`。
 - **v1.6.0（2026-08-11）**：一句话入口、三模式四方案、运行清单、风险决定、代表样片、审批/改样、证据分离恢复与交付主命令；真实端到端仍为 `UNVERIFIED`。
 - **v1.5.0（2026-07-25）**：受治理的可选知识与镜头候选层。
-- **v1.4.1（2026-07-24）**：视觉决定合同和追加式实战经验库。
 
 完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 
