@@ -99,7 +99,7 @@
 - 对比度门槛与文档统一：正文/次级/CTA 7:1，标题强调 4.5:1；8 套主题全绿。
 - 新增 composition、theme/layout/manifest/demo schemas，以及引用、必需文件、画布/圆形几何检查。
 - 新增版本漂移 gate，修正英文 README 的 seven-state 描述；package、lockfile、SKILL、README 与 CHANGELOG 同步为 1.3.1。
-- 新增契约基线与 [V1.3.1 迁移指南](04-项目设计与路线图/V1.3.1迁移指南.md)。本地个人 profile/词表继续留在 `~/.config/majia-chatcut-koubo/`，没有进入公开 fixture。
+- 新增契约基线与 [V1.3.1 迁移指南](https://github.com/maojiebc/majia-chatcut-koubo/blob/main/04-%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B7%AF%E7%BA%BF%E5%9B%BE/V1.3.1%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97.md)。本地个人 profile/词表继续留在 `~/.config/majia-chatcut-koubo/`，没有进入公开 fixture。
 
 ## V1.3.0（2026-07-24）— 制度增量 + ChatCut 实测档案 + 本地个人层
 
