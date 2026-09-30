@@ -6,9 +6,10 @@ import {fileURLToPath} from "node:url";
 
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
+import {LIVE_CANARY_REPORT} from "../src/config/release-files.mjs";
 
 const DEFAULT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DEFAULT_REPORT = "reports/live-canary-v1.6.0.json";
+const DEFAULT_REPORT = LIVE_CANARY_REPORT;
 const CLAIM_FILES = Object.freeze(["README.md", "SKILL.md"]);
 const QUALIFIER = /(?:UNVERIFIED|unverified|未验证|尚未|仍需|需要.{0,12}证据|须另有.{0,12}证据|离线|fake|模拟|目标|不宣称|不代表|不得|不能|待验证|当前边界|canary)/iu;
 const STRONG_CLAIMS = Object.freeze([

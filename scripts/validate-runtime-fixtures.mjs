@@ -105,10 +105,10 @@ function createRegistry(root) {
     strictRequired: false,
   });
   addFormats(ajv);
-  const schemaFiles = listJson(root, "schemas/runtime");
+  const schemaFiles = [...listJson(root, "schemas/runtime"), "schemas/official-source.schema.json"];
   for (const file of schemaFiles) {
     const schema = readJson(root, file);
-    if (!schema.$id?.startsWith(RUNTIME_SCHEMA_PREFIX)) {
+    if (!schema.$id?.startsWith(RUNTIME_SCHEMA_PREFIX) && !(file === "schemas/official-source.schema.json" && schema.$id === "https://github.com/maojiebc/majia-chatcut-koubo/schemas/official-source.schema.json")) {
       throw new Error(`RUNTIME_SCHEMA_ID_INVALID:${file}`);
     }
     if (!ajv.validateSchema(schema)) {

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {LIVE_CANARY_REPORT} from "../src/config/release-files.mjs";
 import {spawnSync} from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
@@ -28,7 +29,7 @@ const VERSION_SURFACE_FILES = [
   "04-项目设计与路线图/公开路线图.md",
   "02-剪辑方法手册/07-字幕与术语.md",
   "agents/openai.yaml",
-  "reports/live-canary-v1.6.0.json",
+  LIVE_CANARY_REPORT,
   "profiles/balanced-stable.json",
   "profiles/tight-short.json",
   "profiles/trust-longform.json",

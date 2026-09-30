@@ -1,13 +1,13 @@
 # ChatCut Talking Head · Majia Field Edition
 
-![Skill Version](https://img.shields.io/badge/skill-v1.6.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.7.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut口播 · 马甲实战版 | One-sentence stable cut with recoverable execution**
 
 > A one-sentence path for ordinary creators: clean low-risk talking-head issues, approve a representative sample, extend the approved treatment, and hand back an editable ChatCut timeline.
 
-![v1.6.0 one-sentence workflow](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.7.0 one-sentence workflow](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.svg)
 
 ## Start in 30 seconds
 
@@ -29,6 +29,12 @@ npm run doctor
 npm run koubo -- --help
 npm run smoke:one-click:fake
 ```
+
+## v1.7 session and text safety
+
+The current session selects Hosted/Web or Desktop instructions. Missing, stale, mismatched, or simulated capability observations do not clear preflight. Caption-only and ASR repair requests disable default speech cleanup; local spoken-audio replacement requires exact high-risk approval. Ambiguous text targets require clarification.
+
+Developers can check a declared current session with `npm run preflight -- --session <current-session.json> --json` and compare a supplied official checkout with `npm run check:official -- --checkout <official-checkout>`. These checks do not verify media. See [session and text safety](workflows/session-and-text-safety.md) and the [dated official-source review](04-项目设计与路线图/2026-09-30官方更新与v1.7设计.md).
 
 ## Safe defaults
 
@@ -115,7 +121,7 @@ The handoff keeps `PASS`, `FAIL`, `UNVERIFIED`, `STALE`, `WAIVED`, `NOT_APPLICAB
 
 ## Current verification boundary
 
-| Capability | v1.6.0 status |
+| Capability | v1.7.0 status |
 | --- | --- |
 | Schemas, profiles, risk policy, state transitions | `PASS` offline |
 | timeout-before/after, partial write, manual-edit protection | `PASS` in anonymous sessions with structured simulation evidence |
@@ -123,11 +129,11 @@ The handoff keeps `PASS`, `FAIL`, `UNVERIFIED`, `STALE`, `WAIVED`, `NOT_APPLICAB
 | real ChatCut writes and readbacks | `UNVERIFIED` |
 | real rendered pixels, human listening, anonymous production cases | `UNVERIFIED` |
 
-[`reports/live-canary-v1.6.0.json`](reports/live-canary-v1.6.0.json) currently records `stableClaimEligible=false`. Offline simulation is not live evidence. This project will not claim production-proven one-click stable editing until the live gate covers at least five anonymous cases across three lengths, three content shapes, recovery, and manual-edit protection.
+[`reports/live-canary-v1.7.0.json`](reports/live-canary-v1.7.0.json) currently records `stableClaimEligible=false`. Offline simulation is not live evidence. This project will not claim production-proven one-click stable editing until the live gate covers at least five anonymous cases across three lengths, three content shapes, recovery, and manual-edit protection.
 
 ## Official ChatCut division of responsibility
 
-ChatCut's 15 official Skills own project operations, import, transcription, talking-head methods, verification, music, graphics, generation, export, and product help. This package does not copy their parameter tutorials. It adds sequencing, conservative defaults, sample approval, recovery, and evidence-aware handoff.
+ChatCut's current official Skills own project operations, import, transcription, talking-head methods, verification, music, graphics, generation, export, and product help. This package does not copy their parameter tutorials. It adds sequencing, conservative defaults, sample approval, recovery, and evidence-aware handoff.
 
 See [`workflows/official-skill-map.md`](workflows/official-skill-map.md). Current ChatCut tool descriptions remain the source of truth.
 
@@ -189,6 +195,8 @@ See the [public roadmap](04-项目设计与路线图/公开路线图.md) for eng
 Private terms, project paths, and business content belong only in local configuration and never in the public repository.
 
 ## Version history
+
+**V1.7.0 (2026-09-30)** — Declared session preflight, Hosted/Desktop routing, text-target protection, official-source snapshots and drift checks, version-bound live canary selection, and a patched indirect dependency. Real end-to-end remains `UNVERIFIED`.
 
 **V1.6.0 (2026-08-11)** — One-sentence entry, three modes, four profiles, run/status/review/approval/revision/resume/report commands, manifests, decisions, checkpoints, six-part sample fingerprints, recovery, evidence-separated handoff reports, and 11 anonymous fault scenarios. Real ChatCut end-to-end remains `UNVERIFIED`.
 

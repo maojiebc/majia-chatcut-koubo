@@ -76,6 +76,11 @@ export function createProjectBrief({
   for (const [name, enabled] of Object.entries(route.requestedTreatments ?? {})) {
     if (name in treatments) treatments[name] = Boolean(enabled);
   }
+  if (route.textEdit && route.textEdit.target !== "speech-cut") {
+    treatments.arollCleanup = false;
+    treatments.smoothAudio = false;
+    if (route.textEdit.target !== "caption-display") treatments.captions = false;
+  }
   return {
     $schema: "https://github.com/maojiebc/majia-chatcut-koubo/schemas/runtime/project-brief.schema.json",
     schemaVersion: "majia.koubo.brief.v1",
@@ -86,6 +91,7 @@ export function createProjectBrief({
     pacing: profile.defaults.pacing,
     automationLevel: route.automationLevel,
     treatments,
+    ...(route.textEdit ? {textEdit: route.textEdit} : {}),
     contentProtections: [...profile.contentProtections],
     intake: {
       asked: normalizedMissingFields.length >= 2,

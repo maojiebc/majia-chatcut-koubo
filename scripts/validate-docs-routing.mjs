@@ -38,23 +38,7 @@ const REQUIRED_ARTIFACTS = Object.freeze([
   "scripts/smoke-one-click.mjs",
   "scripts/validate-live-canary-claim.mjs",
 ]);
-const OFFICIAL_SKILLS = Object.freeze([
-  "chatcut-plugin-basics",
-  "talking-head-guide",
-  "transcription",
-  "verification",
-  "asset-import",
-  "multicam-sync",
-  "music",
-  "create-motion-graphics",
-  "shader-gen",
-  "video-gen",
-  "voice",
-  "export",
-  "known-errors",
-  "product-help",
-  "widget-forms",
-]);
+const OFFICIAL_SKILLS = Object.freeze(JSON.parse(fs.readFileSync(new URL("../reports/official-source-current.json", import.meta.url), "utf8")).hostedSkills);
 const STARTER_PROMPTS = Object.freeze([
   /稳剪当前口播/u,
   /继续上次(?:剪辑|的马甲稳剪任务)/u,

@@ -14,6 +14,7 @@ import {createProjectBrief, selectProfile} from "../orchestration/profile-select
 import {sampleApprovalCard} from "../orchestration/preview-selector.mjs";
 import {auditDecisionLog, decisionSummaryForUser} from "../orchestration/risk-classifier.mjs";
 import {assertSourceInventoryBindings} from "../orchestration/source-inventory.mjs";
+import {preflightSession} from "../orchestration/session-preflight.mjs";
 import {contentHash} from "../planning/preview-approval.mjs";
 import {
   approvalIsCurrent,
@@ -30,7 +31,7 @@ const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const REPOSITORY_ROOT = path.resolve(MODULE_DIRECTORY, "../..");
 const DEFAULT_STATE_ROOT = path.resolve(process.cwd(), ".majia-koubo");
 const DEFAULT_SCENARIO_FILE = path.join(REPOSITORY_ROOT, "fixtures/runtime/scenarios.json");
-const COMMANDS = new Set(["run", "status", "review", "approve-decisions", "approve-sample", "request-revision", "resume", "report"]);
+const COMMANDS = new Set(["preflight", "run", "status", "review", "approve-decisions", "approve-sample", "request-revision", "resume", "report"]);
 const RUN_ID_PATTERN = /^run-[a-z0-9-]+$/u;
 const REVISION_PATTERN = /^rev[-_][A-Za-z0-9._-]+$/u;
 const MAX_JSON_BYTES = 5 * 1024 * 1024;
@@ -80,6 +81,7 @@ function assertRuntimeSchema(document, schemaFile, code = "RUNTIME_SCHEMA") {
 }
 
 const USAGE = `Usage:
+  majia-koubo preflight [--session <observation.json>] [--surface auto|hosted|desktop]
   majia-koubo run [intent] [--mode stable|fast|pro] [--run-id <id>] [--dry-run]
   majia-koubo run --scenario <file> [--scenario-id <id>] [--dry-run]
   majia-koubo status <run-id>
@@ -91,6 +93,8 @@ const USAGE = `Usage:
   majia-koubo report <run-id> [--json]
 
 Options:
+  --session <observation.json>     Current tool/skill observation (not media proof)
+  --surface auto|hosted|desktop    Bind to the selected ChatCut environment
   --root, --state-dir <directory>  Runtime state directory
   --json                          Emit machine-readable JSON
   --format text|markdown|json     Select output format
@@ -139,6 +143,8 @@ function parseArguments(argv) {
     "--decision-id": "decisionId",
     "--direction": "direction",
     "--now": "now",
+    "--session": "sessionFile",
+    "--surface": "surface",
   };
   const booleans = {
     "--json": "json",
@@ -185,6 +191,10 @@ function parseArguments(argv) {
 }
 
 function assignPositionals(options) {
+  if (options.command === "preflight") {
+    if (options.positionals.length > 0) throw usageError("preflight does not accept positional arguments");
+    return;
+  }
   if (options.command === "run") {
     if (options.positionals.length > 0) {
       if (options.intent !== undefined) throw usageError("intent was provided twice");
@@ -202,7 +212,8 @@ function assignPositionals(options) {
 function validateCommandOptions(options) {
   const global = new Set(["stateRoot", "format", "json", "help"]);
   const perCommand = {
-    run: new Set(["intent", "runId", "mode", "goal", "duration", "platform", "scenarioFile", "scenarioId", "dryRun", "screen", "now"]),
+    preflight: new Set(["sessionFile", "surface", "now"]),
+    run: new Set(["intent", "runId", "mode", "goal", "duration", "platform", "scenarioFile", "scenarioId", "dryRun", "screen", "now", "sessionFile", "surface"]),
     status: new Set(["runId"]),
     review: new Set(["runId"]),
     "approve-decisions": new Set(["runId", "decisionId", "dryRun", "now"]),
@@ -216,7 +227,9 @@ function validateCommandOptions(options) {
       throw usageError(`option is not valid for ${options.command}`);
     }
   }
-  if (options.command !== "run" && !options.runId) throw usageError(`${options.command} requires a run ID`);
+  if (options.surface && !["auto", "hosted", "desktop"].includes(options.surface)) throw usageError("--surface must be auto, hosted, or desktop");
+  if ((options.scenarioFile || options.scenarioId) && (options.sessionFile || options.surface)) throw usageError("simulation scenarios cannot use a live session observation");
+  if (!["run", "preflight"].includes(options.command) && !options.runId) throw usageError(`${options.command} requires a run ID`);
   if (options.runId && !RUN_ID_PATTERN.test(options.runId)) {
     throw new CliError("RUN_ID_INVALID", "run ID must use the run- prefix and lowercase safe characters");
   }
@@ -533,10 +546,30 @@ function refreshHandoff(manifest, previous, {
   });
 }
 
+function sessionPreflight(options, brief = null) {
+  const observation = options.sessionFile
+    ? safeReadJson(path.resolve(options.sessionFile), {code: "SESSION_OBSERVATION"})
+    : null;
+  return preflightSession({
+    observation,
+    surface: options.surface ?? "auto",
+    treatments: brief?.treatments ?? {arollCleanup: true, smoothAudio: true, captions: true},
+    textTarget: brief?.textEdit?.target ?? null,
+    now: options.now ?? new Date().toISOString(),
+  });
+}
+
+function preflightCommand(options) {
+  const report = sessionPreflight(options);
+  if (!report.contractReady) process.exitCode = 1;
+  return {ok: report.contractReady, command: "preflight", ...report};
+}
+
 function runCommand(options) {
   const now = options.now ?? new Date().toISOString();
   let result;
   let artifacts;
+  let session = null;
   if (options.scenarioFile || options.scenarioId) {
     const scenario = loadScenario(options);
     const runId = options.runId ?? `run-${scenario.scenarioId.replace(/^scenario-/u, "")}`;
@@ -568,11 +601,12 @@ function runCommand(options) {
     });
     const runId = options.runId ?? createRunId(now);
     options.runId = runId;
+    session = sessionPreflight({...options, now}, brief);
     let manifest = createRunManifest({runId, profile, now});
-    manifest = transitionRun(manifest, "brief_ready", {now, nextSafeAction: "resolve_project_and_source"});
+    manifest = transitionRun(manifest, "brief_ready", {now, nextSafeAction: session.contractReady ? "resolve_project_and_source" : "refresh_session_contract"});
     const handoff = buildHandoffReport({
       manifest,
-      nextActions: route.automationLevel === "audit"
+      nextActions: !session.contractReady ? [session.nextAction] : route.automationLevel === "audit"
         ? ["连接现有 ChatCut 项目并只读生成审核方案"]
         : ["连接 ChatCut 并自动读取目标项目与主素材"],
       now,
@@ -582,6 +616,7 @@ function runCommand(options) {
       "run-manifest.json": manifest,
       "project-brief.json": brief,
       "handoff-report.json": handoff,
+      "session-preflight.json": session,
     };
   }
   if (!options.dryRun) persistNewRun(options, artifacts);
@@ -599,6 +634,7 @@ function runCommand(options) {
     brief: result.brief,
     handoff: result.handoff,
     recovery: result.recovery ?? null,
+    sessionPreflight: session,
   };
 }
 
@@ -831,6 +867,7 @@ function reportCommand(options) {
 
 function execute(options) {
   switch (options.command) {
+    case "preflight": return preflightCommand(options);
     case "run": return runCommand(options);
     case "status": return statusCommand(options);
     case "review": return reviewCommand(options);
@@ -844,6 +881,7 @@ function execute(options) {
 }
 
 function renderText(command, result) {
+  if (command === "preflight") return `环境：${result.surface}\n会话合同：${result.contractReady ? "可继续核对项目" : "需补齐"}\n${result.nextAction}\n`;
   if (command === "report") return renderHandoffMarkdown(result);
   if (command === "status") {
     return [

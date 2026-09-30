@@ -4,6 +4,7 @@ import {spawnSync} from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
+import {LIVE_CANARY_REPORT} from "../src/config/release-files.mjs";
 
 const DEFAULT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const REQUIRED_PATHS = Object.freeze([
@@ -16,7 +17,7 @@ const REQUIRED_PATHS = Object.freeze([
   "schemas/runtime/decision-log.schema.json",
   "schemas/runtime/checkpoint.schema.json",
   "schemas/runtime/handoff-report.schema.json",
-  "reports/live-canary-v1.6.0.json",
+  LIVE_CANARY_REPORT,
   "src/orchestration/orchestrator.mjs",
   "src/cli/koubo.mjs",
   "scripts/validate-live-canary-claim.mjs",
@@ -166,7 +167,7 @@ function runLiveClaimAudit(root) {
 function readCapability(root) {
   let report;
   try {
-    report = JSON.parse(readText(root, "reports/live-canary-v1.6.0.json"));
+    report = JSON.parse(readText(root, LIVE_CANARY_REPORT));
   } catch {
     return {status: "unverified", stableClaimEligible: false, reason: "report-unavailable"};
   }

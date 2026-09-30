@@ -1,13 +1,13 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.6.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.7.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut口播 · 马甲实战版｜一句话稳剪与可恢复主流程**
 
 > 给普通创作者的一句话入口：先安全清理口播、做代表样片，确认后再扩展整片，最后交回可继续编辑的 ChatCut 时间线。
 
-![v1.6.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.7.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.svg)
 
 ## 30 秒开始
 
@@ -29,6 +29,12 @@ npm run doctor
 npm run koubo -- --help
 npm run smoke:one-click:fake
 ```
+
+## v1.7 环境与文字保护
+
+当前版本先分清 Hosted/Web 与 Desktop，使用对应官方指令；会话未知、过期或缺能力时先补齐。只改字幕或只修识别错误会关闭默认口播清理；实际原声替换需要精确授权，模糊的文字请求先澄清。
+
+开发者可用 `npm run preflight -- --session <current-session.json> --json` 检查当前会话合同，用 `npm run check:official -- --checkout <official-checkout>` 对照官方版本、Skill 清单与已审查内容。两个检查都不能证明真实剪辑效果。详见 [环境与文字修改](workflows/session-and-text-safety.md) 和 [本轮官方来源与设计](04-项目设计与路线图/2026-09-30官方更新与v1.7设计.md)。
 
 ## 默认会做什么
 
@@ -132,7 +138,7 @@ npm run report -- --run-id <run-id>
 
 ## 当前验证边界
 
-| 能力 | v1.6.0 状态 |
+| 能力 | v1.7.0 状态 |
 | --- | --- |
 | 运行合同、四套方案、风险规则、状态转换 | `PASS`（离线自动检查） |
 | 超时前/后、部分写入、手工修改保护 | `PASS`（带结构化模拟证据的匿名会话） |
@@ -140,11 +146,11 @@ npm run report -- --run-id <run-id>
 | 真实 ChatCut 工具面与项目写入 | `UNVERIFIED` |
 | 真实合成画面、人耳试听、匿名生产样本 | `UNVERIFIED` |
 
-本仓库当前没有可用的真实 ChatCut 会话和匿名媒体，因此 [`reports/live-canary-v1.6.0.json`](reports/live-canary-v1.6.0.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
+本仓库当前没有可用的真实 ChatCut 会话和匿名媒体，因此 [`reports/live-canary-v1.7.0.json`](reports/live-canary-v1.7.0.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
 
 ## 与 ChatCut 官方能力怎么分工
 
-ChatCut 官方 15 个 Skill 负责项目操作、素材导入、转写、口播基础方法、验证、音乐、动效、生成、导出和产品帮助。本包不复制它们的参数教程，只负责：
+ChatCut 当前官方 Skills 负责项目操作、素材导入、转写、口播基础方法、验证、音乐、动效、生成、导出和产品帮助。本包不复制它们的参数教程，只负责：
 
 - 把一句话需求拆成可恢复的阶段；
 - 给出安全默认、风险边界和样片策略；
@@ -230,6 +236,8 @@ reports/      脱敏真实验证状态
 本地个人词表、项目路径和真实业务内容只放本机配置，不进入公开仓。完整维护地图见 [`01-从这里开始/README.md`](01-从这里开始/README.md)。
 
 ## 版本记录
+
+**V1.7.0（2026-09-30）** — 环境准入、Hosted/Desktop 分流、字幕/转写/剪切/原声替换目标保护、官方来源快照与漂移检查、按当前版本选择真实 canary、间接依赖安全修复；真实端到端仍为 `UNVERIFIED`。
 
 **V1.6.0（2026-08-11）** — 新增一句话入口、三种模式、四套默认方案、`run/status/review/approve-decisions/approve-sample/request-revision/resume/report` 主流程、运行清单、决定记录、检查点、六维样片指纹、恢复协议和证据分离交付报告；新增 11 个匿名故障场景与真实验证声明门禁。真实 ChatCut 端到端仍为 `UNVERIFIED`。
 

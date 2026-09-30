@@ -15,6 +15,7 @@
     "pacing": {"enum": ["natural", "balanced", "tight"]},
     "automationLevel": {"enum": ["audit", "assist", "auto"]},
     "treatments": {"$ref": "#/$defs/treatments"},
+    "textEdit": {"$ref": "#/$defs/textEdit"},
     "contentProtections": {
       "type": "array",
       "minItems": 4,
@@ -37,7 +38,9 @@
     },
     "createdAt": {"type": "string", "format": "date-time"}
   },
+  "allOf": [{"if": {"required": ["textEdit"], "properties": {"textEdit": {"properties": {"target": {"enum": ["caption-display", "transcript-repair", "spoken-replacement", "clarify"]}}, "type": "object"}}}, "then": {"properties": {"treatments": {"properties": {"arollCleanup": {"const": false}, "smoothAudio": {"const": false}}, "type": "object"}}}}],
   "$defs": {
+    "textEdit": {"type": "object", "additionalProperties": false, "required": ["target", "changesSpokenAudio", "preservesTiming", "requiresExplicitApproval"], "properties": {"target": {"type": "string"}, "changesSpokenAudio": {"type": "boolean"}, "preservesTiming": {"type": "boolean"}, "requiresExplicitApproval": {"type": "boolean"}}, "oneOf": [{"properties": {"target": {"const": "caption-display"}, "changesSpokenAudio": {"const": false}, "preservesTiming": {"const": true}, "requiresExplicitApproval": {"const": false}}}, {"properties": {"target": {"const": "transcript-repair"}, "changesSpokenAudio": {"const": false}, "preservesTiming": {"const": true}, "requiresExplicitApproval": {"const": false}}}, {"properties": {"target": {"const": "speech-cut"}, "changesSpokenAudio": {"const": true}, "preservesTiming": {"const": false}, "requiresExplicitApproval": {"const": false}}}, {"properties": {"target": {"const": "spoken-replacement"}, "changesSpokenAudio": {"const": true}, "preservesTiming": {"const": true}, "requiresExplicitApproval": {"const": true}}}, {"properties": {"target": {"const": "clarify"}, "changesSpokenAudio": {"const": false}, "preservesTiming": {"const": true}, "requiresExplicitApproval": {"const": false}}}]},
     "treatments": {
       "type": "object",
       "additionalProperties": false,

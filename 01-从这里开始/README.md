@@ -60,7 +60,7 @@
 
 原则只有一句：案例先积累，方法后晋升，硬规则最后机器化。
 
-## V1.6 主流程改动后的最小检查
+## V1.7 主流程改动后的最小检查
 
 ```bash
 npm run validate:runtime-contracts
@@ -73,4 +73,6 @@ npm run validate:docs-routing
 npm run verify
 ```
 
-真实 ChatCut 验证结果单独写入 `reports/live-canary-v1.6.0.json`。匿名模拟通过不能把真实状态从 `UNVERIFIED` 改为通过。
+真实 ChatCut 验证结果单独写入 `reports/live-canary-v1.7.0.json`。匿名模拟通过不能把真实状态从 `UNVERIFIED` 改为通过。
+
+官方适配维护先读 [环境与文字修改](../workflows/session-and-text-safety.md) 和 [本轮来源与设计](../04-项目设计与路线图/2026-09-30官方更新与v1.7设计.md)，运行 `npm run test:compatibility` 与 `npm run check:official`。

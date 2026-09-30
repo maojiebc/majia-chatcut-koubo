@@ -10,6 +10,7 @@ const MEDIUM_RISK_TYPES = new Set([
   "filler",
   "partial-retake",
   "caption-display",
+  "transcript-repair",
   "intro",
   "pause",
 ]);
@@ -25,6 +26,7 @@ const HIGH_RISK_TYPES = new Set([
   "privacy",
   "protected-baseline",
   "generated-content",
+  "spoken-replacement",
   "export",
   "publish",
 ]);

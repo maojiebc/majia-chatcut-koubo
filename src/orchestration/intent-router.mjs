@@ -1,3 +1,5 @@
+import {inferTextEdit} from "./text-edit-router.mjs";
+
 const ROUTES = Object.freeze([
   {action: "resume", pattern: /(?:继续|恢复|接着|上次|resume)/iu},
   {
@@ -75,6 +77,7 @@ export function inferIntent(input) {
     automationLevel: auditOnly ? "audit" : "assist",
     requestedTreatments,
     deniedTreatments,
+    textEdit: inferTextEdit(text),
     reason: route ? `matched-${route.action}-${route.mode ?? "existing"}` : "safe-stable-default",
   };
 }

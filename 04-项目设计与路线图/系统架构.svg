@@ -121,11 +121,11 @@
   </g>
 
   <rect x="80" y="846" width="1440" height="70" rx="18" fill="#102A43"/>
-  <text x="108" y="876" fill="#9FE3D3" font-size="14" font-weight="700">ChatCut 官方 15 个 Skill 是执行底座</text>
+  <text x="108" y="876" fill="#9FE3D3" font-size="14" font-weight="700">ChatCut 当前 Hosted / Desktop 指令是执行底座</text>
   <text x="108" y="899" fill="#EAF2FA" class="tiny mono">project · import · talking-head · transcription · verification · multicam · music · graphics · shader · video · voice · export · errors · help · forms</text>
 
   <rect x="80" y="936" width="1440" height="40" rx="12" fill="#FFF3D7" stroke="#E6B957"/>
   <text x="100" y="961" fill="#7A4C00" font-size="14" font-weight="700">当前边界：离线合同与匿名恢复模拟已验证；真实 ChatCut 写入、合成画面、人耳试听与匿名生产样本仍为 UNVERIFIED。</text>
 
-  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.6.0 · editable timeline by default · no automatic export or publishing</text>
+  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.7.0 · editable timeline by default · no automatic export or publishing</text>
 </svg>

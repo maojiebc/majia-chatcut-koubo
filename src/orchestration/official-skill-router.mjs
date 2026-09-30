@@ -5,6 +5,8 @@ const CORE_SKILLS = Object.freeze([
 ]);
 
 export function routeOfficialSkills({
+  surface = "hosted",
+  textTarget = null,
   stage = "preflight",
   treatments = {},
   needsAssetImport = false,
@@ -15,7 +17,19 @@ export function routeOfficialSkills({
   needsShader = false,
   needsVoice = false,
   exportAuthorized = false,
+  needsVideoTranslation = false,
+  needsDigitalHuman = false,
 } = {}) {
+  if (!["hosted", "desktop", "unknown"].includes(surface)) throw new Error("SESSION_SURFACE_INVALID");
+  if (surface !== "hosted") {
+    return {
+      required: [],
+      surface,
+      instructionSource: surface === "desktop" ? "current-desktop-instructions" : "resolve-current-surface",
+      liveContract: "current-mcp-schema",
+      exportRouted: false,
+    };
+  }
   const required = new Set(CORE_SKILLS);
   if (["transcript_ready", "edit_plan_ready", "sample_ready", "full_aroll_applied", "captions_audio_ready", "verified", "review_ready"].includes(stage) || treatments.captions) {
     required.add("transcription");
@@ -29,10 +43,15 @@ export function routeOfficialSkills({
   if (treatments.motionGraphics) required.add("create-motion-graphics");
   if (needsShader) required.add("shader-gen");
   if (treatments.generatedMedia) required.add("video-gen");
-  if (needsVoice) required.add("voice");
+  if (needsVoice || textTarget === "spoken-replacement") required.add("voice");
+  if (textTarget === "caption-display" || textTarget === "transcript-repair") required.add("transcription");
+  if (needsVideoTranslation) required.add("video-translation");
+  if (needsDigitalHuman) required.add("digital-human");
   if (exportAuthorized && treatments.export) required.add("export");
   return {
     required: [...required],
+    surface,
+    instructionSource: "current-hosted-plugin-skills",
     liveContract: "current-mcp-schema",
     exportRouted: required.has("export"),
   };

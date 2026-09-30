@@ -17,7 +17,7 @@
         "required": ["decisionId", "type", "risk", "action", "spokenExcerpt", "resultExcerpt", "reason", "evidenceRefs", "status", "approvalRequired", "approvalRef"],
         "properties": {
           "decisionId": {"type": "string", "pattern": "^dec-[a-z0-9-]+$"},
-          "type": {"enum": ["head-tail-silence", "hesitation", "false-start", "covered-restart", "pause", "duplicate-dialogue", "smooth-audio", "filler", "partial-retake", "caption-display", "intro", "whole-sentence", "numeric-content", "proper-noun", "negation", "restructure", "hook-forward", "take-selection", "portrait-reframe", "privacy", "protected-baseline", "generated-content", "export", "publish"]},
+          "type": {"enum": ["head-tail-silence", "hesitation", "false-start", "covered-restart", "pause", "duplicate-dialogue", "smooth-audio", "filler", "partial-retake", "caption-display", "transcript-repair", "intro", "whole-sentence", "numeric-content", "proper-noun", "negation", "restructure", "hook-forward", "take-selection", "portrait-reframe", "privacy", "protected-baseline", "generated-content", "spoken-replacement", "export", "publish"]},
           "risk": {"enum": ["low", "medium", "high"]},
           "action": {"type": "string", "minLength": 1, "maxLength": 80},
           "spokenExcerpt": {"type": "string", "minLength": 1, "maxLength": 160},
@@ -34,11 +34,11 @@
             "then": {"properties": {"risk": {"const": "low"}, "approvalRequired": {"const": false}}}
           },
           {
-            "if": {"required": ["type"], "properties": {"type": {"enum": ["filler", "partial-retake", "caption-display", "intro", "pause"]}}},
+            "if": {"required": ["type"], "properties": {"type": {"enum": ["filler", "partial-retake", "caption-display", "transcript-repair", "intro", "pause"]}}},
             "then": {"properties": {"risk": {"const": "medium"}, "approvalRequired": {"const": true}}}
           },
           {
-            "if": {"required": ["type"], "properties": {"type": {"enum": ["whole-sentence", "numeric-content", "proper-noun", "negation", "restructure", "hook-forward", "take-selection", "portrait-reframe", "privacy", "protected-baseline", "generated-content", "export", "publish"]}}},
+            "if": {"required": ["type"], "properties": {"type": {"enum": ["whole-sentence", "numeric-content", "proper-noun", "negation", "restructure", "hook-forward", "take-selection", "portrait-reframe", "privacy", "protected-baseline", "generated-content", "spoken-replacement", "export", "publish"]}}},
             "then": {"properties": {"risk": {"const": "high"}, "approvalRequired": {"const": true}}}
           },
           {

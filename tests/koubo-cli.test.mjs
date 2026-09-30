@@ -49,6 +49,58 @@ test("help 暴露完整用户主流程", () => {
   }
 });
 
+test("preflight 无会话时退出非零且不创建状态文件", (t) => {
+  const stateRoot = path.join(workspace(t), "untouched");
+  const result = invoke(["preflight", "--root", stateRoot, "--json"]);
+  assert.equal(result.status, 1, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.equal(report.contractReady, false);
+  assert.equal(report.surface, "unknown");
+  assert.equal(fs.existsSync(stateRoot), false);
+});
+
+test("普通文字 run 保存目标与环境检查，但不伪造剪辑结果", (t) => {
+  const stateRoot = workspace(t);
+  const result = successJson(["run", "只改字幕，别剪原声", "--run-id", "run-caption-only", "--root", stateRoot]);
+  assert.equal(result.brief.textEdit.target, "caption-display");
+  assert.equal(result.brief.treatments.arollCleanup, false);
+  assert.equal(result.sessionPreflight.contractReady, false);
+  assert.equal(result.manifest.capability.status, "unverified");
+  assert.equal(result.nextAction, "refresh_session_contract");
+  assert.equal(result.recovery, null);
+  assert.equal(fs.existsSync(path.join(stateRoot, result.runId, "session-preflight.json")), true);
+});
+
+test("模拟文字请求不得调用普通稳剪批量写入", (t) => {
+  const directory = workspace(t);
+  const scenario = fixture("scenario-happy-path");
+  scenario.intent = "只改字幕，别剪原声";
+  const file = path.join(directory, "caption-only.json");
+  fs.writeFileSync(file, JSON.stringify(scenario));
+  const result = successJson(["run", "--scenario", file, "--root", directory, "--dry-run", "--now", NOW]);
+  assert.equal(result.recovery.objectCount, 0);
+  assert.equal(result.stage, "edit_plan_ready");
+  const mixed = invoke(["run", "--scenario", file, "--surface", "desktop", "--json"]);
+  assert.equal(mixed.status, 2);
+});
+
+test("preflight 从已声明的 Desktop 合同读取能力，并拒绝环境不匹配", (t) => {
+  const directory = workspace(t);
+  const file = path.join(directory, "session.json");
+  fs.writeFileSync(file, JSON.stringify({
+    surface: "desktop", skillSource: "managed-desktop", skills: [], provenance: "live",
+    capabilities: ["project-read", "timeline-read", "timeline-write", "transcript-read", "speech-edit", "caption-read", "caption-write", "composed-preview"],
+    observedAt: "2026-08-09T23:59:00Z", expiresAt: "2026-08-10T00:59:00Z", toolSchemaFingerprint: `sha256:${"a".repeat(64)}`,
+  }));
+  const result = successJson(["preflight", "--session", file, "--now", NOW]);
+  assert.equal(result.contractReady, true);
+  assert.equal(result.mediaVerified, false);
+  assert.equal(result.surface, "desktop");
+  const mismatch = invoke(["preflight", "--session", file, "--surface", "hosted", "--now", NOW, "--json"]);
+  assert.equal(mismatch.status, 1);
+  assert.ok(JSON.parse(mismatch.stdout).findings.some((item) => item.code === "SESSION_SURFACE_MISMATCH"));
+});
+
 test("普通 run --dry-run 解析意图与 Profile 且零落盘", (t) => {
   const directory = workspace(t);
   const stateRoot = path.join(directory, "state-does-not-exist");

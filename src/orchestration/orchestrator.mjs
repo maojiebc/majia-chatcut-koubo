@@ -197,7 +197,7 @@ export function runFakeOneClickSession(scenario, {now = "2026-08-10T00:00:00Z"} 
   manifest = transitionRun(manifest, "transcript_ready", {now, nextSafeAction: "classify_aroll_decisions"});
 
   const decisions = scenario.decisions.map((candidate, index) => normalizeDecision(
-    route.automationLevel === "audit"
+    route.automationLevel === "audit" || (brief.textEdit && brief.textEdit.target !== "speech-cut")
       ? {...candidate, status: "proposed", approvalRef: null}
       : candidate,
     index,
@@ -217,6 +217,15 @@ export function runFakeOneClickSession(scenario, {now = "2026-08-10T00:00:00Z"} 
     return {route, profile, brief, manifest, checkpoints, decisionLog, windows: [], fingerprints: null, handoff: buildHandoffReport({manifest, openRisks: ["风险规则未通过"], now})};
   }
   manifest = transitionRun(manifest, "edit_plan_ready", {now, nextSafeAction: "build_representative_sample"});
+  if (brief.textEdit && brief.textEdit.target !== "speech-cut") {
+    manifest.lastSafeAction = "route_text_edit_without_aroll_cleanup";
+    return {
+      route, profile, brief, manifest, checkpoints, decisionLog,
+      windows: [], fingerprints: null,
+      recovery: {status: "not-run", objectCount: 0, duplicateWrites: false, reconciliations: []},
+      handoff: buildHandoffReport({manifest, nextActions: ["按当前官方指令处理指定文字对象；不执行口播清理。"], now}),
+    };
+  }
   if (route.automationLevel === "audit" || route.action === "review") {
     return {
       route,

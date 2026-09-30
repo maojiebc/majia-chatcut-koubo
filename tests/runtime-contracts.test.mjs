@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {LIVE_CANARY_REPORT} from "../src/config/release-files.mjs";
 import {spawnSync} from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
@@ -82,7 +83,7 @@ test("live claim eligibility requires fresh capability fingerprints and every re
     path.join(root, "schemas/runtime/live-canary-report.schema.json"),
     path.join(directory, "schemas/runtime/live-canary-report.schema.json"),
   );
-  const report = JSON.parse(fs.readFileSync(path.join(root, "reports/live-canary-v1.6.0.json"), "utf8"));
+  const report = JSON.parse(fs.readFileSync(path.join(root, LIVE_CANARY_REPORT), "utf8"));
   const now = Date.now();
   report.capabilityStatus = "current";
   report.capabilityObservedAt = new Date(now - 60_000).toISOString();
@@ -113,7 +114,7 @@ test("live claim eligibility requires fresh capability fingerprints and every re
     recoveryObservedRate: 0.95,
   };
   report.stableClaimEligible = true;
-  fs.writeFileSync(path.join(directory, "reports/live-canary-v1.6.0.json"), `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(path.join(directory, LIVE_CANARY_REPORT), `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(path.join(directory, "README.md"), "# Eligible live report\n");
   fs.writeFileSync(path.join(directory, "SKILL.md"), "# Eligible live report\n");
 
@@ -122,7 +123,7 @@ test("live claim eligibility requires fresh capability fingerprints and every re
   assert.equal(outputJson(eligible).computedEligible, true);
 
   report.canaries[0].checks = report.canaries[0].checks.filter((check) => check !== "timeout-before");
-  fs.writeFileSync(path.join(directory, "reports/live-canary-v1.6.0.json"), `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(path.join(directory, LIVE_CANARY_REPORT), `${JSON.stringify(report, null, 2)}\n`);
   const incomplete = run("scripts/validate-live-canary-claim.mjs", ["--root", directory]);
   assert.equal(incomplete.status, 1);
   assert.match(incomplete.stderr, /LIVE_CLAIM_ELIGIBILITY_UNSUPPORTED/);
@@ -138,8 +139,8 @@ test("unqualified production stability claims fail while live evidence is absent
     path.join(directory, "schemas/runtime/live-canary-report.schema.json"),
   );
   fs.copyFileSync(
-    path.join(root, "reports/live-canary-v1.6.0.json"),
-    path.join(directory, "reports/live-canary-v1.6.0.json"),
+    path.join(root, LIVE_CANARY_REPORT),
+    path.join(directory, LIVE_CANARY_REPORT),
   );
   fs.writeFileSync(
     path.join(directory, "README.md"),
@@ -201,7 +202,8 @@ test("user-facing docs route starter prompts, official skills and maintainer com
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const report = outputJson(result);
   assert.equal(report.ok, true);
-  assert.equal(report.officialSkills, 15);
+  const official = JSON.parse(fs.readFileSync(path.join(root, "reports/official-source-current.json"), "utf8"));
+  assert.equal(report.officialSkills, official.hostedSkills.length);
   assert.equal(report.starterPrompts, 4);
   assert.deepEqual(report.findings, []);
 });
