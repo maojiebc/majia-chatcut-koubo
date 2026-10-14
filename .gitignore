@@ -1,5 +1,7 @@
 # PII deny list — must not enter public commits
 .ota-deny-list.txt
+.skill-sync.json
+.DS_Store
 
 # Local dependency, coverage, and diagnostic output
 node_modules/

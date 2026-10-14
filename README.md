@@ -1,13 +1,13 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.7.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.8.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut口播 · 马甲实战版｜一句话稳剪与可恢复主流程**
 
 > 给普通创作者的一句话入口：先安全清理口播、做代表样片，确认后再扩展整片，最后交回可继续编辑的 ChatCut 时间线。
 
-![v1.7.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.8.0 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## 30 秒开始
 
@@ -29,6 +29,12 @@ npm run doctor
 npm run koubo -- --help
 npm run smoke:one-click:fake
 ```
+
+## v1.8 真实连接与实战维护
+
+运行 `npm run live:probe -- --config <private-mcporter.json>`，会实际读取 Hosted 工具清单和账号项目，只返回工具合同指纹、计数及分项状态。配置与 OAuth 留在本机，输出不含项目名称、ID、URL 或字幕。它不修改时间线，也不替代画面或人耳验收。
+
+官方检查现覆盖提交、已审查内容和整个 Hosted Skill 包，能发现导入 helper 的新增、删除或变化。监测指纹与逐项审查分别记录。每周做有价值的小更新，每三周以真实任务做较大迭代，验证后通过 majia-ota 发布。见 [实战维护](workflows/practical-maintenance.md)。
 
 ## v1.7 环境与文字保护
 
@@ -138,15 +144,17 @@ npm run report -- --run-id <run-id>
 
 ## 当前验证边界
 
-| 能力 | v1.7.0 状态 |
+| 能力 | v1.8.0 状态 |
 | --- | --- |
 | 运行合同、四套方案、风险规则、状态转换 | `PASS`（离线自动检查） |
 | 超时前/后、部分写入、手工修改保护 | `PASS`（带结构化模拟证据的匿名会话） |
 | 一句话路由与本地命令 | `PASS`（离线自动检查） |
-| 真实 ChatCut 工具面与项目写入 | `UNVERIFIED` |
+| 真实 Hosted 账号读取与工具清单 | `PASS`（当前连接探针） |
+| 独立测试项目标记写入与回读 | `PASS`（E1 回读 + E2 编辑器可见） |
+| 完整口播项目写入与质量 | `UNVERIFIED` |
 | 真实合成画面、人耳试听、匿名生产样本 | `UNVERIFIED` |
 
-本仓库当前没有可用的真实 ChatCut 会话和匿名媒体，因此 [`reports/live-canary-v1.7.0.json`](reports/live-canary-v1.7.0.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
+本轮已连接真实 Hosted 会话，并完成独立项目的标记写入与回读；完整口播样本、字幕与人耳试听尚未完成，因此 [`reports/live-canary-v1.8.0.json`](reports/live-canary-v1.8.0.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
 
 ## 与 ChatCut 官方能力怎么分工
 
@@ -236,6 +244,8 @@ reports/      脱敏真实验证状态
 本地个人词表、项目路径和真实业务内容只放本机配置，不进入公开仓。完整维护地图见 [`01-从这里开始/README.md`](01-从这里开始/README.md)。
 
 ## 版本记录
+
+**V1.8.0（2026-10-13）** — 真实连接探针、工具合同指纹、官方包文件与提交监测、实战维护周期；完整稳剪仍为 `UNVERIFIED`。
 
 **V1.7.0（2026-09-30）** — 环境准入、Hosted/Desktop 分流、字幕/转写/剪切/原声替换目标保护、官方来源快照与漂移检查、按当前版本选择真实 canary、间接依赖安全修复；真实端到端仍为 `UNVERIFIED`。
 

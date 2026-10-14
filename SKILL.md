@@ -3,7 +3,7 @@ name: majia-chatcut-koubo
 description: ChatCut 口播与录屏视频的一句话编排和安全默认层。用户说“用马甲稳剪、快剪、专业增强、继续上次剪辑、只审核口误和字幕”时触发；负责意图路由、四套默认方案、风险分级、代表样片、审批绑定、中断恢复、证据分级与可编辑时间线交付。项目操作与工具参数始终交给 ChatCut 官方 Skill。默认不重排观点，不添加音乐、动态图形、补充画面或生成素材，不导出、不发布。真实 ChatCut 端到端只有当前匿名样本和工具证据齐全时才能宣称通过。
 license: MIT
 metadata:
-  version: 1.7.0
+  version: 1.8.0
 ---
 
 # ChatCut口播 · 马甲实战版
@@ -14,7 +14,7 @@ metadata:
 
 从当前会话检查、代表样片到可继续编辑的时间线，按阶段回读并保存进度：
 
-![v1.7.0 口播流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.8.0 口播流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## 用户合同
 
@@ -61,7 +61,7 @@ metadata:
 
 字幕重分段会改变卡片身份。完成一个阶段后重新读取卡片、修订号和翻译覆盖，再进行下一批；旧卡片引用和旧样片证据不得复用。历史词级 override 与一帧 guard 保留为旧故障候选，不作为新版默认方法。
 
-完整流程见 [环境与文字修改](workflows/session-and-text-safety.md)。维护时先读 [官方来源快照](reports/official-source-current.json)，再用 `npm run check:official -- --checkout <official-checkout>` 比较已审查内容；源码快照不能覆盖当次工具 schema。
+完整流程见 [环境与文字修改](workflows/session-and-text-safety.md)。维护时先读 [官方来源快照](reports/official-source-current.json)，再用 `npm run check:official -- --checkout <official-checkout>` 比较提交、已审查内容和整个 Hosted Skill 包。`watchedFiles` 只监测文件变化，不代表逐项审查。真实连接可运行 `npm run live:probe -- --config <private-mcporter.json>`，只输出工具指纹和计数；账号读通不等于剪辑质量通过。见 [实战维护](workflows/practical-maintenance.md)。
 
 ## 识别意图
 
@@ -211,7 +211,7 @@ npm run report -- --run-id <run-id>
 
 ## 当前真实环境边界
 
-v1.7.0 的数据合同、风险规则、状态转换、匿名模拟会话和本地命令已通过自动检查。模拟证据以 `provenance=simulation` 明示，不能升级真实声明。仓库真实验证报告当前为 `stableClaimEligible=false`；真实项目写入、合成画面、人耳试听和匿名生产样本仍为 `UNVERIFIED`。
+v1.8.0 记录真实 Hosted 账号读取和独立项目标记写入的验证。它们只证明对应操作，不证明口播清理、字幕、画面或听感。模拟证据以 `provenance=simulation` 明示。仓库完整稳剪验证仍为 `stableClaimEligible=false`；未完成的媒体与生产样本保持 `UNVERIFIED`。
 
 因此可以说“离线流程和恢复模拟已验证”，不得说“一键稳定剪辑已经生产验证”，不得把模拟场景写成真实案例，也不得把旧版本证据外推到当前工具面。
 
@@ -229,6 +229,7 @@ v1.7.0 的数据合同、风险规则、状态转换、匿名模拟会话和本�
 
 ## 版本记录
 
+- **v1.8.0（2026-10-13）**：只读真实连接探针、工具合同指纹、官方包文件与提交监测、定期实战维护；完整稳剪仍为 `UNVERIFIED`。
 - **v1.7.0（2026-09-30）**：环境准入、文字目标保护、原声替换审批、官方来源与漂移检查；真实端到端仍为 `UNVERIFIED`。
 - **v1.6.0（2026-08-11）**：一句话入口、三模式四方案、运行清单、风险决定、代表样片、审批/改样、证据分离恢复与交付主命令；真实端到端仍为 `UNVERIFIED`。
 - **v1.5.0（2026-07-25）**：受治理的可选知识与镜头候选层。

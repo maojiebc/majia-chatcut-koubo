@@ -1,13 +1,13 @@
 # ChatCut Talking Head · Majia Field Edition
 
-![Skill Version](https://img.shields.io/badge/skill-v1.7.0-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.8.0-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut口播 · 马甲实战版 | One-sentence stable cut with recoverable execution**
 
 > A one-sentence path for ordinary creators: clean low-risk talking-head issues, approve a representative sample, extend the approved treatment, and hand back an editable ChatCut timeline.
 
-![v1.7.0 one-sentence workflow](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.8.0 one-sentence workflow](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## Start in 30 seconds
 
@@ -29,6 +29,12 @@ npm run doctor
 npm run koubo -- --help
 npm run smoke:one-click:fake
 ```
+
+## v1.8 live connection and practical maintenance
+
+`npm run live:probe -- --config <private-mcporter.json>` reads the Hosted tool manifest and account projects. It emits only counts, a contract fingerprint and separate verification states, with no project IDs, names, URLs or transcript text. OAuth remains local. A successful account read does not prove timeline writes, composed pixels or listening quality.
+
+The official-source check now detects commit changes and added, removed or changed files across the Hosted Skill package. Watched fingerprints are distinct from reviewed instructions. Weekly maintenance and a larger practical iteration every three weeks follow the [maintenance workflow](workflows/practical-maintenance.md), with majia-ota release readback.
 
 ## v1.7 session and text safety
 
@@ -121,15 +127,17 @@ The handoff keeps `PASS`, `FAIL`, `UNVERIFIED`, `STALE`, `WAIVED`, `NOT_APPLICAB
 
 ## Current verification boundary
 
-| Capability | v1.7.0 status |
+| Capability | v1.8.0 status |
 | --- | --- |
 | Schemas, profiles, risk policy, state transitions | `PASS` offline |
 | timeout-before/after, partial write, manual-edit protection | `PASS` in anonymous sessions with structured simulation evidence |
 | starter prompt routing and local CLI | `PASS` offline |
-| real ChatCut writes and readbacks | `UNVERIFIED` |
+| Hosted account discovery and tool manifest | `PASS` (current connection probe) |
+| Test-project marker write and readback | `PASS` (E1 readback + E2 editor visibility) |
+| complete talking-head writes and quality | `UNVERIFIED` |
 | real rendered pixels, human listening, anonymous production cases | `UNVERIFIED` |
 
-[`reports/live-canary-v1.7.0.json`](reports/live-canary-v1.7.0.json) currently records `stableClaimEligible=false`. Offline simulation is not live evidence. This project will not claim production-proven one-click stable editing until the live gate covers at least five anonymous cases across three lengths, three content shapes, recovery, and manual-edit protection.
+[`reports/live-canary-v1.8.0.json`](reports/live-canary-v1.8.0.json) currently records `stableClaimEligible=false`. Offline simulation is not live evidence. This project will not claim production-proven one-click stable editing until the live gate covers at least five anonymous cases across three lengths, three content shapes, recovery, and manual-edit protection.
 
 ## Official ChatCut division of responsibility
 
@@ -195,6 +203,8 @@ See the [public roadmap](04-项目设计与路线图/公开路线图.md) for eng
 Private terms, project paths, and business content belong only in local configuration and never in the public repository.
 
 ## Version history
+
+**V1.8.0 (2026-10-13)** — Read-only live probe, tool-contract fingerprint, official-package and commit monitoring, and practical maintenance. Full talking-head editing remains `UNVERIFIED`.
 
 **V1.7.0 (2026-09-30)** — Declared session preflight, Hosted/Desktop routing, text-target protection, official-source snapshots and drift checks, version-bound live canary selection, and a patched indirect dependency. Real end-to-end remains `UNVERIFIED`.
 

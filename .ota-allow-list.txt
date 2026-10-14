@@ -31,3 +31,23 @@ sourceRevision
 超全
 超载
 最强
+
+# Reviewed ordinary vocabulary; exceptions cover only each matched span.
+自动强分页
+超限
+越强
+明度
+头发刚好
+人物强表达
+结论强
+发明
+海报
+科技感强
+信任感强
+行动力强
+差异化强
+轻快明亮
+超长卡
+# Public upstream sourceRevision in the cuttips manifest, not a private ID.
+c7b73a90fecd0bb97e103466e3b7ddd8a7c89672
+边界强分页

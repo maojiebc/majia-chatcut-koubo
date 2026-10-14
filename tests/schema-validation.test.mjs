@@ -45,7 +45,8 @@ async function repositoryJsonPaths() {
       if (entry.isDirectory() && !SKIPPED_DIRECTORIES.has(entry.name)) {
         await visit(absolutePath);
       } else if (entry.isFile() && entry.name.endsWith(".json")) {
-        paths.push(path.relative(ROOT, absolutePath).split(path.sep).join("/"));
+        const relative = path.relative(ROOT, absolutePath).split(path.sep).join("/");
+        if (relative !== ".skill-sync.json") paths.push(relative);
       }
     }
   }
@@ -335,6 +336,24 @@ test("invalid JSON reports do not echo private input fragments", async () => {
   } finally {
     await rm(temporaryRoot, {force: true, recursive: true});
   }
+});
+
+test("本机同步状态不进入发布合同扫描，但同名子目录文件仍校验", async (t) => {
+  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "koubo-sync-metadata-"));
+  t.after(() => rm(temporaryRoot, {force: true, recursive: true}));
+  const contract = path.join(temporaryRoot, "fixtures/contract");
+  await mkdir(contract, {recursive: true});
+  await writeFile(path.join(contract, "schema-baseline.json"), '{"version":1,"entries":[]}');
+  await writeFile(path.join(contract, "cases.json"), '{"version":1,"cases":[]}');
+  await writeFile(path.join(temporaryRoot, ".skill-sync.json"), '{"local":"PRIVATE_SYNC_SENTINEL"}');
+  const result = runCli("--root", temporaryRoot, "--mode", "release", "--format", "json");
+  assert.equal(result.status, EXIT_CODES.OK);
+  assert.doesNotMatch(result.stdout, /PRIVATE_SYNC_SENTINEL|\.skill-sync\.json/);
+  await mkdir(path.join(temporaryRoot, "data"));
+  await writeFile(path.join(temporaryRoot, "data/.skill-sync.json"), '{}');
+  const nested = runCli("--root", temporaryRoot, "--mode", "release", "--format", "json");
+  assert.equal(nested.status, EXIT_CODES.VALIDATION_FAILED);
+  assert.ok(JSON.parse(nested.stdout).files.some((file) => file.path === "data/.skill-sync.json" && file.code === "CONTRACT.UNMAPPED_JSON"));
 });
 
 test("schema compile failures do not disclose absolute references", async () => {

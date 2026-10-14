@@ -1,8 +1,8 @@
 {
   "$schema": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/official-source.schema.json",
   "repository": "https://github.com/ChatCut-Inc/agent-plugin",
-  "commit": "877b9177144feeecdef0da70f0e4d5cb760f6037",
-  "observedAt": "2026-09-30T09:12:11Z",
+  "commit": "2df8116feba8ef48f56f54090b02a34597a2899c",
+  "observedAt": "2026-10-14T06:09:39.690Z",
   "hostedPluginVersion": "1.10.15",
   "desktopConnectorVersion": "1.0.5",
   "websiteVersions": {
@@ -75,5 +75,191 @@
   "sourceUse": "References and original compatibility logic only; upstream code and Skill text are not redistributed.",
   "verificationScope": "official-source-review",
   "liveToolsObserved": false,
-  "mediaVerified": false
+  "mediaVerified": false,
+  "watchedFiles": [
+    {
+      "path": "codex/.codex-plugin/plugin.json",
+      "sha256": "a7f3fe7b24c2e881fcc506b921ff99ade7351d8db5fffb2178cc9595dbf57e9c"
+    },
+    {
+      "path": "codex/.mcp.json",
+      "sha256": "7e1526df950ff3cc031c2c87e5f21addb7932ff288daed8ee2cd5ffb253067d4"
+    },
+    {
+      "path": "codex/assets/logo-light.png",
+      "sha256": "521cc2088a18d6d38211e34dcf816a52ad8cfd06a0583ace65f6307d49f0b26e"
+    },
+    {
+      "path": "codex/assets/widget-media/manifest.json",
+      "sha256": "f64d97a27cbcac584bd19cd566a64f5f3ab4af400407197273576b846fba075d"
+    },
+    {
+      "path": "codex/skills/asset-import/scripts/serve-local-media.mjs",
+      "sha256": "9243ebcc4ed2958805eb7906f60cde14052cd103b6eb414647f85f24b375c4a0"
+    },
+    {
+      "path": "codex/skills/asset-import/scripts/upload-media.mjs",
+      "sha256": "1e47b64e8150a2815398cbf2326fee831cbd18899038de95e288cb6777a5f717"
+    },
+    {
+      "path": "codex/skills/asset-import/SKILL.md",
+      "sha256": "bab6c7da6f21323bdf523b287eecd004d2ca49bd52c3cb7aef092a096d529ff3"
+    },
+    {
+      "path": "codex/skills/chatcut-plugin-basics/SKILL.md",
+      "sha256": "9c810774b1fbd5ef6bbcd36bdc4aaed956ffd68b3bb992dd61e6344a8ca3cc43"
+    },
+    {
+      "path": "codex/skills/create-motion-graphics/references/font-matching.md",
+      "sha256": "c8f8b9da5e24ee5cd35e0d5a7ff216f7eced7c92643e5dc8e350c7a3fb3310df"
+    },
+    {
+      "path": "codex/skills/create-motion-graphics/references/overlay-composition.md",
+      "sha256": "86172d3830e02b1b1f45d787d9d9ef1ae15087aaa34c13183010d5d55f88e0cd"
+    },
+    {
+      "path": "codex/skills/create-motion-graphics/SKILL.md",
+      "sha256": "ce7c0d833e97557403c5b33b5143f16c549c070d9877351dafe82d3d461076a0"
+    },
+    {
+      "path": "codex/skills/digital-human/SKILL.md",
+      "sha256": "c2342659d98b803fbc4339865c356bdc9e4dcf35a3f4e44723c660863490dca1"
+    },
+    {
+      "path": "codex/skills/export/SKILL.md",
+      "sha256": "ceca612b519ad6ed360f50a6dd4f1ab7706e0b25a3a90edcb792a6caac445c39"
+    },
+    {
+      "path": "codex/skills/known-errors/SKILL.md",
+      "sha256": "2c5c9396bd2d352df5334642327ec26e32e83ea23707e0c110781ad4711aebde"
+    },
+    {
+      "path": "codex/skills/multicam-sync/scripts/transcript-offset.mjs",
+      "sha256": "beed595a130dc74dc077c4874278e451f88b7ae4687ab2dbf55735b32f9f8da4"
+    },
+    {
+      "path": "codex/skills/multicam-sync/SKILL.md",
+      "sha256": "37878a3cf6831e37ff42609167029316df44eb96959a74a4ff2733f013aa1caf"
+    },
+    {
+      "path": "codex/skills/music/references/song.md",
+      "sha256": "3bdc1c745a268b4bf27e43fab10d01a068f37aabc473df1f9be0922691225d52"
+    },
+    {
+      "path": "codex/skills/music/SKILL.md",
+      "sha256": "319a107a4811b8aaa4217efae2a591c8653d56a2bdbe8020887bbea9e4e6e19c"
+    },
+    {
+      "path": "codex/skills/product-help/SKILL.md",
+      "sha256": "b0f8c5d1cb9abad766bfecdd4abfc809a09f46d3762311db0a001b96944eec37"
+    },
+    {
+      "path": "codex/skills/shader-gen/examples/cube-rotate.md",
+      "sha256": "921b8d22d89356debfb1dff432057478e02d5b6f298ba6aad0cc12fa9594a660"
+    },
+    {
+      "path": "codex/skills/shader-gen/examples/door-open.md",
+      "sha256": "011c52d776dade66f542479f0d8afa496576a7cffb6c7fcba99facf1c2d483d6"
+    },
+    {
+      "path": "codex/skills/shader-gen/examples/page-curl.md",
+      "sha256": "bbb7cf2195eac3ab7cfd6ae293ed48674620c6270804ed731d0f2bde83c781be"
+    },
+    {
+      "path": "codex/skills/shader-gen/references/design-principles.md",
+      "sha256": "dd222a77514f09232b26f081e1f58527705fa647595459527b4a9c2bc88f5b5a"
+    },
+    {
+      "path": "codex/skills/shader-gen/references/property-changes.md",
+      "sha256": "85d6609fabb8b35bb2199546cfa07fab7f77bc629202603f931f3ccb9f2257de"
+    },
+    {
+      "path": "codex/skills/shader-gen/SKILL.md",
+      "sha256": "54ef4d1b88f69696a8f07a285151936f079b87e682c7ec49de7e038176300479"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/references/audio-and-music.md",
+      "sha256": "14673375742334942764f1cd55ade114bae633c63e3cfb75698bf494d84855b8"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/references/b-roll.md",
+      "sha256": "7e28966adb383f22f8bdfadfc078d831af7ce4a51ef61d452d1994879e589259"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/references/captions.md",
+      "sha256": "a79e2420e273092f08c9eedb2d1c83982b43b7fa27033b0cf562df3d6584c29a"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/references/motion-graphics.md",
+      "sha256": "e0a98caf8d6922f24558b10de64e764a62c1ed17d75aa3db12cad70b04ee22cd"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/references/multicam.md",
+      "sha256": "a4338b213d734224fc9505c4d74b6036d17380a74effb1afb05c1a0b27cf76af"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/references/other-a-roll-editing-scenarios.md",
+      "sha256": "eebea47a06fc36b89e7e971212da5560063c1caab520a4c0dee5704e87dd83b1"
+    },
+    {
+      "path": "codex/skills/talking-head-guide/SKILL.md",
+      "sha256": "f52fdb8e1225720091108ae99014819b738c3eb3c0d2478f2aa577fb8f91819f"
+    },
+    {
+      "path": "codex/skills/transcription/SKILL.md",
+      "sha256": "b037443b44b51fd24eb0481b30233fdf3815baba93dbd7c8bcc03ecf8ad39ab9"
+    },
+    {
+      "path": "codex/skills/verification/SKILL.md",
+      "sha256": "033b486503514af0072f6d6e8526de6b856b05620ed733170ae00ba31a6ae785"
+    },
+    {
+      "path": "codex/skills/video-gen/references/kling.md",
+      "sha256": "7a8023067d98034cfff1ff96ac1e2e265c19400e20eb93e7b9650d71efe6b6ba"
+    },
+    {
+      "path": "codex/skills/video-gen/references/minimax-h3-max.md",
+      "sha256": "c443f12ccc53a00184e4354f791295b753ff138681852021a0b8b36bb8f8b3c8"
+    },
+    {
+      "path": "codex/skills/video-gen/references/minimax-h3.md",
+      "sha256": "28e1b51f7d22ff20eaa3c6d25dd66e1803e483bc34bd96ff5e0b06e82b38bc2f"
+    },
+    {
+      "path": "codex/skills/video-gen/references/omni.md",
+      "sha256": "fb2fda284fd136c318a4ba008da23199b95ce3a5495a184a9750ea4a32538292"
+    },
+    {
+      "path": "codex/skills/video-gen/references/seedance2.md",
+      "sha256": "4fdcd7cdf82a3e272beeb331ebe7a23391a73afc46b82e95f8dc929000cb7e0d"
+    },
+    {
+      "path": "codex/skills/video-gen/references/seedance25.md",
+      "sha256": "08be9d048894013de7a7e7f95cdd914e38620a408f67ec610f50d82d6f743835"
+    },
+    {
+      "path": "codex/skills/video-gen/SKILL.md",
+      "sha256": "d65d76c570190c175c9601765eec47a040ec02b3958326e9e6857e05e573a4d6"
+    },
+    {
+      "path": "codex/skills/video-translation/SKILL.md",
+      "sha256": "bc4913fe6f0baa4d1151a76aeb2fceac31c6ad6179f7b063edea36bd660eaf3a"
+    },
+    {
+      "path": "codex/skills/voice/references/fix-spoken-mistakes.md",
+      "sha256": "2931398e10c4b202dff6dcab63067acb71f73d52c6a0b94a41730732ca3a4d09"
+    },
+    {
+      "path": "codex/skills/voice/references/video-sync.md",
+      "sha256": "de7c4f6595313f70be52765cecc1818d2af06ad099c8814b09e4a6ea30700ad0"
+    },
+    {
+      "path": "codex/skills/voice/SKILL.md",
+      "sha256": "69ee83cf90bd9e93f015f68110b23f797c080f040fabfdd1f971054bdd04fa55"
+    },
+    {
+      "path": "codex/skills/widget-forms/SKILL.md",
+      "sha256": "43ac4dcbd4a980b7c45261ce5c196c02c663db6b824743defd4f5491947ccf49"
+    }
+  ]
 }

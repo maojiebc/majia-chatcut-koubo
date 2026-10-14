@@ -1,0 +1,89 @@
+{
+  "$schema": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/runtime/live-canary-report.schema.json",
+  "schemaVersion": "majia.koubo.live-canary.v1",
+  "releaseVersion": "1.8.0",
+  "capabilityStatus": "unverified",
+  "capabilityObservedAt": null,
+  "capabilityExpiresAt": null,
+  "capabilityBuildFingerprint": null,
+  "toolSchemaFingerprint": null,
+  "canaries": [
+    {
+      "caseId": "canary-01",
+      "shape": "single-speaker",
+      "durationClass": "short",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-02",
+      "shape": "multi-take",
+      "durationClass": "medium",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-03",
+      "shape": "screen-and-speaker",
+      "durationClass": "medium",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-04",
+      "shape": "longform",
+      "durationClass": "long",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-05",
+      "shape": "manual-edit",
+      "durationClass": "variable",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-06",
+      "shape": "terminology-heavy",
+      "durationClass": "medium",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-07",
+      "shape": "low-resolution-screen",
+      "durationClass": "medium",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    },
+    {
+      "caseId": "canary-08",
+      "shape": "interrupted-session",
+      "durationClass": "variable",
+      "status": "not_run",
+      "evidenceLevel": "none",
+      "checks": []
+    }
+  ],
+  "metrics": {
+    "passedCanaries": 0,
+    "unapprovedHighRiskEdits": null,
+    "duplicateWrites": null,
+    "manualEditsOverwritten": null,
+    "evidenceStateConfusions": null,
+    "recoveryObservedRate": null
+  },
+  "stableClaimEligible": false,
+  "notes": [
+    "本轮真实 Hosted 账号读取与独立项目标记写入已验证；它们不是完整口播样本，不计入八类生产 canary。",
+    "完整口播清理、字幕、媒体质量、试听及恢复覆盖未完成，stableClaimEligible 仍为 false。"
+  ]
+}

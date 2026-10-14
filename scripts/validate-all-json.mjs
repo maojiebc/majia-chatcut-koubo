@@ -224,6 +224,8 @@ async function collectJsonFiles(root) {
 
     for (const entry of entries) {
       const absolutePath = path.join(directory, entry.name);
+      // OTA's local synchronization baseline is not a distributable contract.
+      if (relativePath(root, absolutePath) === ".skill-sync.json") continue;
       if (entry.isSymbolicLink()) {
         symbolicLinks.push(absolutePath);
       } else if (entry.isDirectory()) {
