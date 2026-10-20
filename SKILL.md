@@ -41,6 +41,7 @@ metadata:
 | 口播清理方法 | `talking-head-guide` |
 | 转写和字幕 | `transcription` |
 | 结构与合成画面验证 | `verification` |
+| 源画面与合成画面对比、逐帧定位 | `visual-analysis` |
 | 导入素材 / 多机位 | `asset-import` / `multicam-sync` |
 | 音乐 / 动态图形获批 | `music` / `create-motion-graphics` |
 | 特殊画面 / 生成视频 / 语音获批 | `shader-gen` / `video-gen` / `voice` |

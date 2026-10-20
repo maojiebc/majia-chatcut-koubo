@@ -1,18 +1,18 @@
 {
   "$schema": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/official-source.schema.json",
   "repository": "https://github.com/ChatCut-Inc/agent-plugin",
-  "commit": "2df8116feba8ef48f56f54090b02a34597a2899c",
-  "observedAt": "2026-10-14T06:09:39.690Z",
-  "hostedPluginVersion": "1.10.15",
+  "commit": "162f04bc4adacc07c420a5006f3447b8828491a9",
+  "observedAt": "2026-10-20T16:09:59.000Z",
+  "hostedPluginVersion": "1.10.17",
   "desktopConnectorVersion": "1.0.5",
   "websiteVersions": {
     "url": "https://chatcut.io/docs/releases",
-    "desktop": "0.4.21",
-    "agentPlugin": "1.10.12"
+    "desktop": "0.6.13",
+    "agentPlugin": "1.10.15"
   },
   "latestPublicChangelog": {
-    "date": "2026-09-20",
-    "url": "https://chatcut.io/docs/changelog/2026-09-20-desktop-projects-imports-effects"
+    "date": "2026-10-08",
+    "url": "https://chatcut.io/docs/changelog/2026-10-08-japanese-voices-changelog-access-browser-export"
   },
   "hostedSkills": [
     "asset-import",
@@ -30,13 +30,14 @@
     "verification",
     "video-gen",
     "video-translation",
+    "visual-analysis",
     "voice",
     "widget-forms"
   ],
   "reviewedFiles": [
     {
       "path": "codex/.codex-plugin/plugin.json",
-      "sha256": "a7f3fe7b24c2e881fcc506b921ff99ade7351d8db5fffb2178cc9595dbf57e9c"
+      "sha256": "8522866fc582da63e0f54e7d99082379d4ed21f729f758e44a7f8a28b0a36b93"
     },
     {
       "path": "chatcut-desktop-codex-plugin/.codex-plugin/plugin.json",
@@ -69,6 +70,22 @@
     {
       "path": "chatcut-desktop-codex-plugin/skills/connect-chatcut-desktop/SKILL.md",
       "sha256": "5282a999677f58da2e2c0f64bb7f30805e7f8f242bfa1f9b7852e93aaad53712"
+    },
+    {
+      "path": "codex/skills/asset-import/SKILL.md",
+      "sha256": "f53d2180ab46614a0e19d15b3dc49a240f3a81f27f9e71fb30f0ea0c666c58a3"
+    },
+    {
+      "path": "codex/skills/asset-import/scripts/serve-local-media.mjs",
+      "sha256": "3a7d08b89961aea25c66173b87cef2922fda913842d6bd56c7f36a0b4fa60a4d"
+    },
+    {
+      "path": "codex/skills/visual-analysis/SKILL.md",
+      "sha256": "91eed3f5f604a89204db4fc15a016c22684129fc90292322a1e41a4d50785892"
+    },
+    {
+      "path": "codex/skills/visual-analysis/scripts/concat-images.mjs",
+      "sha256": "7b67fe9521df9abf3a30ec635024788aef0d33bf3fa1035f16d505478b5c4514"
     }
   ],
   "license": "GPL-3.0-only",
@@ -79,7 +96,7 @@
   "watchedFiles": [
     {
       "path": "codex/.codex-plugin/plugin.json",
-      "sha256": "a7f3fe7b24c2e881fcc506b921ff99ade7351d8db5fffb2178cc9595dbf57e9c"
+      "sha256": "8522866fc582da63e0f54e7d99082379d4ed21f729f758e44a7f8a28b0a36b93"
     },
     {
       "path": "codex/.mcp.json",
@@ -95,7 +112,7 @@
     },
     {
       "path": "codex/skills/asset-import/scripts/serve-local-media.mjs",
-      "sha256": "9243ebcc4ed2958805eb7906f60cde14052cd103b6eb414647f85f24b375c4a0"
+      "sha256": "3a7d08b89961aea25c66173b87cef2922fda913842d6bd56c7f36a0b4fa60a4d"
     },
     {
       "path": "codex/skills/asset-import/scripts/upload-media.mjs",
@@ -103,7 +120,7 @@
     },
     {
       "path": "codex/skills/asset-import/SKILL.md",
-      "sha256": "bab6c7da6f21323bdf523b287eecd004d2ca49bd52c3cb7aef092a096d529ff3"
+      "sha256": "f53d2180ab46614a0e19d15b3dc49a240f3a81f27f9e71fb30f0ea0c666c58a3"
     },
     {
       "path": "codex/skills/chatcut-plugin-basics/SKILL.md",
@@ -244,6 +261,14 @@
     {
       "path": "codex/skills/video-translation/SKILL.md",
       "sha256": "bc4913fe6f0baa4d1151a76aeb2fceac31c6ad6179f7b063edea36bd660eaf3a"
+    },
+    {
+      "path": "codex/skills/visual-analysis/scripts/concat-images.mjs",
+      "sha256": "7b67fe9521df9abf3a30ec635024788aef0d33bf3fa1035f16d505478b5c4514"
+    },
+    {
+      "path": "codex/skills/visual-analysis/SKILL.md",
+      "sha256": "91eed3f5f604a89204db4fc15a016c22684129fc90292322a1e41a4d50785892"
     },
     {
       "path": "codex/skills/voice/references/fix-spoken-mistakes.md",
