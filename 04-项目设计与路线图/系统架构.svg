@@ -34,7 +34,7 @@
   <text x="80" y="74" class="ink" font-size="38" font-weight="800">一句话稳剪，确认后再扩展</text>
   <text x="80" y="108" class="body" font-size="18">ChatCut 官方能力之上的安全默认、审批、恢复与证据交付层</text>
   <rect x="1380" y="48" width="140" height="38" rx="19" fill="#102A43"/>
-  <text x="1450" y="73" class="chip" text-anchor="middle">v1.8.0</text>
+  <text x="1450" y="73" class="chip" text-anchor="middle">v1.8.1</text>
 
   <rect x="80" y="140" width="1440" height="92" rx="22" fill="url(#prompt)" filter="url(#shadow)"/>
   <text x="112" y="180" fill="#D8FFFA" font-size="15" font-weight="700">用户只需要说</text>
@@ -62,13 +62,13 @@
   </g>
 
   <g class="cardTitle" text-anchor="middle">
-    <text x="169" y="340">① 环境与项目</text>
-    <text x="369" y="340">② 文字与风险</text>
-    <text x="569" y="340">③ 代表样片</text>
-    <text x="769" y="340">④ 用户确认</text>
-    <text x="969" y="340">⑤ 整片 A-roll</text>
-    <text x="1169" y="340">⑥ 声音与字幕</text>
-    <text x="1400" y="340">⑦ 验证与交付</text>
+    <text x="169" y="340">1. 环境与项目</text>
+    <text x="369" y="340">2. 文字与风险</text>
+    <text x="569" y="340">3. 代表样片</text>
+    <text x="769" y="340">4. 用户确认</text>
+    <text x="969" y="340">5. 整片 A-roll</text>
+    <text x="1169" y="340">6. 声音与字幕</text>
+    <text x="1400" y="340">7. 验证与交付</text>
   </g>
   <g class="cardBody" text-anchor="middle">
     <text x="169" y="374">Hosted / Desktop</text><text x="169" y="399">安全默认 · 运行清单</text><text x="169" y="424">能力不足就阻断</text>
@@ -117,7 +117,7 @@
     <text x="104" y="764">整句 · 数字 · 否定 · 隐私</text><text x="104" y="788">生成 · 导出均需明确批准</text>
     <text x="470" y="764">计划 / 风格 / 版式 / 字幕</text><text x="470" y="788">时间线版本 / 窗口范围绑定</text>
     <text x="836" y="764">超时先回读 · 幂等不重复写</text><text x="836" y="788">部分写入补偿 · 三轮止损</text>
-    <text x="1202" y="764">结构 ≠ 画面 ≠ 音频 ≠ 试听</text><text x="1202" y="788">无证据保持 UNVERIFIED</text>
+    <text x="1202" y="764">结构 / 画面 / 音频 / 试听分别核验</text><text x="1202" y="788">无证据保持 UNVERIFIED</text>
   </g>
 
   <rect x="80" y="846" width="1440" height="70" rx="18" fill="#102A43"/>
@@ -125,7 +125,7 @@
   <text x="108" y="899" fill="#EAF2FA" class="tiny mono">project · import · talking-head · transcription · verification · multicam · music · graphics · shader · video · voice · export · errors · help · forms</text>
 
   <rect x="80" y="936" width="1440" height="40" rx="12" fill="#FFF3D7" stroke="#E6B957"/>
-  <text x="100" y="961" fill="#7A4C00" font-size="14" font-weight="700">当前边界：真实连接与基础写入已验证；完整口播清理、字幕、人耳试听与生产样本仍为 UNVERIFIED。</text>
+  <text x="100" y="961" fill="#7A4C00" font-size="14" font-weight="700">当前边界：指定合成帧与单卡字幕保护已实测；完整 ASR、连续画面、听感及复杂恢复仍为 UNVERIFIED。</text>
 
-  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.8.0 · editable timeline by default · no automatic export or publishing</text>
+  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.8.1 · editable timeline by default · no automatic export or publishing</text>
 </svg>
