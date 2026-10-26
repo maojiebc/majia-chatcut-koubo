@@ -1,13 +1,13 @@
 # ChatCut口播 · 马甲实战版
 
-![Skill Version](https://img.shields.io/badge/skill-v1.8.1-blue)
+![Skill Version](https://img.shields.io/badge/skill-v1.8.2-blue)
 [![skills.sh](https://skills.sh/b/maojiebc/majia-chatcut-koubo)](https://skills.sh/maojiebc/majia-chatcut-koubo)
 
 **ChatCut口播 · 马甲实战版｜一句话稳剪与可恢复主流程**
 
 > 给普通创作者的一句话入口：先安全清理口播、做代表样片，确认后再扩展整片，最后交回可继续编辑的 ChatCut 时间线。
 
-![v1.8.1 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.8.2 一句话稳剪流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## 30 秒开始
 
@@ -34,7 +34,9 @@ npm run smoke:one-click:fake
 
 运行 `npm run live:probe -- --config <private-mcporter.json>`，会实际读取 Hosted 工具清单和账号项目，只返回工具合同指纹、计数及分项状态。配置与 OAuth 留在本机，输出不含项目名称、ID、URL 或字幕。它不修改时间线，也不替代画面或人耳验收。
 
-官方检查现覆盖提交、已审查内容和整个 Hosted Skill 包，能发现导入 helper 的新增、删除或变化。监测指纹与逐项审查分别记录。2026-10-20 收尾后改为按需手动维护；更新经验证后通过 majia-ota 发布。见 [实战维护](workflows/practical-maintenance.md)。
+官方检查现覆盖提交、已审查内容和整个 Hosted Skill 包，能发现导入 helper 的新增、删除或变化。监测指纹与逐项审查分别记录。按用户最新要求恢复为每两周北京时间周一 10:00 迭代，优先检查官方变化；有价值的更新经验证后通过 majia-ota 发布。见 [实战维护](workflows/practical-maintenance.md)。
+
+v1.8.2 补齐连接异常留证与浏览器导出实际文件检查，避免把“渲染完成”说成“文件已交付”。竖屏人脸跟踪仅在明确需求下采用。见 [连接与交付流程](workflows/connection-and-delivery.md)。
 
 ## v1.7 环境与文字保护
 
@@ -144,7 +146,7 @@ npm run report -- --run-id <run-id>
 
 ## 当前验证边界
 
-| 能力 | v1.8.1 状态 |
+| 能力 | v1.8.2 状态 |
 | --- | --- |
 | 运行合同、四套方案、风险规则、状态转换 | `PASS`（离线自动检查） |
 | 超时前/后、部分写入、手工修改保护 | `PASS`（带结构化模拟证据的匿名会话） |
@@ -155,7 +157,7 @@ npm run report -- --run-id <run-id>
 | 指定合成帧、单卡字幕保留与旧修订冲突保护 | `PASS`（限定实操窗口，见经验库） |
 | 连续画面、人耳试听、匿名生产样本与复杂恢复 | `UNVERIFIED` |
 
-已完成真实 Hosted 连接、指定合成帧，以及单卡字幕刷新/重载保留和旧修订冲突保护实测。完整 ASR 准确率、连续画面、听感与复杂中断恢复仍待核验，因此 [`reports/live-canary-v1.8.1.json`](reports/live-canary-v1.8.1.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
+已完成真实 Hosted 连接、指定合成帧，以及单卡字幕刷新/重载保留和旧修订冲突保护实测。完整 ASR 准确率、连续画面、听感与复杂中断恢复仍待核验，因此 [`reports/live-canary-v1.8.2.json`](reports/live-canary-v1.8.2.json) 如实记录为 `stableClaimEligible=false`。离线模拟不能替代真实端到端证据；在至少 5 条真实匿名样本、三种长度、三种内容形态和恢复/手改保护全部通过前，本项目不会把“一键稳定剪辑已经生产验证”写成事实。
 
 ## 与 ChatCut 官方能力怎么分工
 
@@ -245,6 +247,8 @@ reports/      脱敏真实验证状态
 本地个人词表、项目路径和真实业务内容只放本机配置，不进入公开仓。完整维护地图见 [`01-从这里开始/README.md`](01-从这里开始/README.md)。
 
 ## 版本记录
+
+**V1.8.2（2026-10-25）** — 对齐官方 Hosted 1.10.21，补入连接诊断、导出落盘与按需人脸跟踪指引；恢复双周维护。新增路线的导出、跟踪效果仍待真实验证。
 
 **V1.8.1（2026-10-20）** — 对齐官方画面核验指引与来源快照，收录字幕保护实测；维护改为按需手动执行，完整稳剪仍为 `UNVERIFIED`。
 

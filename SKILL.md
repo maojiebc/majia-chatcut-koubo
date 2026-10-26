@@ -3,7 +3,7 @@ name: majia-chatcut-koubo
 description: ChatCut 口播与录屏视频的一句话编排和安全默认层。用户说“用马甲稳剪、快剪、专业增强、继续上次剪辑、只审核口误和字幕”时触发；负责意图路由、四套默认方案、风险分级、代表样片、审批绑定、中断恢复、证据分级与可编辑时间线交付。项目操作与工具参数始终交给 ChatCut 官方 Skill。默认不重排观点，不添加音乐、动态图形、补充画面或生成素材，不导出、不发布。真实 ChatCut 端到端只有当前匿名样本和工具证据齐全时才能宣称通过。
 license: MIT
 metadata:
-  version: 1.8.1
+  version: 1.8.2
 ---
 
 # ChatCut口播 · 马甲实战版
@@ -14,7 +14,7 @@ metadata:
 
 从当前会话检查、代表样片到可继续编辑的时间线，按阶段回读并保存进度：
 
-![v1.8.1 口播流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
+![v1.8.2 口播流程](https://raw.githubusercontent.com/maojiebc/majia-chatcut-koubo/main/04-项目设计与路线图/系统架构.png)
 
 ## 用户合同
 
@@ -48,7 +48,7 @@ metadata:
 | 导出获批 / 已知故障 | `export` / `known-errors` |
 | 产品问题 / 一次性询问 | `product-help` / `widget-forms` |
 
-完整分工见 [官方能力分工](workflows/official-skill-map.md)。禁止长期复制官方参数或内部对象获取方法。
+完整分工见 [官方能力分工](workflows/official-skill-map.md)。连接异常先保留原始错误；已获授权的浏览器导出必须确认实际文件落盘。见 [连接故障与文件交付](workflows/connection-and-delivery.md)。禁止长期复制官方参数或内部对象获取方法。
 
 ## v1.7 环境与文字保护
 
@@ -212,7 +212,7 @@ npm run report -- --run-id <run-id>
 
 ## 当前真实环境边界
 
-v1.8.1 收录真实 Hosted 连接、指定合成帧、单卡字幕刷新/重载保留与旧修订冲突保护的限定证据；完整转写准确率、连续画面、听感和复杂恢复仍待验收。模拟证据以 `provenance=simulation` 明示。仓库完整稳剪验证仍为 `stableClaimEligible=false`；未完成的媒体与生产样本保持 `UNVERIFIED`。
+v1.8.2 保留历史版本收录的真实 Hosted 连接、指定合成帧、单卡字幕刷新/重载保留与旧修订冲突保护的限定证据；完整转写准确率、连续画面、听感和复杂恢复仍待验收。模拟证据以 `provenance=simulation` 明示。仓库完整稳剪验证仍为 `stableClaimEligible=false`；未完成的媒体与生产样本保持 `UNVERIFIED`。
 
 因此可以说“离线流程和恢复模拟已验证”，不得说“一键稳定剪辑已经生产验证”，不得把模拟场景写成真实案例，也不得把旧版本证据外推到当前工具面。
 
@@ -229,6 +229,8 @@ v1.8.1 收录真实 Hosted 连接、指定合成帧、单卡字幕刷新/重载�
 稳定方法按需读取 [`02-剪辑方法手册/`](02-剪辑方法手册/README.md)。高级机器门禁由 `rules/`、`schemas/`、`src/`、`scripts/`、`fixtures/` 与 `tests/` 维护。
 
 ## 版本记录
+
+- **v1.8.2（2026-10-25）**：对齐官方 Hosted 1.10.21，补入连接诊断、浏览器导出落盘和按需人脸跟踪指引；恢复北京时间双周一迭代。
 
 - **v1.8.1（2026-10-20）**：官方画面核验路由与来源快照更新；收录字幕保留及冲突保护实测，定时维护收尾为按需执行。
 - **v1.8.0（2026-10-13）**：只读真实连接探针、工具合同指纹、官方包文件与提交监测、定期实战维护；完整稳剪仍为 `UNVERIFIED`。

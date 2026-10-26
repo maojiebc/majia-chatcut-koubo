@@ -1,18 +1,18 @@
 {
   "$schema": "https://github.com/maojiebc/majia-chatcut-koubo/schemas/official-source.schema.json",
   "repository": "https://github.com/ChatCut-Inc/agent-plugin",
-  "commit": "162f04bc4adacc07c420a5006f3447b8828491a9",
-  "observedAt": "2026-10-20T16:09:59.000Z",
-  "hostedPluginVersion": "1.10.17",
+  "commit": "06e83c224aecb5c0d8d467ee2c1c607bf3f22a73",
+  "observedAt": "2026-10-26T01:47:06.256946+00:00",
+  "hostedPluginVersion": "1.10.21",
   "desktopConnectorVersion": "1.0.5",
   "websiteVersions": {
     "url": "https://chatcut.io/docs/releases",
-    "desktop": "0.6.13",
-    "agentPlugin": "1.10.15"
+    "desktop": "0.7.21",
+    "agentPlugin": "Codex 1.10.21; Claude Code 1.10.23"
   },
   "latestPublicChangelog": {
-    "date": "2026-10-08",
-    "url": "https://chatcut.io/docs/changelog/2026-10-08-japanese-voices-changelog-access-browser-export"
+    "date": "2026-10-20",
+    "url": "https://chatcut.io/docs/changelog/2026-10-20-face-tracking-bins-deepseek-harness"
   },
   "hostedSkills": [
     "asset-import",
@@ -37,7 +37,7 @@
   "reviewedFiles": [
     {
       "path": "codex/.codex-plugin/plugin.json",
-      "sha256": "8522866fc582da63e0f54e7d99082379d4ed21f729f758e44a7f8a28b0a36b93"
+      "sha256": "0711f42a60dcf1e382fba4d766071d7484b7a02a08e6b2d99ad8debe81c512ca"
     },
     {
       "path": "chatcut-desktop-codex-plugin/.codex-plugin/plugin.json",
@@ -45,7 +45,7 @@
     },
     {
       "path": "codex/skills/chatcut-plugin-basics/SKILL.md",
-      "sha256": "9c810774b1fbd5ef6bbcd36bdc4aaed956ffd68b3bb992dd61e6344a8ca3cc43"
+      "sha256": "b13c534fb10082378c05f9596554fc2e4fffb3b5e912fa55bee0a0ed00f04b28"
     },
     {
       "path": "codex/skills/transcription/SKILL.md",
@@ -61,7 +61,7 @@
     },
     {
       "path": "codex/skills/verification/SKILL.md",
-      "sha256": "033b486503514af0072f6d6e8526de6b856b05620ed733170ae00ba31a6ae785"
+      "sha256": "1830304f0888c5182b90e673e1499a675b2f1c74570c5519e3007b81f48cdc65"
     },
     {
       "path": "codex/skills/voice/references/fix-spoken-mistakes.md",
@@ -86,6 +86,22 @@
     {
       "path": "codex/skills/visual-analysis/scripts/concat-images.mjs",
       "sha256": "7b67fe9521df9abf3a30ec635024788aef0d33bf3fa1035f16d505478b5c4514"
+    },
+    {
+      "path": "codex/.mcp.json",
+      "sha256": "fe428a43fa411cbef2c1956f0596ae4e69a3f8adb3e1aa1fa3424cfb39acf2dc"
+    },
+    {
+      "path": "codex/skills/export/SKILL.md",
+      "sha256": "ac702dca759566a183b27b3b77b657ea0f721bfeec6e0e3bb52a4d02fe4e96c2"
+    },
+    {
+      "path": "codex/skills/known-errors/SKILL.md",
+      "sha256": "f186e48749c90b60ab2568c61d995b19458b0253983245c8dd6b91b8d8df904a"
+    },
+    {
+      "path": "codex/skills/chatcut-plugin-basics/references/connection-diagnostics.md",
+      "sha256": "99c9317190ad6755995097787849d556fec6018d9d774361f3936353823376e5"
     }
   ],
   "license": "GPL-3.0-only",
@@ -96,11 +112,11 @@
   "watchedFiles": [
     {
       "path": "codex/.codex-plugin/plugin.json",
-      "sha256": "8522866fc582da63e0f54e7d99082379d4ed21f729f758e44a7f8a28b0a36b93"
+      "sha256": "0711f42a60dcf1e382fba4d766071d7484b7a02a08e6b2d99ad8debe81c512ca"
     },
     {
       "path": "codex/.mcp.json",
-      "sha256": "7e1526df950ff3cc031c2c87e5f21addb7932ff288daed8ee2cd5ffb253067d4"
+      "sha256": "fe428a43fa411cbef2c1956f0596ae4e69a3f8adb3e1aa1fa3424cfb39acf2dc"
     },
     {
       "path": "codex/assets/logo-light.png",
@@ -123,8 +139,28 @@
       "sha256": "f53d2180ab46614a0e19d15b3dc49a240f3a81f27f9e71fb30f0ea0c666c58a3"
     },
     {
+      "path": "codex/skills/chatcut-plugin-basics/references/connection-diagnostics.md",
+      "sha256": "99c9317190ad6755995097787849d556fec6018d9d774361f3936353823376e5"
+    },
+    {
+      "path": "codex/skills/chatcut-plugin-basics/scripts/mcp-doctor.mjs",
+      "sha256": "1b1dc62ce916fe43e33092b3208cee9028e51211a4665078f1faf2ba2e662abc"
+    },
+    {
+      "path": "codex/skills/chatcut-plugin-basics/scripts/mcp-evidence.mjs",
+      "sha256": "8dd628e05a760edbc3ffbc5d9187a0cdfc6f7e365dbd2a452b534b831a1403d3"
+    },
+    {
+      "path": "codex/skills/chatcut-plugin-basics/scripts/mcp-failure.mjs",
+      "sha256": "04786600f619cf0a7a09dabc9910db7fe22272adf0134a6e70f4edd610cb4402"
+    },
+    {
+      "path": "codex/skills/chatcut-plugin-basics/scripts/mcp-wire.mjs",
+      "sha256": "2c97116639fb0127298f1a841f1e795334c7d9432de3c7d8dfebf45c8a0dcffe"
+    },
+    {
       "path": "codex/skills/chatcut-plugin-basics/SKILL.md",
-      "sha256": "9c810774b1fbd5ef6bbcd36bdc4aaed956ffd68b3bb992dd61e6344a8ca3cc43"
+      "sha256": "b13c534fb10082378c05f9596554fc2e4fffb3b5e912fa55bee0a0ed00f04b28"
     },
     {
       "path": "codex/skills/create-motion-graphics/references/font-matching.md",
@@ -144,11 +180,11 @@
     },
     {
       "path": "codex/skills/export/SKILL.md",
-      "sha256": "ceca612b519ad6ed360f50a6dd4f1ab7706e0b25a3a90edcb792a6caac445c39"
+      "sha256": "ac702dca759566a183b27b3b77b657ea0f721bfeec6e0e3bb52a4d02fe4e96c2"
     },
     {
       "path": "codex/skills/known-errors/SKILL.md",
-      "sha256": "2c5c9396bd2d352df5334642327ec26e32e83ea23707e0c110781ad4711aebde"
+      "sha256": "f186e48749c90b60ab2568c61d995b19458b0253983245c8dd6b91b8d8df904a"
     },
     {
       "path": "codex/skills/multicam-sync/scripts/transcript-offset.mjs",
@@ -228,7 +264,7 @@
     },
     {
       "path": "codex/skills/verification/SKILL.md",
-      "sha256": "033b486503514af0072f6d6e8526de6b856b05620ed733170ae00ba31a6ae785"
+      "sha256": "1830304f0888c5182b90e673e1499a675b2f1c74570c5519e3007b81f48cdc65"
     },
     {
       "path": "codex/skills/video-gen/references/kling.md",

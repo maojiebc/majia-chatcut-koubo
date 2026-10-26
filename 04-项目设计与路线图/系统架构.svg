@@ -34,7 +34,7 @@
   <text x="80" y="74" class="ink" font-size="38" font-weight="800">一句话稳剪，确认后再扩展</text>
   <text x="80" y="108" class="body" font-size="18">ChatCut 官方能力之上的安全默认、审批、恢复与证据交付层</text>
   <rect x="1380" y="48" width="140" height="38" rx="19" fill="#102A43"/>
-  <text x="1450" y="73" class="chip" text-anchor="middle">v1.8.1</text>
+  <text x="1450" y="73" class="chip" text-anchor="middle">v1.8.2</text>
 
   <rect x="80" y="140" width="1440" height="92" rx="22" fill="url(#prompt)" filter="url(#shadow)"/>
   <text x="112" y="180" fill="#D8FFFA" font-size="15" font-weight="700">用户只需要说</text>
@@ -127,5 +127,5 @@
   <rect x="80" y="936" width="1440" height="40" rx="12" fill="#FFF3D7" stroke="#E6B957"/>
   <text x="100" y="961" fill="#7A4C00" font-size="14" font-weight="700">当前边界：指定合成帧与单卡字幕保护已实测；完整 ASR、连续画面、听感及复杂恢复仍为 UNVERIFIED。</text>
 
-  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.8.1 · editable timeline by default · no automatic export or publishing</text>
+  <text x="80" y="994" class="muted tiny">ChatCut口播 · 马甲实战版 · v1.8.2 · editable timeline by default · no automatic export or publishing</text>
 </svg>
