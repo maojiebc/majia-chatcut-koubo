@@ -21,7 +21,9 @@ $majia-chatcut-koubo 用马甲稳剪当前口播
 
 默认结果是一个可继续手调的 ChatCut 时间线，不是自动发布的视频文件。
 
-本地开发者也可以查看入口。以下命令面向 GitHub 源码 clone；SkillHub 的轻量分发包会省略测试、fixture 和纯 CI validator，完整验证仍以同一提交的源码仓与 CI 为准：
+SkillHub 的「ChatCut口播 · 马甲实战丨免费版」提供只读口播体检和样片建议。WorkBuddy 的「ChatCut口播 · 马甲实战丨完整版」提供样片确认、整片剪辑、字幕、续剪和可编辑时间线。使用 WorkBuddy 版剪辑需要连接 ChatCut。
+
+以下命令面向 GitHub 源码 clone：
 
 ```bash
 npm ci
